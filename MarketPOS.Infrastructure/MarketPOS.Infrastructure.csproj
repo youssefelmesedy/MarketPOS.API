@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="14.0.0" />
+		<PackageReference Include="FluentValidation" Version="12.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.6" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.6" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.6">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.6" />
+		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.6" />
+		<PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="9.0.6" />
+		<PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.6" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Market.Domain\Market.Domain.csproj" />
+	  <ProjectReference Include="..\MarketPOS.Application\MarketPOS.Application.csproj" />
+	</ItemGroup>
+
+
+</Project>

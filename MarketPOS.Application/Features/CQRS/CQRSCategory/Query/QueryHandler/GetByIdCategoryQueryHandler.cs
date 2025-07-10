@@ -1,0 +1,41 @@
+﻿using AutoMapper;
+using MarketPOS.Application.Common.HandlerBehaviors;
+using MarketPOS.Application.Common.Helpers.LocalizationPostProcessorMappeing;
+using MarketPOS.Application.Services.Interfaces;
+using MarketPOS.Design.FactoryResult;
+using MarketPOS.Design.FactoryServices;
+using MarketPOS.Shared.DTOs;
+using MarketPOS.Shared.DTOs.CategoryDto;
+using MediatR;
+using Microsoft.Extensions.Localization;
+
+namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query.QueryHaandler;
+
+public class GetByIdCategoryQueryHandler : BaseHandler<GetByIdCategoryQueryHandler>,IRequestHandler<GetByIdCategoryQuery, ResultDto<CategoryDetalisDto>>
+{
+    public GetByIdCategoryQueryHandler(
+        IServiceFactory serviceFactory,
+        IResultFactory<GetByIdCategoryQueryHandler> resultFactory,
+        IMapper mapper,
+        IStringLocalizer<GetByIdCategoryQueryHandler> localizer,
+        ILocalizationPostProcessor localizationPostProcessor) : base(serviceFactory, resultFactory, mapper, localizer : localizer, localizationPostProcessor : localizationPostProcessor)
+    {
+    }
+    public async Task<ResultDto<CategoryDetalisDto>> Handle(GetByIdCategoryQuery request, CancellationToken cancellationToken)
+    {
+        var categoryService = _servicesFactory.GetService<ICategoryService>();
+       
+        var data = await categoryService.GetByIdAsync(request.Id, true, null,request.SoftDeleted);
+
+        if (data is null)
+            return _resultFactory.Fail<CategoryDetalisDto>("GetByIdFailed");
+
+        var mappeing = _mapper?.Map<CategoryDetalisDto>(data);
+        if (mappeing is null)
+            return _resultFactory.Fail<CategoryDetalisDto>("Mappingfailed");
+
+        var localizer = _localizationPostProcessor.Apply(mappeing);
+
+        return _resultFactory.Success(localizer, "Success");
+    }
+}

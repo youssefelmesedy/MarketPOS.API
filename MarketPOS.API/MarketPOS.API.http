@@ -1,0 +1,6 @@
+@MarketPOS.API_HostAddress = http://localhost:5067
+
+GET {{MarketPOS.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
