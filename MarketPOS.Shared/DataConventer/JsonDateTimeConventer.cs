@@ -1,7 +1,4 @@
-﻿
-
-namespace MarketPOS.Shared.DataConventer;
-
+﻿namespace MarketPOS.Shared.DataConventer;
 public class JsonDateConverter : JsonConverter<DateTime>
 {
     private const string Format = "yyyy-MM-dd HH:mm:ss tt";

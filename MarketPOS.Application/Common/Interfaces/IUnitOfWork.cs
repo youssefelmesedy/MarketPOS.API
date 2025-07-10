@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Common.Interfaces;
-
 public interface IUnitOfWork
 {
     IProductRepo ProductRepo { get; }

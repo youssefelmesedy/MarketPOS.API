@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Command.HandlerCommand;
-
 public class CreateProductCommandHandler : BaseHandler<CreateProductCommandHandler>, IRequestHandler<CreateProductCommand, ResultDto<Guid>>
 {
     

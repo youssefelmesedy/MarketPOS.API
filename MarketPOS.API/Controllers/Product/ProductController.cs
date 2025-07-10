@@ -1,6 +1,4 @@
-﻿
-
-namespace MarketPOS.API.Controllers.Product;
+﻿namespace MarketPOS.API.Controllers.Product;
 [ApiController]
 [Route("api/[controller]")]
 public class ProductController : ControllerBase

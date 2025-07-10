@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Command;
-
 public record UpdateCategoryCommand : IRequest<ResultDto<Guid>>
 {
     public CategoryUpdateDto dto { get; set; }

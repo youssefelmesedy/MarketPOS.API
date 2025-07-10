@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Infrastructure.Context.Configurations;
-
 public abstract class BaseEntityConfiguration<T> : IEntityTypeConfiguration<T>
     where T : BaseEntity
 {

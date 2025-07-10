@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Services.Interfaces;
-
 public interface IGenericService<TEntity> where TEntity : class
 {
     Task<(IEnumerable<TEntity> Data, int TotalCount)> GetPagedAsync(

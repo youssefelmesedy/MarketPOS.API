@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-
 namespace MarketPOS.API.Middlewares.LocalizetionCustom;
 public class JsonStringLocalizer : IStringLocalizer
 {

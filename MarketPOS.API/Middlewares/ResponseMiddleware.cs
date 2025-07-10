@@ -1,7 +1,5 @@
 using System.Globalization;
-
 namespace MarketPOS.API.Middlewares;
-
 public class ResponseMiddleware
 {
     private readonly RequestDelegate _next;

@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Infrastructure.Services;
-
 public class CategoryService : GenericService<Category>, ICategoryService
 {
     private readonly ILogger<CategoryService> _logger;

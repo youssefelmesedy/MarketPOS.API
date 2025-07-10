@@ -1,5 +1,4 @@
 ﻿namespace Market.POS.Infrastructure.Repositories;
-
 public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
     protected readonly ApplicationDbContext _context;

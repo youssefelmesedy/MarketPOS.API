@@ -1,6 +1,6 @@
 [
   {
-    "ContainingType": "CategoryController",
+    "ContainingType": "MarketPOS.API.Controllers.Category.CategoryController",
     "Method": "Create",
     "RelativePath": "api/Category/Create",
     "HttpMethod": "POST",
@@ -44,7 +44,7 @@
     ]
   },
   {
-    "ContainingType": "CategoryController",
+    "ContainingType": "MarketPOS.API.Controllers.Category.CategoryController",
     "Method": "Delete",
     "RelativePath": "api/Category/Delete",
     "HttpMethod": "DELETE",
@@ -88,7 +88,7 @@
     ]
   },
   {
-    "ContainingType": "CategoryController",
+    "ContainingType": "MarketPOS.API.Controllers.Category.CategoryController",
     "Method": "GetAll",
     "RelativePath": "api/Category/GetAll",
     "HttpMethod": "GET",
@@ -132,7 +132,7 @@
     ]
   },
   {
-    "ContainingType": "CategoryController",
+    "ContainingType": "MarketPOS.API.Controllers.Category.CategoryController",
     "Method": "GetById",
     "RelativePath": "api/Category/GetById",
     "HttpMethod": "GET",
@@ -181,7 +181,7 @@
     ]
   },
   {
-    "ContainingType": "CategoryController",
+    "ContainingType": "MarketPOS.API.Controllers.Category.CategoryController",
     "Method": "GetByName",
     "RelativePath": "api/Category/GetByName",
     "HttpMethod": "GET",
@@ -225,7 +225,7 @@
     ]
   },
   {
-    "ContainingType": "CategoryController",
+    "ContainingType": "MarketPOS.API.Controllers.Category.CategoryController",
     "Method": "Restore",
     "RelativePath": "api/Category/Restore",
     "HttpMethod": "PATCH",
@@ -269,7 +269,7 @@
     ]
   },
   {
-    "ContainingType": "CategoryController",
+    "ContainingType": "MarketPOS.API.Controllers.Category.CategoryController",
     "Method": "SofteDelete",
     "RelativePath": "api/Category/SofteDelete",
     "HttpMethod": "PATCH",
@@ -313,7 +313,7 @@
     ]
   },
   {
-    "ContainingType": "CategoryController",
+    "ContainingType": "MarketPOS.API.Controllers.Category.CategoryController",
     "Method": "Update",
     "RelativePath": "api/Category/Update",
     "HttpMethod": "PUT",

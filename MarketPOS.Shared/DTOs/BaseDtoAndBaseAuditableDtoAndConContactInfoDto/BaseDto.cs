@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Shared.DTOs.BaseDtoAndBaseAuditableDtoAndConContactInfoDto;
-
 public abstract class BaseDto
 {
     [JsonPropertyOrder(0)]

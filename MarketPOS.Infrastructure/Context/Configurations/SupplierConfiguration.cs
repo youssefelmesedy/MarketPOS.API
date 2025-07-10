@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Infrastructure.Context.Configurations;
-
 public class SupplierConfiguration : BaseEntityConfiguration<Supplier>
 {
     public override void Configure(EntityTypeBuilder<Supplier> builder)

@@ -1,5 +1,4 @@
 ﻿namespace Market.POS.Infrastructure.Repositories;
-
 public class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _context;

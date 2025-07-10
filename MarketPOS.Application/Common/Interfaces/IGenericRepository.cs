@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Common.Interfaces;
-
 public interface IGenericRepository<T> where T : class
 {
     Task<T?> GetByIdAsync(

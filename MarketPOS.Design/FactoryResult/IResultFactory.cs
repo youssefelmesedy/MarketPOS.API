@@ -1,7 +1,4 @@
-﻿
-
-namespace MarketPOS.Design.FactoryResult;
-
+﻿namespace MarketPOS.Design.FactoryResult;
 public interface IResultFactory<THandler>
 {
     ResultDto<T> Success<T>(T data, string messageKey);

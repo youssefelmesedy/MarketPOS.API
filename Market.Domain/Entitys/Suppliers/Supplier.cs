@@ -1,5 +1,4 @@
 ﻿namespace Market.Domain.Entitys.Suppliers;
-
 public class Supplier : BaseEntity
 {
     public string Name { get; set; } = default!;

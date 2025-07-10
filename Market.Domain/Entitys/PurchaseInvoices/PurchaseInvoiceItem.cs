@@ -1,5 +1,4 @@
 ﻿namespace Market.Domain.Entitys.PurchaseInvoices;
-
 public class PurchaseInvoiceItem : BaseEntity
 {
     public Guid PurchaseInvoiceId { get; set; }

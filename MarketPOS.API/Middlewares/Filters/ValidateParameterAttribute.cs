@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.API.Middlewares.Filters;
-
 public class ValidateParameterAttribute : ActionFilterAttribute
 {   
     private readonly string _paramName;

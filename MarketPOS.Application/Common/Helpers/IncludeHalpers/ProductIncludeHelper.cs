@@ -1,7 +1,4 @@
-﻿
-
-namespace MarketPOS.Application.Common.Helpers.IncludeHalpers;
-
+﻿namespace MarketPOS.Application.Common.Helpers.IncludeHalpers;
 public static class ProductIncludeHelper
 {
     public static List<Func<IQueryable<Product>, IQueryable<Product>>> GetIncludeExpressions(List<ProductInclude>? includes)

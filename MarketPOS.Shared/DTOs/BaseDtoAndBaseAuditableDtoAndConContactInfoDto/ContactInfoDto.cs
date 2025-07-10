@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Shared.DTOs.BaseDtoAndBaseAuditableDtoAndConContactInfoDto;
-
 public class ContactInfoDto
 {
     public string? Phone { get; set; }

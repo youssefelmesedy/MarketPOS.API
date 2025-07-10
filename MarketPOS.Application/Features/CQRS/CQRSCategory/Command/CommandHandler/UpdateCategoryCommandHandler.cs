@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Command.CommandHandler;
-
 public class UpdateCategoryCommandHandler : BaseHandler<UpdateCategoryCommandHandler>, IRequestHandler<UpdateCategoryCommand, ResultDto<Guid>>
 {
     public UpdateCategoryCommandHandler(

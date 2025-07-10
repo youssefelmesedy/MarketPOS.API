@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query;
-
 public record GetByIdCategoryQuery : IRequest<ResultDto<CategoryDetalisDto>> 
 {
     public Guid Id { get; set; }

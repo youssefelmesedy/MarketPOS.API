@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Validators.ProductValidetion;
-
 public class UpdateProductValidator : BaseValidator<UpdateProductCommand>
 {
     public UpdateProductValidator()

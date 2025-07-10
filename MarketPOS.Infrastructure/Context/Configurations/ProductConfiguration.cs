@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Infrastructure.Context.Configurations;
-
 #region Product Configuration
 
 public class ProductConfiguration : BaseEntityConfiguration<Product>

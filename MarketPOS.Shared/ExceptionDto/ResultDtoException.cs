@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Shared.ExceptionDto;
-
 [Serializable]
 public sealed class ResultDtoException : Exception
 {

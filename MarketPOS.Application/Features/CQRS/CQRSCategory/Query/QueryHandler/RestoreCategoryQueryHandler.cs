@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query.QueryHandler;
-
 public class RestoreCategoryQueryHandler : BaseHandler<RestoreCategoryQueryHandler>, IRequestHandler<RestoreCategoryQuery, ResultDto<Guid>>
 {
     public RestoreCategoryQueryHandler(

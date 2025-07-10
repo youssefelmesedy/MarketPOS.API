@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Shared.DTOs.BaseDtoAndBaseAuditableDtoAndConContactInfoDto;
-
 public class AddressInfoDto
 {
     public string? Country { get; set; }

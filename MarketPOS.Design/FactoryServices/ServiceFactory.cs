@@ -1,7 +1,4 @@
-﻿
-
-namespace MarketPOS.Design.FactoryServices;
-
+﻿namespace MarketPOS.Design.FactoryServices;
 public class ServiceFactory : IServiceFactory
 {
     private readonly IServiceProvider _provider;

@@ -1,7 +1,5 @@
 ﻿using NJsonSchema;
-
 namespace MarketPOS.API;
-
 public class AcceptLanguageHeaderProcessor : IOperationProcessor
 {
     public bool Process(OperationProcessorContext context)

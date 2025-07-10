@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Features.CQRS.CQRSProduct.MappingProduct;
-
 public partial class ProductProfile
 {
     public void MapProductUpdate()

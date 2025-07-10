@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.MappeCategory;
-
 public partial class CategoryProfile
 {
     public void MapCategoryGet()

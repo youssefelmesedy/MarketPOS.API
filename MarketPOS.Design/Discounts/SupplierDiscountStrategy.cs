@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Design.Discounts;
-
 public class SupplierDiscountStrategy : IDiscountStrategy
 {
 

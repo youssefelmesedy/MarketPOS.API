@@ -1,9 +1,7 @@
-﻿namespace MarketPOS.Infrastructure.Repositories.RepositoryCategory
+﻿namespace MarketPOS.Infrastructure.Repositories.RepositoryCategory;
+public class CategoryRepository : GenericRepository<Category>, ICategoryRepo
 {
-    public class CategoryRepository : GenericRepository<Category>, ICategoryRepo
+    public CategoryRepository(ApplicationDbContext context) : base(context)
     {
-        public CategoryRepository(ApplicationDbContext context) : base(context)
-        {
-        }
     }
 }

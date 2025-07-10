@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Infrastructure.Context.Configurations;
-
 public class CategoryConfiguration : BaseEntityConfiguration<Category>
 {
     public override void Configure(EntityTypeBuilder<Category> builder)

@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Validators.ProductValidetion;
-
 public class CreateProductValidator : BaseValidator<CreateProductCommand>
 {
     public CreateProductValidator()

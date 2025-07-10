@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Validators.QueryValidetor;
-
 public class GetCategoryNameValidetor : BaseValidator<GetCategoryName>
 {
     public GetCategoryNameValidetor()

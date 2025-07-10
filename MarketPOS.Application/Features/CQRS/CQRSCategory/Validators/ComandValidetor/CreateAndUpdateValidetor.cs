@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Validators.ComandValidetor;
-
 public class CreateAndUpdateValidetor : BaseValidator<CategoryCreateDto>
 {
     public CreateAndUpdateValidetor()

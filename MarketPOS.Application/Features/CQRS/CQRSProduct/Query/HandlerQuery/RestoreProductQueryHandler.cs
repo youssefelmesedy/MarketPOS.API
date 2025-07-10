@@ -1,15 +1,4 @@
-﻿using AutoMapper;
-using Market.POS.Application.Services.Interfaces;
-using MarketPOS.Application.Common.HandlerBehaviors;
-using MarketPOS.Design.FactoryResult;
-using MarketPOS.Design.FactoryServices;
-using MarketPOS.Shared.DTOs;
-using MediatR;
-using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Logging;
-
-namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Query.HandlerQuery;
-
+﻿namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Query.HandlerQuery;
 public class RestoreProductQueryHandler : BaseHandler<RestoreProductQueryHandler>,
     IRequestHandler<RestoreProductQuery, ResultDto<Guid>>
 {

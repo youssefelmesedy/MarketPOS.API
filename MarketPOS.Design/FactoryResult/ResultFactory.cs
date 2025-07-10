@@ -1,8 +1,4 @@
-﻿using MarketPOS.Shared.DTOs;
-
-
-namespace MarketPOS.Design.FactoryResult;
-
+﻿namespace MarketPOS.Design.FactoryResult;
 public class ResultFactory<THandler> : IResultFactory<THandler>
 {
     private readonly IStringLocalizer<THandler>? _localizer;

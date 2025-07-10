@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Shared.DTOs.CategoryDto;
-
 public class CategoryDetalisDto : BaseDto
 {
     [JsonPropertyOrder(1)]

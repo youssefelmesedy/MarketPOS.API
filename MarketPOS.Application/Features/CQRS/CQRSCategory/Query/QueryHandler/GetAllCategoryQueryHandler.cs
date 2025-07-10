@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query.QueryHaandler;
-
 public class GetAllCategoryQueryHandler : BaseHandler<GetAllCategoryQueryHandler>,IRequestHandler<GetAllCategoryQuery, ResultDto<IEnumerable<CategoryDetalisDto>>>
 {
     public GetAllCategoryQueryHandler(

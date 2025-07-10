@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Command.CommandHandler;
-
 public class CreateCategoryCommandHandler : BaseHandler<CreateCategoryCommandHandler>, IRequestHandler<CreateCategoryCommand, ResultDto<Guid>>
 {
     public CreateCategoryCommandHandler(

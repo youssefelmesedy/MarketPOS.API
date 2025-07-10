@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Shared.DTOs.CategoryDto;
-
 public class CategoryCreateDto
 {
     public string? Name { get; set; }

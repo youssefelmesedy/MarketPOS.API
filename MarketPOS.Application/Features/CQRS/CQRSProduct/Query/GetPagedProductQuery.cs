@@ -1,10 +1,4 @@
-﻿using MarketPOS.Shared.DTOs;
-using MarketPOS.Shared.DTOs.ProductDto;
-using MarketPOS.Shared.Eunms.ProductEunms;
-using MediatR;
-
-namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Query;
-
+﻿namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Query;
 public class GetPagedProductQuery : IRequest<ResultDto<PagedResultDto<ProductDetailsDto>>>
 {
     public int PageIndex { get; set; }

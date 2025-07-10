@@ -1,9 +1,4 @@
-﻿using MarketPOS.Shared.DTOs;
-using MarketPOS.Shared.DTOs.ProductDto;
-using MediatR;
-
-namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Query;
-
+﻿namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Query;
 public class GetProductByIdQuery : IRequest<ResultDto<ProductDetailsDto>>
 {
     public Guid Id { get; set; }

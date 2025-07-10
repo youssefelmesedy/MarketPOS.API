@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Common.Helpers.LocalizationPostProcessorMappeing;
-
 public interface ILocalizationPostProcessor
 {
     T Apply<T>(T model) where T : class;

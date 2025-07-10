@@ -1,5 +1,4 @@
 ﻿namespace Market.Domain.Entitys.DomainCategory;
-
 public class Category : BaseEntity
 {
     public string Name { get; set; } = default!;

@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Common.HandlerBehaviors;
-
 public abstract class BaseHandler<THandler>
 {
     protected readonly IServiceFactory _servicesFactory;

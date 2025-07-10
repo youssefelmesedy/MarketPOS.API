@@ -1,5 +1,4 @@
-﻿
-
+﻿namespace MarketPOS.API.Controllers.Category;
 [Route("api/[controller]")]
 [ApiController]
 public class CategoryController : ControllerBase

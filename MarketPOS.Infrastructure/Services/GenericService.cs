@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Infrastructure.Services;
-
 public class GenericService<TEntity> : IGenericService<TEntity> where TEntity : class
 {
     private readonly IGenericRepository<TEntity> _repository;

@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Common.Interfaces.ProductRepositorys;
-
 public interface IProductRepo : IGenericRepository<Product>
 {
     Task<Product?> GetWithPricesAsync(Guid id);

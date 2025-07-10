@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Shared.Eunms.ProductEunms;
-
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum ProductInclude
 {

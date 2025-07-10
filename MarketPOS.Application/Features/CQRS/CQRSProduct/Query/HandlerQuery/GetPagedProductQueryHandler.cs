@@ -1,17 +1,4 @@
-﻿using AutoMapper;
-using Market.POS.Application.Services.Interfaces;
-using MarketPOS.Application.Common.HandlerBehaviors;
-using MarketPOS.Application.Common.Helpers.IncludeHalpers;
-using MarketPOS.Application.Common.Helpers.LocalizationPostProcessorMappeing;
-using MarketPOS.Design.FactoryResult;
-using MarketPOS.Design.FactoryServices;
-using MarketPOS.Shared.DTOs;
-using MarketPOS.Shared.DTOs.ProductDto;
-using MediatR;
-using Microsoft.Extensions.Localization;
-
-namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Query.HandlerQuery;
-
+﻿namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Query.HandlerQuery;
 public class GetPagedProductQueryHandler : BaseHandler<GetPagedProductQueryHandler>, IRequestHandler<GetPagedProductQuery, ResultDto<PagedResultDto<ProductDetailsDto>>>
 {
 

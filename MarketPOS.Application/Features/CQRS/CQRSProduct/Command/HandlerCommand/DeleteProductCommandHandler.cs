@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Command.HandlerCommand;
-
 public class DeleteProductCommandHandler : BaseHandler<DeleteProductCommandHandler>, IRequestHandler<DeleteProductCommand, ResultDto<Guid>>
 {
     public DeleteProductCommandHandler
