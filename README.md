@@ -1,3 +1,3 @@
 # MarketPOS.API
-MarketPOS.API هو نظام نقاط بيع (POS) ذكي مبني باستخدام .NET 9 وClean Architecture، يدير المنتجات، الفئات، الأسعار، والخصومات. يدعم تعدد الوحدات (كرتونة، شريط، حبة)، الترجمات، الردود الموحدة، وصلاحيات المستخدم، مع استخدام CQRS وFluentValidation وLocalization.
+MarketPOS.API is a smart Point of Sale (POS) system built with .NET 9 and Clean Architecture. It manages products, categories, pricing, and discounts. Supports multi-units (carton, strip, pill), localization, unified responses, user roles, and uses CQRS, FluentValidation, and Localization.
 ## Project Notes
