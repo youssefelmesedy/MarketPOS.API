@@ -1,8 +1,4 @@
 ﻿namespace MarketPOS.Application.Common.Helpers.LocalizationPostProcessorMappeing;
-
-using Microsoft.Extensions.Localization;
-using System.Reflection;
-
 public class LocalizationPostProcessor : ILocalizationPostProcessor
 {
     private readonly IStringLocalizer<LocalizationPostProcessor> _localizer;

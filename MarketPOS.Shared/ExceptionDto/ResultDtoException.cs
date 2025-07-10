@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-namespace MarketPOS.Shared.ExceptionDto;
+﻿namespace MarketPOS.Shared.ExceptionDto;
 
 [Serializable]
 public sealed class ResultDtoException : Exception

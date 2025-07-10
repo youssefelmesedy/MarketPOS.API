@@ -1,6 +1,4 @@
-﻿using MarketPOS.Shared.DTOs.CategoryDto;
-
-namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Validators.ComandValidetor;
+﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Validators.ComandValidetor;
 
 public class CreateAndUpdateValidetor : BaseValidator<CategoryCreateDto>
 {

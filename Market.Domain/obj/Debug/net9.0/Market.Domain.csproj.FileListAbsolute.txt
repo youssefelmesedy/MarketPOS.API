@@ -22,3 +22,16 @@ D:\Projects\MarketPOS.API\Market.Domain\obj\Debug\net9.0\Market.Domain.dll
 D:\Projects\MarketPOS.API\Market.Domain\obj\Debug\net9.0\refint\Market.Domain.dll
 D:\Projects\MarketPOS.API\Market.Domain\obj\Debug\net9.0\Market.Domain.pdb
 D:\Projects\MarketPOS.API\Market.Domain\obj\Debug\net9.0\ref\Market.Domain.dll
+D:\ResoursGitHub\Market.Domain\bin\Debug\net9.0\Market.Domain.deps.json
+D:\ResoursGitHub\Market.Domain\bin\Debug\net9.0\Market.Domain.dll
+D:\ResoursGitHub\Market.Domain\bin\Debug\net9.0\Market.Domain.pdb
+D:\ResoursGitHub\Market.Domain\obj\Debug\net9.0\Market.Domain.csproj.AssemblyReference.cache
+D:\ResoursGitHub\Market.Domain\obj\Debug\net9.0\Market.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\ResoursGitHub\Market.Domain\obj\Debug\net9.0\Market.Domain.AssemblyInfoInputs.cache
+D:\ResoursGitHub\Market.Domain\obj\Debug\net9.0\Market.Domain.AssemblyInfo.cs
+D:\ResoursGitHub\Market.Domain\obj\Debug\net9.0\Market.Domain.csproj.CoreCompileInputs.cache
+D:\ResoursGitHub\Market.Domain\obj\Debug\net9.0\Market.Domain.sourcelink.json
+D:\ResoursGitHub\Market.Domain\obj\Debug\net9.0\Market.Domain.dll
+D:\ResoursGitHub\Market.Domain\obj\Debug\net9.0\refint\Market.Domain.dll
+D:\ResoursGitHub\Market.Domain\obj\Debug\net9.0\Market.Domain.pdb
+D:\ResoursGitHub\Market.Domain\obj\Debug\net9.0\ref\Market.Domain.dll

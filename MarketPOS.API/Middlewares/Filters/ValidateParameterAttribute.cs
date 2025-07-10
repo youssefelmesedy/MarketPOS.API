@@ -1,9 +1,4 @@
-﻿using MarketPOS.Infrastructure.Exceptions;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.Localization;
-
-namespace MarketPOS.API.Middlewares.Filters;
+﻿namespace MarketPOS.API.Middlewares.Filters;
 
 public class ValidateParameterAttribute : ActionFilterAttribute
 {   

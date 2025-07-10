@@ -1,0 +1,126 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\ResoursGitHub\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D6AA07FA-B56A-4599-B31F-775C14792E43}|MarketPOS.API\\MarketPOS.API.csproj|d:\\resoursgithub\\marketpos.api\\acceptlanguageheaderprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6AA07FA-B56A-4599-B31F-775C14792E43}|MarketPOS.API\\MarketPOS.API.csproj|solutionrelative:marketpos.api\\acceptlanguageheaderprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D6AA07FA-B56A-4599-B31F-775C14792E43}|MarketPOS.API\\MarketPOS.API.csproj|d:\\resoursgithub\\marketpos.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6AA07FA-B56A-4599-B31F-775C14792E43}|MarketPOS.API\\MarketPOS.API.csproj|solutionrelative:marketpos.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D6AA07FA-B56A-4599-B31F-775C14792E43}|MarketPOS.API\\MarketPOS.API.csproj|d:\\resoursgithub\\marketpos.api\\middlewares\\localizetioncustom\\jsonstringlocalizer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6AA07FA-B56A-4599-B31F-775C14792E43}|MarketPOS.API\\MarketPOS.API.csproj|solutionrelative:marketpos.api\\middlewares\\localizetioncustom\\jsonstringlocalizer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D6AA07FA-B56A-4599-B31F-775C14792E43}|MarketPOS.API\\MarketPOS.API.csproj|d:\\resoursgithub\\marketpos.api\\middlewares\\responsemiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6AA07FA-B56A-4599-B31F-775C14792E43}|MarketPOS.API\\MarketPOS.API.csproj|solutionrelative:marketpos.api\\middlewares\\responsemiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D6AA07FA-B56A-4599-B31F-775C14792E43}|MarketPOS.API\\MarketPOS.API.csproj|d:\\resoursgithub\\marketpos.api\\globalusing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D6AA07FA-B56A-4599-B31F-775C14792E43}|MarketPOS.API\\MarketPOS.API.csproj|solutionrelative:marketpos.api\\globalusing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 391,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GlobalUsing.cs",
+              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.API\\GlobalUsing.cs",
+              "RelativeDocumentMoniker": "MarketPOS.API\\GlobalUsing.cs",
+              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.API\\GlobalUsing.cs",
+              "RelativeToolTip": "MarketPOS.API\\GlobalUsing.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-10T12:05:11.202Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AcceptLanguageHeaderProcessor.cs",
+              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.API\\AcceptLanguageHeaderProcessor.cs",
+              "RelativeDocumentMoniker": "MarketPOS.API\\AcceptLanguageHeaderProcessor.cs",
+              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.API\\AcceptLanguageHeaderProcessor.cs",
+              "RelativeToolTip": "MarketPOS.API\\AcceptLanguageHeaderProcessor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-10T12:24:06.71Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.API\\Program.cs",
+              "RelativeDocumentMoniker": "MarketPOS.API\\Program.cs",
+              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.API\\Program.cs",
+              "RelativeToolTip": "MarketPOS.API\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-10T12:23:26.794Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ResponseMiddleware.cs",
+              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.API\\Middlewares\\ResponseMiddleware.cs",
+              "RelativeDocumentMoniker": "MarketPOS.API\\Middlewares\\ResponseMiddleware.cs",
+              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.API\\Middlewares\\ResponseMiddleware.cs",
+              "RelativeToolTip": "MarketPOS.API\\Middlewares\\ResponseMiddleware.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAA9wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-10T12:17:46.455Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "JsonStringLocalizer.cs",
+              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.API\\Middlewares\\LocalizetionCustom\\JsonStringLocalizer.cs",
+              "RelativeDocumentMoniker": "MarketPOS.API\\Middlewares\\LocalizetionCustom\\JsonStringLocalizer.cs",
+              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.API\\Middlewares\\LocalizetionCustom\\JsonStringLocalizer.cs",
+              "RelativeToolTip": "MarketPOS.API\\Middlewares\\LocalizetionCustom\\JsonStringLocalizer.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-10T12:14:50.955Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

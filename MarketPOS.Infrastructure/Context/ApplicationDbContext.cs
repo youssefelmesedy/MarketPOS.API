@@ -1,10 +1,4 @@
-﻿using Market.Domain.Entitys.DomainCategory;
-using Market.Domain.Entitys.DomainProduct;
-using Market.Domain.Entitys.PurchaseInvoices;
-using Market.Domain.Entitys.Suppliers;
-using Microsoft.EntityFrameworkCore;
-
-namespace MarketPOS.Infrastructure.Context;
+﻿namespace MarketPOS.Infrastructure.Context;
 
 public class ApplicationDbContext : DbContext
 {

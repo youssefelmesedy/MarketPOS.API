@@ -1,7 +1,4 @@
-using MarketPOS.Shared;
-using Microsoft.Extensions.Localization;
 using System.Globalization;
-using System.Text.Json;
 
 namespace MarketPOS.API.Middlewares;
 

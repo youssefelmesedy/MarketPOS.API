@@ -1,14 +1,4 @@
-﻿using Market.Domain.Entitys.DomainProduct;
-using Market.POS.Application.Services.Interfaces;
-using MarketPOS.Application.Common.Exceptions;
-using MarketPOS.Application.Common.HandlerBehaviors;
-using MarketPOS.Design.FactoryResult;
-using MarketPOS.Design.FactoryServices;
-using MarketPOS.Shared.DTOs;
-using MediatR;
-using Microsoft.Extensions.Localization;
-
-namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Command.HandlerCommand;
+﻿namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Command.HandlerCommand;
 
 public class DeleteProductCommandHandler : BaseHandler<DeleteProductCommandHandler>, IRequestHandler<DeleteProductCommand, ResultDto<Guid>>
 {

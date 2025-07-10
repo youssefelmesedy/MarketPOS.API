@@ -1,7 +1,4 @@
-﻿using MarketPOS.Shared.DTOs.BaseDtoAndBaseAuditableDtoAndConContactInfoDto;
-using System.Text.Json.Serialization;
-
-namespace MarketPOS.Shared.DTOs.CategoryDto;
+﻿namespace MarketPOS.Shared.DTOs.CategoryDto;
 
 public class CategoryDetalisDto : BaseDto
 {

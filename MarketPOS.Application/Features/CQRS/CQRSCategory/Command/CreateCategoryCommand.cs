@@ -1,8 +1,4 @@
-﻿using MarketPOS.Shared.DTOs;
-using MarketPOS.Shared.DTOs.CategoryDto;
-using MediatR;
-
-namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Command;
+﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Command;
 
 public record CreateCategoryCommand :IRequest<ResultDto<Guid>>
 {

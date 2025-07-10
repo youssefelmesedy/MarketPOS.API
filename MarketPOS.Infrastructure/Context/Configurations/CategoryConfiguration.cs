@@ -1,7 +1,4 @@
-﻿using Market.Domain.Entitys.DomainCategory;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-namespace MarketPOS.Infrastructure.Context.Configurations;
+﻿namespace MarketPOS.Infrastructure.Context.Configurations;
 
 public class CategoryConfiguration : BaseEntityConfiguration<Category>
 {

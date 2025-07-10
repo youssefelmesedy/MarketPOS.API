@@ -1,11 +1,4 @@
-﻿using Market.Domain.Entitys;
-using MarketPOS.Application.Common.Interfaces;
-using MarketPOS.Infrastructure.Context;
-using Microsoft.EntityFrameworkCore;
-using System.Linq.Dynamic.Core;
-using System.Linq.Expressions;
-
-namespace Market.POS.Infrastructure.Repositories;
+﻿namespace Market.POS.Infrastructure.Repositories;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : class
 {

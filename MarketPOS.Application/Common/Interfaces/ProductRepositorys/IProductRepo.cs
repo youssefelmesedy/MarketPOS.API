@@ -1,6 +1,4 @@
-﻿using Market.Domain.Entitys.DomainProduct;
-
-namespace MarketPOS.Application.Common.Interfaces.ProductRepositorys;
+﻿namespace MarketPOS.Application.Common.Interfaces.ProductRepositorys;
 
 public interface IProductRepo : IGenericRepository<Product>
 {

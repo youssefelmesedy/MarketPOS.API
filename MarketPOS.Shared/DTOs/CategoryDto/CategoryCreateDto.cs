@@ -1,6 +1,4 @@
-﻿using MarketPOS.Shared.DTOs.BaseDtoAndBaseAuditableDtoAndConContactInfoDto;
-
-namespace MarketPOS.Shared.DTOs.CategoryDto;
+﻿namespace MarketPOS.Shared.DTOs.CategoryDto;
 
 public class CategoryCreateDto
 {

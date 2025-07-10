@@ -1,6 +1,4 @@
-﻿using System.Linq.Expressions;
-
-namespace MarketPOS.Application.Common.Interfaces;
+﻿namespace MarketPOS.Application.Common.Interfaces;
 
 public interface IGenericRepository<T> where T : class
 {

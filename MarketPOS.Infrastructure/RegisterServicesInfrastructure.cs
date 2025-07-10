@@ -1,21 +1,4 @@
-﻿using Market.POS.Application.Services.Interfaces;
-using Market.POS.Infrastructure.Repositories;
-using Market.POS.Infrastructure.Services;
-using MarketPOS.Application.Common.Interfaces;
-using MarketPOS.Application.Common.Interfaces.ProductRepositorys;
-using MarketPOS.Application.Common.Interfaces.RepositoryCategory;
-using MarketPOS.Application.Common.Interfaces.RepositorySupplier;
-using MarketPOS.Application.Services.Interfaces;
-using MarketPOS.Infrastructure.Context;
-using MarketPOS.Infrastructure.Repositories.ProductRepositorys;
-using MarketPOS.Infrastructure.Repositories.RepositoryCategory;
-using MarketPOS.Infrastructure.Repositories.RepositorySupplier;
-using MarketPOS.Infrastructure.Services;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace MarketPOS.Infrastructure;
+﻿namespace MarketPOS.Infrastructure;
 
 public static class RegisterServicesInfrastructure
 {

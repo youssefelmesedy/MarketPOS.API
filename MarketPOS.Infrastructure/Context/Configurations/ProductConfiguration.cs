@@ -1,8 +1,4 @@
-﻿using Market.Domain.Entitys.DomainProduct;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace MarketPOS.Infrastructure.Context.Configurations;
+﻿namespace MarketPOS.Infrastructure.Context.Configurations;
 
 #region Product Configuration
 

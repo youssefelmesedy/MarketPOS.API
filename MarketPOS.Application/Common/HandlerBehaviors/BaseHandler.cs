@@ -1,12 +1,4 @@
-﻿using AutoMapper;
-using MarketPOS.Application.Common.Helpers.LocalizationPostProcessorMappeing;
-using MarketPOS.Design.FactoryResult;
-using MarketPOS.Design.FactoryServices;
-using MarketPOS.Shared.DTOs;
-using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Logging;
-
-namespace MarketPOS.Application.Common.HandlerBehaviors;
+﻿namespace MarketPOS.Application.Common.HandlerBehaviors;
 
 public abstract class BaseHandler<THandler>
 {

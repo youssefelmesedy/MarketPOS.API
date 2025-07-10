@@ -1,6 +1,4 @@
-﻿using Market.Domain.Entitys.PurchaseInvoices;
-
-namespace Market.Domain.Entitys.Suppliers;
+﻿namespace Market.Domain.Entitys.Suppliers;
 
 public class Supplier : BaseEntity
 {

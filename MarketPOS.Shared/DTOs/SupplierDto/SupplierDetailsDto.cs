@@ -1,6 +1,4 @@
-﻿using MarketPOS.Shared.DTOs.BaseDtoAndBaseAuditableDtoAndConContactInfoDto;
-
-namespace MarketPOS.Shared.DTOs.SupplierDto;
+﻿namespace MarketPOS.Shared.DTOs.SupplierDto;
 
 public class SupplierDetailsDto : BaseDto
 {

@@ -1,6 +1,4 @@
-﻿using Market.Domain.Entitys.DomainCategory;
-
-namespace MarketPOS.Application.Services.Interfaces;
+﻿namespace MarketPOS.Application.Services.Interfaces;
 
 public interface ICategoryService : IGenericService<Category>
 {

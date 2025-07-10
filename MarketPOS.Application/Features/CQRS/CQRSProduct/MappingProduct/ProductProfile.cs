@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-
-namespace MarketPOS.Application.Features.CQRS.CQRSProduct.MappingProduct;
+﻿namespace MarketPOS.Application.Features.CQRS.CQRSProduct.MappingProduct;
 public partial class ProductProfile : Profile
 {
     public ProductProfile()

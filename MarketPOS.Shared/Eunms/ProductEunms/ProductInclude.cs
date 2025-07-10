@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace MarketPOS.Shared.Eunms.ProductEunms;
+﻿namespace MarketPOS.Shared.Eunms.ProductEunms;
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum ProductInclude

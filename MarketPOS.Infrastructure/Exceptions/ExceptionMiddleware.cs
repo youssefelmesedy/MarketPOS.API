@@ -1,15 +1,4 @@
-﻿using AutoMapper;
-using MarketPOS.Application.Common.Exceptions;
-using MarketPOS.Shared.ExceptionDto;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Logging;
-using System.Text.Json;
-using FluentValidation;
-
-namespace MarketPOS.Infrastructure.Exceptions;
+﻿namespace MarketPOS.Infrastructure.Exceptions;
 public class ExceptionMiddleware
 {
     private readonly RequestDelegate _next;

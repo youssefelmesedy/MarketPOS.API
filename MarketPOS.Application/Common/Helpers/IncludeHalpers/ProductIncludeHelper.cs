@@ -1,6 +1,4 @@
-﻿using Market.Domain.Entitys.DomainProduct;
-using MarketPOS.Shared.Eunms.ProductEunms;
-using Microsoft.EntityFrameworkCore;
+﻿
 
 namespace MarketPOS.Application.Common.Helpers.IncludeHalpers;
 

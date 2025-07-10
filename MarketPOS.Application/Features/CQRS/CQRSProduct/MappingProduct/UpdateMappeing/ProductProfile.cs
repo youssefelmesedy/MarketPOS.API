@@ -1,7 +1,4 @@
-﻿using Market.Domain.Entitys.DomainProduct;
-using MarketPOS.Shared.DTOs.ProductDto;
-
-namespace MarketPOS.Application.Features.CQRS.CQRSProduct.MappingProduct;
+﻿namespace MarketPOS.Application.Features.CQRS.CQRSProduct.MappingProduct;
 
 public partial class ProductProfile
 {

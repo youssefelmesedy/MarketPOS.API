@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "va7ys85uFEI=",
+  "dgSpecHash": "H0EELNzLJCA=",
   "success": true,
-  "projectFilePath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API.csproj",
+  "projectFilePath": "D:\\ResoursGitHub\\MarketPOS.API\\MarketPOS.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Youssef\\.nuget\\packages\\aspnetcore.localizer.json\\1.0.1\\aspnetcore.localizer.json.1.0.1.nupkg.sha512",
     "C:\\Users\\Youssef\\.nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
@@ -146,15 +146,5 @@
     "C:\\Users\\Youssef\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\Youssef\\.nuget\\packages\\yamldotnet\\16.3.0\\yamldotnet.16.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.",
-      "projectPath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API.csproj",
-      "warningLevel": 1,
-      "filePath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API.csproj",
-      "targetGraphs": []
-    }
-  ]
+  "logs": []
 }

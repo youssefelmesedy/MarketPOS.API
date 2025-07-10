@@ -1,7 +1,4 @@
-﻿using MarketPOS.Shared.DTOs;
-using MediatR;
-
-namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query;
+﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query;
 
 public class RestoreCategoryQuery : IRequest<ResultDto<Guid>>
 {

@@ -1,8 +1,4 @@
-﻿using MarketPOS.Shared.DTOs;
-using MarketPOS.Shared.DTOs.CategoryDto;
-using MediatR;
-
-namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query;
+﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query;
 
 public record GetCategoryName : IRequest<ResultDto<IEnumerable<CategoryDetalisDto>>>
 {

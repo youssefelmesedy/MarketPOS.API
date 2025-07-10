@@ -1,8 +1,4 @@
-﻿using Market.Domain.Entitys.PurchaseInvoices;
-using Market.Domain.Entitys.Suppliers;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-namespace MarketPOS.Infrastructure.Context.Configurations;
+﻿namespace MarketPOS.Infrastructure.Context.Configurations;
 
 public class SupplierConfiguration : BaseEntityConfiguration<Supplier>
 {

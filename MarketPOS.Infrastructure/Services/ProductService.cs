@@ -1,10 +1,4 @@
-﻿using Market.Domain.Entitys.DomainProduct;
-using Market.POS.Application.Services.Interfaces;
-using MarketPOS.Application.Common.Interfaces;
-using MarketPOS.Infrastructure.Services;
-using Microsoft.Extensions.Logging;
-
-namespace Market.POS.Infrastructure.Services;
+﻿namespace Market.POS.Infrastructure.Services;
 public class ProductService : GenericService<Product>, IProductService
 {
     private ILogger<ProductService> _logger;

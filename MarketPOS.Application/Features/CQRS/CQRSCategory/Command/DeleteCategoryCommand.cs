@@ -1,7 +1,4 @@
-﻿using MarketPOS.Shared.DTOs;
-using MediatR;
-
-namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Command;
+﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Command;
 
 public record DeleteCategoryCommand : IRequest<ResultDto<Guid>>
 {

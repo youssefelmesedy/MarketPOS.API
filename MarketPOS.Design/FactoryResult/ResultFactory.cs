@@ -1,5 +1,5 @@
 ﻿using MarketPOS.Shared.DTOs;
-using Microsoft.Extensions.Localization;
+
 
 namespace MarketPOS.Design.FactoryResult;
 

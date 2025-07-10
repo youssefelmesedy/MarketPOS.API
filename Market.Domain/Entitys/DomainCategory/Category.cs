@@ -1,6 +1,4 @@
-﻿using Market.Domain.Entitys.DomainProduct;
-
-namespace Market.Domain.Entitys.DomainCategory;
+﻿namespace Market.Domain.Entitys.DomainCategory;
 
 public class Category : BaseEntity
 {

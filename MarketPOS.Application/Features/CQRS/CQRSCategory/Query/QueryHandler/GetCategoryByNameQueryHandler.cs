@@ -1,16 +1,4 @@
-﻿using AutoMapper;
-using MarketPOS.Application.Common.HandlerBehaviors;
-using MarketPOS.Application.Common.Helpers.LocalizationPostProcessorMappeing;
-using MarketPOS.Application.Features.CQRS.CQRSProduct.Query;
-using MarketPOS.Application.Services.Interfaces;
-using MarketPOS.Design.FactoryResult;
-using MarketPOS.Design.FactoryServices;
-using MarketPOS.Shared.DTOs;
-using MarketPOS.Shared.DTOs.CategoryDto;
-using MediatR;
-using Microsoft.Extensions.Localization;
-
-namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query.QueryHaandler;
+﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query.QueryHaandler;
 
 public class GetCategoryByNameQueryHandler : BaseHandler<GetCategoryByNameQueryHandler>,IRequestHandler<GetCategoryName, ResultDto<IEnumerable<CategoryDetalisDto>>>
 {

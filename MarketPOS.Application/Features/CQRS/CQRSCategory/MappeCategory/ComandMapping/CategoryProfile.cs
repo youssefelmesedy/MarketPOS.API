@@ -1,7 +1,4 @@
-﻿using Market.Domain.Entitys.DomainCategory;
-using MarketPOS.Shared.DTOs.CategoryDto;
-
-namespace MarketPOS.Application.Features.CQRS.CQRSCategory.MappeCategory;
+﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.MappeCategory;
 public partial class CategoryProfile
 {
     public void MapCreateCategory()

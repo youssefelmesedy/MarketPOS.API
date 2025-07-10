@@ -1,7 +1,4 @@
-﻿using Market.Domain.Entitys;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-namespace MarketPOS.Infrastructure.Context.Configurations;
+﻿namespace MarketPOS.Infrastructure.Context.Configurations;
 
 public abstract class BaseEntityConfiguration<T> : IEntityTypeConfiguration<T>
     where T : BaseEntity

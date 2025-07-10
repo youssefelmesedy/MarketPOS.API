@@ -1,7 +1,4 @@
-﻿using FluentValidation;
-using System.Linq.Expressions;
-
-public abstract class BaseValidator<TDto> : AbstractValidator<TDto>
+﻿public abstract class BaseValidator<TDto> : AbstractValidator<TDto>
 {
     protected void RuleForName(Expression<Func<TDto, string>> selector, int maxLength = 100)
     {

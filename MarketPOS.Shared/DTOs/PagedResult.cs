@@ -1,5 +1,4 @@
 ﻿namespace MarketPOS.Shared.DTOs;
-
 public class PagedResultDto<T>
 {
     public IEnumerable<T> Items { get; set; } = Enumerable.Empty<T>();

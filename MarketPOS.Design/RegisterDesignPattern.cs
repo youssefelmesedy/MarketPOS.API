@@ -1,5 +1,4 @@
-﻿using MarketPOS.Design.FactoryResult;
-using MarketPOS.Design.FactoryServices;
+﻿
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MarketPOS.Design;

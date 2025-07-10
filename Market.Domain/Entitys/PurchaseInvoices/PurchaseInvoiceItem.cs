@@ -1,6 +1,4 @@
-﻿using Market.Domain.Entitys.DomainProduct;
-
-namespace Market.Domain.Entitys.PurchaseInvoices;
+﻿namespace Market.Domain.Entitys.PurchaseInvoices;
 
 public class PurchaseInvoiceItem : BaseEntity
 {

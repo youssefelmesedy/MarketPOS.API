@@ -1,7 +1,4 @@
-﻿using MarketPOS.Shared.DTOs.BaseDtoAndBaseAuditableDtoAndConContactInfoDto;
-using System.Text.Json.Serialization;
-
-namespace MarketPOS.Shared.DTOs.ProductDto;
+﻿namespace MarketPOS.Shared.DTOs.ProductDto;
 public class ProductDetailsDto  :BaseDto
 {
     [JsonPropertyOrder(1)]

@@ -1,20 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "WFPuBCLjJwk=",
+  "dgSpecHash": "SCwCzOBry3U=",
   "success": true,
-  "projectFilePath": "D:\\Projects\\MarketPOS.API\\Market.Domain\\Market.Domain.csproj",
+  "projectFilePath": "D:\\ResoursGitHub\\Market.Domain\\Market.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Youssef\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\9.0.6\\microsoft.entityframeworkcore.abstractions.9.0.6.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.",
-      "projectPath": "D:\\Projects\\MarketPOS.API\\Market.Domain\\Market.Domain.csproj",
-      "warningLevel": 1,
-      "filePath": "D:\\Projects\\MarketPOS.API\\Market.Domain\\Market.Domain.csproj",
-      "targetGraphs": []
-    }
-  ]
+  "logs": []
 }

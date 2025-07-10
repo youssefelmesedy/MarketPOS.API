@@ -1,7 +1,4 @@
 ﻿using NJsonSchema;
-using NSwag;
-using NSwag.Generation.Processors;
-using NSwag.Generation.Processors.Contexts;
 
 namespace MarketPOS.API;
 

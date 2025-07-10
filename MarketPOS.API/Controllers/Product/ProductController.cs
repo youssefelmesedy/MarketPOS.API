@@ -1,14 +1,6 @@
-﻿using MarketPOS.API.Middlewares.Filters;
-using MarketPOS.Application.Features.CQRS.CQRSProduct.Command;
-using MarketPOS.Application.Features.CQRS.CQRSProduct.Query;
-using MarketPOS.Shared;
-using MarketPOS.Shared.DTOs;
-using MarketPOS.Shared.DTOs.ProductDto;
-using MarketPOS.Shared.Eunms.ProductEunms;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
+﻿
 
+namespace MarketPOS.API.Controllers.Product;
 [ApiController]
 [Route("api/[controller]")]
 public class ProductController : ControllerBase

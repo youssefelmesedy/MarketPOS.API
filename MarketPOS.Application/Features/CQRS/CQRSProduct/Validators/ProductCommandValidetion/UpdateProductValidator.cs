@@ -1,7 +1,4 @@
-﻿using FluentValidation;
-using MarketPOS.Application.Features.CQRS.CQRSProduct.Command;
-
-namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Validators.ProductValidetion;
+﻿namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Validators.ProductValidetion;
 
 public class UpdateProductValidator : BaseValidator<UpdateProductCommand>
 {

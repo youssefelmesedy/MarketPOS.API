@@ -1,7 +1,4 @@
-﻿using FluentValidation;
-using MediatR;
-
-namespace MarketPOS.Application.Common.Behaviors;
+﻿namespace MarketPOS.Application.Common.Behaviors;
 
 public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : notnull

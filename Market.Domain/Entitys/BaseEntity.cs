@@ -1,5 +1,4 @@
 ﻿namespace Market.Domain.Entitys;
-
 public abstract class BaseEntity
 {
     public Guid Id { get; set; } = Guid.NewGuid();

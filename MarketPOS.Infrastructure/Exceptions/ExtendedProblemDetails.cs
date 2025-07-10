@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Text.Json.Serialization;
-
-namespace MarketPOS.Infrastructure.Exceptions;
+﻿namespace MarketPOS.Infrastructure.Exceptions;
 public class ExtendedProblemDetails : ProblemDetails
 {
     public bool Success { get; set; } = false;

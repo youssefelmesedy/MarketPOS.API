@@ -1,6 +1,4 @@
-﻿using System.Linq.Expressions;
-
-namespace MarketPOS.Application.Services.Interfaces;
+﻿namespace MarketPOS.Application.Services.Interfaces;
 
 public interface IGenericService<TEntity> where TEntity : class
 {

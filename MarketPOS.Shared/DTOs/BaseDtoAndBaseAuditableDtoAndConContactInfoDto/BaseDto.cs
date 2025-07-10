@@ -1,7 +1,4 @@
-﻿using MarketPOS.Shared.DataConventer;
-using System.Text.Json.Serialization;
-
-namespace MarketPOS.Shared.DTOs.BaseDtoAndBaseAuditableDtoAndConContactInfoDto;
+﻿namespace MarketPOS.Shared.DTOs.BaseDtoAndBaseAuditableDtoAndConContactInfoDto;
 
 public abstract class BaseDto
 {

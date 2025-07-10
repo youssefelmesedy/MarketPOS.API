@@ -1,10 +1,9 @@
-﻿using Microsoft.Extensions.Localization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace MarketPOS.API.Middlewares.LocalizetionCustom;
 public class JsonStringLocalizer : IStringLocalizer
 {
-    private readonly JsonSerializer _jsonSerializer = new();
+    private readonly Newtonsoft.Json.JsonSerializer _jsonSerializer = new();
 
     public LocalizedString this[string name]
     {

@@ -1,10 +1,4 @@
-﻿using Market.Domain.Entitys.DomainProduct;
-using Market.POS.Infrastructure.Repositories;
-using MarketPOS.Application.Common.Interfaces.ProductRepositorys;
-using MarketPOS.Infrastructure.Context;
-using Microsoft.EntityFrameworkCore;
-
-namespace MarketPOS.Infrastructure.Repositories.ProductRepositorys;
+﻿namespace MarketPOS.Infrastructure.Repositories.ProductRepositorys;
 
 public class ProductRepository : GenericRepository<Product>, IProductRepo
 {

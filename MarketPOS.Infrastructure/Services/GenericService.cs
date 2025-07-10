@@ -1,11 +1,4 @@
-﻿using Market.Domain.Entitys;
-using MarketPOS.Application.Common.Exceptions;
-using MarketPOS.Application.Common.Interfaces;
-using MarketPOS.Application.Services.Interfaces;
-using Microsoft.Extensions.Logging;
-using System.Linq.Expressions;
-
-namespace MarketPOS.Infrastructure.Services;
+﻿namespace MarketPOS.Infrastructure.Services;
 
 public class GenericService<TEntity> : IGenericService<TEntity> where TEntity : class
 {

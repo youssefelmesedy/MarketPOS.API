@@ -10,3 +10,16 @@ D:\Projects\MarketPOS.API\MarketPOS.Shared\obj\Debug\net9.0\MarketPOS.Shared.dll
 D:\Projects\MarketPOS.API\MarketPOS.Shared\obj\Debug\net9.0\refint\MarketPOS.Shared.dll
 D:\Projects\MarketPOS.API\MarketPOS.Shared\obj\Debug\net9.0\MarketPOS.Shared.pdb
 D:\Projects\MarketPOS.API\MarketPOS.Shared\obj\Debug\net9.0\ref\MarketPOS.Shared.dll
+D:\ResoursGitHub\MarketPOS.Shared\bin\Debug\net9.0\MarketPOS.Shared.deps.json
+D:\ResoursGitHub\MarketPOS.Shared\bin\Debug\net9.0\MarketPOS.Shared.dll
+D:\ResoursGitHub\MarketPOS.Shared\bin\Debug\net9.0\MarketPOS.Shared.pdb
+D:\ResoursGitHub\MarketPOS.Shared\obj\Debug\net9.0\MarketPOS.Shared.csproj.AssemblyReference.cache
+D:\ResoursGitHub\MarketPOS.Shared\obj\Debug\net9.0\MarketPOS.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\ResoursGitHub\MarketPOS.Shared\obj\Debug\net9.0\MarketPOS.Shared.AssemblyInfoInputs.cache
+D:\ResoursGitHub\MarketPOS.Shared\obj\Debug\net9.0\MarketPOS.Shared.AssemblyInfo.cs
+D:\ResoursGitHub\MarketPOS.Shared\obj\Debug\net9.0\MarketPOS.Shared.csproj.CoreCompileInputs.cache
+D:\ResoursGitHub\MarketPOS.Shared\obj\Debug\net9.0\MarketPOS.Shared.sourcelink.json
+D:\ResoursGitHub\MarketPOS.Shared\obj\Debug\net9.0\MarketPOS.Shared.dll
+D:\ResoursGitHub\MarketPOS.Shared\obj\Debug\net9.0\refint\MarketPOS.Shared.dll
+D:\ResoursGitHub\MarketPOS.Shared\obj\Debug\net9.0\MarketPOS.Shared.pdb
+D:\ResoursGitHub\MarketPOS.Shared\obj\Debug\net9.0\ref\MarketPOS.Shared.dll

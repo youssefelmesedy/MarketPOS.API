@@ -1,12 +1,4 @@
-﻿using MarketPOS.Application.Common.HandlerBehaviors;
-using MarketPOS.Application.Services.Interfaces;
-using MarketPOS.Design.FactoryResult;
-using MarketPOS.Design.FactoryServices;
-using MarketPOS.Shared.DTOs;
-using MediatR;
-using Microsoft.Extensions.Localization;
-
-namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query.QueryHandler;
+﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query.QueryHandler;
 
 public class SofteDeletedCategoryQueryHandler : BaseHandler<SofteDeletedCategoryQueryHandler>, IRequestHandler<SofteCategoryDeletedQuery, ResultDto<Guid>>
 {

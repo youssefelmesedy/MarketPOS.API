@@ -1,9 +1,4 @@
-﻿using FluentValidation;
-using MarketPOS.Application.Common.Behaviors;
-using MediatR;
-using Microsoft.Extensions.DependencyInjection;
-
-public static class RegisterServicesApplication
+﻿public static class RegisterServicesApplication
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {

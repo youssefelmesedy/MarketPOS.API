@@ -1,15 +1,4 @@
-﻿using FluentValidation;
-using FluentValidation.AspNetCore;
-using MarketPOS.API;
-using MarketPOS.API.Middlewares;
-using MarketPOS.API.Middlewares.LocalizetionCustom;
-using MarketPOS.Application.Common.Helpers.LocalizationPostProcessorMappeing;
-using MarketPOS.Design;
-using MarketPOS.Infrastructure;
-using MarketPOS.Infrastructure.Exceptions;
-using Microsoft.AspNetCore.Localization;
-using Microsoft.Extensions.Localization;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
