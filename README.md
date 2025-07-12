@@ -3,57 +3,98 @@ MarketPOS.API is a smart Point of Sale (POS) system built with .NET 9 and Clean 
 
 #📒 Project Notes – MarketPOS.API
 
-##🔧 Architecture & Patterns
-The project follows Clean Architecture with clear separation between layers:
+**MarketPOS.API Project Notes for Youssef**
 
-Domain, Application, Infrastructure, API, Shared, and Design
+---
 
-Uses CQRS pattern with MediatR (each Command and Query in a separate file).
+### ✅ General Info:
 
-Implements Strategy Pattern for supplier and customer discount logic.
+* Built with **.NET 9**, **Clean Architecture**, and **CQRS**.
+* API handles: Products, Categories, Prices, Discounts, Multi-units, Localization, User Permissions.
 
-##🧱 Code Structure Guidelines
-All responses follow a unified format using ResultDto.
+---
 
-Exceptions are handled through a custom ExceptionMiddleware, using ProblemDetails for Swagger documentation.
+### ⚙ Project Layers:
 
-FluentValidation is integrated into all request models with full localization support.
+* **API Layer:** Entry point, contains controllers, middlewares.
+* **Application Layer:** Contains CQRS (Commands, Queries, Handlers), Validation, DTOs.
+* **Infrastructure Layer:** EF Core, Repositories, Configuration.
+* **Domain Layer:** Entities, Enums, Business logic.
+* **Shared Layer:** Common utilities, ResultDto, base classes.
+* **Design Layer:** Strategy patterns, design implementations.
 
-AutoMapper is used to map entities to DTOs and vice versa.
+---
 
-##🌐 Localization
-Multi-language support via IStringLocalizer.
+### 🔨 Important Concepts:
 
-Uses a custom ILocalizationPostProcessor to post-process localized values.
+* **CQRS:** Separate read (Query) and write (Command) logic.
+* **IUnitOfWork:** Handles transactions and repository access.
+* **GenericRepository:** Base repo with common EF operations.
+* **Soft Delete:** Uses IsDeleted + query filtering.
+* **FluentValidation:** Used for input validation.
+* **Localization:** Implemented via custom `JsonStringLocalizer`.
 
-JSON-based translation files are stored in a dedicated localization folder.
+---
 
-##📦 Product Logic Notes
-Supports multi-unit products (e.g., carton, strip, pill).
+### 🛋️ Memory Optimization Tips:
 
-Medium and small unit prices are calculated automatically from the sale price.
+* Use `.AsNoTracking()` for read-only queries.
+* Prefer `.ProjectTo<DTO>()` over `.Map()` + `ToList()` to reduce memory usage.
+* Avoid heavy `Include()` unless necessary. Use `.Select()` or flatten data.
 
-Discounts can be defined either by percentage or by directly setting purchase price.
+---
 
-Products include fields such as expiration date, purchase/sale prices, and inventory count.
+### 🌐 Localization Notes:
 
-##🧪 Testing & Swagger
-Full API documentation is available via Swagger UI.
+* Custom implementation using `JsonStringLocalizer`.
+* Caching done via `ConcurrentDictionary<string, string>`.
+* Cache is cleared on app shutdown using `ApplicationStopping`.
 
-Test all endpoints to ensure:
+---
 
-Valid and consistent responses.
+### 🌐 JSON Localization File:
 
-Correct translation and localization messages.
+* Location: `Resources/{CultureName}.json`
+* Format: `{"Key": "Translation"}`
 
-Unit conversions and business logic behave as expected.
+---
 
-##📌 General Notes
-Always follow SOLID principles when adding or refactoring code.
+### ❌ Exception Handling:
 
-All Handlers should use IResultFactory<T> and IServiceFactory for consistency.
+* `ExceptionMiddleware`: Catches unhandled exceptions.
+* `ResultDtoException`: Custom exception for business logic.
+* `ExtendedProblemDetails`: Returns detailed errors to client.
 
-Middleware is responsible for shaping responses and applying the correct language.
+---
 
-Keep the product system flexible to support both supermarket and pharmacy use cases.
+### 🚀 Response Standardization:
+
+* `ResponseMiddleware`: Wraps all output in `ApiResponse<T>`.
+* Consistent structure: `Success`, `Message`, `Data`, `Errors`
+
+---
+
+### 📅 DTO Mapping:
+
+* Use AutoMapper with `ProjectTo<T>()` for performance.
+* Define profiles in `Design/Mappings/` or dedicated `Profiles/` folder.
+
+---
+
+### ⚡ Tips to Remember:
+
+* Don’t include `.vs`, `bin`, or `obj` in Git (use `.gitignore`).
+* Always pull before push to avoid conflicts.
+* Use `ResultDto<T>` for standardized responses in Handlers.
+* Watch your memory during queries, especially with `Include()`.
+
+---
+
+### ✏ To-Do Ideas:
+
+* Add caching layer (e.g., MemoryCache or Redis).
+* Improve Swagger documentation.
+* Add unit tests using xUnit.
+* Consider using Serilog for better logging.
+
 
