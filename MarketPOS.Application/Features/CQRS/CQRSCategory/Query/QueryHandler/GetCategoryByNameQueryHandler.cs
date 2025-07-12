@@ -15,7 +15,7 @@ public class GetCategoryByNameQueryHandler : BaseHandler<GetCategoryByNameQueryH
         var categoryService = _servicesFactory.GetService<ICategoryService>();
 
         var data = await categoryService.GetByNameAsync(request.CategoryName!, request.IncludSofteDelete);
-        if (data is null || data.Any())
+        if (!data.Any())
             return _resultFactory.Fail<IEnumerable<CategoryDetalisDto>>("GetByNameFailed");
 
         var mappeing = _mapper?.Map<IEnumerable<CategoryDetalisDto>>(data);
