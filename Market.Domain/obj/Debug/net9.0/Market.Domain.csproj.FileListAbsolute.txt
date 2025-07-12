@@ -35,3 +35,4 @@ D:\ResoursGitHub\Market.Domain\obj\Debug\net9.0\Market.Domain.dll
 D:\ResoursGitHub\Market.Domain\obj\Debug\net9.0\refint\Market.Domain.dll
 D:\ResoursGitHub\Market.Domain\obj\Debug\net9.0\Market.Domain.pdb
 D:\ResoursGitHub\Market.Domain\obj\Debug\net9.0\ref\Market.Domain.dll
+D:\Projects\MarketPOS.API\Market.Domain\obj\Debug\net9.0\Market.Domain.sourcelink.json

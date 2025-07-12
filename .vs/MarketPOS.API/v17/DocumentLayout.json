@@ -1,106 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\ResoursGitHub\\",
+  "WorkspaceRootPath": "D:\\Projects\\MarketPOS.API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|d:\\resoursgithub\\market.domain\\entitys\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|solutionrelative:market.domain\\entitys\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|d:\\resoursgithub\\market.domain\\entitys\\suppliers\\supplier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|solutionrelative:market.domain\\entitys\\suppliers\\supplier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|d:\\resoursgithub\\market.domain\\entitys\\purchaseinvoices\\purchaseinvoiceitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|solutionrelative:market.domain\\entitys\\purchaseinvoices\\purchaseinvoiceitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|d:\\resoursgithub\\market.domain\\entitys\\purchaseinvoices\\purchaseinvoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|solutionrelative:market.domain\\entitys\\purchaseinvoices\\purchaseinvoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|d:\\resoursgithub\\market.domain\\entitys\\domainproduct\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|solutionrelative:market.domain\\entitys\\domainproduct\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|d:\\resoursgithub\\market.domain\\entitys\\domaincategory\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|solutionrelative:market.domain\\entitys\\domaincategory\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D6AA07FA-B56A-4599-B31F-775C14792E43}|MarketPOS.API\\MarketPOS.API.csproj|d:\\resoursgithub\\marketpos.api\\middlewares\\filters\\parametervalidationtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D6AA07FA-B56A-4599-B31F-775C14792E43}|MarketPOS.API\\MarketPOS.API.csproj|solutionrelative:marketpos.api\\middlewares\\filters\\parametervalidationtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D6AA07FA-B56A-4599-B31F-775C14792E43}|MarketPOS.API\\MarketPOS.API.csproj|d:\\resoursgithub\\marketpos.api\\controllers\\product\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D6AA07FA-B56A-4599-B31F-775C14792E43}|MarketPOS.API\\MarketPOS.API.csproj|d:\\projects\\marketpos.api\\marketpos.api\\controllers\\product\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D6AA07FA-B56A-4599-B31F-775C14792E43}|MarketPOS.API\\MarketPOS.API.csproj|solutionrelative:marketpos.api\\controllers\\product\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D6AA07FA-B56A-4599-B31F-775C14792E43}|MarketPOS.API\\MarketPOS.API.csproj|d:\\resoursgithub\\marketpos.api\\controllers\\category\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D6AA07FA-B56A-4599-B31F-775C14792E43}|MarketPOS.API\\MarketPOS.API.csproj|solutionrelative:marketpos.api\\controllers\\category\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|d:\\projects\\marketpos.api\\marketpos.application\\features\\cqrs\\cqrsproduct\\query\\getbynameproductquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|solutionrelative:marketpos.application\\features\\cqrs\\cqrsproduct\\query\\getbynameproductquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|d:\\resoursgithub\\marketpos.shared\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|solutionrelative:marketpos.shared\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|d:\\resoursgithub\\marketpos.shared\\exceptiondto\\resultdtoexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|solutionrelative:marketpos.shared\\exceptiondto\\resultdtoexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|d:\\resoursgithub\\marketpos.shared\\eunms\\producteunms\\productinclude.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|solutionrelative:marketpos.shared\\eunms\\producteunms\\productinclude.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|d:\\resoursgithub\\marketpos.shared\\dtos\\pagedresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|solutionrelative:marketpos.shared\\dtos\\pagedresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|d:\\resoursgithub\\marketpos.shared\\dtos\\supplierdto\\supplierdetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|solutionrelative:marketpos.shared\\dtos\\supplierdto\\supplierdetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|d:\\resoursgithub\\marketpos.shared\\dtos\\productdto\\updateproductdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|solutionrelative:marketpos.shared\\dtos\\productdto\\updateproductdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|d:\\resoursgithub\\marketpos.shared\\dtos\\productdto\\somefeaturesproductdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|solutionrelative:marketpos.shared\\dtos\\productdto\\somefeaturesproductdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|d:\\resoursgithub\\marketpos.shared\\dtos\\productdto\\createproductdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|solutionrelative:marketpos.shared\\dtos\\productdto\\createproductdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|d:\\resoursgithub\\marketpos.shared\\dtos\\productdto\\productdetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|solutionrelative:marketpos.shared\\dtos\\productdto\\productdetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|d:\\resoursgithub\\marketpos.shared\\dtos\\categorydto\\categorydetalisdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|solutionrelative:marketpos.shared\\dtos\\categorydto\\categorydetalisdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|d:\\resoursgithub\\marketpos.shared\\dtos\\categorydto\\categorycreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|solutionrelative:marketpos.shared\\dtos\\categorydto\\categorycreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|d:\\resoursgithub\\marketpos.shared\\dtos\\basedtoandbaseauditabledtoandconcontactinfodto\\contactinfodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|solutionrelative:marketpos.shared\\dtos\\basedtoandbaseauditabledtoandconcontactinfodto\\contactinfodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|d:\\resoursgithub\\marketpos.shared\\dtos\\basedtoandbaseauditabledtoandconcontactinfodto\\basedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|solutionrelative:marketpos.shared\\dtos\\basedtoandbaseauditabledtoandconcontactinfodto\\basedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|d:\\resoursgithub\\marketpos.shared\\dtos\\basedtoandbaseauditabledtoandconcontactinfodto\\baseauditabledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|solutionrelative:marketpos.shared\\dtos\\basedtoandbaseauditabledtoandconcontactinfodto\\baseauditabledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|d:\\resoursgithub\\marketpos.shared\\dtos\\basedtoandbaseauditabledtoandconcontactinfodto\\addressinfodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|solutionrelative:marketpos.shared\\dtos\\basedtoandbaseauditabledtoandconcontactinfodto\\addressinfodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|d:\\resoursgithub\\marketpos.shared\\dataconventer\\jsondatetimeconventer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|solutionrelative:marketpos.shared\\dataconventer\\jsondatetimeconventer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|d:\\projects\\marketpos.api\\marketpos.application\\features\\cqrs\\cqrsproduct\\query\\handlerquery\\getbynameproductqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|solutionrelative:marketpos.application\\features\\cqrs\\cqrsproduct\\query\\handlerquery\\getbynameproductqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -135,303 +47,39 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "BaseEntity.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\Market.Domain\\Entitys\\BaseEntity.cs",
-              "RelativeDocumentMoniker": "Market.Domain\\Entitys\\BaseEntity.cs",
-              "ToolTip": "D:\\ResoursGitHub\\Market.Domain\\Entitys\\BaseEntity.cs",
-              "RelativeToolTip": "Market.Domain\\Entitys\\BaseEntity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\Controllers\\Product\\ProductController.cs",
+              "RelativeDocumentMoniker": "MarketPOS.API\\Controllers\\Product\\ProductController.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\Controllers\\Product\\ProductController.cs",
+              "RelativeToolTip": "MarketPOS.API\\Controllers\\Product\\ProductController.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAmwDoAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:51:58.328Z",
+              "WhenOpened": "2025-07-12T03:26:55.53Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Supplier.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\Market.Domain\\Entitys\\Suppliers\\Supplier.cs",
-              "RelativeDocumentMoniker": "Market.Domain\\Entitys\\Suppliers\\Supplier.cs",
-              "ToolTip": "D:\\ResoursGitHub\\Market.Domain\\Entitys\\Suppliers\\Supplier.cs",
-              "RelativeToolTip": "Market.Domain\\Entitys\\Suppliers\\Supplier.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:51:55.375Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "PurchaseInvoiceItem.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\Market.Domain\\Entitys\\PurchaseInvoices\\PurchaseInvoiceItem.cs",
-              "RelativeDocumentMoniker": "Market.Domain\\Entitys\\PurchaseInvoices\\PurchaseInvoiceItem.cs",
-              "ToolTip": "D:\\ResoursGitHub\\Market.Domain\\Entitys\\PurchaseInvoices\\PurchaseInvoiceItem.cs",
-              "RelativeToolTip": "Market.Domain\\Entitys\\PurchaseInvoices\\PurchaseInvoiceItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAxAAAAAAAAAA==",
+              "Title": "GetByNameProductQueryHandler.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\HandlerQuery\\GetByNameProductQueryHandler.cs",
+              "RelativeDocumentMoniker": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\HandlerQuery\\GetByNameProductQueryHandler.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\HandlerQuery\\GetByNameProductQueryHandler.cs",
+              "RelativeToolTip": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\HandlerQuery\\GetByNameProductQueryHandler.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAwwBsAAABiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:51:51.918Z"
+              "WhenOpened": "2025-07-12T03:19:45.206Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PurchaseInvoice.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\Market.Domain\\Entitys\\PurchaseInvoices\\PurchaseInvoice.cs",
-              "RelativeDocumentMoniker": "Market.Domain\\Entitys\\PurchaseInvoices\\PurchaseInvoice.cs",
-              "ToolTip": "D:\\ResoursGitHub\\Market.Domain\\Entitys\\PurchaseInvoices\\PurchaseInvoice.cs",
-              "RelativeToolTip": "Market.Domain\\Entitys\\PurchaseInvoices\\PurchaseInvoice.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAxAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "GetByNameProductQuery.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\GetByNameProductQuery.cs",
+              "RelativeDocumentMoniker": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\GetByNameProductQuery.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\GetByNameProductQuery.cs",
+              "RelativeToolTip": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\GetByNameProductQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:51:47.118Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Product.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\Market.Domain\\Entitys\\DomainProduct\\Product.cs",
-              "RelativeDocumentMoniker": "Market.Domain\\Entitys\\DomainProduct\\Product.cs",
-              "ToolTip": "D:\\ResoursGitHub\\Market.Domain\\Entitys\\DomainProduct\\Product.cs",
-              "RelativeToolTip": "Market.Domain\\Entitys\\DomainProduct\\Product.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:51:43.163Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Category.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\Market.Domain\\Entitys\\DomainCategory\\Category.cs",
-              "RelativeDocumentMoniker": "Market.Domain\\Entitys\\DomainCategory\\Category.cs",
-              "ToolTip": "D:\\ResoursGitHub\\Market.Domain\\Entitys\\DomainCategory\\Category.cs",
-              "RelativeToolTip": "Market.Domain\\Entitys\\DomainCategory\\Category.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:51:39.298Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ParameterValidationType.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.API\\Middlewares\\Filters\\ParameterValidationType.cs",
-              "RelativeDocumentMoniker": "MarketPOS.API\\Middlewares\\Filters\\ParameterValidationType.cs",
-              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.API\\Middlewares\\Filters\\ParameterValidationType.cs",
-              "RelativeToolTip": "MarketPOS.API\\Middlewares\\Filters\\ParameterValidationType.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:51:30.785Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ProductController.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.API\\Controllers\\Product\\ProductController.cs",
-              "RelativeDocumentMoniker": "MarketPOS.API\\Controllers\\Product\\ProductController.cs",
-              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.API\\Controllers\\Product\\ProductController.cs",
-              "RelativeToolTip": "MarketPOS.API\\Controllers\\Product\\ProductController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:51:26.993Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "CategoryController.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.API\\Controllers\\Category\\CategoryController.cs",
-              "RelativeDocumentMoniker": "MarketPOS.API\\Controllers\\Category\\CategoryController.cs",
-              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.API\\Controllers\\Category\\CategoryController.cs",
-              "RelativeToolTip": "MarketPOS.API\\Controllers\\Category\\CategoryController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:51:23.885Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ApiResponse.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.Shared\\ApiResponse.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Shared\\ApiResponse.cs",
-              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.Shared\\ApiResponse.cs",
-              "RelativeToolTip": "MarketPOS.Shared\\ApiResponse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:51:07.286Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ResultDtoException.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.Shared\\ExceptionDto\\ResultDtoException.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Shared\\ExceptionDto\\ResultDtoException.cs",
-              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.Shared\\ExceptionDto\\ResultDtoException.cs",
-              "RelativeToolTip": "MarketPOS.Shared\\ExceptionDto\\ResultDtoException.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:51:02.793Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "ProductInclude.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.Shared\\Eunms\\ProductEunms\\ProductInclude.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Shared\\Eunms\\ProductEunms\\ProductInclude.cs",
-              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.Shared\\Eunms\\ProductEunms\\ProductInclude.cs",
-              "RelativeToolTip": "MarketPOS.Shared\\Eunms\\ProductEunms\\ProductInclude.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:50:54.823Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "PagedResult.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\PagedResult.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Shared\\DTOs\\PagedResult.cs",
-              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\PagedResult.cs",
-              "RelativeToolTip": "MarketPOS.Shared\\DTOs\\PagedResult.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:50:51.117Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "SupplierDetailsDto.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\SupplierDto\\SupplierDetailsDto.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Shared\\DTOs\\SupplierDto\\SupplierDetailsDto.cs",
-              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\SupplierDto\\SupplierDetailsDto.cs",
-              "RelativeToolTip": "MarketPOS.Shared\\DTOs\\SupplierDto\\SupplierDetailsDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:50:44.841Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "UpdateProductDto.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\ProductDto\\UpdateProductDto.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Shared\\DTOs\\ProductDto\\UpdateProductDto.cs",
-              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\ProductDto\\UpdateProductDto.cs",
-              "RelativeToolTip": "MarketPOS.Shared\\DTOs\\ProductDto\\UpdateProductDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:50:40.283Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "SomeFeaturesProductDto.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\ProductDto\\SomeFeaturesProductDto.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Shared\\DTOs\\ProductDto\\SomeFeaturesProductDto.cs",
-              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\ProductDto\\SomeFeaturesProductDto.cs",
-              "RelativeToolTip": "MarketPOS.Shared\\DTOs\\ProductDto\\SomeFeaturesProductDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:50:38.253Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "CreateProductDto.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\ProductDto\\CreateProductDto.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Shared\\DTOs\\ProductDto\\CreateProductDto.cs",
-              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\ProductDto\\CreateProductDto.cs",
-              "RelativeToolTip": "MarketPOS.Shared\\DTOs\\ProductDto\\CreateProductDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:50:35.675Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "ProductDetailsDto.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\ProductDto\\ProductDetailsDto.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Shared\\DTOs\\ProductDto\\ProductDetailsDto.cs",
-              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\ProductDto\\ProductDetailsDto.cs",
-              "RelativeToolTip": "MarketPOS.Shared\\DTOs\\ProductDto\\ProductDetailsDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:50:31.551Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "CategoryDetalisDto.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\CategoryDto\\CategoryDetalisDto.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Shared\\DTOs\\CategoryDto\\CategoryDetalisDto.cs",
-              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\CategoryDto\\CategoryDetalisDto.cs",
-              "RelativeToolTip": "MarketPOS.Shared\\DTOs\\CategoryDto\\CategoryDetalisDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:50:24.171Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "CategoryCreateDto.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\CategoryDto\\CategoryCreateDto.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Shared\\DTOs\\CategoryDto\\CategoryCreateDto.cs",
-              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\CategoryDto\\CategoryCreateDto.cs",
-              "RelativeToolTip": "MarketPOS.Shared\\DTOs\\CategoryDto\\CategoryCreateDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:50:20.954Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "ContactInfoDto.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\ContactInfoDto.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\ContactInfoDto.cs",
-              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\ContactInfoDto.cs",
-              "RelativeToolTip": "MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\ContactInfoDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAABPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:50:17.773Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "BaseDto.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\BaseDto.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\BaseDto.cs",
-              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\BaseDto.cs",
-              "RelativeToolTip": "MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\BaseDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAABPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:50:14.918Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "BaseAuditableDto.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\BaseAuditableDto.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\BaseAuditableDto.cs",
-              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\BaseAuditableDto.cs",
-              "RelativeToolTip": "MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\BaseAuditableDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:50:11.591Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "AddressInfoDto.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\AddressInfoDto.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\AddressInfoDto.cs",
-              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\AddressInfoDto.cs",
-              "RelativeToolTip": "MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\AddressInfoDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAABPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:50:06.378Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "JsonDateTimeConventer.cs",
-              "DocumentMoniker": "D:\\ResoursGitHub\\MarketPOS.Shared\\DataConventer\\JsonDateTimeConventer.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Shared\\DataConventer\\JsonDateTimeConventer.cs",
-              "ToolTip": "D:\\ResoursGitHub\\MarketPOS.Shared\\DataConventer\\JsonDateTimeConventer.cs",
-              "RelativeToolTip": "MarketPOS.Shared\\DataConventer\\JsonDateTimeConventer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T12:49:57.131Z"
+              "WhenOpened": "2025-07-12T03:19:42.374Z"
             }
           ]
         }

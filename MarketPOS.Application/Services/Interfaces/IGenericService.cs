@@ -22,7 +22,8 @@ public interface IGenericService<TEntity> where TEntity : class
     Task<IEnumerable<TEntity>> FindAsync(
         Expression<Func<TEntity, bool>> predicate,
         bool tracking = false,
-        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null);
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
+        bool includeSofteDelete = false);
 
     Task AddAsync(TEntity entity);
     Task UpdateAsync(TEntity entity);

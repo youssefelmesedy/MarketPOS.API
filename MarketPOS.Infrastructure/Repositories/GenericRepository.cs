@@ -66,9 +66,9 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return await BuildQuery(null, tracking, includeExpressions, includeSoftDeleted).ToListAsync();
     }
 
-    public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate, bool tracking = false, List<Func<IQueryable<T>, IQueryable<T>>>? includeExpressions = null)
+    public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate, bool tracking = false, List<Func<IQueryable<T>, IQueryable<T>>>? includeExpressions = null, bool icludeSofteDelete = false)
     {
-        return await BuildQuery(predicate, tracking, includeExpressions).ToListAsync();
+        return await BuildQuery(predicate, tracking, includeExpressions, icludeSofteDelete).ToListAsync();
     }
 
     public async Task<(IEnumerable<T> Data, int TotalCount)> GetPagedAsync(

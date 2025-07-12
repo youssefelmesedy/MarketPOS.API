@@ -45,3 +45,4 @@ D:\ResoursGitHub\MarketPOS.Infrastructure\obj\Debug\net9.0\refint\MarketPOS.Infr
 D:\ResoursGitHub\MarketPOS.Infrastructure\obj\Debug\net9.0\MarketPOS.Infrastructure.pdb
 D:\ResoursGitHub\MarketPOS.Infrastructure\obj\Debug\net9.0\MarketPOS.Infrastructure.genruntimeconfig.cache
 D:\ResoursGitHub\MarketPOS.Infrastructure\obj\Debug\net9.0\ref\MarketPOS.Infrastructure.dll
+D:\Projects\MarketPOS.API\MarketPOS.Infrastructure\obj\Debug\net9.0\MarketPOS.Infrastructure.sourcelink.json

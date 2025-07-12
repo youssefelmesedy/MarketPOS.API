@@ -243,6 +243,14 @@
             "x-position": 1
           },
           {
+            "name": "includeSofteDelete",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            },
+            "x-position": 2
+          },
+          {
             "name": "Accept-Language",
             "in": "header",
             "description": "Preferred language for localization",
@@ -766,6 +774,14 @@
               "type": "string"
             },
             "x-position": 1
+          },
+          {
+            "name": "IncludsofteDelete",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            },
+            "x-position": 2
           },
           {
             "name": "Accept-Language",

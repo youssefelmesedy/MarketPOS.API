@@ -55,9 +55,9 @@ public class ProductController : ControllerBase
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> Name([FromQuery] string name)
+    public async Task<IActionResult> Name([FromQuery] string name, [FromQuery] bool includeSofteDelete)
     {
-        var result = await _mediator.Send(new GetByNameProductQuery(name));
+        var result = await _mediator.Send(new GetByNameProductQuery(name, includeSofteDelete));
 
         return Ok(result);
     }

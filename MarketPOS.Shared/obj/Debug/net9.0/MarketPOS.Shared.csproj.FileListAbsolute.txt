@@ -23,3 +23,4 @@ D:\ResoursGitHub\MarketPOS.Shared\obj\Debug\net9.0\MarketPOS.Shared.dll
 D:\ResoursGitHub\MarketPOS.Shared\obj\Debug\net9.0\refint\MarketPOS.Shared.dll
 D:\ResoursGitHub\MarketPOS.Shared\obj\Debug\net9.0\MarketPOS.Shared.pdb
 D:\ResoursGitHub\MarketPOS.Shared\obj\Debug\net9.0\ref\MarketPOS.Shared.dll
+D:\Projects\MarketPOS.API\MarketPOS.Shared\obj\Debug\net9.0\MarketPOS.Shared.sourcelink.json

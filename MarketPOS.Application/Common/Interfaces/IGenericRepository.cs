@@ -13,7 +13,8 @@ public interface IGenericRepository<T> where T : class
     Task<IEnumerable<T>> FindAsync(
         Expression<Func<T, bool>> predicate,
         bool tracking = false,
-        List<Func<IQueryable<T>, IQueryable<T>>>? includeExpressions = null);
+        List<Func<IQueryable<T>, IQueryable<T>>>? includeExpressions = null,
+        bool IncludeSofteDelete = false);
 
     Task<(IEnumerable<T> Data, int TotalCount)> GetPagedAsync(
         int pageIndex,

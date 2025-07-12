@@ -6,14 +6,15 @@ public class CategoryService : GenericService<Category>, ICategoryService
     {
         _logger = logger;
     }
-    public async Task<IEnumerable<Category>> GetByNameAsync(string name)
+    public async Task<IEnumerable<Category>> GetByNameAsync(string name, bool includeSofteDelete = false)
     {
         try
         {
-            return await FindAsync(c => c.Name.ToLower().Trim() == name.ToLower().Trim());
+            return await FindAsync(c => c.Name.ToLower().Trim() == name.ToLower().Trim(), includeSofteDelete: includeSofteDelete);
         }
         catch (Exception ex)
         {
+
             _logger.LogError(ex, "Error while getting categories by name.");
             return Enumerable.Empty<Category>();
         }

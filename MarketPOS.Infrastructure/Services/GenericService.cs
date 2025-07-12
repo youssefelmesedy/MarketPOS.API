@@ -58,11 +58,11 @@ public class GenericService<TEntity> : IGenericService<TEntity> where TEntity : 
         }
     }
 
-    public async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, bool tracking = false, List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null)
+    public async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, bool tracking = false, List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null, bool includeSofteDelete = false)
     {
         try
         {
-            return await _repository.FindAsync(predicate, tracking, includeExpressions);
+            return await _repository.FindAsync(predicate, tracking, includeExpressions, includeSofteDelete);
         }
         catch (Exception ex)
         {

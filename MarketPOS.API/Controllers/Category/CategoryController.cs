@@ -39,9 +39,9 @@ public class CategoryController : ControllerBase
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> GetByName([FromQuery]string name)
+    public async Task<IActionResult> GetByName([FromQuery]string name, [FromQuery] bool IncludsofteDelete)
     {
-        var result = await _mediator.Send(new GetCategoryName(name));
+        var result = await _mediator.Send(new GetCategoryName(name, IncludsofteDelete));
 
         return Ok(result);
     }

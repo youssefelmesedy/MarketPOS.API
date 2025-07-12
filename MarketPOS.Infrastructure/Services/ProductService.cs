@@ -1,4 +1,6 @@
-﻿namespace Market.POS.Infrastructure.Services;
+﻿using Microsoft.EntityFrameworkCore.Query;
+
+namespace Market.POS.Infrastructure.Services;
 public class ProductService : GenericService<Product>, IProductService
 {
     private ILogger<ProductService> _logger;
@@ -7,11 +9,11 @@ public class ProductService : GenericService<Product>, IProductService
         _logger = logger;
     }
 
-    public async Task<IEnumerable<Product>> GetByNameAsync(string name, List<Func<IQueryable<Product>, IQueryable<Product>>> includes)
+    public async Task<IEnumerable<Product>> GetByNameAsync(string name, List<Func<IQueryable<Product>, IQueryable<Product>>> includes, bool includSofteDelete = false)
     {
         try
         {
-            return await FindAsync(c => c.Name.ToLower().Trim() == name.ToLower().Trim(), false, includes);
+            return await FindAsync(c => c.Name.ToLower().Trim() == name.ToLower().Trim(), includeExpressions: includes, includeSofteDelete: includSofteDelete);
         }
         catch (Exception ex)
         {

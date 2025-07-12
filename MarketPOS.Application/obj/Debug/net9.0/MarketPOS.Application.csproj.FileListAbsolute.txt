@@ -37,3 +37,4 @@ D:\ResoursGitHub\MarketPOS.Application\obj\Debug\net9.0\MarketPOS.Application.dl
 D:\ResoursGitHub\MarketPOS.Application\obj\Debug\net9.0\refint\MarketPOS.Application.dll
 D:\ResoursGitHub\MarketPOS.Application\obj\Debug\net9.0\MarketPOS.Application.pdb
 D:\ResoursGitHub\MarketPOS.Application\obj\Debug\net9.0\ref\MarketPOS.Application.dll
+D:\Projects\MarketPOS.API\MarketPOS.Application\obj\Debug\net9.0\MarketPOS.Application.sourcelink.json

@@ -427,3 +427,4 @@ D:\ResoursGitHub\MarketPOS.API\obj\Debug\net9.0\refint\MarketPOS.API.dll
 D:\ResoursGitHub\MarketPOS.API\obj\Debug\net9.0\MarketPOS.API.pdb
 D:\ResoursGitHub\MarketPOS.API\obj\Debug\net9.0\MarketPOS.API.genruntimeconfig.cache
 D:\ResoursGitHub\MarketPOS.API\obj\Debug\net9.0\ref\MarketPOS.API.dll
+D:\Projects\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\MarketPOS.API.sourcelink.json

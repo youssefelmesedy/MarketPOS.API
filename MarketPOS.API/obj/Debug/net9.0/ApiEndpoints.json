@@ -192,6 +192,11 @@
         "Name": "name",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "IncludsofteDelete",
+        "Type": "System.Boolean",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -553,6 +558,11 @@
       {
         "Name": "name",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "includeSofteDelete",
+        "Type": "System.Boolean",
         "IsRequired": false
       }
     ],

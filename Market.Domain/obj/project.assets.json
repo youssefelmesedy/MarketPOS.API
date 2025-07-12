@@ -46,11 +46,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ResoursGitHub\\Market.Domain\\Market.Domain.csproj",
+      "projectUniqueName": "D:\\Projects\\MarketPOS.API\\Market.Domain\\Market.Domain.csproj",
       "projectName": "Market.Domain",
-      "projectPath": "D:\\ResoursGitHub\\Market.Domain\\Market.Domain.csproj",
+      "projectPath": "D:\\Projects\\MarketPOS.API\\Market.Domain\\Market.Domain.csproj",
       "packagesPath": "C:\\Users\\Youssef\\.nuget\\packages\\",
-      "outputPath": "D:\\ResoursGitHub\\Market.Domain\\obj\\",
+      "outputPath": "D:\\Projects\\MarketPOS.API\\Market.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

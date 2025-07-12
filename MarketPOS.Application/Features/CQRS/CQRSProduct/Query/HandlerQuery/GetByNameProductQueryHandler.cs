@@ -25,7 +25,7 @@ public class GetByNameProductQueryHandler : BaseHandler<GetByNameProductQueryHan
             }
         );
 
-        var data = await service.GetByNameAsync(request.Name!, includes);
+        var data = await service.GetByNameAsync(request.Name!, includes, request.IncludSofteDelete);
         if (data is null || !data.Any())
             return _resultFactory.Fail<IEnumerable<SomeFeaturesProductDto>>("GetByNameFailed");
         

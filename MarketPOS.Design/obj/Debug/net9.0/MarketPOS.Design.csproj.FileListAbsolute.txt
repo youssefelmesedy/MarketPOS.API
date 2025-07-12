@@ -29,3 +29,4 @@ D:\ResoursGitHub\MarketPOS.Design\obj\Debug\net9.0\MarketPOS.Design.dll
 D:\ResoursGitHub\MarketPOS.Design\obj\Debug\net9.0\refint\MarketPOS.Design.dll
 D:\ResoursGitHub\MarketPOS.Design\obj\Debug\net9.0\MarketPOS.Design.pdb
 D:\ResoursGitHub\MarketPOS.Design\obj\Debug\net9.0\ref\MarketPOS.Design.dll
+D:\Projects\MarketPOS.API\MarketPOS.Design\obj\Debug\net9.0\MarketPOS.Design.sourcelink.json
