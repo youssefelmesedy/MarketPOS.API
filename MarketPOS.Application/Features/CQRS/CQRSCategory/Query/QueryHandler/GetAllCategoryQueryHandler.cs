@@ -1,29 +1,25 @@
 ﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query.QueryHaandler;
-public class GetAllCategoryQueryHandler : BaseHandler<GetAllCategoryQueryHandler>,IRequestHandler<GetAllCategoryQuery, ResultDto<IEnumerable<CategoryDetalisDto>>>
+public class GetAllCategoryQueryHandler : BaseHandler<GetAllCategoryQueryHandler>,IRequestHandler<GetAllCategoryQuery, ResultDto<List<CategoryDetalisDto>>>
 {
     public GetAllCategoryQueryHandler(
         IServiceFactory serviceFactory,
         IResultFactory<GetAllCategoryQueryHandler> resultFactory,
         IMapper mapper,
         IStringLocalizer<GetAllCategoryQueryHandler> localizer,
-        ILocalizationPostProcessor localizationPostProcessor) : base(serviceFactory, resultFactory, mapper, localizer : localizer, localizationPostProcessor : localizationPostProcessor)
+        ILocalizationPostProcessor localizationPostProcessor) : 
+        base(serviceFactory, resultFactory, mapper, localizer : localizer, localizationPostProcessor : localizationPostProcessor)
     {
     }
 
-    public async Task<ResultDto<IEnumerable<CategoryDetalisDto>>> Handle(GetAllCategoryQuery request, CancellationToken cancellationToken)
+    public async Task<ResultDto<List<CategoryDetalisDto>>> Handle(GetAllCategoryQuery request, CancellationToken cancellationToken)
     {
         var categoryService = _servicesFactory.GetService<ICategoryService>();
 
-        var data = await categoryService.GetAllAsync(false,null,request.SoftDelete);
-        if (data is null)
-            return _resultFactory.Fail<IEnumerable<CategoryDetalisDto>>("NotFound");
+        var data = await categoryService.GetAllAsync<CategoryDetalisDto>(_mapper!, null, false, null, request.SoftDelete);
 
-        var mappeing = _mapper?.Map<IEnumerable<CategoryDetalisDto>>(data);
-        if (mappeing is null)
-            return _resultFactory.Fail<IEnumerable<CategoryDetalisDto>>("Mappingfailed");
+        var localized = _localizationPostProcessor.Apply<CategoryDetalisDto>(data);
 
-        var Localizer = _localizationPostProcessor.Apply(mappeing);
-
-        return _resultFactory.Success(Localizer, "Success");
+        // Convert to IEnumerable if needed
+        return _resultFactory.Success(localized.ToList(), "Success");
     }
 }

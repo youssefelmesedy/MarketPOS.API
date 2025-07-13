@@ -1,16 +1,35 @@
-﻿namespace MarketPOS.Infrastructure.Services;
-public class GenericService<TEntity> : IGenericService<TEntity> where TEntity : class
+﻿using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+
+namespace MarketPOS.Infrastructure.Services;
+public class GenericService<TEntity> :
+            IQueryableService<TEntity>,
+            IProjectableService<TEntity>,
+            IWritableService<TEntity> where TEntity : class
 {
-    private readonly IGenericRepository<TEntity> _repository;
+    private readonly IQueryableRepository<TEntity> _query;
+    private readonly IProjectableRepository<TEntity> _projectable;
+    private readonly IWritableRepository<TEntity> _writable;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IStringLocalizer<GenericService<TEntity>> _localizer;
     private readonly ILogger _logger;
 
-    public GenericService(IGenericRepository<TEntity> repository, IUnitOfWork unitOfWork, ILogger logger)
+    public GenericService(
+        IUnitOfWork unitOfWork,
+        ILogger logger,
+        IQueryableRepository<TEntity> query,
+        IProjectableRepository<TEntity> projectable,
+        IWritableRepository<TEntity> writable,
+        IStringLocalizer<GenericService<TEntity>> localizer)
     {
-        _repository = repository;
+        _query = query;
+        _projectable = projectable;
+        _writable = writable;
         _unitOfWork = unitOfWork;
         _logger = logger;
+        _localizer = localizer;
     }
+
+    #region Queryable Methods
 
     public async Task<(IEnumerable<TEntity> Data, int TotalCount)> GetPagedAsync(
         int pageIndex,
@@ -19,57 +38,153 @@ public class GenericService<TEntity> : IGenericService<TEntity> where TEntity : 
         Expression<Func<TEntity, object>>? orderBy = null,
         bool ascending = true,
         bool tracking = false,
-        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null)
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
+        bool includeSoftDeleted = false,
+        bool applyIncludes = true)
     {
         try
         {
-            return await _repository.GetPagedAsync(pageIndex, pageSize, filter, orderBy, ascending, tracking, includeExpressions);
+            return await _query.GetPagedAsync(pageIndex, pageSize, filter, orderBy, ascending, tracking, includeExpressions, includeSoftDeleted, applyIncludes);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error in GetPagedAsync for entity {Entity}", typeof(TEntity).Name);
+            _logger.LogError(ex, _localizer["GetPagedFailed"]);
             throw;
         }
     }
 
-    public async Task<IEnumerable<TEntity>> GetAllAsync(bool tracking = false, List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null, bool includeSoftDeleted = false)
+    public async Task<IEnumerable<TEntity>> GetAllAsync(
+        bool tracking = false,
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
+        bool includeSoftDeleted = false,
+        bool applyIncludes = true)
     {
         try
         {
-            return await _repository.GetAllAsync(tracking, includeExpressions, includeSoftDeleted);
+            return await _query.GetAllAsync(tracking, includeExpressions, includeSoftDeleted, applyIncludes);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error in GetAllAsync for entity {Entity}", typeof(TEntity).Name);
+            _logger.LogError(ex, _localizer["GetAllFailed"]);
             throw;
         }
     }
 
-    public async Task<TEntity?> GetByIdAsync(Guid id, bool tracking = false, List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null, bool includeSoftDeleted = false)
+    public async Task<TEntity?> GetByIdAsync(Guid id, bool tracking = false,
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
+        bool includeSoftDeleted = false,
+        bool applyIncludes = true)
     {
         try
         {
-            return await _repository.GetByIdAsync(id, tracking, includeExpressions, includeSoftDeleted);
+            return await _query.GetByIdAsync(id, tracking, includeExpressions, includeSoftDeleted, applyIncludes);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error in GetByIdAsync for entity {Entity}", typeof(TEntity).Name);
+            _logger.LogError(ex, _localizer["GetByIdFailed"]);
             throw;
         }
     }
 
-    public async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, bool tracking = false, List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null, bool includeSofteDelete = false)
+    public async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate,
+        bool tracking = false,
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
+        bool includeSoftDeleted = false)
     {
         try
         {
-            return await _repository.FindAsync(predicate, tracking, includeExpressions, includeSofteDelete);
+            return await _query.FindAsync(predicate, tracking, includeExpressions, includeSoftDeleted);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error in FindAsync for entity {Entity}", typeof(TEntity).Name);
+            _logger.LogError(ex, _localizer["FindFailed"]);
             throw;
         }
     }
+
+    #endregion
+
+    #region Projectable Methods
+
+    public async Task<List<TResult>> GetAllAsync<TResult>(
+        IMapper mapper,
+        Expression<Func<TEntity, bool>>? predicate = null,
+        bool tracking = false,
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
+        bool includeSoftDeleted = false)
+    {
+        try
+        {
+            return await _projectable.GetProjectedListAsync<TResult>(mapper, predicate, tracking, includeExpressions, includeSoftDeleted, applyIncludes: false);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, _localizer["GetAllFailed"]);
+            throw;
+        }
+    }
+
+    public async Task<TResult?> GetByIdAsync<TResult>(
+        IMapper mapper,
+        Expression<Func<TEntity, bool>> predicate,
+        bool tracking = false,
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
+        bool includeSoftDeleted = false)
+    {
+        try
+        {
+            return await _projectable.GetProjectedByIdAsync<TResult>(mapper, predicate, tracking, includeExpressions, includeSoftDeleted, applyIncludes: false);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, _localizer["GetByIdFailed"]);
+            throw;
+        }
+    }
+
+    public async Task<IEnumerable<TResult>> FindProjectedAsync<TResult>(
+        IMapper mapper,
+        Expression<Func<TEntity, bool>> predicate,
+        bool tracking = false,
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
+        bool includeSoftDeleted = false)
+    {
+        try
+        {
+            return await _projectable.FindProjectedAsync<TResult>(mapper, predicate, tracking, includeExpressions, includeSoftDeleted, applyIncludes: false);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, _localizer["FindFailed"]);
+            throw;
+        }
+    }
+
+    public async Task<(IEnumerable<TResult> Data, int TotalCount)> GetPagedProjectedAsync<TResult>(
+        IMapper mapper,
+        int pageIndex,
+        int pageSize,
+        Expression<Func<TEntity, bool>>? filter = null,
+        Expression<Func<TEntity, object>>? orderBy = null,
+        bool ascending = true,
+        bool tracking = false,
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
+        bool includeSoftDeleted = false)
+    {
+        try
+        {
+            return await _projectable.GetPagedProjectedAsync<TResult>(mapper, pageIndex, pageSize, filter, orderBy, ascending, tracking, includeExpressions, includeSoftDeleted, applyIncludes: false);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, _localizer["GetPagedFailed"]);
+            throw;
+        }
+    }
+
+    #endregion
+
+    #region Writable Methods
 
     public async Task AddAsync(TEntity entity)
     {
@@ -78,14 +193,15 @@ public class GenericService<TEntity> : IGenericService<TEntity> where TEntity : 
             if (entity is BaseEntity baseEntity)
             {
                 baseEntity.CreatedAt = DateTime.Now;
-                baseEntity.CreatedBy = "System"; // Replace with actual user context if available
-                await _repository.AddAsync(entity);
-                await _unitOfWork.SaveChangesAsync();
+                baseEntity.CreatedBy = "System";
             }
+
+            await _writable.AddAsync(entity);
+            await _unitOfWork.SaveChangesAsync();
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error in AddAsync for entity {Entity}", typeof(TEntity).Name);
+            _logger.LogError(ex, _localizer["CreateFailed"]);
             throw;
         }
     }
@@ -97,14 +213,15 @@ public class GenericService<TEntity> : IGenericService<TEntity> where TEntity : 
             if (entity is BaseEntity baseEntity)
             {
                 baseEntity.UpdatedAt = DateTime.Now;
-                baseEntity.ModifiedBy = "System"; // Replace with actual user context if available
-                _repository.Update(entity);
-                await _unitOfWork.SaveChangesAsync();
+                baseEntity.ModifiedBy = "System";
             }
+
+            _writable.Update(entity);
+            await _unitOfWork.SaveChangesAsync();
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error in UpdateAsync for entity {Entity}", typeof(TEntity).Name);
+            _logger.LogError(ex, _localizer["UpdateFailed"]);
             throw;
         }
     }
@@ -113,12 +230,12 @@ public class GenericService<TEntity> : IGenericService<TEntity> where TEntity : 
     {
         try
         {
-            _repository.Remove(entity);
+            _writable.Remove(entity);
             await _unitOfWork.SaveChangesAsync();
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error in RemoveAsync for entity {Entity}", typeof(TEntity).Name);
+            _logger.LogError(ex, _localizer["DeleteFailed"]);
             throw;
         }
     }
@@ -131,37 +248,46 @@ public class GenericService<TEntity> : IGenericService<TEntity> where TEntity : 
             {
                 baseEntity.IsDeleted = true;
                 baseEntity.DeletedAt = DateTime.Now;
-                _repository.Update(entity);
+                _writable.Update(entity);
                 await _unitOfWork.SaveChangesAsync();
-                return entity;
             }
 
             return entity;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error in SoftDeleteAsync for entity {Entity}", typeof(TEntity).Name);
+            _logger.LogError(ex, _localizer["SofteDeletedFailed"]);
             throw;
         }
     }
+
     public async Task<Guid> RestoreAsync(Guid id)
     {
-        var entity = await _repository.GetByIdAsync(id, true, null, true);
-
-        if (entity is null)
-            throw new NotFoundException(typeof(TEntity).Name, id);
-
-        if (entity is BaseEntity baseEntity)
+        try
         {
-            baseEntity.IsDeleted = false;
-            baseEntity.DeletedAt = null;
-            _repository.Update(entity);
-            await _unitOfWork.SaveChangesAsync();
+            var entity = await _query.GetByIdAsync(id, true, null, includeSoftDeleted: true, applyIncludes: true);
 
-            return baseEntity.Id;
+            if (entity == null)
+                throw new NotFoundException(typeof(TEntity).Name, id);
+
+            if (entity is BaseEntity baseEntity)
+            {
+                baseEntity.IsDeleted = false;
+                baseEntity.DeletedAt = null;
+                _writable.Update(entity);
+                await _unitOfWork.SaveChangesAsync();
+                return baseEntity.Id;
+            }
+
+            return id;
         }
-
-        return id;
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, _localizer["RestoreFailed"]);
+            throw;
+        }
     }
 
+    #endregion
 }
+

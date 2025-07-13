@@ -16,7 +16,7 @@ public class GetPagedProductQueryHandler : BaseHandler<GetPagedProductQueryHandl
 
         var productService = _servicesFactory.GetService<IProductService>();
 
-        var result = await productService.GetPagedAsync(
+        var result = await productService.GetPagedProjectedAsync<ProductDetailsDto>(_mapper!,
             request.PageIndex,
             request.PageSize,
             orderBy: p => p.Name,
@@ -26,11 +26,8 @@ public class GetPagedProductQueryHandler : BaseHandler<GetPagedProductQueryHandl
         if (result.Data is null || result.TotalCount == 0)
             return _resultFactory.Fail<PagedResultDto<ProductDetailsDto>>("GetPagedFailed");
 
-        var dtoList = _mapper?.Map<IEnumerable<ProductDetailsDto>>(result.Data);
-        if (dtoList is null || !dtoList.Any())
-            return _resultFactory.Fail<PagedResultDto<ProductDetailsDto>>("MappingFailed");
 
-        var localizedDtoList = _localizationPostProcessor.Apply(dtoList);
+        var localizedDtoList = _localizationPostProcessor.Apply<ProductDetailsDto>(result.Data);
 
         var pagedResult = new PagedResultDto<ProductDetailsDto>(localizedDtoList, result.TotalCount, request.PageIndex, request.PageSize);
 

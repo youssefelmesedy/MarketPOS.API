@@ -8,13 +8,26 @@ public static class RegisterServicesInfrastructure
 
         // ✅ تسجيل DbContext    
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging());
+        {
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), sqlOptions =>
+            {
+                sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+            });
+
+            #if DEBUG
+            options.EnableSensitiveDataLogging(); // ✅ تشغيل في بيئة التطوير فقط
+            #endif 
+        });
+
+
 
         // ✅ تسجيل UnitOfWork
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         // ✅ تسجيل الريبو الجينيريك
-        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+        services.AddScoped(typeof(IQueryableRepository<>), typeof(GenericeRepository<>));
+        services.AddScoped(typeof(IProjectableRepository<>), typeof(GenericeRepository<>));
+        services.AddScoped(typeof(IWritableRepository<>), typeof(GenericeRepository<>));
         services.AddScoped<IProductRepo, ProductRepository>();
         services.AddScoped<ICategoryRepo, CategoryRepository>();
         services.AddScoped<ISupplierRepo, SupplierRepo>();

@@ -2,21 +2,32 @@
 public class CategoryService : GenericService<Category>, ICategoryService
 {
     private readonly ILogger<CategoryService> _logger;
-    public CategoryService(IGenericRepository<Category> repository, IUnitOfWork unitOfWork, ILogger<CategoryService> logger) : base(repository, unitOfWork, logger)
+    private readonly IStringLocalizer<CategoryService> _localizer;
+
+    public CategoryService(
+        IQueryableRepository<Category> queryRepo,
+        IProjectableRepository<Category> projectableRepo,
+        IWritableRepository<Category> writableRepo,
+        IUnitOfWork unitOfWork,
+        ILogger<CategoryService> logger,
+        IStringLocalizer<CategoryService> localizer)
+        : base(unitOfWork, logger, queryRepo, projectableRepo, writableRepo, localizer)
     {
         _logger = logger;
+        _localizer = localizer;
     }
+
     public async Task<IEnumerable<Category>> GetByNameAsync(string name, bool includeSofteDelete = false)
     {
         try
         {
-            return await FindAsync(c => c.Name.ToLower().Trim() == name.ToLower().Trim(), includeSofteDelete: includeSofteDelete);
+            return await FindAsync(c => c.Name.ToLower().Trim() == name.ToLower().Trim(), includeSoftDeleted: includeSofteDelete);
         }
         catch (Exception ex)
         {
-
-            _logger.LogError(ex, "Error while getting categories by name.");
-            return Enumerable.Empty<Category>();
+            _logger.LogError(ex, _localizer["GetByNameFailed"]);
+            throw;
         }
     }
+
 }

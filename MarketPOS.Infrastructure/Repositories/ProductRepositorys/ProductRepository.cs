@@ -1,5 +1,5 @@
 ﻿namespace MarketPOS.Infrastructure.Repositories.ProductRepositorys;
-public class ProductRepository : GenericRepository<Product>, IProductRepo
+public class ProductRepository : GenericeRepository<Product>, IProductRepo
 {
     public ProductRepository(ApplicationDbContext context) : base(context) { }
 

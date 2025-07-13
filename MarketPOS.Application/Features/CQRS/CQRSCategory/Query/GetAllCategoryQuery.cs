@@ -1,5 +1,5 @@
 ﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query;
-public class GetAllCategoryQuery : IRequest<ResultDto<IEnumerable<CategoryDetalisDto>>>
+public class GetAllCategoryQuery : IRequest<ResultDto<List<CategoryDetalisDto>>>
 {
     public bool SoftDelete { get; set; }
 

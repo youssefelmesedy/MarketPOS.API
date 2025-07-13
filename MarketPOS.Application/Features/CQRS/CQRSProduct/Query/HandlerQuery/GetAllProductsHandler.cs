@@ -1,16 +1,19 @@
-﻿namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Query.HandlerQuery;
-public class GetAllProductsHandler : BaseHandler<GetAllProductsHandler>, IRequestHandler<GetAllProductsQuery, ResultDto<IEnumerable<SomeFeaturesProductDto>>>
+﻿
+namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Query.HandlerQuery;
+public class GetAllProductsHandler : BaseHandler<GetAllProductsHandler>, IRequestHandler<GetAllProductsQuery, ResultDto<List<SomeFeaturesProductDto>>>
 {
+
     public GetAllProductsHandler(
-        IServiceFactory factoryService, 
-        IResultFactory<GetAllProductsHandler> resultFactory, 
+        IServiceFactory factoryService,
+        IResultFactory<GetAllProductsHandler> resultFactory,
         IMapper mapper,
         IStringLocalizer<GetAllProductsHandler> localizer,
         ILocalizationPostProcessor localizationPostProcessor)
-        : base(factoryService, resultFactory,mapper, null, localizer,localizationPostProcessor)
-    {}
+        : base(factoryService, resultFactory, mapper, null, localizer, localizationPostProcessor)
+    { }
 
-    public async Task<ResultDto<IEnumerable<SomeFeaturesProductDto>>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
+
+    public async Task<ResultDto<List<SomeFeaturesProductDto>>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
     {
         var productService = _servicesFactory.GetService<IProductService>();
 
@@ -22,16 +25,16 @@ public class GetAllProductsHandler : BaseHandler<GetAllProductsHandler>, IReques
                 ProductInclude.Product_Price
             });
 
-        var data = await productService.GetAllAsync(false, includes, request.SofteDelete);
-        if (data is null || !data.Any())
-            return _resultFactory.Fail<IEnumerable<SomeFeaturesProductDto>>("GetAllFailed");
+        var data = await productService.GetAllAsync<SomeFeaturesProductDto>(
+            _mapper!,
+            predicate: null,
+            tracking: false,
+            includeExpressions: includes,
+            includeSoftDeleted: request.SofteDelete);
 
-        var mapped = _mapper?.Map<IEnumerable<SomeFeaturesProductDto>>(data);
-        if(mapped is null)
-            return _resultFactory.Fail<IEnumerable<SomeFeaturesProductDto>>("MappingError");
+        var localized = _localizationPostProcessor.Apply<SomeFeaturesProductDto>(data);
 
-        var localized = _localizationPostProcessor.Apply(mapped);
-
-        return _resultFactory.Success(localized!, "Success");
+        return _resultFactory.Success(localized.ToList(), "Success");
     }
 }
+

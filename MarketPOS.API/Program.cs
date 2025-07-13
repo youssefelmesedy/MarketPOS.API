@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.Globalization;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,12 +13,19 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddDesignPatternServices();
 
+
 // ✅ Distributed cache (memory)
 builder.Services.AddDistributedMemoryCache();
 
 // ✅ Localization
 builder.Services.AddLocalization();
-builder.Services.AddSingleton<IStringLocalizerFactory, CustomJsonStringLocalizerFactory>();
+builder.Services.AddSingleton<JsonLocalizationCache>();
+builder.Services.AddSingleton<IStringLocalizerFactory>(provider =>
+{
+    var cache = provider.GetRequiredService<JsonLocalizationCache>();
+    return new CustomJsonStringLocalizerFactory(cache, "Resources");
+});
+builder.Services.AddSingleton(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
 
 // لا تسجل IStringLocalizer مباشرة، بل استخدم AddLocalization + Factory
 builder.Services.AddSingleton(typeof(IStringLocalizer<>), typeof(StringLocalizer<>)); // ضروري لتوليد IStringLocalizer<T> بالاعتماد على factory
@@ -78,6 +86,14 @@ var localizationOptions = new RequestLocalizationOptions()
     .AddSupportedCultures(supportedCultures);
 
 app.UseRequestLocalization(localizationOptions);
+
+// ✅ Clear cache on shutdown
+var cacheService = app.Services.GetRequiredService<JsonLocalizationCache>();
+app.Lifetime.ApplicationStopping.Register(() =>
+{
+    cacheService.Clear();
+    Console.WriteLine("✅ Localization cache cleared on shutdown.");
+});
 
 app.UseAuthorization();
 
