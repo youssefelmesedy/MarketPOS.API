@@ -97,4 +97,14 @@ MarketPOS.API is a smart Point of Sale (POS) system built with .NET 9 and Clean 
 * Add unit tests using xUnit.
 * Consider using Serilog for better logging.
 
+---
+### ✏ RRefactor: Modularize GenericService and improve localization support
+
+* Split GenericService into IQueryableService, IProjectableService, and IWritableService interfaces
+* Integrated ILogger and IStringLocalizer for consistent logging and multilingual support
+* Enhanced LocalizationPostProcessor to recursively localize nested objects and empty string values
+* Fixed reflection error with IEnumerable<T> and TargetParameterCountException
+* Improved GetPagedProductQueryHandler to return localized message when no data exists
+* Registered and configured ProductService, SupplierService, and CategoryService
+* Aligned ResultDto and PagedResultDto usage for consistent generic handling
 
