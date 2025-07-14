@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Qzorz2luJMY=",
+  "dgSpecHash": "IXo1U8cVTg8=",
   "success": true,
-  "projectFilePath": "D:\\Projects\\MarketPOS.API\\MarketPOS.Design\\MarketPOS.Design.csproj",
+  "projectFilePath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Design\\MarketPOS.Design.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Youssef\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\9.0.6\\microsoft.extensions.dependencyinjection.9.0.6.nupkg.sha512",
     "C:\\Users\\Youssef\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.6\\microsoft.extensions.dependencyinjection.abstractions.9.0.6.nupkg.sha512",

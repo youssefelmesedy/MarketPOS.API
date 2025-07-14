@@ -7,6 +7,7 @@ public partial class ProductProfile : Profile
         MapProductGetAllAndGetById();
         MapProductCreate();
         MapProductUpdate();
+        MapSofteDelete();
     }
 }
 

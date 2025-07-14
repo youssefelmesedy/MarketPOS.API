@@ -4,6 +4,8 @@ public abstract class BaseEntity
     public Guid Id { get; set; } = Guid.NewGuid();
     public DateTime CreatedAt { get; set; } 
     public DateTime? UpdatedAt { get; set; }
+
+    public string DeleteBy { get; set; } = string.Empty;
     public bool IsDeleted { get; set; } = false;
     public DateTime? DeletedAt { get; set; }
 

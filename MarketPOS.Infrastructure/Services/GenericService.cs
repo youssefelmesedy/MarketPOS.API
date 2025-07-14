@@ -190,10 +190,9 @@ public class GenericService<TEntity> :
     {
         try
         {
-            if (entity is BaseEntity baseEntity)
+            if (entity is Product product)
             {
-                baseEntity.CreatedAt = DateTime.Now;
-                baseEntity.CreatedBy = "System";
+                product.InitializeChildEntityinCreate();
             }
 
             await _writable.AddAsync(entity);
@@ -210,10 +209,9 @@ public class GenericService<TEntity> :
     {
         try
         {
-            if (entity is BaseEntity baseEntity)
+            if (entity is Product product)
             {
-                baseEntity.UpdatedAt = DateTime.Now;
-                baseEntity.ModifiedBy = "System";
+                product.InitializeChildEntityinUpdate();
             }
 
             _writable.Update(entity);
@@ -244,10 +242,13 @@ public class GenericService<TEntity> :
     {
         try
         {
-            if (entity is BaseEntity baseEntity)
+            if (entity is BaseEntity baseEntity && entity is Product product)
             {
+                baseEntity.DeleteBy = "Youssef";
                 baseEntity.IsDeleted = true;
                 baseEntity.DeletedAt = DateTime.Now;
+                product.RestoreBy = string.Empty;
+
                 _writable.Update(entity);
                 await _unitOfWork.SaveChangesAsync();
             }
@@ -270,10 +271,11 @@ public class GenericService<TEntity> :
             if (entity == null)
                 throw new NotFoundException(typeof(TEntity).Name, id);
 
-            if (entity is BaseEntity baseEntity)
+            if (entity is BaseEntity baseEntity && entity is Product product)
             {
+                product.RestoreBy = "Youssef";
                 baseEntity.IsDeleted = false;
-                baseEntity.DeletedAt = null;
+                baseEntity.DeletedAt = baseEntity.DeletedAt;
                 _writable.Update(entity);
                 await _unitOfWork.SaveChangesAsync();
                 return baseEntity.Id;

@@ -1,18 +1,30 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Projects\\MarketPOS.API\\",
+  "WorkspaceRootPath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|d:\\projects\\marketpos.api\\marketpos.application\\features\\cqrs\\cqrscategory\\query\\queryhandler\\getallcategoryqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|solutionrelative:marketpos.application\\features\\cqrs\\cqrscategory\\query\\queryhandler\\getallcategoryqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CA2964CC-13FB-4C1F-851B-5D767EAE668C}|MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.infrastructure\\services\\genericservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA2964CC-13FB-4C1F-851B-5D767EAE668C}|MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj|solutionrelative:marketpos.infrastructure\\services\\genericservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|d:\\projects\\marketpos.api\\marketpos.application\\common\\helpers\\localizationpostprocessormappeing\\localizationpostprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|solutionrelative:marketpos.application\\common\\helpers\\localizationpostprocessormappeing\\localizationpostprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.shared\\dtos\\basedtoandbaseauditabledtoandconcontactinfodto\\basedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|solutionrelative:marketpos.shared\\dtos\\basedtoandbaseauditabledtoandconcontactinfodto\\basedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|d:\\projects\\marketpos.api\\marketpos.application\\common\\helpers\\localizationpostprocessormappeing\\ilocalizationpostprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|solutionrelative:marketpos.application\\common\\helpers\\localizationpostprocessormappeing\\ilocalizationpostprocessor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.application\\features\\cqrs\\cqrsproduct\\mappingproduct\\getmappeing\\productprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|solutionrelative:marketpos.application\\features\\cqrs\\cqrsproduct\\mappingproduct\\getmappeing\\productprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.shared\\dtos\\productdto\\productdetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD363E9F-C52F-4692-BE8F-BBDBAA9F4EDF}|MarketPOS.Shared\\MarketPOS.Shared.csproj|solutionrelative:marketpos.shared\\dtos\\productdto\\productdetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|d:\\projects\\marketpos.api\\marketpos.api\\market.domain\\entitys\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|solutionrelative:market.domain\\entitys\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|d:\\projects\\marketpos.api\\marketpos.api\\market.domain\\entitys\\domainproduct\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|solutionrelative:market.domain\\entitys\\domainproduct\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 391,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -45,45 +57,82 @@
               "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BaseDto.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\BaseDto.cs",
+              "RelativeDocumentMoniker": "MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\BaseDto.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\BaseDto.cs",
+              "RelativeToolTip": "MarketPOS.Shared\\DTOs\\BaseDtoAndBaseAuditableDtoAndConContactInfoDto\\BaseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-14T00:52:51.991Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProductDetailsDto.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Shared\\DTOs\\ProductDto\\ProductDetailsDto.cs",
+              "RelativeDocumentMoniker": "MarketPOS.Shared\\DTOs\\ProductDto\\ProductDetailsDto.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Shared\\DTOs\\ProductDto\\ProductDetailsDto.cs",
+              "RelativeToolTip": "MarketPOS.Shared\\DTOs\\ProductDto\\ProductDetailsDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-14T00:52:28.001Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BaseEntity.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\Market.Domain\\Entitys\\BaseEntity.cs",
+              "RelativeDocumentMoniker": "Market.Domain\\Entitys\\BaseEntity.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\Market.Domain\\Entitys\\BaseEntity.cs",
+              "RelativeToolTip": "Market.Domain\\Entitys\\BaseEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-14T00:42:37.893Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GetAllCategoryQueryHandler.cs",
-              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSCategory\\Query\\QueryHandler\\GetAllCategoryQueryHandler.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Application\\Features\\CQRS\\CQRSCategory\\Query\\QueryHandler\\GetAllCategoryQueryHandler.cs",
-              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSCategory\\Query\\QueryHandler\\GetAllCategoryQueryHandler.cs",
-              "RelativeToolTip": "MarketPOS.Application\\Features\\CQRS\\CQRSCategory\\Query\\QueryHandler\\GetAllCategoryQueryHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAA4AAAAAAAAAA==",
+              "Title": "GenericService.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\Services\\GenericService.cs",
+              "RelativeDocumentMoniker": "MarketPOS.Infrastructure\\Services\\GenericService.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\Services\\GenericService.cs",
+              "RelativeToolTip": "MarketPOS.Infrastructure\\Services\\GenericService.cs",
+              "ViewState": "AgIAAO4AAAAAAAAAAAA0wPkAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-13T06:15:04.155Z",
+              "WhenOpened": "2025-07-13T23:15:47.892Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ILocalizationPostProcessor.cs",
-              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.Application\\Common\\Helpers\\LocalizationPostProcessorMappeing\\ILocalizationPostProcessor.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Application\\Common\\Helpers\\LocalizationPostProcessorMappeing\\ILocalizationPostProcessor.cs",
-              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.Application\\Common\\Helpers\\LocalizationPostProcessorMappeing\\ILocalizationPostProcessor.cs",
-              "RelativeToolTip": "MarketPOS.Application\\Common\\Helpers\\LocalizationPostProcessorMappeing\\ILocalizationPostProcessor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "Title": "ProductProfile.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\MappingProduct\\GetMappeing\\ProductProfile.cs",
+              "RelativeDocumentMoniker": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\MappingProduct\\GetMappeing\\ProductProfile.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\MappingProduct\\GetMappeing\\ProductProfile.cs",
+              "RelativeToolTip": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\MappingProduct\\GetMappeing\\ProductProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-13T06:01:26.473Z"
+              "WhenOpened": "2025-07-14T00:56:16.447Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "LocalizationPostProcessor.cs",
-              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.Application\\Common\\Helpers\\LocalizationPostProcessorMappeing\\LocalizationPostProcessor.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Application\\Common\\Helpers\\LocalizationPostProcessorMappeing\\LocalizationPostProcessor.cs",
-              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.Application\\Common\\Helpers\\LocalizationPostProcessorMappeing\\LocalizationPostProcessor.cs",
-              "RelativeToolTip": "MarketPOS.Application\\Common\\Helpers\\LocalizationPostProcessorMappeing\\LocalizationPostProcessor.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAzwD8AAAAVAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "Product.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\Market.Domain\\Entitys\\DomainProduct\\Product.cs",
+              "RelativeDocumentMoniker": "Market.Domain\\Entitys\\DomainProduct\\Product.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\Market.Domain\\Entitys\\DomainProduct\\Product.cs",
+              "RelativeToolTip": "Market.Domain\\Entitys\\DomainProduct\\Product.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAxwAUAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-12T23:36:42.679Z"
+              "WhenOpened": "2025-07-13T23:53:07.342Z",
+              "EditorCaption": ""
             }
           ]
         }
