@@ -1,0 +1,194 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.application\\features\\cqrs\\cqrsproduct\\query\\handlerquery\\getpagedproductqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|solutionrelative:marketpos.application\\features\\cqrs\\cqrsproduct\\query\\handlerquery\\getpagedproductqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.application\\features\\cqrs\\cqrsproduct\\query\\handlerquery\\getallproductshandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|solutionrelative:marketpos.application\\features\\cqrs\\cqrsproduct\\query\\handlerquery\\getallproductshandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.application\\services\\interfacesservices\\genericeinterface\\iqueryableservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|solutionrelative:marketpos.application\\services\\interfacesservices\\genericeinterface\\iqueryableservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA2964CC-13FB-4C1F-851B-5D767EAE668C}|MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.infrastructure\\services\\genericservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA2964CC-13FB-4C1F-851B-5D767EAE668C}|MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj|solutionrelative:marketpos.infrastructure\\services\\genericservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.application\\services\\interfacesservices\\genericeinterface\\iprojectableservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|solutionrelative:marketpos.application\\services\\interfacesservices\\genericeinterface\\iprojectableservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.application\\common\\repositoryinterfaces\\interfacegenerice\\iqueryablerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|solutionrelative:marketpos.application\\common\\repositoryinterfaces\\interfacegenerice\\iqueryablerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA2964CC-13FB-4C1F-851B-5D767EAE668C}|MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.infrastructure\\repositories\\genericerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA2964CC-13FB-4C1F-851B-5D767EAE668C}|MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj|solutionrelative:marketpos.infrastructure\\repositories\\genericerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA2964CC-13FB-4C1F-851B-5D767EAE668C}|MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.infrastructure\\repositories\\basebuildequery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA2964CC-13FB-4C1F-851B-5D767EAE668C}|MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj|solutionrelative:marketpos.infrastructure\\repositories\\basebuildequery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.application\\features\\cqrs\\cqrsproduct\\query\\handlerquery\\getproductwithcategoryidqueryhanler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|solutionrelative:marketpos.application\\features\\cqrs\\cqrsproduct\\query\\handlerquery\\getproductwithcategoryidqueryhanler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.application\\features\\cqrs\\cqrsproduct\\query\\getproductwithcategoryidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|solutionrelative:marketpos.application\\features\\cqrs\\cqrsproduct\\query\\getproductwithcategoryidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 391,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IProjectableService.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Services\\InterfacesServices\\GenericeInterface\\IProjectableService.cs",
+              "RelativeDocumentMoniker": "MarketPOS.Application\\Services\\InterfacesServices\\GenericeInterface\\IProjectableService.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Services\\InterfacesServices\\GenericeInterface\\IProjectableService.cs",
+              "RelativeToolTip": "MarketPOS.Application\\Services\\InterfacesServices\\GenericeInterface\\IProjectableService.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAIAywBgAAABvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-24T13:09:25.048Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IQueryableService.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Services\\InterfacesServices\\GenericeInterface\\IQueryableService.cs",
+              "RelativeDocumentMoniker": "MarketPOS.Application\\Services\\InterfacesServices\\GenericeInterface\\IQueryableService.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Services\\InterfacesServices\\GenericeInterface\\IQueryableService.cs",
+              "RelativeToolTip": "MarketPOS.Application\\Services\\InterfacesServices\\GenericeInterface\\IQueryableService.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAIAywBQAAABvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-24T13:08:42.265Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IQueryableRepository.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Common\\RepositoryInterfaces\\InterfaceGenerice\\IQueryableRepository.cs",
+              "RelativeDocumentMoniker": "MarketPOS.Application\\Common\\RepositoryInterfaces\\InterfaceGenerice\\IQueryableRepository.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Common\\RepositoryInterfaces\\InterfaceGenerice\\IQueryableRepository.cs",
+              "RelativeToolTip": "MarketPOS.Application\\Common\\RepositoryInterfaces\\InterfaceGenerice\\IQueryableRepository.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAkwBkAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-24T13:02:27.937Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GenericService.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\Services\\GenericService.cs",
+              "RelativeDocumentMoniker": "MarketPOS.Infrastructure\\Services\\GenericService.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\Services\\GenericService.cs",
+              "RelativeToolTip": "MarketPOS.Infrastructure\\Services\\GenericService.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAArwGkAAABvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-24T13:00:57.187Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GetAllProductsHandler.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\HandlerQuery\\GetAllProductsHandler.cs",
+              "RelativeDocumentMoniker": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\HandlerQuery\\GetAllProductsHandler.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\HandlerQuery\\GetAllProductsHandler.cs",
+              "RelativeToolTip": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\HandlerQuery\\GetAllProductsHandler.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAArwCIAAABXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-24T12:35:09.304Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GenericeRepository.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\Repositories\\GenericeRepository.cs",
+              "RelativeDocumentMoniker": "MarketPOS.Infrastructure\\Repositories\\GenericeRepository.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\Repositories\\GenericeRepository.cs",
+              "RelativeToolTip": "MarketPOS.Infrastructure\\Repositories\\GenericeRepository.cs",
+              "ViewState": "AgIAAFgAAAAAAAAAAAArwG0AAABmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-24T12:29:12.737Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GetPagedProductQueryHandler.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\HandlerQuery\\GetPagedProductQueryHandler.cs",
+              "RelativeDocumentMoniker": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\HandlerQuery\\GetPagedProductQueryHandler.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\HandlerQuery\\GetPagedProductQueryHandler.cs",
+              "RelativeToolTip": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\HandlerQuery\\GetPagedProductQueryHandler.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABcAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-24T12:17:41.985Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BaseBuildeQuery.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\Repositories\\BaseBuildeQuery.cs",
+              "RelativeDocumentMoniker": "MarketPOS.Infrastructure\\Repositories\\BaseBuildeQuery.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\Repositories\\BaseBuildeQuery.cs",
+              "RelativeToolTip": "MarketPOS.Infrastructure\\Repositories\\BaseBuildeQuery.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAywCYAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-24T12:41:44.141Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "GetProductWithCategoryIdQuery.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\GetProductWithCategoryIdQuery.cs",
+              "RelativeDocumentMoniker": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\GetProductWithCategoryIdQuery.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\GetProductWithCategoryIdQuery.cs",
+              "RelativeToolTip": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\GetProductWithCategoryIdQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-24T11:57:37.666Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "GetProductWithCategoryIdQueryHanler.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\HandlerQuery\\GetProductWithCategoryIdQueryHanler.cs",
+              "RelativeDocumentMoniker": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\HandlerQuery\\GetProductWithCategoryIdQueryHanler.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\HandlerQuery\\GetProductWithCategoryIdQueryHanler.cs",
+              "RelativeToolTip": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Query\\HandlerQuery\\GetProductWithCategoryIdQueryHanler.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAwwB4AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-21T13:54:39.209Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
