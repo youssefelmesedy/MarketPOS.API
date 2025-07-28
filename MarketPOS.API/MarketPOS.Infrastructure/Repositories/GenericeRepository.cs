@@ -10,7 +10,7 @@ public class GenericeRepository<T> :
     {
     }
 
-    // ProjectableRepository Methods
+    #region ProjectableRepository Methods
     public async Task<(IEnumerable<TResult> Data, int TotalCount)> GetPagedProjectedAsync<TResult>(
     IMapper mapper,
     int pageIndex,
@@ -72,8 +72,9 @@ public class GenericeRepository<T> :
         var query = BuildQuery(predicate, tracking, includeExpressions, includeSoftDeleted, ordering, applyIncludes);
         return await query.ProjectTo<TResult>(mapper.ConfigurationProvider).ToListAsync();
     }
+    #endregion
 
-    // QueryableRepository Methods
+    #region QueryableRepository Methods
     public async Task<IEnumerable<T>> GetAllAsync(
         bool tracking = false,
         List<Func<IQueryable<T>, IQueryable<T>>>? includeExpressions = null,
@@ -139,8 +140,9 @@ public class GenericeRepository<T> :
     {
         return await BuildQuery(null, false, null, includeSoftDeleted: true).ToListAsync();
     }
+    #endregion
 
-    // WritableRepository Methods
+    #region WritableRepository Methods
     public async Task AddAsync(T entity)
     {
         await _dbSet.AddAsync(entity);
@@ -165,5 +167,5 @@ public class GenericeRepository<T> :
     {
         _dbSet.RemoveRange(entities);
     }
-
+    #endregion
 }

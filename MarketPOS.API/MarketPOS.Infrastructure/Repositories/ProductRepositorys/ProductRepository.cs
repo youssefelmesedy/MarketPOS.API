@@ -4,23 +4,9 @@ namespace MarketPOS.Infrastructure.Repositories.ProductRepositorys;
 public class ProductRepository : GenericeRepository<Product>, IProductRepo
 {
     private readonly ISpecificationEvaluator<Product> _specificationEvaluator;
-    public ProductRepository(ApplicationDbContext context, ISpecificationEvaluator<Product> specificationEvaluator = null) : base(context)
+    public ProductRepository(ApplicationDbContext context, ISpecificationEvaluator<Product> specificationEvaluator = null!) : base(context)
     {
         _specificationEvaluator = specificationEvaluator;
-    }
-
-    public async Task<Product?> GetWithPricesAsync(Guid id)
-    {
-        return await _dbSet
-            .Include(p => p.ProductPrice)
-            .FirstOrDefaultAsync(p => p.Id == id);
-    }
-
-    public async Task<Product?> GetWithUnitProfilesAsync(Guid id)
-    {
-        return await _dbSet
-            .Include(p => p.ProductUnitProfile)
-            .FirstOrDefaultAsync(p => p.Id == id);
     }
 
     public async Task<IEnumerable<Product>> GetAllWithCategoryAsync(Guid? categoryId = null)

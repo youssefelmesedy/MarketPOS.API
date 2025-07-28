@@ -11,6 +11,9 @@ public abstract class BaseEntity
 
     public string? CreatedBy { get; set; }
     public string? ModifiedBy { get; set; }
+
+    public DateTime? RestorAt { get; set; }
+    public String? RestorBy { get; set; }
 }
 public class ContactInfo
 {

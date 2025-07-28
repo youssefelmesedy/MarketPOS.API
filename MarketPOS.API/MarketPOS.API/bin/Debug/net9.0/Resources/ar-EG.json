@@ -51,8 +51,8 @@
   "CreateFailed": "فشل في إنشاء المورد.",
   "UpdateFailed": "فشل في تحديث المورد.",
   "DeleteFailed": "فشل في حذف المورد.",
-  "DuplicateCategoryName": "يوجد تصنيف بنفس الاسم بالفعل",
-  "DuplicateProductName": "يوجد منتج بنفس الاسم بالفعل",
+  "DuplicateCategoryName": "يوجد تصنيف بنفس الاسم بالفعل ",
+  "DuplicateProductName": " يوجد منتج بنفس الاسم بالفعل او باركود بالفعل لدي تصنيف اخر",
 
   // أنواع محددة (اختياري للتوضيح)
   "Invalid_Guid": "المُعرف المُدخل غير صالح.",

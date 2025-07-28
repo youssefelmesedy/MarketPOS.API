@@ -21,6 +21,8 @@ public abstract class BaseDto
     [JsonConverter(typeof(JsonNullableDateConverter))]
     public DateTime? DeletedAt { get; set; }
     [JsonPropertyOrder(26)]
+    public DateTime? RestoreAt { get; set; }
+    [JsonPropertyOrder(27)]
     public string? RestoreBy { get; set; }
 }
 

@@ -3,7 +3,6 @@ public class Product : BaseEntity
 {
     public string Name { get; set; } = default!;
     public string? Barcode { get; set; }
-    public string RestoreBy { get; set; } = string.Empty;
     public Guid CategoryId { get; set; }
     public Category? Category { get; set; } = default!;
 

@@ -624,7 +624,6 @@ D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\MarketPOS
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\MarketPOS.API.AssemblyInfoInputs.cache
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\MarketPOS.API.AssemblyInfo.cs
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\MarketPOS.API.csproj.CoreCompileInputs.cache
-D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\MarketPOS.API.MvcApplicationPartsAssemblyInfo.cs
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\MarketPOS.API.MvcApplicationPartsAssemblyInfo.cache
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\MarketPOS.API.sourcelink.json
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\rjimswa.dswa.cache.json

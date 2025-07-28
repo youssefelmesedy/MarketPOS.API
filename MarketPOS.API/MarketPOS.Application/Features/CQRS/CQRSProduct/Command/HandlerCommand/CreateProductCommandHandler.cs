@@ -17,20 +17,26 @@ public class CreateProductCommandHandler : BaseHandler<CreateProductCommandHandl
     public async Task<ResultDto<Guid>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
         var getCategory = _servicesFactory.GetService<ICategoryService>();
+        var productService = _servicesFactory.GetService<IProductService>();
 
         var category = await getCategory.GetByIdAsync(request.Dto.CategoryId);
+
+        var existProductName = await productService.FindAsync(p => p.Name.Trim().ToLower() == request.Dto.Name.Trim().ToLower()
+                                                                  || p.Barcode == request.Dto.Barcode);
+        if (existProductName.Any())
+            return _resultFactory.Success<Guid>(existProductName.Select(p => p.Id).First(), "DuplicateProductName");
+
         if (category == null || category.IsDeleted)
             throw new NotFoundException(nameof(Category), request.Dto.CategoryId);
 
-        var product = _mapper?.Map<Product>(request.Dto);
-        if (product is null)
+        var newproduct = _mapper?.Map<Product>(request.Dto);
+        if (newproduct is null)
             return _resultFactory.Fail<Guid>("Mappingfailed");
 
-        var productService = _servicesFactory.GetService<IProductService>();
 
-        await productService.AddAsync(product);
+        await productService.AddAsync(newproduct);
 
-        return _resultFactory.Success(product.Id, "Created");
+        return _resultFactory.Success(newproduct.Id, "Created");
 
     }
 }

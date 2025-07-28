@@ -20,11 +20,15 @@ public class UpdateProductCommandHandler : BaseHandler<UpdateProductCommandHandl
         var categoryService = _servicesFactory.GetService<ICategoryService>();
         var priceService = _servicesFactory.GetService<IProductPriceService>();
 
-        var existCategoryName = await productService.FindAsync(c => c.Name.ToLower().Trim() ==
-                                                                     request.Dto.Name.ToLower().Trim() &&
-                                                                     c.Id != request.Dto.Id);
-        if (existCategoryName.Any())
-            return _resultFactory.Fail<Guid>("DuplicateProductName");
+        var normalizedName = request.Dto.Name.Trim().ToLower();
+        var normalizedBarcode = request.Dto.Barcode?.Trim();
+
+        var existProduct = await productService.FindAsync(p =>
+            (p.Name.Trim().ToLower() == normalizedName || p.Barcode == normalizedBarcode) &&
+            p.Id != request.Dto.Id);
+
+        if (existProduct.Any())
+            return _resultFactory.Success<Guid>(existProduct.Select(p => p.Id).First() ,"DuplicateProductName");
 
         var includes = ProductIncludeHelper.GetIncludeExpressions(
         [
@@ -103,7 +107,7 @@ public class UpdateProductCommandHandler : BaseHandler<UpdateProductCommandHandl
         var modified = product.UpdateValues(
             dto.Name,
             dto.Barcode,
-            dto.CategoryId,
+            dto.CategoryId, 
             dto.ExpirationDate ?? DateTime.MinValue);
 
         if (modified)

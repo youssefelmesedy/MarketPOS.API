@@ -184,9 +184,10 @@ public class GenericService<TEntity> :IFullService<TEntity> where TEntity : clas
         try
         {
             if (entity is Product product)
-            {
                 product.InitializeChildEntityinCreate();
-            }
+
+            if (entity is Category category)
+                category.InitializeBasePropertyInCreate();
 
             await _write.AddAsync(entity);
             await _unitOfWork.SaveChangesAsync();
@@ -203,9 +204,10 @@ public class GenericService<TEntity> :IFullService<TEntity> where TEntity : clas
         try
         {
             if (entity is Product product)
-            {
                 product.InitializeChildEntityinUpdate();
-            }
+
+            if (entity is Category category)
+                category.InitializeBaseInUpDate();
 
             _write.Update(entity);
             await _unitOfWork.SaveChangesAsync();
@@ -235,12 +237,13 @@ public class GenericService<TEntity> :IFullService<TEntity> where TEntity : clas
     {
         try
         {
-            if (entity is BaseEntity baseEntity && entity is Product product)
+            if (entity is BaseEntity baseEntity)
             {
                 baseEntity.DeleteBy = "Youssef";
                 baseEntity.IsDeleted = true;
                 baseEntity.DeletedAt = DateTime.Now;
-                product.RestoreBy = string.Empty;
+                baseEntity.RestorAt = baseEntity.RestorAt;
+                baseEntity.RestorBy = baseEntity.RestorBy;
 
                 _write.Update(entity);
                 await _unitOfWork.SaveChangesAsync();
@@ -264,11 +267,15 @@ public class GenericService<TEntity> :IFullService<TEntity> where TEntity : clas
             if (entity == null)
                 throw new NotFoundException(typeof(TEntity).Name, id);
 
-            if (entity is BaseEntity baseEntity && entity is Product product)
+            if (entity is BaseEntity baseEntity)
             {
-                product.RestoreBy = "Youssef";
                 baseEntity.IsDeleted = false;
                 baseEntity.DeletedAt = baseEntity.DeletedAt;
+                baseEntity.DeleteBy = baseEntity.DeleteBy;
+
+                baseEntity.RestorAt = DateTime.Now;
+                baseEntity.RestorBy = "Youssef";
+
                 _write.Update(entity);
                 await _unitOfWork.SaveChangesAsync();
                 return baseEntity.Id;

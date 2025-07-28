@@ -40,7 +40,7 @@ public class ProductService : GenericService<Product>, IProductService
         {
 
             var result = _productRepository.GetBySpecificationAsync(specification);
-            return result;
+            return result!;
         }
         catch (Exception ex)
         {

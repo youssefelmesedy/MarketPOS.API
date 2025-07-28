@@ -49,7 +49,7 @@
   "UpdateFailed": "Failed to update the resource.",
   "DeleteFailed": "Failed to delete the resource.",
   "DuplicateCategoryName": "Category with the same name already exists",
-  "DuplicateProductName": "Product with the same name already exists",
+  "DuplicateProductName": "Product with the name already exist or Barcode aready exist",
   "SofteDeletedFailed": "This card Aready suspended for a certain period.",
   "RestoreFailed": "An error occurred while restoring the item.",
 

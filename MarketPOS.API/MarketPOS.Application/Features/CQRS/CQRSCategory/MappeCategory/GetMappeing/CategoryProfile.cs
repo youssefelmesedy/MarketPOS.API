@@ -15,6 +15,8 @@ public partial class CategoryProfile
             .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt))
             .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.CreatedBy))
             .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => src.UpdatedAt))
-            .ForMember(dest => dest.ModifiedBy, opt => opt.MapFrom(src => src.ModifiedBy));
+            .ForMember(dest => dest.ModifiedBy, opt => opt.MapFrom(src => src.ModifiedBy))
+            .ForMember(dest => dest.RestoreAt, opt => opt.MapFrom(src => src.RestorAt))
+            .ForMember(dest => dest.RestoreBy, opt => opt.MapFrom(src => src.RestorBy));
     }
 }
