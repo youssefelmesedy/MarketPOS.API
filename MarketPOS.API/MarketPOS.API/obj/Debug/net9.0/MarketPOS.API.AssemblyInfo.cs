@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MarketPOS.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ed50b2b66e67c46579329035787d8ec84658f110")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+433d0f58a6aa3a71e145a09aacc2cba9ac025d2f")]
 [assembly: System.Reflection.AssemblyProductAttribute("MarketPOS.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MarketPOS.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
