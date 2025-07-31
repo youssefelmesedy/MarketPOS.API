@@ -1,4 +1,4 @@
-﻿namespace MarketPOS.Application.Common.RepositoryInterfaces.InterfaceGenerice;
+﻿namespace MarketPOS.Application.RepositoryInterfaces.InterfaceGenerice;
 
 public interface IQueryableRepository<T> where T : class
 {

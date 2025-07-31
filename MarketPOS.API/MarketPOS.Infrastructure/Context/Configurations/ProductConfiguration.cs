@@ -41,23 +41,24 @@ public class ProductConfiguration : BaseEntityConfiguration<Product>
 
 #region ProductPrice Configuration
 
-public class ProductPriceConfiguration : IEntityTypeConfiguration<ProductPrice>
+public class ProductPriceConfiguration : BaseEntityConfiguration<ProductPrice>
 {
-    public void Configure(EntityTypeBuilder<ProductPrice> builder)
+    public override void Configure(EntityTypeBuilder<ProductPrice> builder)
     {
-        builder.HasKey(pp => pp.ProductId );
-        builder.Property(e => e.CreatedAt).IsRequired();
-        builder.Property(e => e.UpdatedAt);
+        builder.HasKey(p => p.ProductId);
 
-        builder.Property(e => e.CreatedBy)
-              .HasMaxLength(100);
+        builder.Ignore(p => p.Id);
+        builder.Ignore(p => p.DeletedAt);
+        builder.Ignore(p => p.IsDeleted);
+        builder.Ignore(p => p.RestorAt);
+        builder.Ignore(p => p.RestorBy);
+        builder.Ignore(p => p.DeleteBy);
 
-        builder.Property(e => e.ModifiedBy)
-               .HasMaxLength(100);
         builder.Property(p => p.PurchasePrice).HasPrecision(18, 2);
         builder.Property(p => p.SalePrice).HasPrecision(18, 2);
         builder.Property(p => p.DiscountPercentageFromSupplier).HasPrecision(5, 2);
     }
+
 }
 
 
@@ -65,19 +66,18 @@ public class ProductPriceConfiguration : IEntityTypeConfiguration<ProductPrice>
 
 #region ProductUnitProfile Configuration
 
-public class ProductUnitProfileConfiguration : IEntityTypeConfiguration<ProductUnitProfile>
+public class ProductUnitProfileConfiguration : BaseEntityConfiguration<ProductUnitProfile>
 {
-    public void Configure(EntityTypeBuilder<ProductUnitProfile> builder)
+    public override void Configure(EntityTypeBuilder<ProductUnitProfile> builder)
     {
-        builder.HasKey(pp => pp.ProductId);
-        builder.Property(e => e.CreatedAt).IsRequired();
-        builder.Property(e => e.UpdatedAt);
+        builder.HasKey(p => p.ProductId);
 
-        builder.Property(e => e.CreatedBy)
-              .HasMaxLength(100);
-
-        builder.Property(e => e.ModifiedBy)
-               .HasMaxLength(100);
+        builder.Ignore(p => p.Id);
+        builder.Ignore(p => p.DeletedAt);
+        builder.Ignore(p => p.IsDeleted);
+        builder.Ignore(p => p.RestorAt);
+        builder.Ignore(p => p.RestorBy);
+        builder.Ignore(p => p.DeleteBy);
 
         builder.Property(p => p.LargeUnitName).HasMaxLength(50).IsRequired();
         builder.Property(p => p.MediumUnitName).HasMaxLength(50).IsRequired();

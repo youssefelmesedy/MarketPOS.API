@@ -22,6 +22,56 @@ namespace MarketPOS.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Market.Domain.Entitys.DomainCategory.ActiveIngredients", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("DeleteBy")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("RestorAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RestorBy")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ActiveIngredients");
+                });
+
             modelBuilder.Entity("Market.Domain.Entitys.DomainCategory.Category", b =>
                 {
                     b.Property<Guid>("Id")
@@ -37,7 +87,8 @@ namespace MarketPOS.Infrastructure.Migrations
 
                     b.Property<string>("DeleteBy")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -64,7 +115,8 @@ namespace MarketPOS.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RestorBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -78,6 +130,12 @@ namespace MarketPOS.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ActiveIngredientId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ActiveIngredientsId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Barcode")
@@ -96,7 +154,8 @@ namespace MarketPOS.Infrastructure.Migrations
 
                     b.Property<string>("DeleteBy")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -122,12 +181,15 @@ namespace MarketPOS.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RestorBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ActiveIngredientsId");
 
                     b.HasIndex("CategoryId");
 
@@ -149,7 +211,8 @@ namespace MarketPOS.Infrastructure.Migrations
 
                     b.Property<string>("DeleteBy")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -173,7 +236,8 @@ namespace MarketPOS.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RestorBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -199,16 +263,14 @@ namespace MarketPOS.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("DiscountPercentageFromSupplier")
                         .HasPrecision(5, 2)
                         .HasColumnType("decimal(5,2)");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("PurchasePrice")
                         .HasPrecision(18, 2)
@@ -235,8 +297,7 @@ namespace MarketPOS.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LargeUnitName")
                         .IsRequired()
@@ -260,8 +321,7 @@ namespace MarketPOS.Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SmallPerMedium")
                         .HasColumnType("int");
@@ -298,7 +358,8 @@ namespace MarketPOS.Infrastructure.Migrations
 
                     b.Property<string>("DeleteBy")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -321,7 +382,8 @@ namespace MarketPOS.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RestorBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -346,7 +408,8 @@ namespace MarketPOS.Infrastructure.Migrations
 
                     b.Property<string>("DeleteBy")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -371,7 +434,8 @@ namespace MarketPOS.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RestorBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<Guid>("SupplierId")
                         .HasColumnType("uniqueidentifier");
@@ -410,7 +474,8 @@ namespace MarketPOS.Infrastructure.Migrations
 
                     b.Property<string>("DeleteBy")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -437,7 +502,8 @@ namespace MarketPOS.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RestorBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("UnitName")
                         .IsRequired()
@@ -475,7 +541,8 @@ namespace MarketPOS.Infrastructure.Migrations
 
                     b.Property<string>("DeleteBy")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -498,7 +565,8 @@ namespace MarketPOS.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RestorBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -510,11 +578,17 @@ namespace MarketPOS.Infrastructure.Migrations
 
             modelBuilder.Entity("Market.Domain.Entitys.DomainProduct.Product", b =>
                 {
+                    b.HasOne("Market.Domain.Entitys.DomainCategory.ActiveIngredients", "ActiveIngredients")
+                        .WithMany("products")
+                        .HasForeignKey("ActiveIngredientsId");
+
                     b.HasOne("Market.Domain.Entitys.DomainCategory.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("ActiveIngredients");
 
                     b.Navigation("Category");
                 });
@@ -706,6 +780,11 @@ namespace MarketPOS.Infrastructure.Migrations
                         });
 
                     b.Navigation("ContactInfo");
+                });
+
+            modelBuilder.Entity("Market.Domain.Entitys.DomainCategory.ActiveIngredients", b =>
+                {
+                    b.Navigation("products");
                 });
 
             modelBuilder.Entity("Market.Domain.Entitys.DomainCategory.Category", b =>

@@ -1,4 +1,5 @@
-﻿using MarketPOS.Application.Specifications;
+﻿using MarketPOS.Application.RepositoryInterfaces.ProductRepositorys;
+using MarketPOS.Application.Specifications;
 
 namespace MarketPOS.Infrastructure.Repositories.ProductRepositorys;
 public class ProductRepository : GenericeRepository<Product>, IProductRepo

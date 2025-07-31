@@ -1,4 +1,4 @@
-﻿using MarketPOS.Application.Common.RepositoryInterfaces;
+﻿using MarketPOS.Application.RepositoryInterfaces;
 using MarketPOS.Application.Services.InterfacesServices;
 
 namespace MarketPOS.Infrastructure.Services;
@@ -183,11 +183,14 @@ public class GenericService<TEntity> :IFullService<TEntity> where TEntity : clas
     {
         try
         {
-            if (entity is Product product)
-                product.InitializeChildEntityinCreate();
+            //if (entity is Product product)
+            //    product.InitializeChildEntityinCreate();
 
-            if (entity is Category category)
-                category.InitializeBasePropertyInCreate();
+            //if (entity is Category category)
+            //    category.InitializeBasePropertyInCreate();
+
+            if (entity is BaseEntity baseEntity)
+                baseEntity.InitializeChildEntityinCreate();
 
             await _write.AddAsync(entity);
             await _unitOfWork.SaveChangesAsync();
@@ -203,11 +206,14 @@ public class GenericService<TEntity> :IFullService<TEntity> where TEntity : clas
     {
         try
         {
-            if (entity is Product product)
-                product.InitializeChildEntityinUpdate();
+            //if (entity is Product product)
+            //    product.InitializeChildEntityinUpdate();
 
-            if (entity is Category category)
-                category.InitializeBaseInUpDate();
+            //if (entity is Category category)
+            //    category.InitializeBaseInUpDate();
+
+            if (entity is BaseEntity baseEntity)
+                baseEntity.InitializeChildEntityinUpdate();
 
             _write.Update(entity);
             await _unitOfWork.SaveChangesAsync();

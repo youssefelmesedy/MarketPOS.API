@@ -1,6 +1,6 @@
-﻿using MarketPOS.Application.Common.RepositoryInterfaces.InterfaceGenerice;
+﻿using MarketPOS.Application.RepositoryInterfaces.InterfaceGenerice;
 
-namespace MarketPOS.Application.Common.Interfaces.RepositorySupplier;
+namespace MarketPOS.Application.RepositoryInterfaces.RepositorySupplier;
 public interface ISupplierRepo  : 
     IQueryableRepository<Supplier>,
     IProjectableRepository<Supplier>,

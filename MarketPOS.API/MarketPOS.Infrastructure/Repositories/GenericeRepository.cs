@@ -1,5 +1,5 @@
 ﻿using AutoMapper.QueryableExtensions;
-using MarketPOS.Application.Common.RepositoryInterfaces;
+using MarketPOS.Application.RepositoryInterfaces;
 
 namespace Market.POS.Infrastructure.Repositories;
 

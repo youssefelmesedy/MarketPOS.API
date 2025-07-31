@@ -1,4 +1,5 @@
-﻿using MarketPOS.Application.Common.RepositoryInterfaces;
+﻿using MarketPOS.Application.RepositoryInterfaces;
+using MarketPOS.Application.RepositoryInterfaces.ProductRepositorys;
 using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 using MarketPOS.Application.Specifications;
 

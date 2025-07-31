@@ -14,6 +14,19 @@ public abstract class BaseEntity
 
     public DateTime? RestorAt { get; set; }
     public String? RestorBy { get; set; }
+
+    public void InitializeChildEntityinCreate()
+    {
+        CreatedAt = DateTime.Now;
+        CreatedBy = "Youssef";
+        IsDeleted = false;
+    }
+
+    public void InitializeChildEntityinUpdate()
+    {
+        UpdatedAt = DateTime.Now;
+        ModifiedBy = "Youssef";
+    }
 }
 public class ContactInfo
 {

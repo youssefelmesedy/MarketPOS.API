@@ -12,7 +12,8 @@ public class UpdateProductValidator : BaseValidator<UpdateProductCommand>
         );
 
         RuleForNullablePercentage(x => x.Dto.DiscountPercentageFromSupplier, "Supplier Discount");
-        RuleForExpirationDate(x => x.Dto.ExpirationDate, "ExpirationDate");
+        RuleForExpirationDate(x => x.Dto.ExpirationDate, "ExpirationDate Not valide");
+
 
         When(x => x.Dto.MediumPerLarge != null, () =>
         {

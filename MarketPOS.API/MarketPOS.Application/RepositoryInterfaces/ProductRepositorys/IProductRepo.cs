@@ -1,7 +1,7 @@
-﻿using MarketPOS.Application.Common.RepositoryInterfaces.InterfaceGenerice;
+﻿using MarketPOS.Application.RepositoryInterfaces.InterfaceGenerice;
 using MarketPOS.Application.Specifications;
 
-namespace MarketPOS.Application.Common.Interfaces.ProductRepositorys;
+namespace MarketPOS.Application.RepositoryInterfaces.ProductRepositorys;
 public interface IProductRepo : 
     IQueryableRepository<Product>,
     IProjectableRepository<Product>,

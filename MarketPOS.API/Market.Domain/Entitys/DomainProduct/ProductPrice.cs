@@ -3,7 +3,7 @@
 namespace Market.Domain.Entitys.DomainProduct;
 
 // ProductPrice.cs
-public class ProductPrice 
+public class ProductPrice : BaseEntity
 {
     public Guid ProductId { get; set; }
     public Product Product { get; set; } = default!;
@@ -11,12 +11,6 @@ public class ProductPrice
     public decimal PurchasePrice { get; set; }
     public decimal SalePrice { get; set; }
     public decimal DiscountPercentageFromSupplier { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-    public string? CreatedBy { get; set; }
-
-    public DateTime? UpdatedAt { get; set; }
-    public string? ModifiedBy { get; set; }
 
     public ProductPrice() { }
 
@@ -43,16 +37,10 @@ public class ProductPrice
             throw new ArgumentException("The purchase price cannot be greater than the selling price.");
     }
 
-    public static decimal CalculatePurchasePriceFromDiscount(decimal salePrice, decimal discountPercentage)
-        => Math.Round(salePrice * (1 - discountPercentage / 100), 2);
-
-    public static decimal CalculateDiscountFromPurchase(decimal salePrice, decimal purchasePrice)
-        => Math.Round((1 - (purchasePrice / salePrice)) * 100, 2);
     public bool UpdateValues(decimal? newSalePrice, decimal? newPurchasePrice, decimal? newDiscountPercentage, string updatedBy)
     {
         bool isModified = false;
 
-        // ❌ لا يُسمح بإرسال سعر البيع فقط
         if (newSalePrice.HasValue &&
             (!newPurchasePrice.HasValue || newPurchasePrice <= 0) &&
             (!newDiscountPercentage.HasValue || newDiscountPercentage <= 0))
@@ -60,22 +48,18 @@ public class ProductPrice
             throw new ValidationException("You must provide either a valid purchase price or a valid discount percentage when updating the sale price.");
         }
 
-        // ❌ لو تم إرسال سعر الشراء بدون سعر بيع و الشراء > البيع
         if (!newSalePrice.HasValue && newPurchasePrice.HasValue && newPurchasePrice > SalePrice)
             throw new ValidationException("Purchase price cannot be greater than sale price.");
 
-        // ✅ لو تم إرسال سعر البيع وسعر الشراء معًا
         if (newSalePrice.HasValue && newPurchasePrice.HasValue)
         {
             if (newPurchasePrice >= newSalePrice)
                 throw new ValidationException("Purchase price cannot be greater than or equal to sale price.");
 
-            // ✅ يتم دائمًا حساب الخصم تلقائيًا إذا غائب أو = 0
             if (!newDiscountPercentage.HasValue || newDiscountPercentage == 0)
             {
                 var calculatedDiscount = CalculateDiscountFromPurchase(newSalePrice.Value, newPurchasePrice.Value);
 
-                // ❌ تأكد إن الخصم لا يزيد عن 90%
                 if (calculatedDiscount < 5m || calculatedDiscount > 100)
                     throw new ValidationException("Discount percentage cannot exceed 90% of sale price.");
 
@@ -85,7 +69,6 @@ public class ProductPrice
             }
         }
 
-        // ✅ الأولوية لحساب الخصم لو تم إرساله وكان > 0
         if (newDiscountPercentage.HasValue && newDiscountPercentage > 0)
         {
             if (newDiscountPercentage > 90)
@@ -107,7 +90,6 @@ public class ProductPrice
             }
         }
 
-        // ✅ لو مفيش خصم، بس سعر الشراء اتغير
         else if (newPurchasePrice.HasValue && newPurchasePrice != PurchasePrice)
         {
             if (newPurchasePrice >= newSalePrice)
@@ -123,7 +105,6 @@ public class ProductPrice
             isModified = true;
         }
 
-        // ✅ تحديث سعر البيع فقط
         if (newSalePrice.HasValue && newSalePrice.Value != SalePrice)
         {
             if (newSalePrice <= PurchasePrice)
@@ -135,11 +116,18 @@ public class ProductPrice
 
         if (isModified)
         {
-            UpdatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.Now;
             ModifiedBy = updatedBy;
         }
 
         return isModified;
     }
+
+    public static decimal CalculatePurchasePriceFromDiscount(decimal salePrice, decimal discountPercentage)
+        => Math.Round(salePrice * (1 - discountPercentage / 100), 2);
+
+    public static decimal CalculateDiscountFromPurchase(decimal salePrice, decimal purchasePrice)
+        => Math.Round((1 - (purchasePrice / salePrice)) * 100, 2);
+
 }
 

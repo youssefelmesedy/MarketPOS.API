@@ -1,10 +1,15 @@
-﻿namespace Market.Domain.Entitys.DomainProduct;
+﻿using System;
+
+namespace Market.Domain.Entitys.DomainProduct;
 public class Product : BaseEntity
 {
     public string Name { get; set; } = default!;
     public string? Barcode { get; set; }
     public Guid CategoryId { get; set; }
     public Category? Category { get; set; } = default!;
+
+    public Guid? ActiveIngredientId { get; set; }
+    public ActiveIngredients? ActiveIngredients { get; set; } = default;
 
     public DateTime ExpirationDate { get; set; }
 
@@ -17,24 +22,6 @@ public class Product : BaseEntity
     public bool IsExpired() =>
         ExpirationDate < DateTime.UtcNow;
 
-    public void InitializeChildEntityinCreate()
-    {
-        CreatedAt = DateTime.Now;
-        CreatedBy = "Yousse";
-
-        ProductPrice.CreatedAt = DateTime.Now;
-        ProductPrice.CreatedBy = "Youssef";
-
-        ProductUnitProfile.CreatedAt = DateTime.Now;
-        ProductUnitProfile.CreatedBy = "Youssef";
-
-        IsDeleted = false;
-    }
-    public void InitializeChildEntityinUpdate()
-    {
-        UpdatedAt = DateTime.Now;
-        ModifiedBy = "Youssef";
-    }
     public bool UpdateValues(string? newName, string? newBarcode, Guid newCategoryId, DateTime newExpirationDate)
     {
         bool modified = false;

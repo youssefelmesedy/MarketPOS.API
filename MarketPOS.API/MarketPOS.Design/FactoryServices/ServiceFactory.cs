@@ -12,15 +12,15 @@ public class ServiceFactory : IServiceFactory
 
     public TService GetService<TService>()
     {
-        if (typeof(TService) == null)
-        {
-            _logger.LogWarning("Attempted to resolve a null service type.");
-            throw new ArgumentNullException(nameof(TService), "Service type cannot be null.");
-        }
-
         try
         {
-                return _provider.GetRequiredService<TService>();
+            if (typeof(TService) == null)
+            {
+                _logger.LogWarning("Attempted to resolve a null service type.");
+                throw new ArgumentNullException(nameof(TService), "Service type cannot be null.");
+            }
+
+            return _provider.GetRequiredService<TService>();
         }
         catch (Exception ex)
         {

@@ -14,5 +14,19 @@ public class CategoryConfiguration : BaseEntityConfiguration<Category>
     }
 }
 
+public class ActiveIngredientsConfiguration : BaseEntityConfiguration<ActiveIngredients>
+{
+    public override void Configure(EntityTypeBuilder<ActiveIngredients> builder)
+    {
+        base.Configure(builder);
+
+        builder.Property(c => c.Name)
+               .IsRequired()
+               .HasMaxLength(100);
+
+    }
+}
+
+
 
 

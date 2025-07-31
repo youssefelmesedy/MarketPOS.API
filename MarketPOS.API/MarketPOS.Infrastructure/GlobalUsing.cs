@@ -29,14 +29,14 @@ global using Microsoft.Extensions.Localization;
 global using Microsoft.Extensions.Logging;
 
 global using MarketPOS.Infrastructure.Context;
-global using MarketPOS.Application.Common.Interfaces;
+global using MarketPOS.Application.RepositoryInterfaces;
 global using MarketPOS.Application.Common.Exceptions;
 global using MarketPOS.Shared.ExceptionDto;
 
 global using Market.POS.Infrastructure.Repositories;
-global using MarketPOS.Application.Common.Interfaces.ProductRepositorys;
-global using MarketPOS.Application.Common.Interfaces.RepositoryCategory;
-global using MarketPOS.Application.Common.Interfaces.RepositorySupplier;
+global using MarketPOS.Application.RepositoryInterfaces.ProductRepositorys;
+global using MarketPOS.Application.RepositoryInterfaces.RepositoryCategory;
+global using MarketPOS.Application.RepositoryInterfaces.RepositorySupplier;
 
 global using MarketPOS.Infrastructure.Services;
 global using MarketPOS.Application.Services.InterfacesServices;

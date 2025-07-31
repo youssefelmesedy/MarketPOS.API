@@ -1,5 +1,4 @@
-﻿using MarketPOS.Application.Services.InterfacesServices.GenericeInterface;
-using MarketPOS.Application.Specifications;
+﻿using MarketPOS.Application.Specifications;
 
 namespace MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 public interface IProductService :IFullService<Product>

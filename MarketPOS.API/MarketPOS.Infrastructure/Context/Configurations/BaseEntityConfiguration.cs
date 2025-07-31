@@ -10,12 +10,19 @@ public abstract class BaseEntityConfiguration<T> : IEntityTypeConfiguration<T>
         builder.Property(e => e.UpdatedAt);
         builder.Property(e => e.IsDeleted).HasDefaultValue(false);
         builder.Property(e => e.DeletedAt);
+        builder.Property(e => e.RestorAt);
 
         builder.Property(e => e.CreatedBy)
                .HasMaxLength(100);
 
         builder.Property(e => e.ModifiedBy)
                .HasMaxLength(100);
+
+        builder.Property(e => e.DeleteBy)
+              .HasMaxLength(100);
+
+        builder.Property(e => e.RestorBy)
+             .HasMaxLength(100);
     }
 }
 

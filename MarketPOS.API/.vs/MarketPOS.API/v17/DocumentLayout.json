@@ -3,24 +3,12 @@
   "WorkspaceRootPath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CA2964CC-13FB-4C1F-851B-5D767EAE668C}|MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.infrastructure\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA2964CC-13FB-4C1F-851B-5D767EAE668C}|MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj|solutionrelative:marketpos.infrastructure\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CA2964CC-13FB-4C1F-851B-5D767EAE668C}|MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.infrastructure\\repositories\\productrepositorys\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CA2964CC-13FB-4C1F-851B-5D767EAE668C}|MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj|solutionrelative:marketpos.infrastructure\\repositories\\productrepositorys\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.application\\common\\repositoryinterfaces\\productrepositorys\\iproductrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|solutionrelative:marketpos.application\\common\\repositoryinterfaces\\productrepositorys\\iproductrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.application\\features\\cqrs\\cqrsproduct\\command\\handlercommand\\updateproductcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|solutionrelative:marketpos.application\\features\\cqrs\\cqrsproduct\\command\\handlercommand\\updateproductcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.application\\features\\cqrs\\cqrsproduct\\command\\handlercommand\\createproductcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|solutionrelative:marketpos.application\\features\\cqrs\\cqrsproduct\\command\\handlercommand\\createproductcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|d:\\projects\\marketpos.api\\marketpos.api\\marketpos.application\\features\\cqrs\\cqrsproduct\\command\\updateproductcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|solutionrelative:marketpos.application\\features\\cqrs\\cqrsproduct\\command\\updateproductcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -55,64 +43,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ProductService.cs",
-              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\Services\\ProductService.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Infrastructure\\Services\\ProductService.cs",
-              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\Services\\ProductService.cs",
-              "RelativeToolTip": "MarketPOS.Infrastructure\\Services\\ProductService.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAIwAUAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-28T11:17:53.256Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IProductRepo.cs",
-              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Common\\RepositoryInterfaces\\ProductRepositorys\\IProductRepo.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Application\\Common\\RepositoryInterfaces\\ProductRepositorys\\IProductRepo.cs",
-              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Common\\RepositoryInterfaces\\ProductRepositorys\\IProductRepo.cs",
-              "RelativeToolTip": "MarketPOS.Application\\Common\\RepositoryInterfaces\\ProductRepositorys\\IProductRepo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-28T11:15:34.876Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ProductRepository.cs",
-              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\Repositories\\ProductRepositorys\\ProductRepository.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Infrastructure\\Repositories\\ProductRepositorys\\ProductRepository.cs",
-              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\Repositories\\ProductRepositorys\\ProductRepository.cs",
-              "RelativeToolTip": "MarketPOS.Infrastructure\\Repositories\\ProductRepositorys\\ProductRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-28T11:14:24.2Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CreateProductCommandHandler.cs",
-              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\HandlerCommand\\CreateProductCommandHandler.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\HandlerCommand\\CreateProductCommandHandler.cs",
-              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\HandlerCommand\\CreateProductCommandHandler.cs",
-              "RelativeToolTip": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\HandlerCommand\\CreateProductCommandHandler.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAwwAYAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-28T10:53:57.513Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "UpdateProductCommandHandler.cs",
               "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\HandlerCommand\\UpdateProductCommandHandler.cs",
               "RelativeDocumentMoniker": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\HandlerCommand\\UpdateProductCommandHandler.cs",
               "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\HandlerCommand\\UpdateProductCommandHandler.cs",
               "RelativeToolTip": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\HandlerCommand\\UpdateProductCommandHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAAC4AAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-28T10:46:12.084Z",
+              "WhenOpened": "2025-07-31T04:32:43.021Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UpdateProductCommand.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\UpdateProductCommand.cs",
+              "RelativeDocumentMoniker": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\UpdateProductCommand.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\UpdateProductCommand.cs",
+              "RelativeToolTip": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\UpdateProductCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-31T04:32:37.446Z",
               "EditorCaption": ""
             }
           ]

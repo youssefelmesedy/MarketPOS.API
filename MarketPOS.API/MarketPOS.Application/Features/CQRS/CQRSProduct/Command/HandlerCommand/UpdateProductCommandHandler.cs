@@ -19,6 +19,7 @@ public class UpdateProductCommandHandler : BaseHandler<UpdateProductCommandHandl
         var productService = _servicesFactory.GetService<IProductService>();
         var categoryService = _servicesFactory.GetService<ICategoryService>();
         var priceService = _servicesFactory.GetService<IProductPriceService>();
+        var unittProfileService = _servicesFactory.GetService<IProductUnitProfileService>();
 
         var normalizedName = request.Dto.Name.Trim().ToLower();
         var normalizedBarcode = request.Dto.Barcode?.Trim();
@@ -42,10 +43,9 @@ public class UpdateProductCommandHandler : BaseHandler<UpdateProductCommandHandl
 
         await EnsureCategoryExists(categoryService, request.Dto.CategoryId);
 
-        //_mapper?.Map(request.Dto, product);
-
-        await HandleProductPriceUpdateAsync(priceService, product, request.Dto);
         await HandleProductInfoUpdateAsync(productService, product, request.Dto);
+        await HandleProductPriceUpdateAsync(priceService, product, request.Dto);
+        await HandleProductUnitProfileUpdateAsync(unittProfileService, product, request.Dto);
 
         return _resultFactory.Success(product.Id, "Updated");
     }
@@ -114,4 +114,23 @@ public class UpdateProductCommandHandler : BaseHandler<UpdateProductCommandHandl
             await productService.UpdateAsync(product);
     }
 
+
+    private async Task HandleProductUnitProfileUpdateAsync(
+        IProductUnitProfileService productService,
+        Product product,
+        UpdateProductDto dto)
+    {
+        if(product.ProductUnitProfile is null)
+            return;
+
+        var modified = product.ProductUnitProfile.UpdateValues(
+            dto.LargeUnitName,
+            dto.MediumUnitName,
+            dto.SmallUnitName,
+            dto.MediumPerLarge,
+            dto.SmallPerMedium);
+
+        if (modified)
+            await productService.UpdateByProductIdAsync(product.ProductUnitProfile);
+    }
 }
