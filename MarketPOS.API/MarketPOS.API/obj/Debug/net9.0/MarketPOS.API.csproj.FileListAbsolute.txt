@@ -624,6 +624,10 @@ D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\MarketPOS
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\MarketPOS.API.AssemblyInfoInputs.cache
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\MarketPOS.API.AssemblyInfo.cs
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\MarketPOS.API.csproj.CoreCompileInputs.cache
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.API/obj/Debug/net9.0/MarketPOS.API.csproj.FileListAbsolute.txt
+=======
+D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\MarketPOS.API.MvcApplicationPartsAssemblyInfo.cs
+>>>>>>> origin:MarketPOS.API/obj/Debug/net9.0/MarketPOS.API.csproj.FileListAbsolute.txt
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\MarketPOS.API.MvcApplicationPartsAssemblyInfo.cache
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\MarketPOS.API.sourcelink.json
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\rjimswa.dswa.cache.json
@@ -634,10 +638,17 @@ D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\staticweb
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\staticwebassets.build.json.cache
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\staticwebassets.development.json
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.API/obj/Debug/net9.0/MarketPOS.API.csproj.FileListAbsolute.txt
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+=======
+>>>>>>> origin:MarketPOS.API/obj/Debug/net9.0/MarketPOS.API.csproj.FileListAbsolute.txt
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\MarketPO.4EFD9A12.Up2Date
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\MarketPOS.API.dll
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\refint\MarketPOS.API.dll
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\MarketPOS.API.pdb
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\MarketPOS.API.genruntimeconfig.cache
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\ref\MarketPOS.API.dll
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.API/obj/Debug/net9.0/MarketPOS.API.csproj.FileListAbsolute.txt
+=======
+D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+>>>>>>> origin:MarketPOS.API/obj/Debug/net9.0/MarketPOS.API.csproj.FileListAbsolute.txt

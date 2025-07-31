@@ -4,6 +4,7 @@
     "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Design\\MarketPOS.Design.csproj": {}
   },
   "projects": {
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Design/obj/MarketPOS.Design.csproj.nuget.dgspec.json
     "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\Market.Domain\\Market.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -83,6 +84,15 @@
         "projectName": "MarketPOS.Design",
         "projectPath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Design\\MarketPOS.Design.csproj",
         "packagesPath": "C:\\Users\\Youssef\\.nuget\\packages\\",
+=======
+    "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Design\\MarketPOS.Design.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Design\\MarketPOS.Design.csproj",
+        "projectName": "MarketPOS.Design",
+        "projectPath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Design\\MarketPOS.Design.csproj",
+        "packagesPath": "C:\\Users\\Youssef\\.nuget\\packages\\",
+>>>>>>> origin:MarketPOS.Design/obj/MarketPOS.Design.csproj.nuget.dgspec.json
         "outputPath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Design\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
@@ -105,9 +115,12 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Design/obj/MarketPOS.Design.csproj.nuget.dgspec.json
               "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\Market.Domain\\Market.Domain.csproj": {
                 "projectPath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\Market.Domain\\Market.Domain.csproj"
               },
+=======
+>>>>>>> origin:MarketPOS.Design/obj/MarketPOS.Design.csproj.nuget.dgspec.json
               "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Shared\\MarketPOS.Shared.csproj": {
                 "projectPath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Shared\\MarketPOS.Shared.csproj"
               }

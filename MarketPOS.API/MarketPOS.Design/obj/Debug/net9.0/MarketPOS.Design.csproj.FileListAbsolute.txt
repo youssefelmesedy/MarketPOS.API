@@ -46,5 +46,8 @@ D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.Design\obj\Debug\net9.0\Market
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.Design\obj\Debug\net9.0\refint\MarketPOS.Design.dll
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.Design\obj\Debug\net9.0\MarketPOS.Design.pdb
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.Design\obj\Debug\net9.0\ref\MarketPOS.Design.dll
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Design/obj/Debug/net9.0/MarketPOS.Design.csproj.FileListAbsolute.txt
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.Design\bin\Debug\net9.0\Market.Domain.dll
 D:\Projects\MarketPOS.API\MarketPOS.API\MarketPOS.Design\bin\Debug\net9.0\Market.Domain.pdb
+=======
+>>>>>>> origin:MarketPOS.Design/obj/Debug/net9.0/MarketPOS.Design.csproj.FileListAbsolute.txt

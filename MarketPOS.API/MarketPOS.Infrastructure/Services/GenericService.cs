@@ -183,8 +183,15 @@ public class GenericService<TEntity> :IFullService<TEntity> where TEntity : clas
     {
         try
         {
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Infrastructure/Services/GenericService.cs
             //if (entity is Product product)
             //    product.InitializeChildEntityinCreate();
+=======
+            if (entity is Product product)
+            {
+                product.InitializeChildEntityinCreate();
+            }
+>>>>>>> origin:MarketPOS.Infrastructure/Services/GenericService.cs
 
             //if (entity is Category category)
             //    category.InitializeBasePropertyInCreate();
@@ -206,8 +213,15 @@ public class GenericService<TEntity> :IFullService<TEntity> where TEntity : clas
     {
         try
         {
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Infrastructure/Services/GenericService.cs
             //if (entity is Product product)
             //    product.InitializeChildEntityinUpdate();
+=======
+            if (entity is Product product)
+            {
+                product.InitializeChildEntityinUpdate();
+            }
+>>>>>>> origin:MarketPOS.Infrastructure/Services/GenericService.cs
 
             //if (entity is Category category)
             //    category.InitializeBaseInUpDate();
@@ -243,15 +257,21 @@ public class GenericService<TEntity> :IFullService<TEntity> where TEntity : clas
     {
         try
         {
-            if (entity is BaseEntity baseEntity)
+            if (entity is BaseEntity baseEntity && entity is Product product)
             {
                 baseEntity.DeleteBy = "Youssef";
                 baseEntity.IsDeleted = true;
                 baseEntity.DeletedAt = DateTime.Now;
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Infrastructure/Services/GenericService.cs
                 baseEntity.RestorAt = baseEntity.RestorAt;
                 baseEntity.RestorBy = baseEntity.RestorBy;
 
                 _write.Update(entity);
+=======
+                product.RestoreBy = string.Empty;
+
+                _writable.Update(entity);
+>>>>>>> origin:MarketPOS.Infrastructure/Services/GenericService.cs
                 await _unitOfWork.SaveChangesAsync();
             }
 
@@ -273,16 +293,21 @@ public class GenericService<TEntity> :IFullService<TEntity> where TEntity : clas
             if (entity == null)
                 throw new NotFoundException(typeof(TEntity).Name, id);
 
-            if (entity is BaseEntity baseEntity)
+            if (entity is BaseEntity baseEntity && entity is Product product)
             {
+                product.RestoreBy = "Youssef";
                 baseEntity.IsDeleted = false;
                 baseEntity.DeletedAt = baseEntity.DeletedAt;
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Infrastructure/Services/GenericService.cs
                 baseEntity.DeleteBy = baseEntity.DeleteBy;
 
                 baseEntity.RestorAt = DateTime.Now;
                 baseEntity.RestorBy = "Youssef";
 
                 _write.Update(entity);
+=======
+                _writable.Update(entity);
+>>>>>>> origin:MarketPOS.Infrastructure/Services/GenericService.cs
                 await _unitOfWork.SaveChangesAsync();
                 return baseEntity.Id;
             }

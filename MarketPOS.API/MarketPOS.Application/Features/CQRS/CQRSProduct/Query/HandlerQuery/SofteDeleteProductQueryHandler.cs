@@ -1,5 +1,9 @@
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Application/Features/CQRS/CQRSProduct/Query/HandlerQuery/SofteDeleteProductQueryHandler.cs
 ﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 using MarketPOS.Shared.DTOs.SofteDleteAndRestor;
+=======
+﻿using MarketPOS.Shared.DTOs.SofteDleteAndRestor;
+>>>>>>> origin:MarketPOS.Application/Features/CQRS/CQRSProduct/Query/HandlerQuery/SofteDeleteProductQueryHandler.cs
 
 namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Query.HandlerQuery;
 public class SofteDeleteProductQueryHandler : BaseHandler<SofteDeleteProductQueryHandler>, IRequestHandler<SofteDeleteProductQuery, ResultDto<SofteDeleteDto>>

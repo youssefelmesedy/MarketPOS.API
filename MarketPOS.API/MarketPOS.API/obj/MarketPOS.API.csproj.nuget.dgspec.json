@@ -356,9 +356,12 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.API/obj/MarketPOS.API.csproj.nuget.dgspec.json
               "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\Market.Domain\\Market.Domain.csproj": {
                 "projectPath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\Market.Domain\\Market.Domain.csproj"
               },
+=======
+>>>>>>> origin:MarketPOS.API/obj/MarketPOS.API.csproj.nuget.dgspec.json
               "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Shared\\MarketPOS.Shared.csproj": {
                 "projectPath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Shared\\MarketPOS.Shared.csproj"
               }

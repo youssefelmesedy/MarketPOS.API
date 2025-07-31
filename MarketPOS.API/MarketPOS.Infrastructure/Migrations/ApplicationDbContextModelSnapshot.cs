@@ -87,8 +87,12 @@ namespace MarketPOS.Infrastructure.Migrations
 
                     b.Property<string>("DeleteBy")
                         .IsRequired()
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+=======
+                        .HasColumnType("nvarchar(max)");
+>>>>>>> origin:MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -154,8 +158,12 @@ namespace MarketPOS.Infrastructure.Migrations
 
                     b.Property<string>("DeleteBy")
                         .IsRequired()
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+=======
+                        .HasColumnType("nvarchar(max)");
+>>>>>>> origin:MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -177,12 +185,18 @@ namespace MarketPOS.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
                     b.Property<DateTime?>("RestorAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RestorBy")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+=======
+                    b.Property<string>("RestoreBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+>>>>>>> origin:MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -211,8 +225,12 @@ namespace MarketPOS.Infrastructure.Migrations
 
                     b.Property<string>("DeleteBy")
                         .IsRequired()
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+=======
+                        .HasColumnType("nvarchar(max)");
+>>>>>>> origin:MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -263,7 +281,19 @@ namespace MarketPOS.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
                         .HasColumnType("nvarchar(max)");
+=======
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("DeleteBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+>>>>>>> origin:MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
 
                     b.Property<decimal>("DiscountPercentageFromSupplier")
                         .HasPrecision(5, 2)
@@ -297,7 +327,24 @@ namespace MarketPOS.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
                         .HasColumnType("nvarchar(max)");
+=======
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("DeleteBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+>>>>>>> origin:MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
 
                     b.Property<string>("LargeUnitName")
                         .IsRequired()
@@ -358,8 +405,12 @@ namespace MarketPOS.Infrastructure.Migrations
 
                     b.Property<string>("DeleteBy")
                         .IsRequired()
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+=======
+                        .HasColumnType("nvarchar(max)");
+>>>>>>> origin:MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -408,8 +459,12 @@ namespace MarketPOS.Infrastructure.Migrations
 
                     b.Property<string>("DeleteBy")
                         .IsRequired()
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+=======
+                        .HasColumnType("nvarchar(max)");
+>>>>>>> origin:MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -474,8 +529,12 @@ namespace MarketPOS.Infrastructure.Migrations
 
                     b.Property<string>("DeleteBy")
                         .IsRequired()
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+=======
+                        .HasColumnType("nvarchar(max)");
+>>>>>>> origin:MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -541,8 +600,12 @@ namespace MarketPOS.Infrastructure.Migrations
 
                     b.Property<string>("DeleteBy")
                         .IsRequired()
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+=======
+                        .HasColumnType("nvarchar(max)");
+>>>>>>> origin:MarketPOS.Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");

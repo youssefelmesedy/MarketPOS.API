@@ -14,7 +14,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MarketPOS.Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Shared/obj/Debug/net9.0/MarketPOS.Shared.AssemblyInfo.cs
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7f66be20f7fa539538ad265bccfb923b13c4aed5")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e9188ecefeb771769260c380a5326e6d4e2c3ead")]
+>>>>>>> origin:MarketPOS.Shared/obj/Debug/net9.0/MarketPOS.Shared.AssemblyInfo.cs
 [assembly: System.Reflection.AssemblyProductAttribute("MarketPOS.Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MarketPOS.Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

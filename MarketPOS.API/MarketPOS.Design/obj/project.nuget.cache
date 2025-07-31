@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Design/obj/project.nuget.cache
   "dgSpecHash": "ATIPPWZenl0=",
+=======
+  "dgSpecHash": "IXo1U8cVTg8=",
+>>>>>>> origin:MarketPOS.Design/obj/project.nuget.cache
   "success": true,
   "projectFilePath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Design\\MarketPOS.Design.csproj",
   "expectedPackageFiles": [

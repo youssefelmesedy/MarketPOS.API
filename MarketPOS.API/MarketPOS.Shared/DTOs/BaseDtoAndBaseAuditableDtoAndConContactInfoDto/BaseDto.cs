@@ -21,8 +21,11 @@ public abstract class BaseDto
     [JsonConverter(typeof(JsonNullableDateConverter))]
     public DateTime? DeletedAt { get; set; }
     [JsonPropertyOrder(26)]
+<<<<<<< HEAD:MarketPOS.API/MarketPOS.Shared/DTOs/BaseDtoAndBaseAuditableDtoAndConContactInfoDto/BaseDto.cs
     public DateTime? RestoreAt { get; set; }
     [JsonPropertyOrder(27)]
+=======
+>>>>>>> origin:MarketPOS.Shared/DTOs/BaseDtoAndBaseAuditableDtoAndConContactInfoDto/BaseDto.cs
     public string? RestoreBy { get; set; }
 }
 
