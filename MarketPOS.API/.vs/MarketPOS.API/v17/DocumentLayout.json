@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|d:\\projects\\marketpos.api\\youssefelmesedy\\marketpos.api\\marketpos.api\\market.domain\\entitys\\domainproduct\\productprice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|solutionrelative:market.domain\\entitys\\domainproduct\\productprice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|d:\\projects\\marketpos.api\\youssefelmesedy\\marketpos.api\\marketpos.api\\marketpos.application\\features\\cqrs\\cqrsproduct\\command\\handlercommand\\updateproductcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|solutionrelative:marketpos.application\\features\\cqrs\\cqrsproduct\\command\\handlercommand\\updateproductcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|d:\\projects\\marketpos.api\\youssefelmesedy\\marketpos.api\\marketpos.api\\marketpos.application\\features\\cqrs\\cqrsproduct\\command\\updateproductcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{796101F0-59B2-42C5-8586-C1426AD0077E}|MarketPOS.Application\\MarketPOS.Application.csproj|solutionrelative:marketpos.application\\features\\cqrs\\cqrsproduct\\command\\updateproductcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|d:\\projects\\marketpos.api\\youssefelmesedy\\marketpos.api\\marketpos.api\\market.domain\\entitys\\domainproduct\\productunitprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|solutionrelative:market.domain\\entitys\\domainproduct\\productunitprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|d:\\projects\\marketpos.api\\youssefelmesedy\\marketpos.api\\marketpos.api\\market.domain\\entitys\\domainproduct\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{010CF420-FD15-0F96-CDEC-FD100BA8E043}|Market.Domain\\Market.Domain.csproj|solutionrelative:market.domain\\entitys\\domainproduct\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA2964CC-13FB-4C1F-851B-5D767EAE668C}|MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj|d:\\projects\\marketpos.api\\youssefelmesedy\\marketpos.api\\marketpos.api\\marketpos.infrastructure\\services\\genericservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA2964CC-13FB-4C1F-851B-5D767EAE668C}|MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj|solutionrelative:marketpos.infrastructure\\services\\genericservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 391,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,28 +50,68 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UpdateProductCommandHandler.cs",
-              "DocumentMoniker": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\HandlerCommand\\UpdateProductCommandHandler.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\HandlerCommand\\UpdateProductCommandHandler.cs",
-              "ToolTip": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\HandlerCommand\\UpdateProductCommandHandler.cs",
-              "RelativeToolTip": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\HandlerCommand\\UpdateProductCommandHandler.cs",
-              "ViewState": "AgIAAGgAAAAAAAAAAAAYwHcAAABcAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "Product.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\Market.Domain\\Entitys\\DomainProduct\\Product.cs",
+              "RelativeDocumentMoniker": "Market.Domain\\Entitys\\DomainProduct\\Product.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\Market.Domain\\Entitys\\DomainProduct\\Product.cs",
+              "RelativeToolTip": "Market.Domain\\Entitys\\DomainProduct\\Product.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAADwvzkAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T04:32:43.021Z",
+              "WhenOpened": "2025-07-31T09:38:31.452Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProductPrice.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\Market.Domain\\Entitys\\DomainProduct\\ProductPrice.cs",
+              "RelativeDocumentMoniker": "Market.Domain\\Entitys\\DomainProduct\\ProductPrice.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\Market.Domain\\Entitys\\DomainProduct\\ProductPrice.cs",
+              "RelativeToolTip": "Market.Domain\\Entitys\\DomainProduct\\ProductPrice.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAIBAwEQAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-31T09:13:33.951Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GenericService.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\Services\\GenericService.cs",
+              "RelativeDocumentMoniker": "MarketPOS.Infrastructure\\Services\\GenericService.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\Services\\GenericService.cs",
+              "RelativeToolTip": "MarketPOS.Infrastructure\\Services\\GenericService.cs",
+              "ViewState": "AgIAAF4AAAAAAAAAAAAqwL0AAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-31T09:04:17.799Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProductUnitProfile.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\Market.Domain\\Entitys\\DomainProduct\\ProductUnitProfile.cs",
+              "RelativeDocumentMoniker": "Market.Domain\\Entitys\\DomainProduct\\ProductUnitProfile.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\Market.Domain\\Entitys\\DomainProduct\\ProductUnitProfile.cs",
+              "RelativeToolTip": "Market.Domain\\Entitys\\DomainProduct\\ProductUnitProfile.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAzwEcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-31T08:58:20.198Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UpdateProductCommand.cs",
-              "DocumentMoniker": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\UpdateProductCommand.cs",
-              "RelativeDocumentMoniker": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\UpdateProductCommand.cs",
-              "ToolTip": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\UpdateProductCommand.cs",
-              "RelativeToolTip": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\UpdateProductCommand.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "UpdateProductCommandHandler.cs",
+              "DocumentMoniker": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\HandlerCommand\\UpdateProductCommandHandler.cs",
+              "RelativeDocumentMoniker": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\HandlerCommand\\UpdateProductCommandHandler.cs",
+              "ToolTip": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\HandlerCommand\\UpdateProductCommandHandler.cs",
+              "RelativeToolTip": "MarketPOS.Application\\Features\\CQRS\\CQRSProduct\\Command\\HandlerCommand\\UpdateProductCommandHandler.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAA1wBYAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T04:32:37.446Z"
+              "WhenOpened": "2025-07-31T04:32:43.021Z",
+              "EditorCaption": ""
             }
           ]
         }

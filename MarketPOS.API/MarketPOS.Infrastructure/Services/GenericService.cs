@@ -1,7 +1,4 @@
-﻿using MarketPOS.Application.RepositoryInterfaces;
-using MarketPOS.Application.Services.InterfacesServices;
-
-namespace MarketPOS.Infrastructure.Services;
+﻿namespace MarketPOS.Infrastructure.Services;
 public class GenericService<TEntity> :IFullService<TEntity> where TEntity : class
 {
     protected readonly IReadOnlyRepository<TEntity> _query;
