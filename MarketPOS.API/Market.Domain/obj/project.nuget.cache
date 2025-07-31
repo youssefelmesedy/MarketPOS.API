@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KLB6ejWgWz4=",
+  "dgSpecHash": "MFRk8w9ZTpk=",
   "success": true,
-  "projectFilePath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\Market.Domain\\Market.Domain.csproj",
+  "projectFilePath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API\\Market.Domain\\Market.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Youssef\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\9.0.6\\microsoft.entityframeworkcore.abstractions.9.0.6.nupkg.sha512"
   ],

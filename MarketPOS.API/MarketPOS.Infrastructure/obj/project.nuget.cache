@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "w6JP/lQMwZQ=",
+  "dgSpecHash": "ceE1wAlqMoM=",
   "success": true,
-  "projectFilePath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj",
+  "projectFilePath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Youssef\\.nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
     "C:\\Users\\Youssef\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",

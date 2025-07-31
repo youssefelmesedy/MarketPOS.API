@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OzrNWHW8L/I=",
+  "dgSpecHash": "W/aNc45zGis=",
   "success": true,
-  "projectFilePath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\Market.POS.Tests\\Market.POS.Tests.csproj",
+  "projectFilePath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API\\Market.POS.Tests\\Market.POS.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Youssef\\.nuget\\packages\\aspnetcore.localizer.json\\1.0.1\\aspnetcore.localizer.json.1.0.1.nupkg.sha512",
     "C:\\Users\\Youssef\\.nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
