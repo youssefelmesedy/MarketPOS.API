@@ -1,5 +1,6 @@
-﻿namespace MarketPOS.Infrastructure.Services;
-public class GenericService<TEntity> :IFullService<TEntity> where TEntity : class
+﻿
+namespace MarketPOS.Infrastructure.Services;
+public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TEntity> where TEntity : class
 {
     protected readonly IReadOnlyRepository<TEntity> _query;
     protected readonly IFullRepository<TEntity> _write;
@@ -261,14 +262,13 @@ public class GenericService<TEntity> :IFullService<TEntity> where TEntity : clas
         }
     }
 
-    public async Task<Guid> RestoreAsync(Guid id)
+    public async Task<TEntity> RestoreAsync(TEntity entity)
     {
         try
         {
-            var entity = await _query.GetByIdAsync(id, true, null, includeSoftDeleted: true, applyIncludes: true);
 
             if (entity == null)
-                throw new NotFoundException(typeof(TEntity).Name, id);
+                throw new NotFoundException(typeof(TEntity).Name);
 
             if (entity is BaseEntity baseEntity)
             {
@@ -281,10 +281,10 @@ public class GenericService<TEntity> :IFullService<TEntity> where TEntity : clas
 
                 _write.Update(entity);
                 await _unitOfWork.SaveChangesAsync();
-                return baseEntity.Id;
+                return entity;
             }
 
-            return id;
+            return entity;
         }
         catch (Exception ex)
         {

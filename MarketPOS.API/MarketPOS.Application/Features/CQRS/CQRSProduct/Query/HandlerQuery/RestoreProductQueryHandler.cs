@@ -1,8 +1,9 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
+using MarketPOS.Shared.DTOs.SofteDleteAndRestor;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Query.HandlerQuery;
 public class RestoreProductQueryHandler : BaseHandler<RestoreProductQueryHandler>,
-    IRequestHandler<RestoreProductQuery, ResultDto<Guid>>
+    IRequestHandler<RestoreProductQuery, ResultDto<SofteDeleteAndRestorDto>>
 {
     public RestoreProductQueryHandler(
         IServiceFactory services,
@@ -13,15 +14,29 @@ public class RestoreProductQueryHandler : BaseHandler<RestoreProductQueryHandler
     {
     }
 
-    public async Task<ResultDto<Guid>> Handle(RestoreProductQuery request, CancellationToken cancellationToken)
+    public async Task<ResultDto<SofteDeleteAndRestorDto>> Handle(RestoreProductQuery request, CancellationToken cancellationToken)
     {
         _logger?.LogInformation(_localizer?["Starting Restore"]!);
 
         var productService = _servicesFactory.GetService<IProductService>();
-        var result = await productService.RestoreAsync(request.Id);
 
-        return result == Guid.Empty
-            ? Fail<Guid>("RestoredFailed")
-            : Success(result, "Restored");
+        var product = await productService.GetByIdAsync(request.Id, includeSoftDeleted: true);
+        if (product is null)
+            return _resultFactory.Fail<SofteDeleteAndRestorDto>("GetByIdFailed");
+        if (!product.IsDeleted)
+            return _resultFactory.Fail<SofteDeleteAndRestorDto>("RestoreFailed");
+
+
+        var result = await productService.RestoreAsync(product);
+        if (result is null)
+            return _resultFactory.Fail<SofteDeleteAndRestorDto>("RestoreFailed");
+
+        var mapping = _mapper?.Map<SofteDeleteAndRestorDto>(result);
+        if (mapping is null)
+            return _resultFactory.Fail<SofteDeleteAndRestorDto>("MappingFailed");
+
+        var localizedResult = _localizationPostProcessor.Apply(mapping);
+
+        return _resultFactory.Success(localizedResult, "Restored");
     }
 }

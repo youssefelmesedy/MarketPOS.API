@@ -5,6 +5,6 @@ public interface IWritableService<TEntity> where TEntity : class
     Task UpdateAsync(TEntity entity);
     Task RemoveAsync(TEntity entity);
     Task<TEntity> SoftDeleteAsync(TEntity entity);
-    Task<Guid> RestoreAsync(Guid id);
+    Task<TEntity> RestoreAsync(TEntity entity);
 }
 

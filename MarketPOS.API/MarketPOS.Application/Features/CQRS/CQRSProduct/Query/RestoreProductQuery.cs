@@ -1,5 +1,7 @@
-﻿namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Query;
-public record RestoreProductQuery : IRequest<ResultDto<Guid>>
+﻿using MarketPOS.Shared.DTOs.SofteDleteAndRestor;
+
+namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Query;
+public record RestoreProductQuery : IRequest<ResultDto<SofteDeleteAndRestorDto>>
 {
     public Guid Id { get; init; } // The ID of the product to be restored
     public RestoreProductQuery(Guid id) => Id = id; // Constructor to initialize the Id property

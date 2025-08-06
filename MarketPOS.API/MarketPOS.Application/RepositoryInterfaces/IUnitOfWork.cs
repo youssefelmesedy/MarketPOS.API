@@ -1,6 +1,4 @@
-﻿using MarketPOS.Application.RepositoryInterfaces.ProductRepositorys;
-using MarketPOS.Application.RepositoryInterfaces.RepositoryCategory;
-using MarketPOS.Application.RepositoryInterfaces.RepositorySupplier;
+﻿using MarketPOS.Application.RepositoryInterfaces.RepositoryCategoryAndWareHouse;
 
 namespace MarketPOS.Application.RepositoryInterfaces;
 public interface IUnitOfWork
@@ -9,6 +7,7 @@ public interface IUnitOfWork
     ICategoryRepo CategoryRepo { get; }
     IProductPriceRepo ProductPriceRepo { get; }
     IProductUnitProfileRepo ProductUnitProfileRepo { get; }
+    IWareHouseRepo WareHouseRepo { get; }
     ISupplierRepo SupplierRepo { get; }
 
     Task<int> SaveChangesAsync();

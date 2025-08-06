@@ -1,5 +1,7 @@
-﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query;
-public class RestoreCategoryQuery : IRequest<ResultDto<Guid>>
+﻿using MarketPOS.Shared.DTOs.SofteDleteAndRestor;
+
+namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query;
+public class RestoreCategoryQuery : IRequest<ResultDto<SofteDeleteAndRestorDto>>
 {
     public Guid Id { get; set; }
 

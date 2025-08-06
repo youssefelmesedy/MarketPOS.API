@@ -22,5 +22,11 @@
 	  <ProjectReference Include="..\MarketPOS.Shared\MarketPOS.Shared.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Features\CQRS\CQRSWareHouse\Command\CommandHandler\" />
+	  <Folder Include="Features\CQRS\CQRSWareHouse\Validators\CommandValidetor\" />
+	  <Folder Include="Features\CQRS\CQRSWareHouse\Validators\QueryValidetor\" />
+	</ItemGroup>
+
 </Project>
 
