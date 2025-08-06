@@ -4,7 +4,7 @@ using System.Xml.Linq;
 namespace Market.Domain.Entitys.DomainProduct;
 
 // ProductUnitProfile.cs
-public class ProductUnitProfile : BaseEntity
+public class  ProductUnitProfile : BaseEntity
 {
     public Guid ProductId { get; set; }
 
@@ -63,6 +63,12 @@ public class ProductUnitProfile : BaseEntity
         }
 
         return modified;
+    }
+
+    public override void InitializeChildEntityinCreate()
+    {
+        CreatedAt = DateTime.Now;
+        CreatedBy = "Youssef"; // Replace with actual user context if available
     }
     public void CalculateUnitPricesFromLargeUnit()
     {

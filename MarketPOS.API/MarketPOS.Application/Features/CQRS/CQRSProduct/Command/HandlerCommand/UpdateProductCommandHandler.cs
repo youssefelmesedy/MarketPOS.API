@@ -113,6 +113,14 @@ public class UpdateProductCommandHandler : BaseHandler<UpdateProductCommandHandl
             await productService.UpdateAsync(product);
     }
 
+    /// <summary>
+    /// Handles updating the <see cref="ProductUnitProfile"/> of a given <see cref="Product"/> 
+    /// if the profile exists and any of its unit-related values have changed.
+    /// </summary>
+    /// <param name="productService">The service responsible for updating product unit profiles.</param>
+    /// <param name="product">The product containing the current unit profile.</param>
+    /// <param name="dto">The DTO containing the updated unit profile values.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
 
     private async Task HandleProductUnitProfileUpdateAsync(
         IProductUnitProfileService productService,

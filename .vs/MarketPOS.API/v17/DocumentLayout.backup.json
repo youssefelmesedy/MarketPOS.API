@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 391,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -43,6 +43,10 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
@@ -67,8 +71,7 @@
               "RelativeToolTip": "MarketPOS.Application\\Common\\Helpers\\LocalizationPostProcessorMappeing\\ILocalizationPostProcessor.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-13T06:01:26.473Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-13T06:01:26.473Z"
             },
             {
               "$type": "Document",
@@ -80,8 +83,7 @@
               "RelativeToolTip": "MarketPOS.Application\\Common\\Helpers\\LocalizationPostProcessorMappeing\\LocalizationPostProcessor.cs",
               "ViewState": "AgIAADEAAAAAAAAAAAAzwD8AAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-12T23:36:42.679Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-12T23:36:42.679Z"
             }
           ]
         }

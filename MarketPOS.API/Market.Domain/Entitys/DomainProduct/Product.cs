@@ -52,4 +52,12 @@ public class Product : BaseEntity
 
         return modified;
     }
+
+    public override void InitializeChildEntityinCreate()
+    {
+        base.InitializeChildEntityinCreate();
+
+        ProductUnitProfile?.InitializeChildEntityinCreate();
+        ProductPrice.InitializeChildEntityinCreate();
+    }
 }

@@ -15,7 +15,7 @@ public abstract class BaseEntity
     public DateTime? RestorAt { get; set; }
     public String? RestorBy { get; set; }
 
-    public void InitializeChildEntityinCreate()
+    public virtual void InitializeChildEntityinCreate()
     {
         CreatedAt = DateTime.Now;
         CreatedBy = "Youssef";
