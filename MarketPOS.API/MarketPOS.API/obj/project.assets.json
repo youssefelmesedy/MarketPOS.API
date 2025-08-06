@@ -6950,11 +6950,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API.csproj",
+      "projectUniqueName": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API.csproj",
       "projectName": "MarketPOS.API",
-      "projectPath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API.csproj",
+      "projectPath": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API.csproj",
       "packagesPath": "C:\\Users\\Youssef\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API\\obj\\",
+      "outputPath": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -6976,14 +6976,14 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\MarketPOS.Application.csproj": {
-              "projectPath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\MarketPOS.Application.csproj"
+            "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\MarketPOS.Application.csproj": {
+              "projectPath": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Application\\MarketPOS.Application.csproj"
             },
-            "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Design\\MarketPOS.Design.csproj": {
-              "projectPath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Design\\MarketPOS.Design.csproj"
+            "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Design\\MarketPOS.Design.csproj": {
+              "projectPath": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Design\\MarketPOS.Design.csproj"
             },
-            "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj": {
-              "projectPath": "D:\\Projects\\MarketPOS.API\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj"
+            "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj": {
+              "projectPath": "D:\\Projects\\MarketPOS.Api\\youssefelmesedy\\MarketPOS.API\\MarketPOS.API\\MarketPOS.Infrastructure\\MarketPOS.Infrastructure.csproj"
             }
           }
         }

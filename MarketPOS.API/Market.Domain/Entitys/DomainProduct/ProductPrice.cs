@@ -37,6 +37,11 @@ public class ProductPrice : BaseEntity
             throw new ArgumentException("The purchase price cannot be greater than the selling price.");
     }
 
+    public override void InitializeChildEntityinCreate()
+    {
+        CreatedAt = DateTime.Now;
+        CreatedBy = "Youssef"; // Replace with actual user context if available
+    }
     public bool UpdateValues(decimal? newSalePrice, decimal? newPurchasePrice, decimal? newDiscountPercentage, string updatedBy)
     {
         bool isModified = false;
