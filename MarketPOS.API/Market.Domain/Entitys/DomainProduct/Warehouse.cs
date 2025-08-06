@@ -7,5 +7,12 @@ public class Warehouse : BaseEntity
     public ContactInfo? ContactInfo { get; set; }
 
     public ICollection<ProductInventory> ProductInventories { get; set; } = new List<ProductInventory>();
+
+    public override void InitializeChildEntityinCreate()
+    {
+        base.InitializeChildEntityinCreate();
+        Name = Name.Trim();
+        ContactInfo ??= new ContactInfo();
+    }
 }
 

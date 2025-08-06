@@ -1,7 +1,8 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
+using MarketPOS.Shared.DTOs.SofteDleteAndRestor;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query.QueryHandler;
-public class RestoreCategoryQueryHandler : BaseHandler<RestoreCategoryQueryHandler>, IRequestHandler<RestoreCategoryQuery, ResultDto<Guid>>
+public class RestoreCategoryQueryHandler : BaseHandler<RestoreCategoryQueryHandler>, IRequestHandler<RestoreCategoryQuery, ResultDto<SofteDeleteAndRestorDto>>
 {
     public RestoreCategoryQueryHandler(
         IServiceFactory serviceFactory,
@@ -11,14 +12,26 @@ public class RestoreCategoryQueryHandler : BaseHandler<RestoreCategoryQueryHandl
     {
     }
 
-    public async Task<ResultDto<Guid>> Handle(RestoreCategoryQuery request, CancellationToken cancellationToken)
+    public async Task<ResultDto<SofteDeleteAndRestorDto>> Handle(RestoreCategoryQuery request, CancellationToken cancellationToken)
     {
         var categoryService = _servicesFactory.GetService<ICategoryService>();
 
-        var result = await categoryService.RestoreAsync(request.Id);
-        if (result == Guid.Empty)
-            return _resultFactory.Fail<Guid>("RestoreFailed");
+        var category = await categoryService.GetByIdAsync(request.Id, includeSoftDeleted: true);
 
-        return _resultFactory.Success(result, "Restored");
+        if (category is null)
+            return _resultFactory.Fail<SofteDeleteAndRestorDto>("GetByIdFailed");
+
+        if (!category.IsDeleted)
+            return _resultFactory.Fail<SofteDeleteAndRestorDto>("RestoreFailed");
+
+        var result = await categoryService.RestoreAsync(category);
+
+        var mapping = _mapper?.Map<SofteDeleteAndRestorDto>(result);
+        if (mapping is null)
+            return _resultFactory.Fail<SofteDeleteAndRestorDto>("MappingFailed");
+
+        var localizedResult = _localizationPostProcessor.Apply(mapping);
+
+        return _resultFactory.Success(localizedResult, "Restored");
     }
 }

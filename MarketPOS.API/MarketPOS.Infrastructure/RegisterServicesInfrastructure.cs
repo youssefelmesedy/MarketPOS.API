@@ -1,9 +1,7 @@
-﻿using MarketPOS.Application.RepositoryInterfaces;
-using MarketPOS.Application.RepositoryInterfaces.ProductRepositorys;
-using MarketPOS.Application.RepositoryInterfaces.RepositoryCategory;
-using MarketPOS.Application.RepositoryInterfaces.RepositorySupplier;
+﻿using MarketPOS.Application.RepositoryInterfaces.RepositoryCategoryAndWareHouse;
 using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 using MarketPOS.Application.Specifications;
+using MarketPOS.Infrastructure.Repositories.RepositoryCategoryAndWareHouse;
 
 namespace MarketPOS.Infrastructure;
 
@@ -42,6 +40,7 @@ public static class RegisterServicesInfrastructure
         services.AddScoped<IProductPriceRepo, ProductPriceRepository>();
         services.AddScoped<IProductUnitProfileRepo, ProductUnitProfileRepository>();
         services.AddScoped<ICategoryRepo, CategoryRepository>();
+        services.AddScoped<IWareHouseRepo, WareHouseRepository>();
         services.AddScoped<ISupplierRepo, SupplierRepo>();
 
         //✅ تسجيل Services
@@ -49,6 +48,7 @@ public static class RegisterServicesInfrastructure
         services.AddScoped<IProductPriceService, ProductPriceService>(); 
         services.AddScoped<IProductUnitProfileService, ProductUnitProfileService>(); 
         services.AddScoped<ICategoryService, CategoryService>();
+        services.AddScoped<IWareHouseService, WareHouseService>();
         services.AddScoped<ISupplierService, SupplierService>(); 
 
         return services;

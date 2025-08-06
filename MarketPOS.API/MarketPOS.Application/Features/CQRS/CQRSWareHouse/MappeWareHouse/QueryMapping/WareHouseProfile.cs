@@ -1,0 +1,18 @@
+﻿using MarketPOS.Shared.DTOs.SofteDleteAndRestor;
+
+namespace MarketPOS.Application.Features.CQRS.CQRSWareHouse.MappeWareHouse;
+public partial class WareHouseProfile
+{
+    public void ReadConfigureMappings()
+    {
+        CreateMap<Warehouse, WareHouseDetailsDto>()
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+            .ForMember(dest => dest.ContactInfoDto, opt => opt.MapFrom(src => src.ContactInfo)).ReverseMap();
+
+        CreateMap<Warehouse, SofteDeleteAndRestorDto>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.name, opt => opt.MapFrom(src => src.Name))
+            .ForMember(dest => dest.IsDeleted, opt => opt.MapFrom(src => src.IsDeleted))
+            .ForMember(dest => dest.DeletedAt, opt => opt.MapFrom(src => src.DeletedAt));
+    }
+}

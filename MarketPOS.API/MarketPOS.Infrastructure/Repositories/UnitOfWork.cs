@@ -1,7 +1,4 @@
-﻿using MarketPOS.Application.RepositoryInterfaces;
-using MarketPOS.Application.RepositoryInterfaces.ProductRepositorys;
-using MarketPOS.Application.RepositoryInterfaces.RepositoryCategory;
-using MarketPOS.Application.RepositoryInterfaces.RepositorySupplier;
+﻿using MarketPOS.Application.RepositoryInterfaces.RepositoryCategoryAndWareHouse;
 
 namespace Market.POS.Infrastructure.Repositories;
 public class UnitOfWork : IUnitOfWork
@@ -14,12 +11,15 @@ public class UnitOfWork : IUnitOfWork
     public IProductUnitProfileRepo ProductUnitProfileRepo { get; } // Uncomment if you have a product unit profile repository
     public ISupplierRepo SupplierRepo { get; } // Uncomment if you have a supplier repository
 
+    public IWareHouseRepo WareHouseRepo { get; }
+
     public UnitOfWork(ApplicationDbContext context,
         IProductRepo productRepository,
         ICategoryRepo categoryRepository,
         ISupplierRepo supplierRepo,
         IProductPriceRepo productPriceRepo,
-        IProductUnitProfileRepo porductUnitProfileRepo)
+        IProductUnitProfileRepo porductUnitProfileRepo,
+        IWareHouseRepo wareHouseRepo)
     {
         _context = context;
         ProductRepo = productRepository;
@@ -27,6 +27,7 @@ public class UnitOfWork : IUnitOfWork
         SupplierRepo = supplierRepo;
         ProductPriceRepo = productPriceRepo;
         ProductUnitProfileRepo = porductUnitProfileRepo;
+        WareHouseRepo = wareHouseRepo;
     }
 
 
