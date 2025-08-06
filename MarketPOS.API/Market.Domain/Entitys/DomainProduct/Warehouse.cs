@@ -11,8 +11,6 @@ public class Warehouse : BaseEntity
     public override void InitializeChildEntityinCreate()
     {
         base.InitializeChildEntityinCreate();
-        Name = Name.Trim();
-        ContactInfo ??= new ContactInfo();
     }
 }
 

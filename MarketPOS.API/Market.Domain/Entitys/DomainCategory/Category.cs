@@ -6,5 +6,10 @@ public class Category : BaseEntity
 
     public ICollection<Product> Products { get; set; } = new List<Product>();
 
+    public override void InitializeChildEntityinCreate()
+    {
+        base.InitializeChildEntityinCreate();
+    }
+
 }
 

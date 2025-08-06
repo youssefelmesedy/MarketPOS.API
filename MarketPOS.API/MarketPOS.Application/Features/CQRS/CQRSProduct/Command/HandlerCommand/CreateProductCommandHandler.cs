@@ -24,7 +24,7 @@ public class CreateProductCommandHandler : BaseHandler<CreateProductCommandHandl
         var existProductName = await productService.FindAsync(p => p.Name.Trim().ToLower() == request.Dto.Name.Trim().ToLower()
                                                                   || p.Barcode == request.Dto.Barcode);
         if (existProductName.Any())
-            return _resultFactory.Success<Guid>(existProductName.Select(p => p.Id).First(), "DuplicateProductName");
+            return _resultFactory.Fail<Guid>($"DuplicateProductName: \n {existProductName.Select(p => p.Id).First()}");
 
         if (category == null || category.IsDeleted)
             throw new NotFoundException(nameof(Category), request.Dto.CategoryId);

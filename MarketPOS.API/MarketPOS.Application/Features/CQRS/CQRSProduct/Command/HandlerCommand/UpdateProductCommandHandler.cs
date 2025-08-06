@@ -37,7 +37,7 @@ public class UpdateProductCommandHandler : BaseHandler<UpdateProductCommandHandl
             ProductInclude.Product_UnitProfile
         ]);
 
-        var product = await productService.GetByIdAsync(request.Dto.Id, true, includes)
+        var product = existProduct.FirstOrDefault()
             ?? throw new NotFoundException(nameof(Product), request.Dto.Id);
 
         await EnsureCategoryExists(categoryService, request.Dto.CategoryId);

@@ -21,7 +21,7 @@ public class CreateCategoryCommandHandler : BaseHandler<CreateCategoryCommandHan
         var existCategoryName = await serviceCategory.FindAsync(c => c.Name.ToLower().Trim() ==
                                                                      category.Name.ToLower().Trim());
         if (existCategoryName.Any())
-            return _resultFactory.Fail<Guid>("DuplicateCategoryName");
+            return _resultFactory.Fail<Guid>($"DuplicateCategoryName: \n {existCategoryName.Select(c => c.Id).First()}");
 
         await serviceCategory.AddAsync(category);
 
