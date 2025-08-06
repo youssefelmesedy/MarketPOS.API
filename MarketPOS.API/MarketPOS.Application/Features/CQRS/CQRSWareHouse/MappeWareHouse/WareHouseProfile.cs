@@ -5,7 +5,7 @@ public partial class WareHouseProfile : Profile
 {
     public WareHouseProfile()
     {
-        WriteConfigureMappings();
+        WriteConfigureMappingsCreate();
         ReadConfigureMappings();
     }
 }

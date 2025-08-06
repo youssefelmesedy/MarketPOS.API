@@ -1,17 +1,21 @@
-﻿namespace MarketPOS.Application.Features.CQRS.CQRSWareHouse.MappeWareHouse
+﻿using Market.Domain.Entitys;
+using MarketPOS.Shared.DTOs.BaseDtoAndBaseAuditableDtoAndConContactInfoDto;
+
+namespace MarketPOS.Application.Features.CQRS.CQRSWareHouse.MappeWareHouse
 {
     public partial class WareHouseProfile
     {
-        public void WriteConfigureMappings()
+        public void WriteConfigureMappingsCreate()
         {
             CreateMap<WareHouseCreateDto, Warehouse>()
-                .ForMember(dest => dest.ContactInfo, opt => opt.MapFrom(src => src.ContactInfoDto));
-            CreateMap<WareHouseUpdateDto, Warehouse>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
-                .ForMember(dest => dest.ContactInfo, opt => opt.MapFrom(src => src.ContactInfoDto));
-            CreateMap<Warehouse, WareHouseDetailsDto>()
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
-                .ForMember(dest => dest.ContactInfoDto, opt => opt.MapFrom(src => src.ContactInfo));
+                 .ForMember(dest => dest.ContactInfo, opt => opt.MapFrom(src => src.ContactInfoDto))
+                 .ReverseMap();
+
+            CreateMap<ContactInfoDto, ContactInfo>()
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Address))
+                .ReverseMap();
+
+            CreateMap<AddressInfoDto, AddressInfo>().ReverseMap();
         }
     }
 }
