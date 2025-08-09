@@ -9,5 +9,8 @@ public class ActiveIngredients : BaseEntity
 
    public ICollection<Product> products { get; set; } = new List<Product>();
 
-
+    public override void InitializeChildEntityinCreate()
+    {
+        base.InitializeChildEntityinCreate();
+    }
 }
