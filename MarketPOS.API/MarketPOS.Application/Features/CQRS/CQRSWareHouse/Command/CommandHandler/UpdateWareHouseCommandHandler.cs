@@ -1,4 +1,5 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
+using MarketPOS.Shared.DTOs.WareHouseDTO;
 namespace MarketPOS.Application.Features.CQRS.CQRSWareHouse.Command.CommandHandler;
 public class UpdateWareHouseCommandHandler : BaseHandler<UpdateWareHouseCommandHandler>,
     IRequestHandler<UpdateWareHouseCommand, ResultDto<Guid>>

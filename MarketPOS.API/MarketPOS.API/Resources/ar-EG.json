@@ -24,6 +24,7 @@
   "ValidationError": "حدث خطأ في التحقق من البيانات.",
   "UnhandledError": "حدث خطأ غير معالج.",
   "Something went wrong.": "حدث خطأ ما، يرجى المحاولة لاحقاً.",
+  "ModelISNotValide": "لايمكن استقبال اي خصائص لاتخص نفس المودل ",
 
   // ✅ تفاصيل الأخطاء الشائعة
   "MappingError": "حدث خطأ أثناء تحويل البيانات.",
@@ -52,6 +53,7 @@
   "UpdateFailed": "فشل في تحديث المورد.",
   "DeleteFailed": "فشل في حذف المورد.",
   "DuplicateCategoryName": "يوجد تصنيف بنفس الاسم بالفعل ",
+  "DuplicateActiveIngredinentName": "يوجد ماده فعاله بنفس الاسم بل الفعل",
   "DuplicateWareHouseName": "يوجد مخزن بنفس الاسم بالفعل",
   "DuplicateProductName": " يوجد منتج بنفس الاسم بالفعل او باركود بالفعل لدي تصنيف اخر",
 

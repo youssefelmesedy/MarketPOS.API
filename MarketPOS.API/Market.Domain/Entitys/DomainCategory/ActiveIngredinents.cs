@@ -2,7 +2,7 @@
 
 namespace Market.Domain.Entitys.DomainCategory;
 
-public class ActiveIngredients : BaseEntity
+public class ActiveIngredinents : BaseEntity
 {
     [Required]
     public string? Name { get; set; }

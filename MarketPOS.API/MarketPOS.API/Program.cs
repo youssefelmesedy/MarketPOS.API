@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);

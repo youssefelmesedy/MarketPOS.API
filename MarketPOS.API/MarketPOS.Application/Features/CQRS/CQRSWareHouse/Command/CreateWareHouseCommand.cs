@@ -1,4 +1,6 @@
-﻿namespace MarketPOS.Application.Features.CQRS.CQRSWareHouse.Command;
+﻿using MarketPOS.Shared.DTOs.WareHouseDTO;
+
+namespace MarketPOS.Application.Features.CQRS.CQRSWareHouse.Command;
 public class CreateWareHouseCommand : IRequest<ResultDto<Guid>>
 {
     public WareHouseCreateDto Dto { get; set; }

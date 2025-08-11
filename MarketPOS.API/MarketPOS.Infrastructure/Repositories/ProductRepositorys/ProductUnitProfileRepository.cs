@@ -1,6 +1,4 @@
-﻿using MarketPOS.Application.RepositoryInterfaces.ProductRepositorys;
-
-namespace MarketPOS.Infrastructure.Repositories.ProductRepositorys;
+﻿namespace MarketPOS.Infrastructure.Repositories.ProductRepositorys;
 public class ProductUnitProfileRepository : GenericeRepository<ProductUnitProfile>, IProductUnitProfileRepo
 {
     public ProductUnitProfileRepository(ApplicationDbContext context) : base(context)

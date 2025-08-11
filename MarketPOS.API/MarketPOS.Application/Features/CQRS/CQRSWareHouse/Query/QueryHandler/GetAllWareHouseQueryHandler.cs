@@ -1,4 +1,5 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
+using MarketPOS.Shared.DTOs.WareHouseDTO;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSWareHouse.Query.QueryHandler;
 public class GetAllWareHouseQueryHandler : BaseHandler<GetAllWareHouseQueryHandler>,

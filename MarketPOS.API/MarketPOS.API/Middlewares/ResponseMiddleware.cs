@@ -92,7 +92,7 @@ public class ResponseMiddleware
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "❌ Failed in ResponseMiddleware");
+            _logger.LogError(ex, "Failed in ResponseMiddleware");
 
             if (!context.Response.HasStarted && context.Response.Body.CanWrite)
             {

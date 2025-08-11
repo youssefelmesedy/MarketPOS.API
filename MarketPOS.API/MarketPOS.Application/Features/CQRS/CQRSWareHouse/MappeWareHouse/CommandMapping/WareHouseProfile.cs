@@ -1,5 +1,6 @@
 ﻿using Market.Domain.Entitys;
 using MarketPOS.Shared.DTOs.BaseDtoAndBaseAuditableDtoAndConContactInfoDto;
+using MarketPOS.Shared.DTOs.WareHouseDTO;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSWareHouse.MappeWareHouse
 {

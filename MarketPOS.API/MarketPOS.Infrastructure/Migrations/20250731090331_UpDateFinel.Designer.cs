@@ -25,7 +25,7 @@ namespace MarketPOS.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Market.Domain.Entitys.DomainCategory.ActiveIngredients", b =>
+            modelBuilder.Entity("Market.Domain.Entitys.DomainCategory.ActiveIngredinentsProfile", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -72,7 +72,7 @@ namespace MarketPOS.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ActiveIngredients");
+                    b.ToTable("ActiveIngredinentsProfile");
                 });
 
             modelBuilder.Entity("Market.Domain.Entitys.DomainCategory.Category", b =>
@@ -581,7 +581,7 @@ namespace MarketPOS.Infrastructure.Migrations
 
             modelBuilder.Entity("Market.Domain.Entitys.DomainProduct.Product", b =>
                 {
-                    b.HasOne("Market.Domain.Entitys.DomainCategory.ActiveIngredients", "ActiveIngredients")
+                    b.HasOne("Market.Domain.Entitys.DomainCategory.ActiveIngredinentsProfile", "ActiveIngredinentsProfile")
                         .WithMany("products")
                         .HasForeignKey("ActiveIngredientsId");
 
@@ -591,7 +591,7 @@ namespace MarketPOS.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("ActiveIngredients");
+                    b.Navigation("ActiveIngredinentsProfile");
 
                     b.Navigation("Category");
                 });
@@ -785,7 +785,7 @@ namespace MarketPOS.Infrastructure.Migrations
                     b.Navigation("ContactInfo");
                 });
 
-            modelBuilder.Entity("Market.Domain.Entitys.DomainCategory.ActiveIngredients", b =>
+            modelBuilder.Entity("Market.Domain.Entitys.DomainCategory.ActiveIngredinentsProfile", b =>
                 {
                     b.Navigation("products");
                 });

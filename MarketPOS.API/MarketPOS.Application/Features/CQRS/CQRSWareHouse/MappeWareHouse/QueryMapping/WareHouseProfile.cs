@@ -1,4 +1,5 @@
 ﻿using MarketPOS.Shared.DTOs.SofteDleteAndRestor;
+using MarketPOS.Shared.DTOs.WareHouseDTO;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSWareHouse.MappeWareHouse;
 public partial class WareHouseProfile

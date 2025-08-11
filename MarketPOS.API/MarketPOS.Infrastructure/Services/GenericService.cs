@@ -2,16 +2,15 @@
 namespace MarketPOS.Infrastructure.Services;
 public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TEntity> where TEntity : class
 {
-    protected readonly IReadOnlyRepository<TEntity> _query;
-    protected readonly IFullRepository<TEntity> _write;
     protected readonly IUnitOfWork _unitOfWork;
     protected readonly IStringLocalizer<GenericService<TEntity>> _localizer;
     protected readonly ILogger _logger;
 
-    public GenericService(IReadOnlyRepository<TEntity> query, IFullRepository<TEntity> write, IUnitOfWork unitOfWork, IStringLocalizer<GenericService<TEntity>> localizer, ILogger logger)
+    public GenericService(
+        IUnitOfWork unitOfWork,
+        IStringLocalizer<GenericService<TEntity>> localizer, 
+        ILogger logger)
     {
-        _query = query;
-        _write = write;
         _unitOfWork = unitOfWork;
         _localizer = localizer;
         _logger = logger;
@@ -32,7 +31,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
     {
         try
         {
-            return await _query.GetPagedAsync(pageIndex, pageSize, filter,ordering : orderBy, ascending: ascending, tracking, includeExpressions, includeSoftDeleted, applyIncludes);
+            return await _unitOfWork.RepositoryEntity<TEntity>().GetPagedAsync(pageIndex, pageSize, filter,ordering : orderBy, ascending: ascending, tracking, includeExpressions, includeSoftDeleted, applyIncludes);
         }
         catch (Exception ex)
         {
@@ -50,7 +49,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
     {
         try
         {
-            return await _query.GetAllAsync(tracking, includeExpressions, includeSoftDeleted, ordering, applyIncludes);
+            return await _unitOfWork.RepositoryEntity<TEntity>().GetAllAsync(tracking, includeExpressions, includeSoftDeleted, ordering, applyIncludes);
         }
         catch (Exception ex)
         {
@@ -66,7 +65,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
     {
         try
         {
-            return await _query.GetByIdAsync(id, tracking, includeExpressions, includeSoftDeleted, applyIncludes);
+            return await _unitOfWork.RepositoryEntity<TEntity>().GetByIdAsync(id, tracking, includeExpressions, includeSoftDeleted, applyIncludes);
         }
         catch (Exception ex)
         {
@@ -83,7 +82,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
     {
         try
         {
-            return await _query.FindAsync(predicate, tracking, includeExpressions, includeSoftDeleted, ordering);
+            return await _unitOfWork.RepositoryEntity<TEntity>().FindAsync(predicate, tracking, includeExpressions, includeSoftDeleted, ordering);
         }
         catch (Exception ex)
         {
@@ -105,7 +104,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
     {
         try
         {
-            return await _query.GetProjectedListAsync<TResult>(mapper, predicate, tracking, includeExpressions, includeSoftDeleted, 
+            return await _unitOfWork.RepositoryEntity<TEntity>().GetProjectedListAsync<TResult>(mapper, predicate, tracking, includeExpressions, includeSoftDeleted, 
                                  ordering, applyIncludes: false);
         }
         catch (Exception ex)
@@ -124,7 +123,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
     {
         try
         {
-            return await _query.GetProjectedByIdAsync<TResult>(mapper, predicate, tracking, includeExpressions, includeSoftDeleted, applyIncludes: false);
+            return await _unitOfWork.RepositoryEntity<TEntity>().GetProjectedByIdAsync<TResult>(mapper, predicate, tracking, includeExpressions, includeSoftDeleted, applyIncludes: false);
         }
         catch (Exception ex)
         {
@@ -142,7 +141,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
     {
         try
         {
-            return await _query.FindProjectedAsync<TResult>(mapper, predicate, tracking, includeExpressions, includeSoftDeleted, ordering, applyIncludes: false);
+            return await _unitOfWork.RepositoryEntity<TEntity>().FindProjectedAsync<TResult>(mapper, predicate, tracking, includeExpressions, includeSoftDeleted, ordering, applyIncludes: false);
         }
         catch (Exception ex)
         {
@@ -164,7 +163,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
     {
         try
         {
-            return await _query.GetPagedProjectedAsync<TResult>(mapper, pageIndex, pageSize, filter, ordering, ascending, tracking, includeExpressions, includeSoftDeleted, applyIncludes: false);
+            return await _unitOfWork.RepositoryEntity<TEntity>().GetPagedProjectedAsync<TResult>(mapper, pageIndex, pageSize, filter, ordering, ascending, tracking, includeExpressions, includeSoftDeleted, applyIncludes: false);
         }
         catch (Exception ex)
         {
@@ -190,7 +189,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
             if (entity is BaseEntity baseEntity)
                 baseEntity.InitializeChildEntityinCreate();
 
-            await _write.AddAsync(entity);
+            await _unitOfWork.RepositoryEntity<TEntity>().AddAsync(entity);
             await _unitOfWork.SaveChangesAsync();
         }
         catch (Exception ex)
@@ -213,7 +212,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
             if (entity is BaseEntity baseEntity)
                 baseEntity.InitializeChildEntityinUpdate();
 
-            _write.Update(entity);
+            _unitOfWork.RepositoryEntity<TEntity>().Update(entity);
             await _unitOfWork.SaveChangesAsync();
         }
         catch (Exception ex)
@@ -227,7 +226,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
     {
         try
         {
-            _write.Remove(entity);
+            _unitOfWork.RepositoryEntity<TEntity>().Remove(entity);
             await _unitOfWork.SaveChangesAsync();
         }
         catch (Exception ex)
@@ -249,7 +248,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
                 baseEntity.RestorAt = baseEntity.RestorAt;
                 baseEntity.RestorBy = baseEntity.RestorBy;
 
-                _write.Update(entity);
+                _unitOfWork.RepositoryEntity<TEntity>().Update(entity);
                 await _unitOfWork.SaveChangesAsync();
             }
 
@@ -279,7 +278,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
                 baseEntity.RestorAt = DateTime.Now;
                 baseEntity.RestorBy = "Youssef";
 
-                _write.Update(entity);
+                _unitOfWork.RepositoryEntity<TEntity>().Update(entity);
                 await _unitOfWork.SaveChangesAsync();
                 return entity;
             }

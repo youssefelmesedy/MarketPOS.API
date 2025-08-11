@@ -1,15 +1,12 @@
-﻿using MarketPOS.Application.RepositoryInterfaces.RepositoryCategoryAndWareHouse;
-
-namespace MarketPOS.Application.RepositoryInterfaces;
-public interface IUnitOfWork
+﻿namespace MarketPOS.Application.RepositoryInterfaces;
+public interface IUnitOfWork : IDisposable
 {
-    IProductRepo ProductRepo { get; }
-    ICategoryRepo CategoryRepo { get; }
-    IProductPriceRepo ProductPriceRepo { get; }
-    IProductUnitProfileRepo ProductUnitProfileRepo { get; }
-    IWareHouseRepo WareHouseRepo { get; }
-    ISupplierRepo SupplierRepo { get; }
-
+    public IFullRepository<TEntity> RepositoryEntity<TEntity>() where TEntity : class;
+    TRepository Repository<TRepository>() where TRepository : class;
     Task<int> SaveChangesAsync();
 
+    Task BeginTransactionAsync();
+    Task CommitAsync();
+    Task RollbackAsync();
 }
+

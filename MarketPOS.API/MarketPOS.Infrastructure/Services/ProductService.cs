@@ -1,15 +1,15 @@
-﻿using MarketPOS.Application.RepositoryInterfaces;
-using MarketPOS.Application.RepositoryInterfaces.ProductRepositorys;
-using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
+﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 using MarketPOS.Application.Specifications;
 
 namespace Market.POS.Infrastructure.Services;
 public class ProductService : GenericService<Product>, IProductService
 {
-    private readonly IProductRepo _productRepository;
-    public ProductService(IReadOnlyRepository<Product> query, IFullRepository<Product> write, IUnitOfWork unitOfWork, IStringLocalizer<GenericService<Product>> localizer, ILogger<ProductService> logger, IProductRepo productRepository) : base(query, write, unitOfWork, localizer, logger)
+    public ProductService(
+        IUnitOfWork unitOfWork, 
+        IStringLocalizer<GenericService<Product>> localizer, 
+        ILogger<ProductService> logger)
+        : base(unitOfWork, localizer, logger)
     {
-        _productRepository = productRepository;
     }
 
     public async Task<IEnumerable<Product>>GetAllWithCategoryAsync
@@ -17,7 +17,7 @@ public class ProductService : GenericService<Product>, IProductService
         List<Func<IQueryable<Product>, IQueryable<Product>>>? IncludeExpression = null,
         bool IncludeSofteDelete = false)
     {
-        return await _unitOfWork.ProductRepo.FindAsync(p => p.CategoryId == CategoryId,
+        return await _unitOfWork.Repository<IProductRepo>().FindAsync(p => p.CategoryId == CategoryId,
                                  includeExpressions: IncludeExpression, includeSoftDeleted: IncludeSofteDelete);
             
     }
@@ -26,7 +26,7 @@ public class ProductService : GenericService<Product>, IProductService
     {
         try
         {
-            return await _unitOfWork.ProductRepo.FindAsync(p => p.Name.ToLower().Trim() == name.ToLower().Trim(), includeExpressions: includes, includeSoftDeleted: includeSoftDelete);
+            return await _unitOfWork.Repository<IProductRepo>().FindAsync(p => p.Name.ToLower().Trim() == name.ToLower().Trim(), includeExpressions: includes, includeSoftDeleted: includeSoftDelete);
         }
         catch (Exception ex)
         {
@@ -40,7 +40,7 @@ public class ProductService : GenericService<Product>, IProductService
         try
         {
 
-            var result = _productRepository.GetBySpecificationAsync(specification);
+            var result = _unitOfWork.Repository<IProductRepo>().GetBySpecificationAsync(specification);
             return result!;
         }
         catch (Exception ex)

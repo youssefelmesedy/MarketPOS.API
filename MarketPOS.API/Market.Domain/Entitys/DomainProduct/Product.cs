@@ -9,7 +9,7 @@ public class Product : BaseEntity
     public Category? Category { get; set; } = default!;
 
     public Guid? ActiveIngredientId { get; set; }
-    public ActiveIngredients? ActiveIngredients { get; set; } = default;
+    public ActiveIngredinents? ActiveIngredients { get; set; } = default;
 
     public DateTime ExpirationDate { get; set; }
 

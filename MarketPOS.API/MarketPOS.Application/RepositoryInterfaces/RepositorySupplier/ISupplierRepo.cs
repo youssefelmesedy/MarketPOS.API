@@ -1,7 +1,7 @@
 ﻿using MarketPOS.Application.RepositoryInterfaces.InterfaceGenerice;
 
 namespace MarketPOS.Application.RepositoryInterfaces.RepositorySupplier;
-public interface ISupplierRepo  : IFullRepository<Supplier>, IReadOnlyRepository<Supplier>
+public interface ISupplierRepo  : IFullRepository<Supplier>
 {
 
 }

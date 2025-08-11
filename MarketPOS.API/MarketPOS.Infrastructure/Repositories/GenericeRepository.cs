@@ -1,10 +1,8 @@
 ﻿using AutoMapper.QueryableExtensions;
-using MarketPOS.Application.RepositoryInterfaces;
 
 namespace Market.POS.Infrastructure.Repositories;
 
-public class GenericeRepository<T> : 
-    BaseBuildeQuery<T>,IFullRepository<T> where T : class
+public class GenericeRepository<T> : BaseBuildeQuery<T>, IFullRepository<T> where T : class
 {
     public GenericeRepository(ApplicationDbContext context) : base(context)
     {

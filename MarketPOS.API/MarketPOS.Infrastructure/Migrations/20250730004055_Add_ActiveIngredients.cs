@@ -87,7 +87,7 @@ namespace MarketPOS.Infrastructure.Migrations
                 oldType: "nvarchar(max)");
 
             migrationBuilder.CreateTable(
-                name: "ActiveIngredients",
+                name: "ActiveIngredinentsProfile",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -116,7 +116,7 @@ namespace MarketPOS.Infrastructure.Migrations
                 name: "FK_Products_ActiveIngredients_ActiveIngredientsId",
                 table: "Products",
                 column: "ActiveIngredientsId",
-                principalTable: "ActiveIngredients",
+                principalTable: "ActiveIngredinentsProfile",
                 principalColumn: "Id");
         }
 
@@ -128,7 +128,7 @@ namespace MarketPOS.Infrastructure.Migrations
                 table: "Products");
 
             migrationBuilder.DropTable(
-                name: "ActiveIngredients");
+                name: "ActiveIngredinentsProfile");
 
             migrationBuilder.DropIndex(
                 name: "IX_Products_ActiveIngredientsId",

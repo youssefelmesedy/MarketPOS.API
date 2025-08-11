@@ -1,4 +1,6 @@
-﻿namespace MarketPOS.Application.Features.CQRS.CQRSWareHouse.Validators.CommandValidetor;
+﻿using MarketPOS.Shared.DTOs.WareHouseDTO;
+
+namespace MarketPOS.Application.Features.CQRS.CQRSWareHouse.Validators.CommandValidetor;
 
 public class CreateValidetorWareHouse : BaseValidator<WareHouseCreateDto>
 {

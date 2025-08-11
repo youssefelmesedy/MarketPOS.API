@@ -1,4 +1,6 @@
-﻿namespace MarketPOS.Application.Features.CQRS.CQRSWareHouse.Query;
+﻿using MarketPOS.Shared.DTOs.WareHouseDTO;
+
+namespace MarketPOS.Application.Features.CQRS.CQRSWareHouse.Query;
 public class GetByIdWareHouseQuery : IRequest<ResultDto<WareHouseDetailsDto>>
 {
     public Guid Id { get; set; }

@@ -1,10 +1,13 @@
-﻿using MarketPOS.Application.RepositoryInterfaces;
-using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
+﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 
 namespace MarketPOS.Infrastructure.Services;
 public class CategoryService : GenericService<Category>, ICategoryService
 {
-    public CategoryService(IReadOnlyRepository<Category> query, IFullRepository<Category> write, IUnitOfWork unitOfWork, IStringLocalizer<GenericService<Category>> localizer, ILogger<CategoryService> logger) : base(query, write, unitOfWork, localizer, logger)
+    public CategoryService(
+        IUnitOfWork unitOfWork,
+        IStringLocalizer<GenericService<Category>> localizer,
+        ILogger<CategoryService> logger)
+        : base(unitOfWork, localizer, logger)
     {
     }
 
@@ -12,7 +15,7 @@ public class CategoryService : GenericService<Category>, ICategoryService
     {
         try
         {
-            return await FindAsync(c => c.Name.ToLower().Trim() == name.ToLower().Trim(), includeSoftDeleted: includeSofteDelete);
+            return await _unitOfWork.Repository<ICategoryRepo>().FindAsync(c => c.Name.ToLower().Trim() == name.ToLower().Trim(), includeSoftDeleted: includeSofteDelete);
         }
         catch (Exception ex)
         {

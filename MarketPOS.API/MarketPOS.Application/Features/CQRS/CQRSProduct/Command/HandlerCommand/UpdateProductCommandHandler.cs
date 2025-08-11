@@ -37,8 +37,7 @@ public class UpdateProductCommandHandler : BaseHandler<UpdateProductCommandHandl
             ProductInclude.Product_UnitProfile
         ]);
 
-        var product = existProduct.FirstOrDefault()
-            ?? throw new NotFoundException(nameof(Product), request.Dto.Id);
+        var product = await productService.GetByIdAsync(request.Dto.Id, true, includes, true);
 
         await EnsureCategoryExists(categoryService, request.Dto.CategoryId);
 
@@ -103,6 +102,9 @@ public class UpdateProductCommandHandler : BaseHandler<UpdateProductCommandHandl
         Product product,
         UpdateProductDto dto)
     {
+        if (product is null)
+            return;
+
         var modified = product.UpdateValues(
             dto.Name,
             dto.Barcode,

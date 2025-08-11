@@ -1,5 +1,6 @@
 ﻿using MarketPOS.Application.Features.CQRS.CQRSWareHouse.Command;
 using MarketPOS.Application.Features.CQRS.CQRSWareHouse.Query;
+using MarketPOS.Shared.DTOs.WareHouseDTO;
 
 namespace MarketPOS.API.Controllers.WareHouse
 {

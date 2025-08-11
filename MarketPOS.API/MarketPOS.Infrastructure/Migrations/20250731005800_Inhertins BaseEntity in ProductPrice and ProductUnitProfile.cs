@@ -122,7 +122,7 @@ namespace MarketPOS.Infrastructure.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "RestorBy",
-                table: "ActiveIngredients",
+                table: "ActiveIngredinentsProfile",
                 type: "nvarchar(100)",
                 maxLength: 100,
                 nullable: true,
@@ -246,7 +246,7 @@ namespace MarketPOS.Infrastructure.Migrations
 
             migrationBuilder.AlterColumn<string>(
                 name: "RestorBy",
-                table: "ActiveIngredients",
+                table: "ActiveIngredinentsProfile",
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),

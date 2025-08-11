@@ -1,7 +1,4 @@
-﻿using MarketPOS.Application.RepositoryInterfaces.ProductRepositorys;
-using Microsoft.EntityFrameworkCore;
-
-namespace MarketPOS.Infrastructure.Repositories.ProductRepositorys;
+﻿namespace MarketPOS.Infrastructure.Repositories.ProductRepositorys;
 public class ProductPriceRepository : GenericeRepository<ProductPrice>, IProductPriceRepo
 {
     public ProductPriceRepository(ApplicationDbContext context) : base(context)

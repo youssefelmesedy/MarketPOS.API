@@ -1,4 +1,6 @@
-﻿namespace MarketPOS.Application.Features.CQRS.CQRSWareHouse.Query;
+﻿using MarketPOS.Shared.DTOs.WareHouseDTO;
+
+namespace MarketPOS.Application.Features.CQRS.CQRSWareHouse.Query;
 public class GetAllWareHouseQuery : IRequest<ResultDto<IEnumerable<WareHouseDetailsDto>>>
 {
     public bool SofteDelete { get; set; }

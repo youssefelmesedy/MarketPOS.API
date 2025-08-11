@@ -40,6 +40,7 @@ public static class RegisterServicesInfrastructure
         services.AddScoped<IProductPriceRepo, ProductPriceRepository>();
         services.AddScoped<IProductUnitProfileRepo, ProductUnitProfileRepository>();
         services.AddScoped<ICategoryRepo, CategoryRepository>();
+        services.AddScoped<IActivelngredinentsRepo, ActiveingredinentRepository>();
         services.AddScoped<IWareHouseRepo, WareHouseRepository>();
         services.AddScoped<ISupplierRepo, SupplierRepo>();
 
@@ -48,6 +49,7 @@ public static class RegisterServicesInfrastructure
         services.AddScoped<IProductPriceService, ProductPriceService>(); 
         services.AddScoped<IProductUnitProfileService, ProductUnitProfileService>(); 
         services.AddScoped<ICategoryService, CategoryService>();
+        services.AddScoped<IActiveingredinentService, ActiveingredinentService>();
         services.AddScoped<IWareHouseService, WareHouseService>();
         services.AddScoped<ISupplierService, SupplierService>(); 
 

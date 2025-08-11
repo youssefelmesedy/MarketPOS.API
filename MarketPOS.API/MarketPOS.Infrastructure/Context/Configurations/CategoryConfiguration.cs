@@ -14,9 +14,9 @@ public class CategoryConfiguration : BaseEntityConfiguration<Category>
     }
 }
 
-public class ActiveIngredientsConfiguration : BaseEntityConfiguration<ActiveIngredients>
+public class ActiveIngredientsConfiguration : BaseEntityConfiguration<ActiveIngredinents>
 {
-    public override void Configure(EntityTypeBuilder<ActiveIngredients> builder)
+    public override void Configure(EntityTypeBuilder<ActiveIngredinents> builder)
     {
         base.Configure(builder);
 

@@ -1,6 +1,6 @@
 ﻿using MarketPOS.Application.RepositoryInterfaces.InterfaceGenerice;
 
 namespace MarketPOS.Application.RepositoryInterfaces.RepositoryCategory;
-public interface ICategoryRepo : IFullRepository<Category>, IReadOnlyRepository<Category>
+public interface ICategoryRepo : IFullRepository<Category>
 {
 }
