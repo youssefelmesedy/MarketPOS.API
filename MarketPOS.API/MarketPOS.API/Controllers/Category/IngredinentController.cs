@@ -28,37 +28,50 @@ public class IngredinentController : ControllerBase
     }
 
     // GET api/<IngredinentController>/5
-    [HttpGet("GetById/")]
+    [HttpGet("GetById/{id}")]
     [TypeFilter(typeof(ValidateParameterAttribute), Arguments = new object[] { "Id", ParameterValidationType.Guid })]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> GetById([FromQuery] Guid id, [FromQuery] bool Softdeleted)
+    public async Task<IActionResult> GetById(Guid id, [FromQuery] bool Softdeleted)
     {
         var result = await _mediator.Send(new GetByIdInegredinentQuery(id, Softdeleted));
 
         return Ok(result);
     }
 
-    // PUT api/<IngredinentController>/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
-    {
-    }
-
     // POST api/<IngredinentController>
     [HttpPost("Create/")]
-    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status500InternalServerError)]
-    [ValidateNoExtraProperties("dto")]
-    public async Task<IActionResult> Create([FromBody] ActiveIngredinentsCreateDTO dto)
+    public async Task<IActionResult> Create([FromBody] CommandActiveIngredinentsDTO dto)
     {
 
         var result = await _mediator.Send(new CreateActivIngredinentCommand(dto));
+        if (result.Data == Guid.Empty)
+            return BadRequest(result);
+
+        var createdItem = await _mediator.Send(new GetByIdInegredinentQuery(result.Data, false));
+        return CreatedAtAction(nameof(GetById), new { id = createdItem.Data!.Id, Softdeleted = false }, createdItem);
+    }
+
+    // PUT api/<IngredinentController>/5
+    [HttpPut("Update/")]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status500InternalServerError)]
+    [TypeFilter(typeof(ValidateParameterAttribute), Arguments = new object[] { "Id", ParameterValidationType.Guid })]
+    public async Task<IActionResult> Put([FromQuery]Guid id, [FromBody] CommandActiveIngredinentsDTO dto)
+    {
+        var result = await _mediator.Send(new UpdateIngredinentCommand(id, dto));
+
+        if (result.Data == Guid.Empty)
+            return NotFound(result);
 
         return Ok(result);
     }
+
 
     // DELETE api/<IngredinentController>/5
     [HttpDelete("{id}")]

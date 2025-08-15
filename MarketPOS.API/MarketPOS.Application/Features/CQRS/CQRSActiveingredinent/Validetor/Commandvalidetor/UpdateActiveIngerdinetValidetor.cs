@@ -2,7 +2,7 @@
 
 namespace MarketPOS.Application.Features.CQRS.CQRSActiveingredinent.Validetor.Commandvalidetor;
 
-public class UpdateActiveIngerdinetValidetor : BaseValidator<ActiveIngredinentsUpDateDTO>
+public class UpdateActiveIngerdinetValidetor : BaseValidator<CommandActiveIngredinentsDTO>
 {
     public UpdateActiveIngerdinetValidetor()
     {

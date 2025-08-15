@@ -3,7 +3,7 @@ public partial class ActiveIngredinentsProfile : Profile
 {
     public ActiveIngredinentsProfile()
     {
-        CommandWareHouseProfile();
-        QueryActiveIngredinent();
+        CommandIngredinentProfile();
+        QueryIngredinent();
     }
 }

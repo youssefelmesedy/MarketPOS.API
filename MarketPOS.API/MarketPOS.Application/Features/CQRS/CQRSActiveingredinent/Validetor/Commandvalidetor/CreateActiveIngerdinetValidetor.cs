@@ -1,7 +1,7 @@
 ﻿using MarketPOS.Shared.DTOs.ActivelngredientsDTO;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSActiveingredinent.Validetor.Commandvalidetor;
-public class CreateActiveIngerdinetValidetor : BaseValidator<ActiveIngredinentsCreateDTO>
+public class CreateActiveIngerdinetValidetor : BaseValidator<CommandActiveIngredinentsDTO>
 {
     public CreateActiveIngerdinetValidetor()
     {

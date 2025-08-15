@@ -2,10 +2,15 @@
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers().AddJsonOptions(options =>
-{
-    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-});
+builder.Services.AddControllers()
+       .AddJsonOptions(options =>
+       {
+           options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+
+           // ✅ Configure JSON serialization options
+           // تعطيل خاصيه تجاهل الخصائص المرسله داخل Json- والتي لا توجد داخل  Model 
+           options.JsonSerializerOptions.UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow; 
+       });
 
 // ✅ Add services to the container
 builder.Services.AddInfrastructureServices(builder.Configuration);

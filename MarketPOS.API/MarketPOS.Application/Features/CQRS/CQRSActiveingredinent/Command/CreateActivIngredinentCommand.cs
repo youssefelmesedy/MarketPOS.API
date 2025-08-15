@@ -3,9 +3,9 @@
 namespace MarketPOS.Application.Features.CQRS.CQRSActiveingredinent.Command;
 public class CreateActivIngredinentCommand : IRequest<ResultDto<Guid>>
 {
-    public ActiveIngredinentsCreateDTO DTO { get; set; }
+    public CommandActiveIngredinentsDTO DTO { get; set; }
 
-    public CreateActivIngredinentCommand(ActiveIngredinentsCreateDTO dTO)
+    public CreateActivIngredinentCommand(CommandActiveIngredinentsDTO dTO)
     {
         DTO = dTO;
     }

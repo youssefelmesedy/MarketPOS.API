@@ -28,6 +28,6 @@ public class CreateActivIngredinentCommandHandler : BaseHandler<CreateActivIngre
 
         await _service.AddAsync(mapping);
 
-        return _resultFactory.Success(mapping.Id, "Success");
+        return _resultFactory.Success(mapping.Id, "Created");
     }
 }

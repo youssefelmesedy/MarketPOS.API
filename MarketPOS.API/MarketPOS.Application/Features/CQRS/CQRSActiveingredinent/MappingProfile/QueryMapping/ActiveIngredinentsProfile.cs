@@ -3,7 +3,7 @@
 namespace MarketPOS.Application.Features.CQRS.CQRSActiveingredinent.MappingProfile;
 public partial class ActiveIngredinentsProfile
 {
-    public void QueryActiveIngredinent()
+    public void QueryIngredinent()
     {
         CreateMap<ActiveIngredinents, ActiveIngredinentsDetalisDTO>()
             .ForMember(dets => dets.Id, opt => opt.MapFrom(src => src.Id))

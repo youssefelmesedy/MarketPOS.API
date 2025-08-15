@@ -1,4 +1,6 @@
-﻿namespace MarketPOS.Infrastructure.Exceptions;
+﻿using System.Text.RegularExpressions;
+
+namespace MarketPOS.Infrastructure.Exceptions;
 public class ExceptionMiddleware
 {
     private readonly RequestDelegate _next;
@@ -98,6 +100,43 @@ public class ExceptionMiddleware
         }
 
         // 4. Default Exception Handler
+        if (ex is JsonException jsonEx)
+        {
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
+
+            var errors = new Dictionary<string, string[]>();
+
+            var match = Regex.Match(jsonEx.Message, @"property '(.+?)'");
+            if (match.Success)
+            {
+                errors["$." + match.Groups[1].Value] = new[]
+                {
+                  _localizer["The JSON property '{0}' could not be mapped to any .NET member.", match.Groups[1].Value].Value
+                };
+            }
+            else
+            {
+                errors["json"] = new[] { jsonEx.Message };
+            }
+
+            var jsonProblem = new ExtendedProblemDetails
+            {
+                Title = _localizer["InvalidJson"],
+                Detail = _localizer["The request body contains invalid or unexpected properties."],
+                Status = StatusCodes.Status400BadRequest,
+                Instance = context.Request.Path,
+                Type = "https://httpstatuses.com/400",
+                ErrorCode = "JsonParsingError",
+                ErrorSource = ex.Source,
+                Errors = errors
+            };
+
+            var json = JsonSerializer.Serialize(jsonProblem, JsonOptions());
+            await context.Response.WriteAsync(json);
+            return;
+        }
+
+        // 5. Default Exception Handler
         var statusCode = ex switch
         {
             UnauthorizedAccessException => StatusCodes.Status403Forbidden,

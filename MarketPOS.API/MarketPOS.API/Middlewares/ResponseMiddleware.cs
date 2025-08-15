@@ -1,5 +1,10 @@
-using System.Globalization;
+﻿using System.Globalization;
+using Microsoft.AspNetCore.Mvc; // 🆕 عشان ProblemDetails
+using System.Text;
+using System.Text.Json;
+
 namespace MarketPOS.API.Middlewares;
+
 public class ResponseMiddleware
 {
     private readonly RequestDelegate _next;
@@ -38,8 +43,42 @@ public class ResponseMiddleware
                 return;
             }
 
+            // 🆕 لو الرد عبارة عن ProblemDetails أو ValidationProblemDetails
+            try
+            {
+                var jsonProblem = JsonSerializer.Deserialize<ProblemDetails>(bodyText,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                if (jsonProblem is not null && !string.IsNullOrEmpty(jsonProblem.Title))
+                {
+                    object errorsObj = null!;
+
+                    // 🆕 لو فيه validation errors
+                    if (jsonProblem is ValidationProblemDetails vpd)
+                        errorsObj = vpd.Errors;
+
+                    var unifiedError = new ApiResponse<object>
+                    {
+                        Success = false,
+                        Status = jsonProblem.Status ?? context.Response.StatusCode,
+                        Message = jsonProblem.Title,
+                        Data = null,
+                        Errors = errorsObj ?? jsonProblem.Extensions
+                    };
+
+                    var errorJson = JsonSerializer.Serialize(unifiedError);
+                    await context.Response.WriteAsync(errorJson);
+                    return;
+                }
+            }
+            catch
+            {
+                // تجاهل لو مش ProblemDetails
+            }
+
             using var jsonDoc = JsonDocument.Parse(bodyText);
             var root = jsonDoc.RootElement;
+            var statusCode = context.Response.StatusCode;
 
             if (root.TryGetProperty("isSuccess", out _) &&
                 root.TryGetProperty("message", out var messageElement))
@@ -58,8 +97,9 @@ public class ResponseMiddleware
                 var final = new ApiResponse<object>
                 {
                     Success = isSuccess,
+                    Status = statusCode,
                     Message = message,
-                    Data =  data,
+                    Data = data,
                     Errors = errors
                 };
 
@@ -68,7 +108,6 @@ public class ResponseMiddleware
                 return;
             }
 
-            var statusCode = context.Response.StatusCode;
             var parsed = JsonSerializer.Deserialize<object>(bodyText);
 
             var response = new ApiResponse<object>
