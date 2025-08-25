@@ -23,6 +23,8 @@ public class IngredinentController : ControllerBase
     public async Task<IActionResult> GetAll([FromQuery] bool SoftDeleted)
     {
         var result = await _mediator.Send(new GetAllActiveIngredinentQuery(SoftDeleted));
+        if (result.Data is null)
+            return BadRequest(result);
 
         return Ok(result);
     }
@@ -36,6 +38,22 @@ public class IngredinentController : ControllerBase
     public async Task<IActionResult> GetById(Guid id, [FromQuery] bool Softdeleted)
     {
         var result = await _mediator.Send(new GetByIdInegredinentQuery(id, Softdeleted));
+        if (result.Data is null)
+            return BadRequest(result);
+
+        return Ok(result);
+    }
+
+    [HttpGet("GetByName/")]
+    [TypeFilter(typeof(ValidateParameterAttribute), Arguments = new object[] { "Name", ParameterValidationType.NonEmptyString})]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> GetByName(string Name, [FromQuery] bool Softdeleted)
+    {
+        var result = await _mediator.Send(new GetIngredinentByNameQuery(Name, Softdeleted));
+        if (result.Data is null)
+            return NotFound(result);
 
         return Ok(result);
     }
@@ -72,10 +90,31 @@ public class IngredinentController : ControllerBase
         return Ok(result);
     }
 
-
-    // DELETE api/<IngredinentController>/5
-    [HttpDelete("{id}")]
-    public void Delete(int id)
+    [HttpPatch("SofteDelete/")]
+    [TypeFilter(typeof(ValidateParameterAttribute), Arguments = new object[] { "id", ParameterValidationType.Guid })]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> SofteDelete([FromQuery] Guid id)
     {
+        var result = await _mediator.Send(new SofteDeleteIngredinentCommand(id));
+        if (result.Data is null)
+            return BadRequest(result);
+
+        return Ok(result);
+    }
+
+    [HttpPatch("Restore/")]
+    [TypeFilter(typeof(ValidateParameterAttribute), Arguments = new object[] { "Id", ParameterValidationType.Guid })]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> Restore([FromQuery] Guid id)
+    {
+        var result = await _mediator.Send(new RestorIngredinentCommand(id));
+        if (result.Data is null)
+            return BadRequest(result);
+
+        return Ok(result);
     }
 }

@@ -9,7 +9,7 @@ public class CreateWareHouseCommandHandler : BaseHandler<CreateWareHouseCommandH
         IResultFactory<CreateWareHouseCommandHandler> resultFactory,
         IMapper? mapper = null, 
         IStringLocalizer<CreateWareHouseCommandHandler>? localizer = null,
-        ILocalizationPostProcessor localizationPostProcessor = null) 
+        ILocalizationPostProcessor localizationPostProcessor = null!) 
         : base(services, resultFactory, mapper, null, localizer, localizationPostProcessor)
     {
     }

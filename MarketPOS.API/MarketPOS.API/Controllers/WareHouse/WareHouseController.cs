@@ -48,7 +48,7 @@ namespace MarketPOS.API.Controllers.WareHouse
             return Ok(result);
         }
 
-        [HttpPatch("Restored/")]
+        [HttpPatch("RestoredBy/")]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status500InternalServerError)]

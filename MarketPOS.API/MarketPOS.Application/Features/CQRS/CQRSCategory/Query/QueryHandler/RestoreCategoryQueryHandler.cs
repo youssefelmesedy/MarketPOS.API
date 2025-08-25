@@ -2,7 +2,8 @@
 using MarketPOS.Shared.DTOs.SofteDleteAndRestor;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query.QueryHandler;
-public class RestoreCategoryQueryHandler : BaseHandler<RestoreCategoryQueryHandler>, IRequestHandler<RestoreCategoryQuery, ResultDto<SofteDeleteAndRestorDto>>
+public class RestoreCategoryQueryHandler : BaseHandler<RestoreCategoryQueryHandler>,
+    IRequestHandler<RestoreCategoryQuery, ResultDto<RestorDto>>
 {
     public RestoreCategoryQueryHandler(
         IServiceFactory serviceFactory,
@@ -12,26 +13,26 @@ public class RestoreCategoryQueryHandler : BaseHandler<RestoreCategoryQueryHandl
     {
     }
 
-    public async Task<ResultDto<SofteDeleteAndRestorDto>> Handle(RestoreCategoryQuery request, CancellationToken cancellationToken)
+    public async Task<ResultDto<RestorDto>> Handle(RestoreCategoryQuery request, CancellationToken cancellationToken)
     {
         var categoryService = _servicesFactory.GetService<ICategoryService>();
 
         var category = await categoryService.GetByIdAsync(request.Id, includeSoftDeleted: true);
 
         if (category is null)
-            return _resultFactory.Fail<SofteDeleteAndRestorDto>("GetByIdFailed");
+            return _resultFactory.Fail<RestorDto>("GetByIdFailed");
 
         if (!category.IsDeleted)
-            return _resultFactory.Fail<SofteDeleteAndRestorDto>("RestoreFailed");
+            return _resultFactory.Fail<RestorDto>("RestoreFailed");
 
         var result = await categoryService.RestoreAsync(category);
 
-        var mapping = _mapper?.Map<SofteDeleteAndRestorDto>(result);
+        var mapping = _mapper?.Map<RestorDto>(result);
         if (mapping is null)
-            return _resultFactory.Fail<SofteDeleteAndRestorDto>("MappingFailed");
+            return _resultFactory.Fail<RestorDto>("MappingFailed");
 
         var localizedResult = _localizationPostProcessor.Apply(mapping);
 
-        return _resultFactory.Success(localizedResult, "Restored");
+        return _resultFactory.Success(localizedResult, "RestoredBy");
     }
 }

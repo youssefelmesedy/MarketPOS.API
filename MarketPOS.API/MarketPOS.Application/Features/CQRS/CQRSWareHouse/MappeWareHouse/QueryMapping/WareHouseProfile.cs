@@ -10,7 +10,13 @@ public partial class WareHouseProfile
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.ContactInfoDto, opt => opt.MapFrom(src => src.ContactInfo)).ReverseMap();
 
-        CreateMap<Warehouse, SofteDeleteAndRestorDto>()
+        CreateMap<Warehouse, RestorDto>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.name, opt => opt.MapFrom(src => src.Name))
+            .ForMember(dest => dest.RestoredBy, opt => opt.MapFrom(src => src.RestorBy))
+            .ForMember(dest => dest.RestoredAt, opt => opt.MapFrom(src => src.RestorAt));
+
+        CreateMap<Warehouse, SofteDeleteDto>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.IsDeleted, opt => opt.MapFrom(src => src.IsDeleted))
