@@ -3,7 +3,7 @@ using MarketPOS.Shared.DTOs.SofteDleteAndRestor;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSWareHouse.Query.QueryHandler;
 public class SofteDeleteWareHouseQueryHandler : BaseHandler<SofteDeleteWareHouseQueryHandler>, 
-    IRequestHandler<SofteDeleteWareHouseQuery, ResultDto<SofteDeleteAndRestorDto>>
+    IRequestHandler<SofteDeleteWareHouseQuery, ResultDto<SofteDeleteDto>>
 {
     public SofteDeleteWareHouseQueryHandler(
         IServiceFactory services, 
@@ -15,22 +15,22 @@ public class SofteDeleteWareHouseQueryHandler : BaseHandler<SofteDeleteWareHouse
     {
     }
 
-    public async Task<ResultDto<SofteDeleteAndRestorDto>> Handle(SofteDeleteWareHouseQuery request, CancellationToken cancellationToken)
+    public async Task<ResultDto<SofteDeleteDto>> Handle(SofteDeleteWareHouseQuery request, CancellationToken cancellationToken)
     {
         var wareHouseService = _servicesFactory.GetService<IWareHouseService>();
 
         var wareHouse = await wareHouseService.GetByIdAsync(request.Id, includeSoftDeleted: true);
         if(wareHouse is null)
-            return _resultFactory.Fail<SofteDeleteAndRestorDto>("GetByIdFailed");
+            return _resultFactory.Fail<SofteDeleteDto>("GetByIdFailed");
 
         if (wareHouse.IsDeleted)
-            return _resultFactory.Fail<SofteDeleteAndRestorDto>("SofteDeletedFailed");
+            return _resultFactory.Fail<SofteDeleteDto>("SofteDeletedFailed");
 
         var result = await wareHouseService.SoftDeleteAsync(wareHouse);
 
-        var mappedResult = _mapper?.Map<SofteDeleteAndRestorDto>(result);
+        var mappedResult = _mapper?.Map<SofteDeleteDto>(result);
         if (mappedResult is null)
-            return _resultFactory.Fail<SofteDeleteAndRestorDto>("MappingFailed");
+            return _resultFactory.Fail<SofteDeleteDto>("MappingFailed");
 
         var localizedResult = _localizationPostProcessor.Apply(mappedResult);
 

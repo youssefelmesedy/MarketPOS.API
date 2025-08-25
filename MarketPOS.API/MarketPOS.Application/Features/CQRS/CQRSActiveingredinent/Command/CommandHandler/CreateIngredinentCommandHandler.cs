@@ -1,14 +1,14 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSActiveingredinent.Command.CommandHandler;
-public class CreateActivIngredinentCommandHandler : BaseHandler<CreateActivIngredinentCommandHandler>,
+public class CreateIngredinentCommandHandler : BaseHandler<CreateIngredinentCommandHandler>,
     IRequestHandler<CreateActivIngredinentCommand, ResultDto<Guid>>
 {
-    public CreateActivIngredinentCommandHandler(
+    public CreateIngredinentCommandHandler(
         IServiceFactory services,
-        IResultFactory<CreateActivIngredinentCommandHandler> resultFactory,
+        IResultFactory<CreateIngredinentCommandHandler> resultFactory,
         IMapper? mapper = null,
-        IStringLocalizer<CreateActivIngredinentCommandHandler>? localizer = null,
+        IStringLocalizer<CreateIngredinentCommandHandler>? localizer = null,
         ILocalizationPostProcessor localizationPostProcessor = null!) 
         : base(services, resultFactory, mapper, null, localizer, localizationPostProcessor)
     {

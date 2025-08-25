@@ -3,7 +3,7 @@ using MarketPOS.Shared.DTOs.SofteDleteAndRestor;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSWareHouse.Query.QueryHandler;
 public class RestorWareHouseQueryHandler : BaseHandler<RestorWareHouseQueryHandler>,
-    IRequestHandler<RestorWareHouseQuery, ResultDto<SofteDeleteAndRestorDto>>
+    IRequestHandler<RestorWareHouseQuery, ResultDto<RestorDto>>
 {
     public RestorWareHouseQueryHandler(
         IServiceFactory services,
@@ -15,25 +15,25 @@ public class RestorWareHouseQueryHandler : BaseHandler<RestorWareHouseQueryHandl
     {
     }
 
-    public async Task<ResultDto<SofteDeleteAndRestorDto>> Handle(RestorWareHouseQuery request, CancellationToken cancellationToken)
+    public async Task<ResultDto<RestorDto>> Handle(RestorWareHouseQuery request, CancellationToken cancellationToken)
     {
         var wareHouseService = _servicesFactory.GetService<IWareHouseService>();
 
         var wareHouse = await wareHouseService.GetByIdAsync(request.Id, includeSoftDeleted: true);
         if (wareHouse is null)
-            return _resultFactory.Fail<SofteDeleteAndRestorDto>("GetByIdFailed");
+            return _resultFactory.Fail<RestorDto>("GetByIdFailed");
 
         if(!wareHouse.IsDeleted)
-            return _resultFactory.Fail<SofteDeleteAndRestorDto>("RestoreFailed");
+            return _resultFactory.Fail<RestorDto>("RestoreFailed");
 
         var result = await wareHouseService.RestoreAsync(wareHouse);
 
-        var mappedResult = _mapper?.Map<SofteDeleteAndRestorDto>(result);
+        var mappedResult = _mapper?.Map<RestorDto>(result);
         if (mappedResult is null)
-            return _resultFactory.Fail<SofteDeleteAndRestorDto>("MappingFailed");
+            return _resultFactory.Fail<RestorDto>("MappingFailed");
 
         var localizedResult = _localizationPostProcessor.Apply(mappedResult);
 
-        return _resultFactory.Success(localizedResult, "Restored");
+        return _resultFactory.Success(localizedResult, "RestoredBy");
     }
 }

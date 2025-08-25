@@ -3,7 +3,7 @@ using MarketPOS.Shared.DTOs.SofteDleteAndRestor;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Query.HandlerQuery;
 public class RestoreProductQueryHandler : BaseHandler<RestoreProductQueryHandler>,
-    IRequestHandler<RestoreProductQuery, ResultDto<SofteDeleteAndRestorDto>>
+    IRequestHandler<RestoreProductQuery, ResultDto<RestorDto>>
 {
     public RestoreProductQueryHandler(
         IServiceFactory services,
@@ -14,7 +14,7 @@ public class RestoreProductQueryHandler : BaseHandler<RestoreProductQueryHandler
     {
     }
 
-    public async Task<ResultDto<SofteDeleteAndRestorDto>> Handle(RestoreProductQuery request, CancellationToken cancellationToken)
+    public async Task<ResultDto<RestorDto>> Handle(RestoreProductQuery request, CancellationToken cancellationToken)
     {
         _logger?.LogInformation(_localizer?["Starting Restore"]!);
 
@@ -22,21 +22,21 @@ public class RestoreProductQueryHandler : BaseHandler<RestoreProductQueryHandler
 
         var product = await productService.GetByIdAsync(request.Id, includeSoftDeleted: true);
         if (product is null)
-            return _resultFactory.Fail<SofteDeleteAndRestorDto>("GetByIdFailed");
+            return _resultFactory.Fail<RestorDto>("GetByIdFailed");
         if (!product.IsDeleted)
-            return _resultFactory.Fail<SofteDeleteAndRestorDto>("RestoreFailed");
+            return _resultFactory.Fail<RestorDto>("RestoreFailed");
 
 
         var result = await productService.RestoreAsync(product);
         if (result is null)
-            return _resultFactory.Fail<SofteDeleteAndRestorDto>("RestoreFailed");
+            return _resultFactory.Fail<RestorDto>("RestoreFailed");
 
-        var mapping = _mapper?.Map<SofteDeleteAndRestorDto>(result);
+        var mapping = _mapper?.Map<RestorDto>(result);
         if (mapping is null)
-            return _resultFactory.Fail<SofteDeleteAndRestorDto>("MappingFailed");
+            return _resultFactory.Fail<RestorDto>("MappingFailed");
 
         var localizedResult = _localizationPostProcessor.Apply(mapping);
 
-        return _resultFactory.Success(localizedResult, "Restored");
+        return _resultFactory.Success(localizedResult, "RestoredBy");
     }
 }
