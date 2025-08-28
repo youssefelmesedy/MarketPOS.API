@@ -6,6 +6,7 @@ public enum ProductInclude
     Product_Price,
     Product_UnitProfile,
     Product_InventorieAndWareHouse,
-    Product_Inventorie
+    Product_Inventorie,
+    Ingredinent
 }
 

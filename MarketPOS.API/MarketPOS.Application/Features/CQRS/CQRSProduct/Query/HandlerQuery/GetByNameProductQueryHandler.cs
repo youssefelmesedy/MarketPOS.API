@@ -23,7 +23,8 @@ public class GetByNameProductQueryHandler : BaseHandler<GetByNameProductQueryHan
             {
                 ProductInclude.Category,
                 ProductInclude.Product_Price,
-                ProductInclude.Product_InventorieAndWareHouse
+                ProductInclude.Product_InventorieAndWareHouse,
+                ProductInclude.Ingredinent,
             }
         );
 

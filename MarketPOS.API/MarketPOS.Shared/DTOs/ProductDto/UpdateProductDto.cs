@@ -4,6 +4,7 @@ public class UpdateProductDto
     public Guid Id { get; set; }
     public string Name { get; set; } = default!;
     public string? Barcode { get; set; }
+    public Guid IngredinentId { get; set; }
     public Guid CategoryId { get; set; }
     public DateTime? ExpirationDate { get; set; }
 

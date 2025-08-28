@@ -7,6 +7,8 @@ public partial class ProductProfile
         CreateMap<Product, SomeFeaturesProductDto>()
             .ForMember(dest => dest.CategoryName,
                 opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : "Not Found Category Name"))
+            .ForMember(dest => dest.IngredinentName,
+                opt => opt.MapFrom(src => src.ActiveIngredients != null ? src.ActiveIngredients.Name : "Not Found Ingredinent Name"))
 
             .ForMember(dest => dest.WaerHousId,
                 opt => opt.MapFrom(src => src.ProductInventories != null

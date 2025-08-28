@@ -11,6 +11,7 @@ public class CategoryConfiguration : BaseEntityConfiguration<Category>
 
         builder.Property(c => c.Description)
                .HasMaxLength(100);
+
     }
 }
 

@@ -16,6 +16,12 @@ public partial class ProductProfile
                         opt.Condition(src => src.Barcode != null);
                         opt.MapFrom(src => src.Barcode);
                     })
+                .ForMember(dest => dest.ActiveIngredientId,
+                    opt =>
+                    {
+                        opt.Condition(src => src.IngredinentId != Guid.Empty);
+                        opt.MapFrom(src => src.IngredinentId);
+                    })
                 .ForMember(dest => dest.CategoryId,
                     opt =>
                     {

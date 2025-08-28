@@ -34,10 +34,13 @@ public class UpdateProductCommandHandler : BaseHandler<UpdateProductCommandHandl
         [
             ProductInclude.Category,
             ProductInclude.Product_Price,
-            ProductInclude.Product_UnitProfile
+            ProductInclude.Product_UnitProfile,
+            ProductInclude.Ingredinent
         ]);
 
         var product = await productService.GetByIdAsync(request.Dto.Id, true, includes, true);
+        if (product is null)
+            return _resultFactory.Fail<Guid>("GetByIdFalide");
 
         await EnsureCategoryExists(categoryService, request.Dto.CategoryId);
 
