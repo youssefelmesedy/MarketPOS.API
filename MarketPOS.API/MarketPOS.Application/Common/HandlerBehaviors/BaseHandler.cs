@@ -1,6 +1,9 @@
-﻿namespace MarketPOS.Application.Common.HandlerBehaviors;
+﻿using MarketPOS.Application.Services.InterfacesServices;
+
+namespace MarketPOS.Application.Common.HandlerBehaviors;
 public abstract class BaseHandler<THandler>
 {
+    protected readonly IAggregateService _productServices;
     protected readonly IServiceFactory _servicesFactory;
     protected readonly IResultFactory<THandler> _resultFactory;
     protected readonly IMapper? _mapper;
@@ -9,12 +12,13 @@ public abstract class BaseHandler<THandler>
     protected readonly ILocalizationPostProcessor _localizationPostProcessor;
 
     protected BaseHandler(
-        IServiceFactory services,
-        IResultFactory<THandler> resultFactory,
+        IServiceFactory services = null!,
+        IResultFactory<THandler> resultFactory = null!,
         IMapper? mapper = null,
         ILogger<THandler>? logger = null,
         IStringLocalizer<THandler>? localizer = null,
-        ILocalizationPostProcessor localizationPostProcessor = null!)
+        ILocalizationPostProcessor localizationPostProcessor = null!,
+        IAggregateService productServices = null!)
     {
         _servicesFactory = services;
         _resultFactory = resultFactory;
@@ -22,6 +26,7 @@ public abstract class BaseHandler<THandler>
         _logger = logger;
         _localizer = localizer;
         _localizationPostProcessor = localizationPostProcessor;
+        _productServices = productServices;
     }
 
     protected ResultDto<T> Success<T>(T data, string key)

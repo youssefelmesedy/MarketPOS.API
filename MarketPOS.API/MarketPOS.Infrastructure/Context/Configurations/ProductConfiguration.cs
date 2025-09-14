@@ -1,4 +1,6 @@
-﻿namespace MarketPOS.Infrastructure.Context.Configurations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+
+namespace MarketPOS.Infrastructure.Context.Configurations;
 #region Product Configuration
 
 public class ProductConfiguration : BaseEntityConfiguration<Product>
@@ -33,6 +35,12 @@ public class ProductConfiguration : BaseEntityConfiguration<Product>
                .WithOne(pi => pi.Product)
                .HasForeignKey(pi => pi.ProductId)
                .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasMany(p => p.ProductIngredients)
+               .WithOne(pa => pa.Product)
+               .HasForeignKey(pa => pa.ProductId)
+               .OnDelete(DeleteBehavior.Cascade);
+
     }
 }
 
@@ -45,6 +53,7 @@ public class ProductPriceConfiguration : BaseEntityConfiguration<ProductPrice>
 {
     public override void Configure(EntityTypeBuilder<ProductPrice> builder)
     {
+        base.Configure(builder);
         builder.HasKey(p => p.ProductId);
 
         builder.Ignore(p => p.Id);
@@ -70,6 +79,8 @@ public class ProductUnitProfileConfiguration : BaseEntityConfiguration<ProductUn
 {
     public override void Configure(EntityTypeBuilder<ProductUnitProfile> builder)
     {
+        base.Configure(builder);
+
         builder.HasKey(p => p.ProductId);
 
         builder.Ignore(p => p.Id);
@@ -147,6 +158,28 @@ public class WarehouseConfiguration : BaseEntityConfiguration<Warehouse>
 
 #endregion
 
+#region ProductPrice Configuration
 
+public class ProductActiveIngredientConfiguration : IEntityTypeConfiguration<ProductActiveIngredient>
+{
+    public void Configure(EntityTypeBuilder<ProductActiveIngredient> builder)
+    {
+        builder.ToTable("ProductActiveIngredient");
 
+        builder.HasKey(pa => new { pa.ProductId, pa.ActiveIngredinentsId });
 
+        /// Relationship with Product
+        builder.HasOne(pa => pa.Product)
+               .WithMany(p => p.ProductIngredients)
+               .HasForeignKey(pa => pa.ProductId)
+               .OnDelete(DeleteBehavior.Cascade);
+
+        //// Relationship with ActiveIngredients
+        builder.HasOne(pa => pa.ActiveIngredinents)
+               .WithMany(ai => ai.ProductIngredient)
+                .HasForeignKey(pa => pa.ActiveIngredinentsId)
+                .OnDelete(DeleteBehavior.Cascade);
+    }
+
+}
+#endregion

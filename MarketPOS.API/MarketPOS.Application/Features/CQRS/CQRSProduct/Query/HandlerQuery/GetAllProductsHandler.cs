@@ -24,7 +24,8 @@ public class GetAllProductsHandler : BaseHandler<GetAllProductsHandler>, IReques
             {
                 ProductInclude.Category,
                 ProductInclude.Product_InventorieAndWareHouse,
-                ProductInclude.Product_Price
+                ProductInclude.Product_Price,
+                ProductInclude.Ingredinent,
             });
 
         var data = await productService.GetAllAsync<SomeFeaturesProductDto>(
@@ -32,7 +33,7 @@ public class GetAllProductsHandler : BaseHandler<GetAllProductsHandler>, IReques
             predicate: null,
             tracking: false,
             includeExpressions: includes,
-            includeSoftDeleted: request.SofteDelete, ordering: p => p.OrderBy(p => p.Id));
+            includeSoftDeleted: request.SofteDelete, ordering: p => p.OrderBy(p => p.Name));
 
         var localized = _localizationPostProcessor.Apply<SomeFeaturesProductDto>(data);
 

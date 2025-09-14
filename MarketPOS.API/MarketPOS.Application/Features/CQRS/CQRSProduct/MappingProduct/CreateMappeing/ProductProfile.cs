@@ -7,6 +7,13 @@ public partial class ProductProfile
         CreateMap<CreateProductDto, Product>()
          .ForMember(dest => dest.Barcode,
              opt => opt.MapFrom(src => string.IsNullOrEmpty(src.Barcode) ? "Not Found Barcode" : src.Barcode))
+         .ForMember(dest => dest.ProductIngredients,
+              opt => opt.MapFrom(src =>
+                  src.IngredinentId!.Select(id => new ProductActiveIngredient
+                  {
+                      ActiveIngredinentsId = id
+                  }).ToList()
+              ))
          .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.CategoryId))
          .ForMember(dest => dest.ProductPrice,
              opt => opt.MapFrom(src =>

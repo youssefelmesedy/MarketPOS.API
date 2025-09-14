@@ -5,8 +5,17 @@ public partial class ProductProfile
     {
         // Product → ProductDetailsDto
         CreateMap<Product, ProductDetailsDto>()
+            .ForMember(dest => dest.IngredinentId,
+                opt => opt.MapFrom(src => src.ProductIngredients != null
+                  ? src.ProductIngredients.Select(pi => pi.ActiveIngredinentsId).ToList()
+                  : new List<Guid>()))
+
+            .ForMember(dest => dest.IngredinentName,
+                opt => opt.MapFrom(src => src.ProductIngredients != null 
+                ? src.ProductIngredients.Select(pi => pi.ActiveIngredinents.Name).ToList() 
+                : new List<string?>() { "Not Found Ingredients "}))
             .ForMember(dest => dest.CategoryName,
-                opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : ""))
+                opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : "Not Found Category Name"))
             .ForMember(dest => dest.Barcode,
                 opt => opt.MapFrom(src => string.IsNullOrWhiteSpace(src.Barcode) ? "Not Found Barcode" : src.Barcode))
             .ForMember(dest => dest.PurchasePrice,

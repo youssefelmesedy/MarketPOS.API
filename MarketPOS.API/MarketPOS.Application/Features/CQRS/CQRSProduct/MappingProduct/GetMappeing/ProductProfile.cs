@@ -8,6 +8,16 @@ public partial class ProductProfile
             .ForMember(dest => dest.CategoryName,
                 opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : "Not Found Category Name"))
 
+            .ForMember(dest => dest.IngredinentId,
+                opt => opt.MapFrom(src => src.ProductIngredients != null
+                  ? src.ProductIngredients.Select(pi => pi.ActiveIngredinentsId).ToList()
+                  : new List<Guid>()))
+
+            .ForMember(dest => dest.IngredinentName,
+                opt => opt.MapFrom(src => src.ProductIngredients != null 
+                  ? src.ProductIngredients.Select(pi => pi.ActiveIngredinents.Name).ToList() 
+                  : new List<string?>() { "Not Found Ingredients "}))
+
             .ForMember(dest => dest.WaerHousId,
                 opt => opt.MapFrom(src => src.ProductInventories != null
                     ? string.Join(", ", src.ProductInventories

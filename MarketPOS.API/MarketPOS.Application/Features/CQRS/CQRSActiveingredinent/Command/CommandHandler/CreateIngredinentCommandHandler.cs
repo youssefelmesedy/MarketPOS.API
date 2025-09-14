@@ -22,7 +22,7 @@ public class CreateIngredinentCommandHandler : BaseHandler<CreateIngredinentComm
         if (existEntity.Any())
             return _resultFactory.Fail<Guid>($"DuplicateActiveIngredinentName");
 
-        var mapping = _mapper?.Map<ActiveIngredinents>(request.DTO);
+        var mapping = _mapper?.Map<ActiveIngredients>(request.DTO);
         if (mapping is null)
             return _resultFactory.Fail<Guid>("MappingFiled");
 

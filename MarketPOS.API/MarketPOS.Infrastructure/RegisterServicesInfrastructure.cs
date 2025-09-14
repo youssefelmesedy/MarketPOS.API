@@ -17,13 +17,15 @@ public static class RegisterServicesInfrastructure
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), sqlOptions =>
             {
                 sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+
+                // ✅ إضافة retry على الفشل المؤقت
+                sqlOptions.EnableRetryOnFailure(
+                    maxRetryCount: 5,                               // عدد المحاولات قبل ما يرمي Exception
+                    maxRetryDelay: TimeSpan.FromSeconds(10),        // أقصى تأخير بين المحاولات
+                    errorNumbersToAdd: null                         // ممكن تحدد أكواد أخطاء معينة، null يعني الكل
+                );
             });
-
-            #if DEBUG
-            options.EnableSensitiveDataLogging(); // ✅ تشغيل في بيئة التطوير فقط
-            #endif 
         });
-
 
 
         // ✅ تسجيل UnitOfWork
@@ -52,7 +54,7 @@ public static class RegisterServicesInfrastructure
         services.AddScoped<IActiveingredinentService, ActiveingredinentService>();
         services.AddScoped<IWareHouseService, WareHouseService>();
         services.AddScoped<ISupplierService, SupplierService>(); 
-
+        services.AddScoped<IAggregateService, AggregateService>();
         return services;
     }
 }

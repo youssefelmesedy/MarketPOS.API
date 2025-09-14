@@ -100,7 +100,7 @@ public class ProductPrice : BaseEntity
             if (newPurchasePrice >= newSalePrice)
                 throw new ValidationException("Purchase price cannot be greater than or equal to sale price.");
 
-            var calculatedDiscount = CalculateDiscountFromPurchase(newSalePrice.Value, newPurchasePrice.Value);
+            var calculatedDiscount = CalculateDiscountFromPurchase(newSalePrice!.Value, newPurchasePrice.Value);
 
             if (calculatedDiscount > 90)
                 throw new ValidationException("Calculated discount percentage cannot exceed 90%.");

@@ -25,7 +25,8 @@ public class GetProductWithCategoryIdQueryHanler : BaseHandler<GetProductWithCat
             ProductInclude.Category,
             ProductInclude.Product_Price,
             ProductInclude.Product_UnitProfile,
-            ProductInclude.Product_InventorieAndWareHouse
+            ProductInclude.Product_InventorieAndWareHouse,
+            ProductInclude.Ingredinent
         };
 
         var spec = new GetProductWithIncludesSpecification(request.CategoryId, includes, request.IncludeSofteDelete, request.PageSize, request.PageIndex);

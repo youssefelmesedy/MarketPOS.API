@@ -1,4 +1,4 @@
 ﻿namespace MarketPOS.Application.RepositoryInterfaces.RepositoryCategoryAndWareHouse;
-public interface IActivelngredinentsRepo : IFullRepository<ActiveIngredinents>
+public interface IActivelngredinentsRepo : IFullRepository<ActiveIngredients>
 {
 }

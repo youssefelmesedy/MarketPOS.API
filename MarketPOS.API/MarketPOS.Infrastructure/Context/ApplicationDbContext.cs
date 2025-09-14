@@ -14,6 +14,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<Supplier> Suppliers { get; set; } = default!;
     public DbSet<PurchaseInvoice> PurchaseInvoices { get; set; } = default!;
     public DbSet<PurchaseInvoiceItem> PurchaseInvoiceItems { get; set; } = default!;
+    public DbSet<ProductActiveIngredient> productActiveIngredients{ get; set; } = default!;
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

@@ -2,9 +2,14 @@
 
 namespace MarketPOS.Application.Specifications.Products;
 
-public class GetProductWithIncludesSpecification  : BaseSpecification<Product>
+public class GetProductWithIncludesSpecification : BaseSpecification<Product>
 {
-    public GetProductWithIncludesSpecification (Guid? categoryId, List<ProductInclude> includes, bool IncludeSofteDelete, int pageSize = 0, int pageIndex = 0)
+    public GetProductWithIncludesSpecification(
+        Guid? categoryId,
+        List<ProductInclude> includes,
+        bool includeSoftDelete,
+        int pageSize = 0,
+        int pageIndex = 1) // نبدأ من 1
     {
         Criteria = categoryId.HasValue
             ? p => p.CategoryId == categoryId.Value
@@ -22,9 +27,12 @@ public class GetProductWithIncludesSpecification  : BaseSpecification<Product>
 
         ApplyOrderBy(p => p.OrderBy(c => c.Id));
 
-        ApplyPaging(pageSize, pageIndex);
+        // تحويل PageIndex بحيث يبدأ من 1
+        var skip = (pageIndex > 0 ? pageIndex - 1 : 0) * pageSize;
+        ApplyPaging(skip, pageSize);
 
-        EnableSoftDeleted(IncludeSoftDeleted);
+        EnableSoftDeleted(includeSoftDelete);
     }
 }
+
 

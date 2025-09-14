@@ -14,13 +14,13 @@ public class ServiceFactory : IServiceFactory
     {
         try
         {
-            if (typeof(TService) == null)
+            var service = _provider.GetService<TService>();
+            if (service == null)
             {
-                _logger.LogWarning("Attempted to resolve a null service type.");
-                throw new ArgumentNullException(nameof(TService), "Service type cannot be null.");
+                _logger.LogWarning("Service of type {ServiceType} not found.", typeof(TService).Name);
+                throw new InvalidOperationException($"Service of type {typeof(TService).Name} is not registered.");
             }
-
-            return _provider.GetRequiredService<TService>();
+            return service;
         }
         catch (Exception ex)
         {

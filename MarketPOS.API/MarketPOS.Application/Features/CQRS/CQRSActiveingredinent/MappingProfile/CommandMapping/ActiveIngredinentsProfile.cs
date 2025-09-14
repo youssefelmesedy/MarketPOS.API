@@ -6,20 +6,20 @@ public partial class ActiveIngredinentsProfile
 {
     public void CommandIngredinentProfile()
     {
-        CreateMap<ActiveIngredinents, CommandActiveIngredinentsDTO>()
+        CreateMap<ActiveIngredients, CommandActiveIngredinentsDTO>()
              .ForMember(dest => dest.Name, opt =>
              {
                  opt.Condition(src => src.Name != null);
                  opt.MapFrom(src => src.Name!.Trim());
              }).ReverseMap();
 
-        CreateMap<ActiveIngredinents, SofteDeleteDto>()
+        CreateMap<ActiveIngredients, SofteDeleteDto>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.IsDeleted, opt => opt.MapFrom(src => src.IsDeleted))
             .ForMember(dest => dest.DeletedAt, opt => opt.MapFrom(src => src.DeletedAt));
 
-        CreateMap<ActiveIngredinents, RestorDto>()
+        CreateMap<ActiveIngredients, RestorDto>()
            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
            .ForMember(dest => dest.name, opt => opt.MapFrom(src => src.Name))
            .ForMember(dest => dest.RestoredBy, opt => opt.MapFrom(src => src.RestorBy))

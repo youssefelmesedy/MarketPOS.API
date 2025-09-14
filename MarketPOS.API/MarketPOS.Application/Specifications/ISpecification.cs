@@ -16,6 +16,8 @@ public interface ISpecification<T>
     // 🆕 New Properties
     bool IsTracking { get; }
     bool IncludeSoftDeleted { get; }
+
+    string ToCacheKey();
 }
 
 

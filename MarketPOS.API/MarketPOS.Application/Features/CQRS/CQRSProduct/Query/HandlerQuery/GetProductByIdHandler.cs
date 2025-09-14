@@ -20,7 +20,8 @@ public class GetProductByIdHandler : BaseHandler<GetProductByIdHandler>, IReques
             ProductInclude.Category,
             ProductInclude.Product_InventorieAndWareHouse,
             ProductInclude.Product_Price,
-            ProductInclude.Product_UnitProfile
+            ProductInclude.Product_UnitProfile,
+            ProductInclude.Ingredinent
         });
 
         var product = await productServic

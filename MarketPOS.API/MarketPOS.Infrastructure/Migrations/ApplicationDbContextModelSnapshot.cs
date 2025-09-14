@@ -22,7 +22,7 @@ namespace MarketPOS.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Market.Domain.Entitys.DomainCategory.ActiveIngredinentsProfile", b =>
+            modelBuilder.Entity("Market.Domain.Entitys.DomainCategory.ActiveIngredients", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -69,7 +69,7 @@ namespace MarketPOS.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ActiveIngredinentsProfile");
+                    b.ToTable("ActiveIngredinents", (string)null);
                 });
 
             modelBuilder.Entity("Market.Domain.Entitys.DomainCategory.Category", b =>
@@ -132,12 +132,6 @@ namespace MarketPOS.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ActiveIngredientId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ActiveIngredientsId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Barcode")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -189,11 +183,24 @@ namespace MarketPOS.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ActiveIngredientsId");
-
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Market.Domain.Entitys.DomainProduct.ProductActiveIngredient", b =>
+                {
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ActiveIngredinentsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ProductId", "ActiveIngredinentsId");
+
+                    b.HasIndex("ActiveIngredinentsId");
+
+                    b.ToTable("ProductActiveIngredient", (string)null);
                 });
 
             modelBuilder.Entity("Market.Domain.Entitys.DomainProduct.ProductInventory", b =>
@@ -263,14 +270,16 @@ namespace MarketPOS.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal>("DiscountPercentageFromSupplier")
                         .HasPrecision(5, 2)
                         .HasColumnType("decimal(5,2)");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal>("PurchasePrice")
                         .HasPrecision(18, 2)
@@ -297,7 +306,8 @@ namespace MarketPOS.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("LargeUnitName")
                         .IsRequired()
@@ -321,7 +331,8 @@ namespace MarketPOS.Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("SmallPerMedium")
                         .HasColumnType("int");
@@ -578,19 +589,32 @@ namespace MarketPOS.Infrastructure.Migrations
 
             modelBuilder.Entity("Market.Domain.Entitys.DomainProduct.Product", b =>
                 {
-                    b.HasOne("Market.Domain.Entitys.DomainCategory.ActiveIngredinentsProfile", "ActiveIngredinentsProfile")
-                        .WithMany("products")
-                        .HasForeignKey("ActiveIngredientsId");
-
                     b.HasOne("Market.Domain.Entitys.DomainCategory.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("ActiveIngredinentsProfile");
-
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Market.Domain.Entitys.DomainProduct.ProductActiveIngredient", b =>
+                {
+                    b.HasOne("Market.Domain.Entitys.DomainCategory.ActiveIngredients", "ActiveIngredinents")
+                        .WithMany("ProductIngredient")
+                        .HasForeignKey("ActiveIngredinentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Market.Domain.Entitys.DomainProduct.Product", "Product")
+                        .WithMany("ProductIngredients")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ActiveIngredinents");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Market.Domain.Entitys.DomainProduct.ProductInventory", b =>
@@ -782,9 +806,9 @@ namespace MarketPOS.Infrastructure.Migrations
                     b.Navigation("ContactInfo");
                 });
 
-            modelBuilder.Entity("Market.Domain.Entitys.DomainCategory.ActiveIngredinentsProfile", b =>
+            modelBuilder.Entity("Market.Domain.Entitys.DomainCategory.ActiveIngredients", b =>
                 {
-                    b.Navigation("products");
+                    b.Navigation("ProductIngredient");
                 });
 
             modelBuilder.Entity("Market.Domain.Entitys.DomainCategory.Category", b =>
@@ -794,6 +818,8 @@ namespace MarketPOS.Infrastructure.Migrations
 
             modelBuilder.Entity("Market.Domain.Entitys.DomainProduct.Product", b =>
                 {
+                    b.Navigation("ProductIngredients");
+
                     b.Navigation("ProductInventories");
 
                     b.Navigation("ProductPrice")
