@@ -1,35 +1,61 @@
-﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
-namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Command.HandlerCommand;
-public class UpdateProductCommandHandler : BaseHandler<UpdateProductCommandHandler>, IRequestHandler<UpdateProductCommand, ResultDto<Guid>>
+﻿using MarketPOS.Application.Services.InterfacesServices;
+
+public class UpdateProductCommandHandler
+    : BaseHandler<UpdateProductCommandHandler>,
+      IRequestHandler<UpdateProductCommand, ResultDto<Guid>>
 {
-    public UpdateProductCommandHandler
-        (
-           IServiceFactory serviceFactory,
-           IResultFactory<UpdateProductCommandHandler> resultFactory,
-           IMapper mapper,
-           IStringLocalizer<UpdateProductCommandHandler> localizar
-        )
-        : base(serviceFactory, resultFactory, mapper,  localizer: localizar)
+    private readonly IAggregateService _services;
+
+    public UpdateProductCommandHandler(
+        IAggregateService services,
+        IServiceFactory serviceFactory,// ✅ بدل 4 Services
+        IResultFactory<UpdateProductCommandHandler> resultFactory,
+        IMapper mapper,
+        IStringLocalizer<UpdateProductCommandHandler> localizer
+    ) : base(serviceFactory, resultFactory, mapper, localizer: localizer)
     {
+        _services = services;
     }
 
     public async Task<ResultDto<Guid>> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
-        var productService = _servicesFactory.GetService<IProductService>();
-        var categoryService = _servicesFactory.GetService<ICategoryService>();
-        var priceService = _servicesFactory.GetService<IProductPriceService>();
-        var unittProfileService = _servicesFactory.GetService<IProductUnitProfileService>();
+        // ✅ Check duplicate
+        if (await IsDuplicateAsync(request.Dto))
+            return _resultFactory.Fail<Guid>("DuplicateProductName");
 
-        var normalizedName = request.Dto.Name.Trim().ToLower();
-        var normalizedBarcode = request.Dto.Barcode?.Trim();
+        // ✅ Load Product
+        var product = await LoadProductAsync(request.Dto.Id);
+        if (product is null)
+            return _resultFactory.Fail<Guid>("GetByIdFailed");
 
-        var existProduct = await productService.FindAsync(p =>
+        // ✅ Business validation
+        await EnsureCategoryExistsAsync(request.Dto.CategoryId);
+
+        // ✅ Updates
+        await UpdateProductInfoAsync(product, request.Dto);
+        await UpdateProductPriceAsync(product, request.Dto);
+        await UpdateProductUnitProfileAsync(product, request.Dto);
+        await UpdateProductIngredientsAsync(product, request.Dto);
+
+        return _resultFactory.Success(product.Id, "Updated");
+    }
+
+    #region Private Helpers
+
+    private async Task<bool> IsDuplicateAsync(UpdateProductDto dto)
+    {
+        var normalizedName = dto.Name.Trim().ToLower();
+        var normalizedBarcode = dto.Barcode?.Trim();
+
+        var exist = await _services.ProductService.FindAsync(p =>
             (p.Name.Trim().ToLower() == normalizedName || p.Barcode == normalizedBarcode) &&
-            p.Id != request.Dto.Id);
+            p.Id != dto.Id);
 
-        if (existProduct.Any())
-            return _resultFactory.Success<Guid>(existProduct.Select(p => p.Id).First() ,"DuplicateProductName");
+        return exist.Any();
+    }
 
+    private async Task<Product?> LoadProductAsync(Guid id)
+    {
         var includes = ProductIncludeHelper.GetIncludeExpressions(
         [
             ProductInclude.Category,
@@ -38,111 +64,50 @@ public class UpdateProductCommandHandler : BaseHandler<UpdateProductCommandHandl
             ProductInclude.Ingredinent
         ]);
 
-        var product = await productService.GetByIdAsync(request.Dto.Id, true, includes, true);
-        if (product is null)
-            return _resultFactory.Fail<Guid>("GetByIdFalide");
-
-        await EnsureCategoryExists(categoryService, request.Dto.CategoryId);
-
-        await HandleProductInfoUpdateAsync(productService, product, request.Dto);
-        await HandleProductPriceUpdateAsync(priceService, product, request.Dto);
-        await HandleProductUnitProfileUpdateAsync(unittProfileService, product, request.Dto);
-
-        return _resultFactory.Success(product.Id, "Updated");
+        return await _services.ProductService.GetByIdAsync(id, tracking: true, includes, true);
     }
 
-
-    /// <summary>
-    /// Ensures that the specified category exists in the system.
-    /// Throws a NotFoundException if the category is not found.
-    /// </summary>
-    /// <param name="categoryService">The category service to retrieve the category.</param>
-    /// <param name="categoryId">The ID of the category to check.</param>
-    /// <exception cref="NotFoundException">Thrown when the category is not found.</exception>
-
-    private async Task EnsureCategoryExists(ICategoryService categoryService, Guid categoryId)
+    private async Task EnsureCategoryExistsAsync(Guid categoryId)
     {
-        var category = await categoryService.GetByIdAsync(categoryId);
+        var category = await _services.CategoryService.GetByIdAsync(categoryId);
         if (category is null)
             throw new NotFoundException(nameof(Category), categoryId);
     }
 
-    /// <summary>
-    /// Updates the product price entity if any relevant values have changed.
-    /// Applies the update through the IProductPriceService.
-    /// </summary>
-    /// <param name="priceService">The service responsible for managing product prices.</param>
-    /// <param name="product">The product containing the existing price data.</param>
-    /// <param name="dto">The DTO containing the new price values.</param>
-
-    private async Task HandleProductPriceUpdateAsync(
-        IProductPriceService priceService,
-        Product product,
-        UpdateProductDto dto)
+    private async Task UpdateProductInfoAsync(Product product, UpdateProductDto dto)
     {
-        if (product.ProductPrice is null)
-            return;
-
-        var modified = product.ProductPrice.UpdateValues(
-            dto.SalePrice,
-            dto.PurchasePrice,
-            dto.DiscountPercentageFromSupplier,
-            "Youssef");
-
-        if (modified)
-            await priceService.UpdateByProductIdAsync(product.ProductPrice);
+        if (product.UpdateValues(dto.Name, dto.Barcode, dto.CategoryId, dto.ExpirationDate ?? DateTime.MinValue))
+            await _services.ProductService.UpdateAsync(product);
     }
 
-    /// <summary>
-    /// Updates product information (name, barcode, category, expiration date)
-    /// if any of the values have changed, using the IProductService.
-    /// </summary>
-    /// <param name="productService">The service responsible for updating products.</param>
-    /// <param name="product">The existing product entity to be updated.</param>
-    /// <param name="dto">The DTO containing the new product values.</param>
-    private async Task HandleProductInfoUpdateAsync(
-        IProductService productService,
-        Product product,
-        UpdateProductDto dto)
+    private async Task UpdateProductPriceAsync(Product product, UpdateProductDto dto)
     {
-        if (product is null)
-            return;
+        if (product.ProductPrice is null) return;
 
-        var modified = product.UpdateValues(
-            dto.Name,
-            dto.Barcode,
-            dto.CategoryId, 
-            dto.ExpirationDate ?? DateTime.MinValue);
-
-        if (modified)
-            await productService.UpdateAsync(product);
+        if (product.ProductPrice.UpdateValues(dto.SalePrice, dto.PurchasePrice, dto.DiscountPercentageFromSupplier, "Youssef"))
+            await _services.ProductPriceService.UpdateByProductIdAsync(product.ProductPrice);
     }
 
-    /// <summary>
-    /// Handles updating the <see cref="ProductUnitProfile"/> of a given <see cref="Product"/> 
-    /// if the profile exists and any of its unit-related values have changed.
-    /// </summary>
-    /// <param name="productService">The service responsible for updating product unit profiles.</param>
-    /// <param name="product">The product containing the current unit profile.</param>
-    /// <param name="dto">The DTO containing the updated unit profile values.</param>
-    /// <returns>A task that represents the asynchronous operation.</returns>
-
-    private async Task HandleProductUnitProfileUpdateAsync(
-        IProductUnitProfileService productService,
-        Product product,
-        UpdateProductDto dto)
+    private async Task UpdateProductUnitProfileAsync(Product product, UpdateProductDto dto)
     {
-        if(product.ProductUnitProfile is null)
-            return;
+        if (product.ProductUnitProfile is null) return;
 
-        var modified = product.ProductUnitProfile.UpdateValues(
-            dto.LargeUnitName,
-            dto.MediumUnitName,
-            dto.SmallUnitName,
-            dto.MediumPerLarge,
-            dto.SmallPerMedium);
-
-        if (modified)
-            await productService.UpdateByProductIdAsync(product.ProductUnitProfile);
+        if (product.ProductUnitProfile.UpdateValues(dto.LargeUnitName, dto.MediumUnitName, dto.SmallUnitName, dto.MediumPerLarge, dto.SmallPerMedium))
+            await _services.ProductUnitProfileService.UpdateByProductIdAsync(product.ProductUnitProfile);
     }
+
+    private async Task UpdateProductIngredientsAsync(Product product, UpdateProductDto dto)
+    {
+        if (dto.IngredinentId is null || !dto.IngredinentId.Any()) return;
+
+        var currentIds = product.ProductIngredients.Select(i => i.ActiveIngredinentsId).ToList();
+
+        bool isSame = currentIds.Count == dto.IngredinentId.Count
+                      && !dto.IngredinentId.Except(currentIds).Any();
+
+        if (!isSame)
+            await _services.ProductService.UpdateProductIngredientAsync(product, dto.IngredinentId);
+    }
+
+    #endregion
 }

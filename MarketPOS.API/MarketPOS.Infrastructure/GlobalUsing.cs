@@ -41,7 +41,6 @@ global using MarketPOS.Application.RepositoryInterfaces.RepositorySupplier;
 global using MarketPOS.Infrastructure.Services;
 global using MarketPOS.Application.Services.InterfacesServices;
 
-global using Market.POS.Infrastructure.Services;
 global using MarketPOS.Infrastructure.Repositories.ProductRepositorys;
 global using MarketPOS.Infrastructure.Repositories.RepositoryCategory;
 global using MarketPOS.Infrastructure.Repositories.RepositorySupplier;

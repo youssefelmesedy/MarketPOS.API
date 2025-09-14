@@ -1,15 +1,16 @@
-﻿using System.Globalization;
+﻿using MarketPOS.Application.InterfaceCacheing;
+using MarketPOS.Infrastructure.ImplmentationCacheing;
+using System.Globalization;
 using System.Text.Json.Serialization;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddControllers()
        .AddJsonOptions(options =>
        {
            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-
-           // ✅ Configure JSON serialization options
-           // تعطيل خاصيه تجاهل الخصائص المرسله داخل Json- والتي لا توجد داخل  Model 
-           options.JsonSerializerOptions.UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow; 
+           options.JsonSerializerOptions.UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow;
        });
 
 // ✅ Add services to the container
@@ -17,9 +18,23 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddDesignPatternServices();
 
+// ✅ Cache Provider (Memory or Redis)
+var cacheProvider = builder.Configuration["CacheSettings:Provider"];
 
-// ✅ Distributed cache (memory)
-builder.Services.AddDistributedMemoryCache();
+if (cacheProvider?.Equals("Redis", StringComparison.OrdinalIgnoreCase) == true)
+{
+    builder.Services.AddStackExchangeRedisCache(options =>
+    {
+        options.Configuration = builder.Configuration["CacheSettings:RedisConnection"];
+        options.InstanceName = "MarketPOS_";
+    });
+    builder.Services.AddScoped<IGenericCache, RedisCacheService>();
+}
+else
+{
+    builder.Services.AddMemoryCache();
+    builder.Services.AddScoped<IGenericCache, MemoryCacheService>();
+}
 
 // ✅ Localization
 builder.Services.AddLocalization();
@@ -30,12 +45,7 @@ builder.Services.AddSingleton<IStringLocalizerFactory>(provider =>
     return new CustomJsonStringLocalizerFactory(cache, "Resources");
 });
 builder.Services.AddSingleton(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
-
-// لا تسجل IStringLocalizer مباشرة، بل استخدم AddLocalization + Factory
-builder.Services.AddSingleton(typeof(IStringLocalizer<>), typeof(StringLocalizer<>)); // ضروري لتوليد IStringLocalizer<T> بالاعتماد على factory
-
 builder.Services.AddScoped<ILocalizationPostProcessor, LocalizationPostProcessor>();
-
 
 // ✅ FluentValidation
 builder.Services.AddFluentValidationAutoValidation();
@@ -52,10 +62,10 @@ builder.Services.AddMvc()
 // ✅ Supported cultures
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
-    var supportedCultures = new[] 
+    var supportedCultures = new[]
     {
-        new CultureInfo("ar-EG"), 
-        new CultureInfo("en-US"), 
+        new CultureInfo("ar-EG"),
+        new CultureInfo("en-US"),
     };
 
     options.DefaultRequestCulture = new RequestCulture(culture: supportedCultures[0]);
@@ -73,29 +83,29 @@ builder.Services.AddOpenApiDocument(config =>
 var app = builder.Build();
 
 // ✅ Swagger middleware
-if (app.Environment.IsDevelopment())
-{
-    app.UseOpenApi();
-    app.UseSwaggerUi();
-}
+//if (app.Environment.IsProduction())
+//{
+   
+//}
+app.UseOpenApi();
+app.UseSwaggerUi();
 
 // ✅ Use routing
 app.UseHttpsRedirection();
 
-var supportedCultures = new[] {"ar-EG", "en-US" };
-
 // ✅ Localization middleware
+var supportedCultures = new[] { "ar-EG", "en-US" };
 var localizationOptions = new RequestLocalizationOptions()
     .SetDefaultCulture(supportedCultures[0])
     .AddSupportedCultures(supportedCultures);
 
 app.UseRequestLocalization(localizationOptions);
 
-// ✅ Clear cache on shutdown
-var cacheService = app.Services.GetRequiredService<JsonLocalizationCache>();
+// ✅ Clear localization cache on shutdown
+var locCacheService = app.Services.GetRequiredService<JsonLocalizationCache>();
 app.Lifetime.ApplicationStopping.Register(() =>
 {
-    cacheService.Clear();
+    locCacheService.Clear();
     Console.WriteLine("✅ Localization cache cleared on shutdown.");
 });
 

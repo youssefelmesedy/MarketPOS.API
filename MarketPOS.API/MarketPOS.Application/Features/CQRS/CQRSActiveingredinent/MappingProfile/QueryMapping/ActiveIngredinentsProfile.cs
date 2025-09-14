@@ -5,7 +5,7 @@ public partial class ActiveIngredinentsProfile
 {
     public void QueryIngredinent()
     {
-        CreateMap<ActiveIngredinents, ActiveIngredinentsDetalisDTO>()
+        CreateMap<ActiveIngredients, ActiveIngredinentsDetalisDTO>()
             .ForMember(dets => dets.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dets => dets.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dets => dets.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt))

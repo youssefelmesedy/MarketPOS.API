@@ -2,12 +2,12 @@
 
 namespace Market.Domain.Entitys.DomainCategory;
 
-public class ActiveIngredinents : BaseEntity
+public class ActiveIngredients : BaseEntity
 {
     [Required]
     public string? Name { get; set; }
 
-   public ICollection<Product> products { get; set; } = new List<Product>();
+   public ICollection<ProductActiveIngredient> ProductIngredient { get; set; } = new List<ProductActiveIngredient>();
 
     public override void InitializeChildEntityinCreate()
     {

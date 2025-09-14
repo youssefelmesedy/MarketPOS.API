@@ -1,11 +1,11 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 
 namespace MarketPOS.Infrastructure.Services;
-public class ActiveingredinentService : GenericService<ActiveIngredinents>, IActiveingredinentService
+public class ActiveingredinentService : GenericService<ActiveIngredients>, IActiveingredinentService
 {
     public ActiveingredinentService(
         IUnitOfWork unitOfWork, 
-        IStringLocalizer<GenericService<ActiveIngredinents>> localizer,
+        IStringLocalizer<GenericService<ActiveIngredients>> localizer,
         ILogger<ActiveingredinentService> logger)
         : base(unitOfWork, localizer, logger)
     {

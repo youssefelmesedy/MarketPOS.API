@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Query;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace MarketPOS.Application.Specifications;
 
@@ -40,4 +42,24 @@ public abstract class BaseSpecification<T> : ISpecification<T>
 
     protected void EnableSoftDeleted(bool sofetDelete)
         => IncludeSoftDeleted = sofetDelete;
+
+    public string ToCacheKey()
+    {
+        var criteria = Criteria?.Body.ToString() ?? "NoCriteria";
+        var orderBy = OrderBy != null ? "OrderBy" : "NoOrderBy";
+        var orderByDesc = OrderByDescending != null ? "OrderByDesc" : "NoOrderByDesc";
+        var includes = string.Join(",", Includes.Select(i => i.Body.ToString()));
+        var paging = IsPagingEnabled ? $"Skip={Skip}_Take={Take}" : "NoPaging";
+        var tracking = IsTracking ? "Tracking" : "NoTracking";
+        var softDelete = IncludeSoftDeleted ? "WithSoftDelete" : "WithoutSoftDelete";
+
+        var rawKey = $"Spec:{typeof(T).Name}|{criteria}|{orderBy}|{orderByDesc}|{includes}|{paging}|{tracking}|{softDelete}";
+
+        // هنعمل Hash بالـ SHA256
+        using var sha = SHA256.Create();
+        var hashBytes = sha.ComputeHash(Encoding.UTF8.GetBytes(rawKey));
+        var hashString = Convert.ToBase64String(hashBytes);
+
+        return $"Spec_{typeof(T).Name}_{hashString}";
+    }
 }

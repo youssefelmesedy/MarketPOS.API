@@ -6,9 +6,9 @@ public class ProductDetailsDto  :BaseDto
     [JsonPropertyOrder(2)]
     public string? Barcode { get; set; }
     [JsonPropertyOrder(3)]
-    public Guid IngredinentId { get; set; }
+    public List<Guid>? IngredinentId { get; set; }
     [JsonPropertyOrder(4)]
-    public string? IngredinentName { get; set; }
+    public List<string>? IngredinentName { get; set; }
     [JsonPropertyOrder(5)]
     public Guid CategoryId { get; set; }
     [JsonPropertyOrder(6)]

@@ -3,7 +3,7 @@ public class CreateProductDto
 {
     public string Name { get; set; } = default!;
     public string? Barcode { get; set; }
-    public Guid? IngredinentId { get; set; }
+    public List<Guid>? IngredinentId { get; set; }
     public Guid CategoryId { get; set; }
 
     // Price-related

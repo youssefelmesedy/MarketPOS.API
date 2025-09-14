@@ -1,19 +1,24 @@
 ﻿
+using MarketPOS.Application.InterfaceCacheing;
+
 namespace MarketPOS.Infrastructure.Services;
 public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TEntity> where TEntity : class
 {
     protected readonly IUnitOfWork _unitOfWork;
     protected readonly IStringLocalizer<GenericService<TEntity>> _localizer;
     protected readonly ILogger _logger;
+    protected readonly IGenericCache _cache;
 
     public GenericService(
         IUnitOfWork unitOfWork,
-        IStringLocalizer<GenericService<TEntity>> localizer, 
-        ILogger logger)
+        IStringLocalizer<GenericService<TEntity>> localizer,
+        ILogger logger,
+        IGenericCache cache = null!)
     {
         _unitOfWork = unitOfWork;
         _localizer = localizer;
         _logger = logger;
+        _cache = cache;
     }
 
     #region Queryable Methods
@@ -29,8 +34,10 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
         bool includeSoftDeleted = false,
         bool applyIncludes = true)
     {
+        var cachKey = $"Page_CachKey_({pageIndex})_({pageSize})";
         try
         {
+
             return await _unitOfWork.RepositoryEntity<TEntity>().GetPagedAsync(pageIndex, pageSize, filter,ordering : orderBy, ascending: ascending, tracking, includeExpressions, includeSoftDeleted, applyIncludes);
         }
         catch (Exception ex)

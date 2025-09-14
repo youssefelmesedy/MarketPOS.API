@@ -8,9 +8,6 @@ public class Product : BaseEntity
     public Guid CategoryId { get; set; }
     public Category? Category { get; set; } = default!;
 
-    public Guid? ActiveIngredientId { get; set; }
-    public ActiveIngredinents? ActiveIngredients { get; set; } = default;
-
     public DateTime ExpirationDate { get; set; }
 
     // one to one 
@@ -18,6 +15,7 @@ public class Product : BaseEntity
     public ProductUnitProfile ProductUnitProfile { get; set; } = default!;
 
     public ICollection<ProductInventory> ProductInventories { get; set; } = new List<ProductInventory>();
+    public ICollection<ProductActiveIngredient> ProductIngredients { get; set; } = new List<ProductActiveIngredient>();
 
     public bool IsExpired() =>
         ExpirationDate < DateTime.UtcNow;

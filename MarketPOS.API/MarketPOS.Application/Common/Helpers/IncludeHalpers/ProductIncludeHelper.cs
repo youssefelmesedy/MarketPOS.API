@@ -40,7 +40,8 @@ public static class ProductIncludeHelper
                     break;
 
                 case ProductInclude.Ingredinent:
-                    expressions.Add(q => q.Include(p => p.ActiveIngredients));
+                    expressions.Add(q => q.Include(p => p.ProductIngredients)
+                                   .ThenInclude(p => p.ActiveIngredinents));
                     break;
             }
         }
@@ -103,7 +104,8 @@ public static class ProductIncludeHelper
                 case ProductInclude.Ingredinent:
                     result.Add(new IncludeExpressionOrFunc<Product>
                     {
-                        ExpressionInclude = p => p.ActiveIngredients!
+                        FuncInclude = q => q.Include(p => p.ProductIngredients)
+                                            .ThenInclude(pi => pi.ActiveIngredinents)
                     });
                     break;
             }
