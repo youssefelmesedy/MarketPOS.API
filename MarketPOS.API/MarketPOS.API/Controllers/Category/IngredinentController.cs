@@ -80,9 +80,9 @@ public class IngredinentController : ControllerBase
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status500InternalServerError)]
     [TypeFilter(typeof(ValidateParameterAttribute), Arguments = new object[] { "Id", ParameterValidationType.Guid })]
-    public async Task<IActionResult> Put([FromQuery]Guid id, [FromBody] CommandActiveIngredinentsDTO dto)
+    public async Task<IActionResult> Put([FromQuery]Guid id, [FromBody] CommandActiveIngredinentsDTO dto, [FromQuery] bool SofteDelete)
     {
-        var result = await _mediator.Send(new UpdateIngredinentCommand(id, dto));
+        var result = await _mediator.Send(new UpdateIngredinentCommand(id, dto, SofteDelete));
 
         if (result.Data == Guid.Empty)
             return NotFound(result);

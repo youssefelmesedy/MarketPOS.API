@@ -6,9 +6,6 @@
   "Deleted": "Resource deleted successfully.",
   "SofteDeleted": "This card has been suspended for a certain period.",
   "Restored": "Resource restored successfully.",
-  "SofteDeletedFailed": "This card Aready suspended for a certain period.",
-  "RestoreFailed": "An error occurred while restoring the item.",
-
 
   // ✅ Common Errors
   "NotFound": "The requested item was not found.",
@@ -52,6 +49,8 @@
   "CreateFailed": "Failed to create the resource.",
   "UpdateFailed": "Failed to update the resource.",
   "DeleteFailed": "Failed to delete the resource.",
+  "SofteDeletedFailed": "This card Aready suspended for a certain period.",
+  "RestoreFailed": "TThis card was actually recovered a while ago.",
   "DuplicateCategoryName": "Category with the same name already exists",
   "DuplicateActiveIngredinentName": "Ingerdinen with the same name already exists",
   "DuplicateWareHouseName": "WareHouse with the same name already exists",

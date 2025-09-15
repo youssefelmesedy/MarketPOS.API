@@ -9,7 +9,8 @@ public class RestoreCategoryQueryHandler : BaseHandler<RestoreCategoryQueryHandl
         IServiceFactory serviceFactory,
         IResultFactory<RestoreCategoryQueryHandler> resultFactory,
         IMapper mapper,
-        IStringLocalizer<RestoreCategoryQueryHandler> localizer) : base(serviceFactory, resultFactory, mapper, localizer : localizer)
+        IStringLocalizer<RestoreCategoryQueryHandler> localizer) 
+        : base(serviceFactory, resultFactory, mapper, localizer : localizer)
     {
     }
 
@@ -31,8 +32,6 @@ public class RestoreCategoryQueryHandler : BaseHandler<RestoreCategoryQueryHandl
         if (mapping is null)
             return _resultFactory.Fail<RestorDto>("MappingFailed");
 
-        var localizedResult = _localizationPostProcessor.Apply(mapping);
-
-        return _resultFactory.Success(localizedResult, "RestoredBy");
+        return _resultFactory.Success(mapping, "RestoredBy");
     }
 }

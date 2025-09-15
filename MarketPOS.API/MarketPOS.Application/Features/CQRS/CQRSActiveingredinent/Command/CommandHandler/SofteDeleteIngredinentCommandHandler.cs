@@ -19,7 +19,7 @@ public class SofteDeleteIngredinentCommandHandler : BaseHandler<SofteDeleteIngre
     {
         var service = _servicesFactory.GetService<IActiveingredinentService>();
 
-        var ingredinent = await service.GetByIdAsync(request.Id);
+        var ingredinent = await service.GetByIdAsync(request.Id, true, includeSoftDeleted: true);
         if (ingredinent is null)
             return _resultFactory.Fail<SofteDeleteDto>("GetByIdFailed");
 
@@ -30,7 +30,7 @@ public class SofteDeleteIngredinentCommandHandler : BaseHandler<SofteDeleteIngre
 
         var mapping = _mapper?.Map<SofteDeleteDto>(isDeletedIngredinent);
         if (mapping is null)
-            return _resultFactory.Fail<SofteDeleteDto>("MappingFailed");
+            return _resultFactory.Fail<SofteDeleteDto>("Mappingfailed");
 
         var result = _localizationPostProcessor.Apply(mapping);
 

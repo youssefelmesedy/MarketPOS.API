@@ -1,7 +1,8 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Query.HandlerQuery;
-public class GetPagedProductQueryHandler : BaseHandler<GetPagedProductQueryHandler>, IRequestHandler<GetPagedProductQuery, ResultDto<PagedResultDto<ProductDetailsDto>>>
+public class GetPagedProductQueryHandler : BaseHandler<GetPagedProductQueryHandler>, 
+    IRequestHandler<GetPagedProductQuery, ResultDto<PagedResultDto<ProductDetailsDto>>>
 {
 
     public GetPagedProductQueryHandler(IServiceFactory serviceFactory,
@@ -22,7 +23,8 @@ public class GetPagedProductQueryHandler : BaseHandler<GetPagedProductQueryHandl
             request.PageIndex,
             request.PageSize,
             ordering: p => p.OrderBy(p => p.Name),
-            includeExpressions: includes
+            includeExpressions: includes,
+            includeSoftDeleted: request.SofteDelete
         );
 
         if (result.Data is null || result.TotalCount == 0)

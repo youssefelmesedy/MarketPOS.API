@@ -1,6 +1,6 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 
-namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query.QueryHaandler;
+namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query.QueryHandler;
 public class GetAllCategoryQueryHandler : BaseHandler<GetAllCategoryQueryHandler>,IRequestHandler<GetAllCategoryQuery, ResultDto<List<CategoryDetalisDto>>>
 {
     public GetAllCategoryQueryHandler(

@@ -18,6 +18,12 @@ public class CategoryController : ControllerBase
     public async Task<IActionResult> GetAll([FromQuery] bool SoftDeleted)
     {
         var result = await _mediator.Send(new GetAllCategoryQuery(SoftDeleted));
+        if(result.Data is null || !result.Data.Any())
+            return NotFound(new ResultDto<object>
+            {
+                IsSuccess = false,
+                Message = _localizar["NotFound"]
+            });
 
         return Ok(result);
     }
@@ -30,6 +36,13 @@ public class CategoryController : ControllerBase
     public async Task<IActionResult> GetById([FromQuery]Guid id, [FromQuery] bool Softdeleted)
     {
         var result = await _mediator.Send(new GetByIdCategoryQuery(id, Softdeleted));
+        
+        if(result.Data is null)
+            return NotFound(new ResultDto<object>
+            {
+                IsSuccess = false,
+                Message = _localizar["NotFound"]
+            });
 
         return Ok(result);
     }
@@ -42,6 +55,12 @@ public class CategoryController : ControllerBase
     public async Task<IActionResult> GetByName([FromQuery]string name, [FromQuery] bool IncludsofteDelete)
     {
         var result = await _mediator.Send(new GetCategoryName(name, IncludsofteDelete));
+        if(result.Data is null || !result.Data.Any())
+            return NotFound(new ResultDto<object>
+            {
+                IsSuccess = false,
+                Message = _localizar["NotFound"]
+            });
 
         return Ok(result);
     }
@@ -54,6 +73,7 @@ public class CategoryController : ControllerBase
     {
         var result = await _mediator.Send(new CreateCategoryCommand(dto));
 
+
         return Ok(result);
     }
 
@@ -62,7 +82,7 @@ public class CategoryController : ControllerBase
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> Update([FromQuery] Guid id, [FromBody] CategoryUpdateDto dto)
+    public async Task<IActionResult> Update([FromQuery] Guid id, [FromBody] CategoryUpdateDto dto, [FromQuery] bool SofteDelete)
     {
         if (id != dto.Id)
         {
@@ -72,7 +92,7 @@ public class CategoryController : ControllerBase
                 Message = _localizar["IdMismatch"]
             });
         }
-        var result = await _mediator.Send(new UpdateCategoryCommand(dto));
+        var result = await _mediator.Send(new UpdateCategoryCommand(dto, SofteDelete));
 
         return Ok(result);
     }
@@ -85,7 +105,7 @@ public class CategoryController : ControllerBase
     public async Task<IActionResult> Delete([FromQuery] Guid id)
     {
         var result = await _mediator.Send(new DeleteCategoryCommand(id));
-
+       
         return Ok(result);
     }
 
@@ -97,6 +117,14 @@ public class CategoryController : ControllerBase
     public async Task<IActionResult> SofteDelete([FromQuery] Guid id)
     {
         var result = await _mediator.Send(new SofteCategoryDeletedQuery(id));
+        if (result.Data is null)
+        {
+            return BadRequest(new ResultDto<object>
+            {
+                IsSuccess = false,
+                Message = result.Message
+            });
+        }
 
         return Ok(result);
     }
@@ -109,6 +137,14 @@ public class CategoryController : ControllerBase
     public async Task<IActionResult> Restore([FromQuery] Guid id)
     {
         var result = await _mediator.Send(new RestoreCategoryQuery(id));
+        if (result.Data is null)
+        {
+            return BadRequest(new ResultDto<object>
+            {
+                IsSuccess = false,
+                Message = result.Message
+            });
+        }
 
         return Ok(result);
     }

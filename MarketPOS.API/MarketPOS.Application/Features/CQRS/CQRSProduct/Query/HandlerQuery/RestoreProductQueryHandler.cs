@@ -16,16 +16,14 @@ public class RestoreProductQueryHandler : BaseHandler<RestoreProductQueryHandler
 
     public async Task<ResultDto<RestorDto>> Handle(RestoreProductQuery request, CancellationToken cancellationToken)
     {
-        _logger?.LogInformation(_localizer?["Starting Restore"]!);
-
         var productService = _servicesFactory.GetService<IProductService>();
 
         var product = await productService.GetByIdAsync(request.Id, includeSoftDeleted: true);
         if (product is null)
             return _resultFactory.Fail<RestorDto>("GetByIdFailed");
+
         if (!product.IsDeleted)
             return _resultFactory.Fail<RestorDto>("RestoreFailed");
-
 
         var result = await productService.RestoreAsync(product);
         if (result is null)
@@ -35,8 +33,6 @@ public class RestoreProductQueryHandler : BaseHandler<RestoreProductQueryHandler
         if (mapping is null)
             return _resultFactory.Fail<RestorDto>("MappingFailed");
 
-        var localizedResult = _localizationPostProcessor.Apply(mapping);
-
-        return _resultFactory.Success(localizedResult, "RestoredBy");
+        return _resultFactory.Success(mapping, "RestoredBy");
     }
 }

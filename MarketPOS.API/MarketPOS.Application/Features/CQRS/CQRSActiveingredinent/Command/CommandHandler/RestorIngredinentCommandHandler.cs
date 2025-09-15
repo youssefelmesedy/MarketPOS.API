@@ -20,7 +20,7 @@ public class RestorIngredinentCommandHandler : BaseHandler<RestorIngredinentComm
 
         var ingerdient = await service.GetByIdAsync(request.Id, includeSoftDeleted: true);
         if (ingerdient is null)
-            return _resultFactory.Fail<RestorDto>("GetByIdFalied");
+            return _resultFactory.Fail<RestorDto>("GetByIdFailed");
 
         if(!ingerdient.IsDeleted)
             return _resultFactory.Fail<RestorDto>("RestoreFailed");

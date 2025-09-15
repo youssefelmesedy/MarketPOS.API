@@ -8,8 +8,8 @@ public class SofteDeleteProductQueryHandler : BaseHandler<SofteDeleteProductQuer
         IServiceFactory serviceFactory,
         IResultFactory<SofteDeleteProductQueryHandler> resultFactory,
         IMapper mapper,
-        IStringLocalizer<SofteDeleteProductQueryHandler> localizer,
-        ILocalizationPostProcessor localizationPostProcessor) : base(serviceFactory, resultFactory, mapper, localizer: localizer, localizationPostProcessor : localizationPostProcessor)
+        IStringLocalizer<SofteDeleteProductQueryHandler> localizer) 
+        : base(serviceFactory, resultFactory, mapper, null, localizer)
     {
     }
 
@@ -29,8 +29,6 @@ public class SofteDeleteProductQueryHandler : BaseHandler<SofteDeleteProductQuer
         if (maping is null)
             return _resultFactory.Fail<SofteDeleteDto>("Mappingfailed");
 
-        var localizer = _localizationPostProcessor.Apply(maping);
-
-        return _resultFactory.Success<SofteDeleteDto>(localizer, "SofteDeleted");
+        return _resultFactory.Success<SofteDeleteDto>(maping, "SofteDeleted");
     }
 }

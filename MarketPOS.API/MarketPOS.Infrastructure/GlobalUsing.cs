@@ -12,9 +12,6 @@ global using Market.Domain.Entitys.PurchaseInvoices;
 global using Market.Domain.Entitys.Suppliers;
 
 // global using 
-global using Microsoft.AspNetCore.Mvc;
-global using Microsoft.AspNetCore.Http;
-
 global using AutoMapper;
 global using FluentValidation;
 
@@ -22,16 +19,12 @@ global using System.Linq.Dynamic.Core;
 global using System.Linq.Expressions;
 
 global using System.Text.Json;
-global using System.Text.Json.Serialization;
-
-global using Microsoft.Extensions.Hosting;
 global using Microsoft.Extensions.Localization;
 global using Microsoft.Extensions.Logging;
 
 global using MarketPOS.Infrastructure.Context;
 global using MarketPOS.Application.RepositoryInterfaces;
 global using MarketPOS.Application.Common.Exceptions;
-global using MarketPOS.Shared.ExceptionDto;
 
 global using Market.POS.Infrastructure.Repositories;
 global using MarketPOS.Application.RepositoryInterfaces.ProductRepositorys;

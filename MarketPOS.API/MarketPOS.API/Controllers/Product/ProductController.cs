@@ -19,9 +19,19 @@ public class ProductController : ControllerBase
     public async Task<IActionResult> GetPage(
         [FromQuery] int pageIndex = 1,
         [FromQuery] int pageSize = 10,
-        [FromQuery] List<ProductInclude>? includes = null)
+        [FromQuery] List<ProductInclude>? includes = null,
+        [FromQuery] bool SofteDelete = false)
     {
-        var result = await _mediator.Send(new GetPagedProductQuery(pageIndex, pageSize, includes));
+        var result = await _mediator.Send(new GetPagedProductQuery(pageIndex, pageSize, includes, SofteDelete));
+        if(result.Data is null)
+        {
+            return BadRequest(new ResultDto<object>
+            {
+                IsSuccess = false,
+                Message = result.Message
+            });
+        }
+
         return Ok(result);
     }
 
@@ -33,8 +43,16 @@ public class ProductController : ControllerBase
     public async Task<IActionResult> GetAll([FromQuery] bool SofteDelete)
     {
         var result = await _mediator.Send(new GetAllProductsQuery(SofteDelete));
+        //if(result.Data is null)
+        //{
+        //    return NotFound(new ResultDto<object>
+        //    {
+        //        IsSuccess = false,
+        //        Message = result.Message
+        //    });
+        //}
         return Ok(result);
-    }
+        }
 
     // ✅ Get By ID
     [HttpGet("GetById/")]
@@ -132,6 +150,14 @@ public class ProductController : ControllerBase
     public async Task<IActionResult> SofteDelete([FromQuery] Guid id)
     {
         var result = await _mediator.Send(new SofteDeleteProductQuery(id, true));
+        if (result.Data is null)
+        {
+            return BadRequest(new ResultDto<object>
+            {
+                IsSuccess = false,
+                Message = result.Message
+            });
+        }
 
         return Ok(result);
     }
@@ -145,6 +171,14 @@ public class ProductController : ControllerBase
     public async Task<IActionResult> Restore([FromQuery] Guid id)
     {
         var result = await _mediator.Send(new RestoreProductQuery(id));
+        if(result.Data is null)
+        {
+            return BadRequest(new ResultDto<object>
+            {
+                IsSuccess = false,
+                Message = result.Message
+            });
+        }
 
         return Ok(result);
     }

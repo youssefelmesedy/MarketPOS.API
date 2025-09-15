@@ -35,6 +35,9 @@ public class GetAllProductsHandler : BaseHandler<GetAllProductsHandler>, IReques
             includeExpressions: includes,
             includeSoftDeleted: request.SofteDelete, ordering: p => p.OrderBy(p => p.Name));
 
+        if(data is null || !data.Any())
+            return _resultFactory.Fail<List<SomeFeaturesProductDto>>("NotFound");
+
         var localized = _localizationPostProcessor.Apply<SomeFeaturesProductDto>(data);
 
         return _resultFactory.Success(localized.ToList(), "Success");
