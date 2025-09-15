@@ -2,7 +2,6 @@
 using MarketPOS.Infrastructure.ImplmentationCacheing;
 using System.Globalization;
 using System.Text.Json.Serialization;
-using Microsoft.Extensions.Caching.StackExchangeRedis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -83,12 +82,19 @@ builder.Services.AddOpenApiDocument(config =>
 var app = builder.Build();
 
 // ✅ Swagger middleware
-//if (app.Environment.IsProduction())
-//{
-   
-//}
-app.UseOpenApi();
-app.UseSwaggerUi();
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
+{
+    app.UseOpenApi();
+    app.UseSwaggerUi();
+
+    // Redirect root "/" to swagger
+    app.MapGet("/", context =>
+    {
+        context.Response.Redirect("/swagger/index.html");
+        return Task.CompletedTask;
+    });
+}
+
 
 // ✅ Use routing
 app.UseHttpsRedirection();

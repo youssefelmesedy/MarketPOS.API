@@ -14,10 +14,10 @@ public class ResultFactory<THandler> : IResultFactory<THandler>
         return ResultDto<T>.Ok(message, data);
     }
 
-    public ResultDto<T> Fail<T>(string messageKey)
+    public ResultDto<T> Fail<T>(string messageKey, object? error = null)
     {
         var message = _localizer?[messageKey] ?? messageKey;
-        return ResultDto<T>.Fail(message);
+        return ResultDto<T>.Fail(message, error);
     }
 }
 

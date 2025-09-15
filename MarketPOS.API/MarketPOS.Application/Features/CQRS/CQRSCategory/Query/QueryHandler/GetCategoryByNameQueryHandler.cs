@@ -1,6 +1,6 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 
-namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query.QueryHaandler;
+namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query.QueryHandler;
 public class GetCategoryByNameQueryHandler : BaseHandler<GetCategoryByNameQueryHandler>,IRequestHandler<GetCategoryName, ResultDto<IEnumerable<CategoryDetalisDto>>>
 {
     public GetCategoryByNameQueryHandler(

@@ -8,14 +8,10 @@ public class ResultDto<T>
     public object? Errors { get; set; }
 
     public static ResultDto<T> Ok(string message, T? data)
-    {
-        return new ResultDto<T> { IsSuccess = true, Message = message, Data = data };
-    }
+        => new() { IsSuccess = true, Message = message, Data = data };
 
     public static ResultDto<T> Fail(string message, object? errors = null)
-    {
-        return new ResultDto<T> { IsSuccess = false, Message = message, Errors = errors };
-    }
+        => new() { IsSuccess = false, Message = message, Errors = errors };
 }
 
 

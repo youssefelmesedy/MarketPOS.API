@@ -1,6 +1,8 @@
 ﻿using MarketPOS.Application.InterfaceCacheing;
 using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 using MarketPOS.Application.Specifications;
+using Microsoft.Data.SqlClient;
+using YourProjectNamespace.Application.Common.Exceptions;
 
 namespace MarketPOS.Infrastructure.Services;
 
@@ -171,8 +173,14 @@ public class ProductService : GenericService<Product>, IProductService
 
             await _unitOfWork.SaveChangesAsync();
 
-            // امسح الكاش القديم عشان يترفرش
             await _cache.RemoveAsync($"Product_Ingredients_{product.Id}");
+        }
+        catch (DbUpdateException dbEx) when (dbEx.InnerException is SqlException sqlEx &&
+                                             sqlEx.Number == 547) // 547 = FK constraint violation
+        {
+            _logger.LogError(dbEx, "Foreign key constraint violated when updating product ingredients.");
+            throw new BusinessException(_localizer["IngredientNotFound"]);
+            // BusinessException هي Exception انت معرفها عشان تترجمها في Middleware لرسالة واضحة
         }
         catch (Exception ex)
         {
@@ -181,3 +189,4 @@ public class ProductService : GenericService<Product>, IProductService
         }
     }
 }
+

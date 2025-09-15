@@ -17,7 +17,7 @@ public class UpdateIngredinentCommandHandler : BaseHandler<UpdateIngredinentComm
     {
         var _service = _servicesFactory.GetService<IActiveingredinentService>();
 
-        var existIngredinent = await _service.GetByIdAsync(request.Id);
+        var existIngredinent = await _service.GetByIdAsync(request.Id, true, includeSoftDeleted: request.SofteDelete);
         if (existIngredinent is null)
             return _resultFactory.Fail<Guid>("GetByIdFailed");
 

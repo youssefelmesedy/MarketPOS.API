@@ -7,5 +7,7 @@ public partial class CategoryProfile : Profile
         MapCategoryGet();
         MapCreateCategory();
         MapUpdateCategory();
+        MapCategorySofteDelete();
+        MapCategoryRestored();
     }
 }

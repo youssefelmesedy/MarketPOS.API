@@ -1,7 +1,8 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Command.CommandHandler;
-public class UpdateCategoryCommandHandler : BaseHandler<UpdateCategoryCommandHandler>, IRequestHandler<UpdateCategoryCommand, ResultDto<Guid>>
+public class UpdateCategoryCommandHandler : BaseHandler<UpdateCategoryCommandHandler>,
+    IRequestHandler<UpdateCategoryCommand, ResultDto<Guid>>
 {
     public UpdateCategoryCommandHandler(
         IServiceFactory serviceFactory,
@@ -15,7 +16,7 @@ public class UpdateCategoryCommandHandler : BaseHandler<UpdateCategoryCommandHan
     {
         var serviceCategory = _servicesFactory.GetService<ICategoryService>();
 
-        var esistCategory = await serviceCategory.GetByIdAsync(request.dto.Id);
+        var esistCategory = await serviceCategory.GetByIdAsync(request.dto.Id, true, includeSoftDeleted: request.SofteDelete);
         if (esistCategory == null)
             throw new NotFoundException(nameof(Category), request.dto.Id);
 
