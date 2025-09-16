@@ -20,7 +20,7 @@ public class GetAllActiveIngredinentQueryHandler : BaseHandler<GetAllActiveIngre
         var _service = _servicesFactory.GetService<IActiveingredinentService>();
 
         var entitys = await _service.GetAllAsync(includeSoftDeleted: request.SoftDelete);
-        if (entitys is null)
+        if (!entitys.Any())
             return _resultFactory.Fail<IEnumerable<ActiveIngredinentsDetalisDTO>>("GetAllFailed");
 
         var result = _mapper?.Map<IEnumerable<ActiveIngredinentsDetalisDTO>>(entitys);

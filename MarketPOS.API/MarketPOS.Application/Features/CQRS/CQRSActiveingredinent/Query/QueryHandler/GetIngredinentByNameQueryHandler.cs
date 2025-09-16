@@ -1,4 +1,4 @@
-﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
+﻿  using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 using MarketPOS.Shared.DTOs.ActivelngredientsDTO;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSActiveingredinent.Query.QueryHandler;
@@ -24,7 +24,7 @@ public class GetIngredinentByNameQueryHandler : BaseHandler<GetIngredinentByName
         if (!ingredinents.Any())
            return  _resultFactory.Fail<ActiveIngredinentsDetalisDTO>("NotFound");
 
-        var mapping = _mapper?.Map<ActiveIngredinentsDetalisDTO>(ingredinents.FirstOrDefault());
+        var mapping = _mapper?.Map<ActiveIngredinentsDetalisDTO>(ingredinents.First());
         if (mapping is null)
             return _resultFactory.Fail<ActiveIngredinentsDetalisDTO>("Mappingfailed");
 
