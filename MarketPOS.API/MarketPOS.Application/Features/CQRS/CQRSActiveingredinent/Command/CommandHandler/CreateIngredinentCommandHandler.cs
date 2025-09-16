@@ -18,13 +18,13 @@ public class CreateIngredinentCommandHandler : BaseHandler<CreateIngredinentComm
     {
         var _service = _servicesFactory.GetService<IActiveingredinentService>();
 
-        var existEntity = await _service.FindAsync(a => a.Name!.Trim().ToLower() == request.DTO.Name.Trim().ToLower());
+        var existEntity = await _service.FindAsync(a => a.Name!.Trim().ToLower() == request.DTO.Name.Trim().ToLower(), includeSoftDeleted : true);
         if (existEntity.Any())
             return _resultFactory.Fail<Guid>($"DuplicateActiveIngredinentName");
 
         var mapping = _mapper?.Map<ActiveIngredients>(request.DTO);
         if (mapping is null)
-            return _resultFactory.Fail<Guid>("MappingFiled");
+            return _resultFactory.Fail<Guid>("Mappingfailed");
 
         await _service.AddAsync(mapping);
 

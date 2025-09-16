@@ -9,6 +9,7 @@
 
   // ✅ Common Errors
   "NotFound": "The requested item was not found.",
+  "NotFounds": "The requested item was not founds.",
   "ValidationFailed": "Validation failed.",
   "InvalidParameterFormat": "Invalid value for parameter '{0}'.",
   "MissingParameter": "Parameter '{0}' is required.",
