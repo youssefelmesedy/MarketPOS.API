@@ -28,8 +28,15 @@ public static class HelperMethod
             (result.Data is IEnumerable<object> list && !list.Any()))
             return ErrorFunction.NotFound(result.IsSuccess, result.Message, result.Errors);
 
-        if (result.Message!.Equals(localizer["DuplicateActiveIngredinentName"]))
-            return ErrorFunction.ConflictRequest(result.IsSuccess, result.Message, result.Errors);
+        if (!string.IsNullOrEmpty(result.Message) &&
+            result.Message.Contains("already exists", StringComparison.OrdinalIgnoreCase))
+        {
+            return ErrorFunction.ConflictRequest(
+                result.IsSuccess,
+                result.Message,
+                result.Errors
+            );
+        }
 
         if (result.Data is Guid guidValue && guidValue == Guid.Empty)
             return ErrorFunction.BadRequest(false, result.Message, result.Errors);
@@ -70,8 +77,15 @@ public static class HelperMethod
         if (result.Data == null)
             return ErrorFunction.NotFound(result.IsSuccess, result.Message, result.Errors);
 
-        if (result.Message!.Equals(localizer["DuplicateActiveIngredinentName"]))
-            return ErrorFunction.ConflictRequest(result.IsSuccess, result.Message, result.Errors);
+        if (!string.IsNullOrEmpty(result.Message) &&
+            result.Message.Contains("already exists", StringComparison.OrdinalIgnoreCase))
+        {
+            return ErrorFunction.ConflictRequest(
+                result.IsSuccess,
+                result.Message,
+                result.Errors
+            );
+        }
 
         if (result.Data is Guid guidValue)
         {
@@ -112,19 +126,22 @@ public static class HelperMethod
         Func<Guid, Task<object?>> getByIdFunc,
         IStringLocalizer localizer)
     {
-        // 1. لو فيه Errors
         if (result.Errors is not null)
             return ErrorFunction.BadRequest(result.IsSuccess, result.Message, result.Errors);
 
-        // 2. لو مفيش Data
         if (result.Data == null)
             return ErrorFunction.NotFound(result.IsSuccess, result.Message, result.Errors);
 
-        // 3. لو اسم مكرر
-        if (result.Message!.Equals(localizer["DuplicateActiveIngredinentName"]))
-            return ErrorFunction.ConflictRequest(result.IsSuccess, result.Message, result.Errors);
+        if (!string.IsNullOrEmpty(result.Message) &&
+             result.Message.Contains("already exists", StringComparison.OrdinalIgnoreCase))
+        {
+            return ErrorFunction.ConflictRequest(
+                result.IsSuccess,
+                result.Message,
+                result.Errors
+            );
+        }
 
-        // 4. لو Data عبارة عن Guid (يعني بيرجع Id للكيان اللي اتعدل)
         if (result.Data is Guid guidValue)
         {
             if (guidValue == Guid.Empty)

@@ -1,4 +1,8 @@
-﻿namespace MarketPOS.Infrastructure;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Concurrent;
+
+namespace MarketPOS.Infrastructure;
 
 public static class RegisterServicesInfrastructure
 {
@@ -46,3 +50,70 @@ public static class RegisterServicesInfrastructure
         return services;
     }
 }
+public class ServiceTrackingMiddleware
+{
+    private readonly RequestDelegate _next;
+    private readonly ILogger<ServiceTrackingMiddleware> _logger;
+
+    public ServiceTrackingMiddleware(RequestDelegate next, ILogger<ServiceTrackingMiddleware> logger)
+    {
+        _next = next;
+        _logger = logger;
+    }
+
+    public async Task InvokeAsync(HttpContext context)
+    {
+        try
+        {
+            await _next(context);
+        }
+        finally
+        {
+            var resolved = ServiceTracker.GetResolvedServices();
+            if (resolved.Any())
+            {
+                _logger.LogInformation("✅ Services resolved this request: {Count}", resolved.Count);
+                foreach (var kvp in resolved)
+                {
+                    _logger.LogInformation(" - {ServiceName}: {Count} times", kvp.Key, kvp.Value);
+                }
+            }
+            else
+            {
+                _logger.LogInformation("⚠️ No services were resolved in this request.");
+            }
+
+            // نفضي الـ Cache بعد ما الـ Request يخلص
+            ServiceTracker.Clear();
+        }
+    }
+}
+
+public static class ServiceTrackingMiddlewareExtensions
+{
+    public static IApplicationBuilder UseServiceTracking(this IApplicationBuilder builder)
+    {
+        return builder.UseMiddleware<ServiceTrackingMiddleware>();
+    }
+}
+public static class ServiceTracker
+{
+    private static readonly ConcurrentDictionary<string, int> _resolvedServices = new();
+
+    public static void Add(string serviceName)
+    {
+        _resolvedServices.AddOrUpdate(serviceName, 1, (_, count) => count + 1);
+    }
+
+    public static IReadOnlyDictionary<string, int> GetResolvedServices()
+    {
+        return _resolvedServices;
+    }
+
+    public static void Clear()
+    {
+        _resolvedServices.Clear();
+    }
+}
+
+

@@ -76,8 +76,20 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 builder.Services.AddOpenApiDocument(config =>
 {
     config.Title = "MarketPOS API";
+    config.Version = "v1";
+    config.Description = "This is the API for MarketPOS system.\n\n" +
+                         "✨ Developed by Y𝒐𝐔𝓢𝓢e𝓕 E𝓵𝓜𝐄𝓢𝐞𝐃𝓨 ✨\n\n" +
+                         "🔗 Website: https://yourwebsite.com\n" +
+                         "📧 Email: youremail@example.com\n\n" +
+                         "License: MIT License";
+
+    // دعم هيدر Accept-Language
     config.OperationProcessors.Add(new AcceptLanguageHeaderProcessor());
+
+    // إضافة Contact info
+    config.DocumentProcessors.Add(new ContactDocumentProcessor());
 });
+
 
 // ✅ Build app
 var app = builder.Build();
@@ -121,7 +133,7 @@ app.UseAuthorization();
 // ✅ Middleware مخصص
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseMiddleware<ResponseMiddleware>();
-
+app.UseServiceTracking();
 // ✅ Map endpoints
 app.MapControllers();
 

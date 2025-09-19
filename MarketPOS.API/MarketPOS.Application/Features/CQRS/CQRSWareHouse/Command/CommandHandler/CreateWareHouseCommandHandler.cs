@@ -26,7 +26,7 @@ public class CreateWareHouseCommandHandler : BaseHandler<CreateWareHouseCommandH
                                                                      wareHouse.Name.ToLower().Trim());
 
         if (existWareHouseName.Any())
-            return _resultFactory.Fail<Guid>($"DuplicateWareHouseName: \n {existWareHouseName.Select(w => w.Id).First()}");
+            return _resultFactory.Fail<Guid>($"DuplicateWareHouseName");
 
         await wareHouseService.AddAsync(wareHouse);
 
