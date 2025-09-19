@@ -1,5 +1,5 @@
 ﻿namespace MarketPOS.Shared.DTOs.ProductDto;
-public class ProductDetailsDto  :BaseDto
+public class ProductDetailsDto : BaseDto
 {
     [JsonPropertyOrder(1)]
     public string Name { get; set; } = default!;

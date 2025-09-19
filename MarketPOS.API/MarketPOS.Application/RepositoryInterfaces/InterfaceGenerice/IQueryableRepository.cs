@@ -29,7 +29,5 @@ public interface IQueryableRepository<T> where T : class
         List<Func<IQueryable<T>, IQueryable<T>>>? includeExpressions = null,
         bool includeSoftDeleted = false,
         bool applyIncludes = true);
-
-    Task<IEnumerable<T>> GetAllIncludingSoftDeletedAsync();
 }
 

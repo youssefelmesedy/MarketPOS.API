@@ -8,7 +8,7 @@ public class SofteDeleteProductQueryHandler : BaseHandler<SofteDeleteProductQuer
         IServiceFactory serviceFactory,
         IResultFactory<SofteDeleteProductQueryHandler> resultFactory,
         IMapper mapper,
-        IStringLocalizer<SofteDeleteProductQueryHandler> localizer) 
+        IStringLocalizer<SofteDeleteProductQueryHandler> localizer)
         : base(serviceFactory, resultFactory, mapper, null, localizer)
     {
     }

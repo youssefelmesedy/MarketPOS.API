@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
+﻿using MarketPOS.Infrastructure.Repositories.GenericRepositoryAndBaseBuliderQuery;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Collections;
 
 namespace Market.POS.Infrastructure.Repositories;

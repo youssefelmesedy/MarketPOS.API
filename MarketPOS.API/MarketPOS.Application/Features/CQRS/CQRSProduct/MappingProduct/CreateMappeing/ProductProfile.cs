@@ -1,7 +1,7 @@
 ﻿namespace MarketPOS.Application.Features.CQRS.CQRSProduct.MappingProduct;
 public partial class ProductProfile
 {
-    public void  MapProductCreate()
+    public void MapProductCreate()
     {
         //Create Product
         CreateMap<CreateProductDto, Product>()

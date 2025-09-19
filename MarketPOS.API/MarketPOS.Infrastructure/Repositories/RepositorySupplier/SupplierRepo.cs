@@ -1,4 +1,4 @@
-﻿using MarketPOS.Application.RepositoryInterfaces.RepositorySupplier;
+﻿using MarketPOS.Infrastructure.Repositories.GenericRepositoryAndBaseBuliderQuery;
 
 namespace MarketPOS.Infrastructure.Repositories.RepositorySupplier;
 public class SupplierRepo : GenericeRepository<Supplier>, ISupplierRepo

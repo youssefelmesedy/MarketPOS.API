@@ -1,5 +1,4 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
-using MarketPOS.Application.Specifications.Products;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Query.HandlerQuery;
 
@@ -11,7 +10,7 @@ public class GetProductWithCategoryIdQueryHanler : BaseHandler<GetProductWithCat
         IMapper? mapper = null,
         ILogger<GetProductWithCategoryIdQueryHanler>? logger = null,
         IStringLocalizer<GetProductWithCategoryIdQueryHanler>? localizer = null,
-        ILocalizationPostProcessor localizationPostProcessor = null!) 
+        ILocalizationPostProcessor localizationPostProcessor = null!)
         : base(services, resultFactory, mapper, logger, localizer, localizationPostProcessor)
     {
     }
@@ -29,9 +28,7 @@ public class GetProductWithCategoryIdQueryHanler : BaseHandler<GetProductWithCat
             ProductInclude.Ingredinent
         };
 
-        var spec = new GetProductWithIncludesSpecification(request.CategoryId, includes, request.IncludeSofteDelete, request.PageSize, request.PageIndex);
-
-        var products = await service.GetProductbyCategoryIdSpce(spec);
+        var products = await service.FindProjectedAsync<ProductDetailsDto>(_mapper!, c => c.CategoryId == request.CategoryId, false, null, request.IncludeSofteDelete, o => o.OrderBy(p => p.Name));
 
         if (products is null || !products.Any())
         {
@@ -40,12 +37,12 @@ public class GetProductWithCategoryIdQueryHanler : BaseHandler<GetProductWithCat
 
         var mapping = _mapper?.Map<IEnumerable<ProductDetailsDto>>(products);
         if (mapping is null)
-            return _resultFactory.Fail<PagedResultDto<ProductDetailsDto>>("Mapping Failed");
-        
+            return _resultFactory.Fail<PagedResultDto<ProductDetailsDto>>("Mappingfailed");
+
         var pagenition = new PagedResultDto<ProductDetailsDto>(mapping, products.Count(), request.PageIndex, request.PageSize);
 
-        if(pagenition is null || pagenition.TotalCount == 0)
-            return _resultFactory.Fail<PagedResultDto<ProductDetailsDto>>("Mapping Failed");
+        if (pagenition is null || pagenition.TotalCount == 0)
+            return _resultFactory.Fail<PagedResultDto<ProductDetailsDto>>("Pagenation is Failed");
 
         var localized = _localizationPostProcessor?.Apply(pagenition!);
         if (localized is null)

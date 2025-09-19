@@ -1,6 +1,4 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-
-namespace Market.POS.Infrastructure.Repositories;
+﻿namespace MarketPOS.Infrastructure.Repositories.GenericRepositoryAndBaseBuliderQuery;
 
 public class BaseBuildeQuery<T> where T : class
 {

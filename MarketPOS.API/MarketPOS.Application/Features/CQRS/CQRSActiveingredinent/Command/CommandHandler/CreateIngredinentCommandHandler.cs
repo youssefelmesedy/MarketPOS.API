@@ -9,7 +9,7 @@ public class CreateIngredinentCommandHandler : BaseHandler<CreateIngredinentComm
         IResultFactory<CreateIngredinentCommandHandler> resultFactory,
         IMapper? mapper = null,
         IStringLocalizer<CreateIngredinentCommandHandler>? localizer = null,
-        ILocalizationPostProcessor localizationPostProcessor = null!) 
+        ILocalizationPostProcessor localizationPostProcessor = null!)
         : base(services, resultFactory, mapper, null, localizer, localizationPostProcessor)
     {
     }
@@ -18,7 +18,7 @@ public class CreateIngredinentCommandHandler : BaseHandler<CreateIngredinentComm
     {
         var _service = _servicesFactory.GetService<IActiveingredinentService>();
 
-        var existEntity = await _service.FindAsync(a => a.Name!.Trim().ToLower() == request.DTO.Name.Trim().ToLower(), includeSoftDeleted : true);
+        var existEntity = await _service.FindAsync(a => a.Name!.Trim().ToLower() == request.DTO.Name.Trim().ToLower(), includeSoftDeleted: true);
         if (existEntity.Any())
             return _resultFactory.Fail<Guid>($"DuplicateActiveIngredinentName");
 

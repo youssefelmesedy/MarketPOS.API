@@ -1,8 +1,7 @@
-﻿
-using MarketPOS.Application.InterfaceCacheing;
+﻿using MarketPOS.Application.InterfaceCacheing;
 
-namespace MarketPOS.Infrastructure.Services;
-public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TEntity> where TEntity : class
+namespace MarketPOS.Infrastructure.Services.GenericService;
+public class GenericService<TEntity> : IFullService<TEntity> where TEntity : class
 {
     protected readonly IUnitOfWork _unitOfWork;
     protected readonly IStringLocalizer<GenericService<TEntity>> _localizer;
@@ -23,7 +22,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
 
     #region Queryable Methods
 
-    public async Task<(IEnumerable<TEntity> Data, int TotalCount)> GetPagedAsync(
+    public virtual async Task<(IEnumerable<TEntity> Data, int TotalCount)> GetPagedAsync(
         int pageIndex,
         int pageSize,
         Expression<Func<TEntity, bool>>? filter = null,
@@ -38,7 +37,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
         try
         {
 
-            return await _unitOfWork.RepositoryEntity<TEntity>().GetPagedAsync(pageIndex, pageSize, filter,ordering : orderBy, ascending: ascending, tracking, includeExpressions, includeSoftDeleted, applyIncludes);
+            return await _unitOfWork.RepositoryEntity<TEntity>().GetPagedAsync(pageIndex, pageSize, filter, ordering: orderBy, ascending: ascending, tracking, includeExpressions, includeSoftDeleted, applyIncludes);
         }
         catch (Exception ex)
         {
@@ -47,7 +46,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
         }
     }
 
-    public async Task<IEnumerable<TEntity>> GetAllAsync(
+    public virtual async Task<IEnumerable<TEntity>> GetAllAsync(
         bool tracking = false,
         List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
         bool includeSoftDeleted = false,
@@ -65,7 +64,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
         }
     }
 
-    public async Task<TEntity?> GetByIdAsync(Guid id, bool tracking = false,
+    public virtual async Task<TEntity?> GetByIdAsync(Guid id, bool tracking = false,
         List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
         bool includeSoftDeleted = false,
         bool applyIncludes = true)
@@ -81,7 +80,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
         }
     }
 
-    public async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate,
+    public virtual async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate,
         bool tracking = false,
         List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
         bool includeSoftDeleted = false,
@@ -102,16 +101,17 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
 
     #region Projectable Methods
 
-    public async Task<List<TResult>> GetAllAsync<TResult>(
+    public virtual async Task<List<TResult>> GetAllAsync<TResult>(
         IMapper mapper,
         Expression<Func<TEntity, bool>>? predicate = null,
         bool tracking = false,
         List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
         bool includeSoftDeleted = false, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null)
+        where TResult : class
     {
         try
         {
-            return await _unitOfWork.RepositoryEntity<TEntity>().GetProjectedListAsync<TResult>(mapper, predicate, tracking, includeExpressions, includeSoftDeleted, 
+            return await _unitOfWork.RepositoryEntity<TEntity>().GetProjectedListAsync<TResult>(mapper, predicate, tracking, includeExpressions, includeSoftDeleted,
                                  ordering, applyIncludes: false);
         }
         catch (Exception ex)
@@ -121,16 +121,18 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
         }
     }
 
-    public async Task<TResult?> GetByIdAsync<TResult>(
-        IMapper mapper,
-        Expression<Func<TEntity, bool>> predicate,
-        bool tracking = false,
-        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
-        bool includeSoftDeleted = false)
+    public virtual async Task<TResult?> GetByIdProjectedAsync<TResult>(
+    IMapper mapper,
+    Expression<Func<TEntity, bool>> predicate,
+    bool tracking = false,
+    List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
+    bool includeSoftDeleted = false)
+    where TResult : class
     {
         try
         {
-            return await _unitOfWork.RepositoryEntity<TEntity>().GetProjectedByIdAsync<TResult>(mapper, predicate, tracking, includeExpressions, includeSoftDeleted, applyIncludes: false);
+            return await _unitOfWork.RepositoryEntity<TEntity>()
+                .GetProjectedByIdAsync<TResult>(mapper, predicate, tracking, includeExpressions, includeSoftDeleted, applyIncludes: false);
         }
         catch (Exception ex)
         {
@@ -139,12 +141,13 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
         }
     }
 
-    public async Task<IEnumerable<TResult>> FindProjectedAsync<TResult>(
+    public virtual async Task<IEnumerable<TResult>> FindProjectedAsync<TResult>(
         IMapper mapper,
         Expression<Func<TEntity, bool>> predicate,
         bool tracking = false,
         List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
         bool includeSoftDeleted = false, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null)
+        where TResult : class
     {
         try
         {
@@ -157,7 +160,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
         }
     }
 
-    public async Task<(IEnumerable<TResult> Data, int TotalCount)> GetPagedProjectedAsync<TResult>(
+    public virtual async Task<(IEnumerable<TResult> Data, int TotalCount)> GetPagedProjectedAsync<TResult>(
         IMapper mapper,
         int pageIndex,
         int pageSize,
@@ -166,7 +169,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
         bool ascending = true,
         bool tracking = false,
         List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
-        bool includeSoftDeleted = false)
+        bool includeSoftDeleted = false) where TResult : class
     {
         try
         {
@@ -183,7 +186,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
 
     #region Writable Methods
 
-    public async Task AddAsync(TEntity entity)
+    public virtual async Task AddAsync(TEntity entity)
     {
         try
         {
@@ -206,7 +209,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
         }
     }
 
-    public async Task UpdateAsync(TEntity entity)
+    public virtual async Task UpdateAsync(TEntity entity)
     {
         try
         {
@@ -229,7 +232,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
         }
     }
 
-    public async Task RemoveAsync(TEntity entity)
+    public virtual async Task RemoveAsync(TEntity entity)
     {
         try
         {
@@ -243,7 +246,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
         }
     }
 
-    public async Task<TEntity> SoftDeleteAsync(TEntity entity)
+    public virtual async Task<TEntity> SoftDeleteAsync(TEntity entity)
     {
         try
         {
@@ -268,7 +271,7 @@ public class GenericService<TEntity> :IFullService<TEntity>, IReadOnlyService<TE
         }
     }
 
-    public async Task<TEntity> RestoreAsync(TEntity entity)
+    public virtual async Task<TEntity> RestoreAsync(TEntity entity)
     {
         try
         {

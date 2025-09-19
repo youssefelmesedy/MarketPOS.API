@@ -1,6 +1,6 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 
-namespace MarketPOS.Infrastructure.Services;
+namespace MarketPOS.Infrastructure.Services.AggregateService;
 public class AggregateService : IAggregateService
 {
     public IProductService ProductService { get; }

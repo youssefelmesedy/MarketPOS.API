@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Market.Domain.Entitys.DomainProduct;
+﻿namespace Market.Domain.Entitys.DomainProduct;
 public class Product : BaseEntity
 {
     public string Name { get; set; } = default!;

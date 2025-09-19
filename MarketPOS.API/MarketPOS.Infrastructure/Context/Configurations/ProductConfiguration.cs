@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-
-namespace MarketPOS.Infrastructure.Context.Configurations;
+﻿namespace MarketPOS.Infrastructure.Context.Configurations;
 #region Product Configuration
 
 public class ProductConfiguration : BaseEntityConfiguration<Product>

@@ -1,5 +1,5 @@
 ﻿namespace MarketPOS.Shared.DTOs.ProductDto;
-public class CreateProductDto 
+public class CreateProductDto
 {
     public string Name { get; set; } = default!;
     public string? Barcode { get; set; }

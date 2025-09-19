@@ -168,7 +168,7 @@ public class ResponseMiddleware
 //            context.Response.Body = originalBody;
 //            context.Response.ContentType = "application/json";
 //            context.Response.ContentLength = null;
-//            context.Response.Headers["Content-Language"] = CultureInfo.CurrentUICulture.Name;
+//            context.Response.Headers["Content-Language"] = CultureInfo.CurrentUICulture.GetByName;
 
 //            if (string.IsNullOrWhiteSpace(bodyText) ||
 //                !context.Response.ContentType.Contains("application/json"))
@@ -271,7 +271,7 @@ public class ResponseMiddleware
 //            {
 //                context.Response.Body = originalBody;
 //                context.Response.ContentType = "application/json";
-//                context.Response.Headers["Content-Language"] = CultureInfo.CurrentUICulture.Name;
+//                context.Response.Headers["Content-Language"] = CultureInfo.CurrentUICulture.GetByName;
 
 //                var fallback = JsonSerializer.Serialize(new
 //                {

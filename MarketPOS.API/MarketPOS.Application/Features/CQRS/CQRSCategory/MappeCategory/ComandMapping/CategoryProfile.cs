@@ -13,15 +13,15 @@ public partial class CategoryProfile
         CreateMap<CategoryUpdateDto, Category>()
             .ForMember(dest => dest.Name, opt =>
             {
-                opt.Condition(src => src.Name != null); // تجاهل null
+                opt.Condition(src => src.Name != null); 
                 opt.MapFrom(src => src.Name!.Trim());
             })
             .ForMember(dest => dest.Description, opt =>
             {
-                opt.Condition(src => src.Description != null); // تجاهل null
+                opt.Condition(src => src.Description != null);
                 opt.MapFrom(src => src.Description);
             })
-            .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null)); // عام لأي خاصية تانية
+            .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null)); 
     }
 
 }

@@ -1,21 +1,21 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query.QueryHandler;
-public class GetByIdCategoryQueryHandler : BaseHandler<GetByIdCategoryQueryHandler>,IRequestHandler<GetByIdCategoryQuery, ResultDto<CategoryDetalisDto>>
+public class GetByIdCategoryQueryHandler : BaseHandler<GetByIdCategoryQueryHandler>, IRequestHandler<GetByIdCategoryQuery, ResultDto<CategoryDetalisDto>>
 {
     public GetByIdCategoryQueryHandler(
         IServiceFactory serviceFactory,
         IResultFactory<GetByIdCategoryQueryHandler> resultFactory,
         IMapper mapper,
         IStringLocalizer<GetByIdCategoryQueryHandler> localizer,
-        ILocalizationPostProcessor localizationPostProcessor) : base(serviceFactory, resultFactory, mapper, localizer : localizer, localizationPostProcessor : localizationPostProcessor)
+        ILocalizationPostProcessor localizationPostProcessor) : base(serviceFactory, resultFactory, mapper, localizer: localizer, localizationPostProcessor: localizationPostProcessor)
     {
     }
     public async Task<ResultDto<CategoryDetalisDto>> Handle(GetByIdCategoryQuery request, CancellationToken cancellationToken)
     {
         var categoryService = _servicesFactory.GetService<ICategoryService>();
-       
-        var data = await categoryService.GetByIdAsync(request.Id, true, null,request.SoftDeleted);
+
+        var data = await categoryService.GetByIdAsync(request.Id, true, null, request.SoftDeleted);
 
         if (data is null)
             return _resultFactory.Fail<CategoryDetalisDto>("GetByIdFailed");

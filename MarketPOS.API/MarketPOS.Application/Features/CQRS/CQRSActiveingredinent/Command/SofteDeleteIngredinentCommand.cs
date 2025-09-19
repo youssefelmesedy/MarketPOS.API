@@ -1,7 +1,7 @@
 ﻿using MarketPOS.Shared.DTOs.SofteDleteAndRestor;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSActiveingredinent.Command;
-public class SofteDeleteIngredinentCommand  : IRequest<ResultDto<SofteDeleteDto>>
+public class SofteDeleteIngredinentCommand : IRequest<ResultDto<SofteDeleteDto>>
 {
     public Guid Id { get; set; }
 

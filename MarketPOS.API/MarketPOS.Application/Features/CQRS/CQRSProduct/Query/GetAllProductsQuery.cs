@@ -8,4 +8,3 @@ public record GetAllProductsQuery : IRequest<ResultDto<List<SomeFeaturesProductD
         SofteDelete = softeDelete;
     }
 }
-    

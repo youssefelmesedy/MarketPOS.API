@@ -2,7 +2,7 @@
 public abstract class BaseEntity
 {
     public Guid Id { get; set; } = Guid.NewGuid();
-    public DateTime CreatedAt { get; set; } 
+    public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 
     public string DeleteBy { get; set; } = string.Empty;
@@ -38,7 +38,7 @@ public class AddressInfo
 {
     public string Country { get; set; } = string.Empty;
     public string? City { get; set; }
-    public string? Street { get; set; } 
+    public string? Street { get; set; }
 }
 
 

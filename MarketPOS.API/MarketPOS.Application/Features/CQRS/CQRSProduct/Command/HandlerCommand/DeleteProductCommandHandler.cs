@@ -6,7 +6,7 @@ public class DeleteProductCommandHandler : BaseHandler<DeleteProductCommandHandl
     public DeleteProductCommandHandler
         (IServiceFactory serviceFactory,
         IResultFactory<DeleteProductCommandHandler> resultFactory,
-        IStringLocalizer<DeleteProductCommandHandler> localizer) : 
+        IStringLocalizer<DeleteProductCommandHandler> localizer) :
         base(serviceFactory, resultFactory, localizer: localizer)
     {
     }
@@ -15,11 +15,11 @@ public class DeleteProductCommandHandler : BaseHandler<DeleteProductCommandHandl
     {
         var productservice = _servicesFactory.GetService<IProductService>();
 
-        var product = await productservice.GetByIdAsync(request.Id,false);
+        var product = await productservice.GetByIdAsync(request.Id, false);
         if (product is null)
             throw new NotFoundException(nameof(Product), request.Id);
 
-           await productservice.RemoveAsync(product);
+        await productservice.RemoveAsync(product);
 
         return _resultFactory.Success(request.Id, "Deleted");
 

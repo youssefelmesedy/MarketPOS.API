@@ -10,7 +10,7 @@ public class SofteDeleteIngredinentCommandHandler : BaseHandler<SofteDeleteIngre
         IResultFactory<SofteDeleteIngredinentCommandHandler> resultFactory,
         IMapper? mapper = null,
         IStringLocalizer<SofteDeleteIngredinentCommandHandler>? localizer = null,
-        ILocalizationPostProcessor localizationPostProcessor = null!) 
+        ILocalizationPostProcessor localizationPostProcessor = null!)
         : base(services, resultFactory, mapper, null, localizer, localizationPostProcessor)
     {
     }
@@ -23,7 +23,7 @@ public class SofteDeleteIngredinentCommandHandler : BaseHandler<SofteDeleteIngre
         if (ingredinent is null)
             return _resultFactory.Fail<SofteDeleteDto>("GetByIdFailed");
 
-        if(ingredinent.IsDeleted)
+        if (ingredinent.IsDeleted)
             return _resultFactory.Fail<SofteDeleteDto>("SofteDeletedFailed");
 
         var isDeletedIngredinent = await service.SoftDeleteAsync(ingredinent);
@@ -34,6 +34,6 @@ public class SofteDeleteIngredinentCommandHandler : BaseHandler<SofteDeleteIngre
 
         var result = _localizationPostProcessor.Apply(mapping);
 
-        return _resultFactory.Success(result, "Deleted");
+        return _resultFactory.Success(result, "SofteDeleted");
     }
 }

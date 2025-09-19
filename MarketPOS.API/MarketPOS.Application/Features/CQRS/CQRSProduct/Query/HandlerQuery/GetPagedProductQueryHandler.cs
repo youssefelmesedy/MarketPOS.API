@@ -1,7 +1,7 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Query.HandlerQuery;
-public class GetPagedProductQueryHandler : BaseHandler<GetPagedProductQueryHandler>, 
+public class GetPagedProductQueryHandler : BaseHandler<GetPagedProductQueryHandler>,
     IRequestHandler<GetPagedProductQuery, ResultDto<PagedResultDto<ProductDetailsDto>>>
 {
 
@@ -35,7 +35,7 @@ public class GetPagedProductQueryHandler : BaseHandler<GetPagedProductQueryHandl
 
         var pagedResult = new PagedResultDto<ProductDetailsDto>(localizedDtoList, result.TotalCount, request.PageIndex, request.PageSize);
 
-        return _resultFactory.Success(pagedResult,"Success");
+        return _resultFactory.Success(pagedResult, "Success");
     }
 
 }

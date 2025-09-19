@@ -8,8 +8,8 @@ public class UpdateWareHouseCommandHandler : BaseHandler<UpdateWareHouseCommandH
         IServiceFactory services,
         IResultFactory<UpdateWareHouseCommandHandler> resultFactory,
         IMapper? mapper = null,
-        IStringLocalizer<UpdateWareHouseCommandHandler>? localizer = null, 
-        ILocalizationPostProcessor localizationPostProcessor = null!) 
+        IStringLocalizer<UpdateWareHouseCommandHandler>? localizer = null,
+        ILocalizationPostProcessor localizationPostProcessor = null!)
         : base(services, resultFactory, mapper, null, localizer, localizationPostProcessor)
     {
     }
@@ -28,7 +28,7 @@ public class UpdateWareHouseCommandHandler : BaseHandler<UpdateWareHouseCommandH
             return _resultFactory.Fail<Guid>($"DuplicateWareHouseName: \n {existWareHouse.Select(p => p.Id).First()}");
 
         var wareHouse = await wareHouseService.GetByIdAsync(request.Dto.Id, true);
-        if(wareHouse is null)
+        if (wareHouse is null)
             return _resultFactory.Fail<Guid>("GetByIdFailed");
 
         UpdateWareHouse(wareHouse, request.Dto);

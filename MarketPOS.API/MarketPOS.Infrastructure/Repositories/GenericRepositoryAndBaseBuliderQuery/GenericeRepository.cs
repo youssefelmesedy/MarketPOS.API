@@ -1,6 +1,6 @@
 ﻿using AutoMapper.QueryableExtensions;
 
-namespace Market.POS.Infrastructure.Repositories;
+namespace MarketPOS.Infrastructure.Repositories.GenericRepositoryAndBaseBuliderQuery;
 
 public class GenericeRepository<T> : BaseBuildeQuery<T>, IFullRepository<T> where T : class
 {
@@ -21,7 +21,7 @@ public class GenericeRepository<T> : BaseBuildeQuery<T>, IFullRepository<T> wher
     bool includeSoftDeleted = false,
     bool applyIncludes = false)
     {
-        var query = BuildQuery(filter, tracking, includeExpressions, includeSoftDeleted, ordering,applyIncludes);
+        var query = BuildQuery(filter, tracking, includeExpressions, includeSoftDeleted, ordering, applyIncludes);
 
         var total = await query.CountAsync();
         var data = await query
@@ -122,8 +122,8 @@ public class GenericeRepository<T> : BaseBuildeQuery<T>, IFullRepository<T> wher
     {
         IQueryable<T> query = BuildQuery(filter, tracking, includeExpressions, includeSoftDeleted, ordering, applyIncludes);
 
-        //if (orderBy != null)
-        //    query = ascending ? query.OrderBy(orderBy) : query.OrderByDescending(orderBy);
+        //if (ordering != null)
+        //    query = ascending ? query.OrderBy(ordering) : query.OrderByDescending(orderBy);
 
         var total = await query.CountAsync();
         var data = await query
@@ -132,11 +132,6 @@ public class GenericeRepository<T> : BaseBuildeQuery<T>, IFullRepository<T> wher
             .ToListAsync();
 
         return (data, total);
-    }
-
-    public async Task<IEnumerable<T>> GetAllIncludingSoftDeletedAsync()
-    {
-        return await BuildQuery(null, false, null, includeSoftDeleted: true).ToListAsync();
     }
     #endregion
 
