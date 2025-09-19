@@ -1,6 +1,6 @@
 ﻿namespace MarketPOS.API.Middlewares.Filters;
 public class ValidateParameterAttribute : ActionFilterAttribute
-{   
+{
     private readonly string _paramName;
     private readonly ParameterValidationType _validationType;
     private readonly Type? _enumType;

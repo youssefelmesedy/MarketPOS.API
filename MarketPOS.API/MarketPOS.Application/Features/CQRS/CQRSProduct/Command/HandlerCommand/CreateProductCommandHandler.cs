@@ -3,11 +3,11 @@
 namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Command.HandlerCommand;
 public class CreateProductCommandHandler : BaseHandler<CreateProductCommandHandler>, IRequestHandler<CreateProductCommand, ResultDto<Guid>>
 {
-    
+
     public CreateProductCommandHandler
         (
         IServiceFactory serviceFactory,
-        IResultFactory<CreateProductCommandHandler>resultFactory,
+        IResultFactory<CreateProductCommandHandler> resultFactory,
         IMapper mapper,
         IStringLocalizer<CreateProductCommandHandler> localizer)
        : base(serviceFactory, resultFactory, mapper, localizer: localizer)

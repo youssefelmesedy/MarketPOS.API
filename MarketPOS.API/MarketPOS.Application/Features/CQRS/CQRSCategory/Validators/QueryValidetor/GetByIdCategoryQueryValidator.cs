@@ -3,6 +3,6 @@ public class GetByIdCategoryQueryValidator : BaseValidator<GetByIdCategoryQuery>
 {
     public GetByIdCategoryQueryValidator()
     {
-        RuleForId(x => x.Id,"ID");
+        RuleForId(x => x.Id, "ID");
     }
 }

@@ -25,17 +25,17 @@ public class GetProductByIdHandler : BaseHandler<GetProductByIdHandler>, IReques
         });
 
         var product = await productServic
-            .GetByIdAsync(request.Id, true, includeExpressions: includeExpressions , request.SoftDelete);
+            .GetByIdAsync(request.Id, true, includeExpressions: includeExpressions, request.SoftDelete);
 
         if (product is null)
             return _resultFactory.Fail<ProductDetailsDto>("NotFound");
 
         var mappeing = _mapper?.Map<ProductDetailsDto>(product);
-        if(mappeing is null)
+        if (mappeing is null)
             return _resultFactory.Fail<ProductDetailsDto>("MappingError");
 
         var localizer = _localizationPostProcessor.Apply(mappeing);
-        
+
         return _resultFactory.Success(localizer, "Success");
     }
 }

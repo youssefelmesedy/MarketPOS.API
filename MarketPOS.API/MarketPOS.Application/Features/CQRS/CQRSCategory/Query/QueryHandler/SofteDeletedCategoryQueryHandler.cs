@@ -1,6 +1,5 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 using MarketPOS.Shared.DTOs.SofteDleteAndRestor;
-using System.Net;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query.QueryHandler;
 public class SofteDeletedCategoryQueryHandler : BaseHandler<SofteDeletedCategoryQueryHandler>, IRequestHandler<SofteCategoryDeletedQuery, ResultDto<SofteDeleteDto>>
@@ -9,15 +8,15 @@ public class SofteDeletedCategoryQueryHandler : BaseHandler<SofteDeletedCategory
         IServiceFactory servicesFactory,
         IResultFactory<SofteDeletedCategoryQueryHandler> resultFactory,
         IMapper mapper,
-        IStringLocalizer<SofteDeletedCategoryQueryHandler> localizer) 
-        : base(servicesFactory, resultFactory, mapper, localizer : localizer)
+        IStringLocalizer<SofteDeletedCategoryQueryHandler> localizer)
+        : base(servicesFactory, resultFactory, mapper, localizer: localizer)
     { }
 
     public async Task<ResultDto<SofteDeleteDto>> Handle(SofteCategoryDeletedQuery request, CancellationToken cancellationToken)
     {
         var categoryService = _servicesFactory.GetService<ICategoryService>();
 
-        var category = await categoryService.GetByIdAsync(request.Id, true, includeSoftDeleted : true);
+        var category = await categoryService.GetByIdAsync(request.Id, true, includeSoftDeleted: true);
         if (category is null)
             return _resultFactory.Fail<SofteDeleteDto>("NotFound");
 

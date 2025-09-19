@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using MarketPOS.Application.Common.Exceptions;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using System.Text.RegularExpressions;
 using YourProjectNamespace.Application.Common.Exceptions;
 
 namespace MarketPOS.Infrastructure.Exceptions;
@@ -181,7 +179,7 @@ namespace MarketPOS.Infrastructure.Exceptions;
 //            Status = statusCode,
 //            Instance = context.Request.Path,
 //            Type = $"https://httpstatuses.com/{statusCode}",
-//            Title = _localizer[ex.GetType().Name],
+//            Title = _localizer[ex.GetType().GetByName],
 //            Detail = _env.IsDevelopment() ? ex.ToString() : _localizer["Something went wrong."],
 //            ErrorSource = ex.Source
 //        };
@@ -190,7 +188,7 @@ namespace MarketPOS.Infrastructure.Exceptions;
 //        if (ex is AutoMapperMappingException mapEx)
 //        {
 //            defaultProblem.Title = _localizer["MappingError"];
-//            defaultProblem.ErrorCode = mapEx.InnerException?.GetType().Name;
+//            defaultProblem.ErrorCode = mapEx.InnerException?.GetType().GetByName;
 //            defaultProblem.Detail = mapEx.InnerException?.Message ?? _localizer["Mapping failed."];
 //            defaultProblem.ErrorSource = mapEx.MemberMap?.DestinationName ?? ex.Source;
 //        }

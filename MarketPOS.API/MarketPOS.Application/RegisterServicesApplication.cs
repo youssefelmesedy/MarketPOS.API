@@ -8,7 +8,7 @@
                .ToArray();
 
         // ✅ تسجيل AutoMapper (لـ DTO ↔️ Entity)
-        services.AddAutoMapper(assemblies);
+        services.AddAutoMapper(cfg => { }, assemblies);
 
         // ✅ تسجيل MediatR ومعالجة كل الـ Handlers العادية
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));

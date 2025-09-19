@@ -1,4 +1,4 @@
-﻿using MarketPOS.API.Middlewares.FuatuersFunction;
+﻿using MarketPOS.API.Middlewares.FeaturesFunction;
 using MarketPOS.Application.Features.CQRS.CQRSActiveingredinent.Command;
 using MarketPOS.Application.Features.CQRS.CQRSActiveingredinent.Query;
 using MarketPOS.Shared.DTOs.ActivelngredientsDTO;
@@ -11,10 +11,10 @@ public class IngredinentController : ControllerBase
 {
     private readonly IMediator _mediator;
     private readonly IStringLocalizer<IngredinentController> _localizar;
-    public IngredinentController(IMediator mediator, IStringLocalizer<IngredinentController> localizar = null!)
+    public IngredinentController(IMediator mediator, IStringLocalizer<IngredinentController> localizar)
     {
-        _mediator = mediator;
-        _localizar = localizar;
+        _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        _localizar = localizar ?? throw new ArgumentNullException(nameof(localizar));
     }
 
     [HttpGet("GetAll")]
@@ -25,13 +25,8 @@ public class IngredinentController : ControllerBase
     public async Task<IActionResult> GetAll([FromQuery] bool SoftDeleted)
     {
         var result = await _mediator.Send(new GetAllActiveIngredinentQuery(SoftDeleted));
-        if(result.Errors is not null)
-            return ErrorFunction.BadRequest(result.IsSuccess, result.Message, result.Errors);
 
-        if (result.Data is null || !result.Data.Any())
-            return ErrorFunction.NotFound(result.IsSuccess, result.Message, result.Errors);
-
-        return Ok(result);
+        return HelperMethod.HandleResult(result, _localizar);
     }
 
     // GET api/<IngredinentController>/5
@@ -44,14 +39,12 @@ public class IngredinentController : ControllerBase
     public async Task<IActionResult> GetById(Guid id, [FromQuery] bool Softdeleted)
     {
         var result = await _mediator.Send(new GetByIdInegredinentQuery(id, Softdeleted));
-        if (result.Data is null)
-            return ErrorFunction.NotFound(false, result.Message, result.Errors);
 
-        return Ok(result);
+        return HelperMethod.HandleResult(result, _localizar);
     }
 
     [HttpGet("GetByName/")]
-    [TypeFilter(typeof(ValidateParameterAttribute), Arguments = new object[] { "Name", ParameterValidationType.NonEmptyString})]
+    [TypeFilter(typeof(ValidateParameterAttribute), Arguments = new object[] { "GetByName", ParameterValidationType.NonEmptyString })]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
@@ -59,12 +52,8 @@ public class IngredinentController : ControllerBase
     public async Task<IActionResult> GetByName(string Name, [FromQuery] bool Softdeleted)
     {
         var result = await _mediator.Send(new GetIngredinentByNameQuery(Name, Softdeleted));
-        if (result.Errors is not null)
-            return ErrorFunction.BadRequest(false, result.Message, result.Errors);
-        else if(result.Data is null)
-            return ErrorFunction.NotFound(false, result.Message, result.Errors);
 
-            return Ok(result);
+        return HelperMethod.HandleResult(result, _localizar);
     }
 
     // POST api/<IngredinentController>
@@ -78,17 +67,13 @@ public class IngredinentController : ControllerBase
     {
 
         var result = await _mediator.Send(new CreateActivIngredinentCommand(dto));
-        if(result.Errors is not null)
-            return ErrorFunction.BadRequest(result.IsSuccess, result.Message, result.Errors);
 
-        if (result.Message!.Equals(_localizar["DuplicateActiveIngredinentName"]))
-            return ErrorFunction.ConflictRequest(result.IsSuccess, result.Message, result.Errors);
-
-        if (result.Data == Guid.Empty)
-            return ErrorFunction.BadRequest(false, result.Message, result.Errors);
-
-        var createdItem = await _mediator.Send(new GetByIdInegredinentQuery(result.Data, false));
-        return CreatedAtAction(nameof(GetById), new { id = createdItem.Data!.Id, Softdeleted = false }, createdItem);
+        return await HelperMethod.HandleCreatedResult(
+         result,
+         nameof(GetById),
+         async (id) => await _mediator.Send(new GetByIdInegredinentQuery(id, false)),
+         _localizar
+        );
     }
 
     // PUT api/<IngredinentController>/5
@@ -99,20 +84,14 @@ public class IngredinentController : ControllerBase
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status500InternalServerError)]
     [TypeFilter(typeof(ValidateParameterAttribute), Arguments = new object[] { "Id", ParameterValidationType.Guid })]
-    public async Task<IActionResult> Put([FromQuery]Guid id, [FromBody] CommandActiveIngredinentsDTO dto, [FromQuery] bool SofteDelete)
+    public async Task<IActionResult> Put([FromQuery] Guid id, [FromBody] CommandActiveIngredinentsDTO dto, [FromQuery] bool SofteDelete)
     {
         var result = await _mediator.Send(new UpdateIngredinentCommand(id, dto, SofteDelete));
 
-        if (result.Errors is not null)
-            return ErrorFunction.BadRequest(result.IsSuccess, result.Message, result.Errors);
-
-        if (result.Message!.Equals(_localizar["DuplicateActiveIngredinentName"]))
-            return ErrorFunction.ConflictRequest(result.IsSuccess, result.Message, result.Errors);
-
-        if (result.Data == Guid.Empty)
-            return ErrorFunction.BadRequest(false, result.Message, result.Errors);
-
-        return Ok(result);
+        return await HelperMethod.ProcessResultAsync(
+            result,
+            async(id) => await _mediator.Send(new GetByIdInegredinentQuery(id, false)),
+            _localizar);
     }
 
     [HttpPatch("SofteDelete/")]
@@ -124,13 +103,8 @@ public class IngredinentController : ControllerBase
     public async Task<IActionResult> SofteDelete([FromQuery] Guid id)
     {
         var result = await _mediator.Send(new SofteDeleteIngredinentCommand(id));
-        if(result.Errors is not null)
-            return ErrorFunction.BadRequest(result.IsSuccess, result.Message, result.Errors);
 
-        if (result.Data is null)
-            return ErrorFunction.NotFound(false, result.Message, result.Errors);
-
-        return Ok(result);
+        return HelperMethod.HandleResult(result, _localizar);
     }
 
     [HttpPatch("Restore/")]
@@ -142,12 +116,7 @@ public class IngredinentController : ControllerBase
     public async Task<IActionResult> Restore([FromQuery] Guid id)
     {
         var result = await _mediator.Send(new RestorIngredinentCommand(id));
-        if(result.Errors is not null)
-            return ErrorFunction.BadRequest(result.IsSuccess, result.Message, result.Errors);
 
-        if (result.Data is null)
-            return ErrorFunction.NotFound(false, result.Message, result.Errors);
-
-        return Ok(result);
+        return HelperMethod.HandleResult(result, _localizar);
     }
 }

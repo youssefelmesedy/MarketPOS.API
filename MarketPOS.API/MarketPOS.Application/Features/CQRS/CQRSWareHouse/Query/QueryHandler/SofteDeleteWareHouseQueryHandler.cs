@@ -2,15 +2,15 @@
 using MarketPOS.Shared.DTOs.SofteDleteAndRestor;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSWareHouse.Query.QueryHandler;
-public class SofteDeleteWareHouseQueryHandler : BaseHandler<SofteDeleteWareHouseQueryHandler>, 
+public class SofteDeleteWareHouseQueryHandler : BaseHandler<SofteDeleteWareHouseQueryHandler>,
     IRequestHandler<SofteDeleteWareHouseQuery, ResultDto<SofteDeleteDto>>
 {
     public SofteDeleteWareHouseQueryHandler(
-        IServiceFactory services, 
+        IServiceFactory services,
         IResultFactory<SofteDeleteWareHouseQueryHandler> resultFactory,
-        IMapper? mapper = null, 
+        IMapper? mapper = null,
         IStringLocalizer<SofteDeleteWareHouseQueryHandler>? localizer = null,
-        ILocalizationPostProcessor localizationPostProcessor = null!) 
+        ILocalizationPostProcessor localizationPostProcessor = null!)
         : base(services, resultFactory, mapper, null, localizer, localizationPostProcessor)
     {
     }
@@ -20,7 +20,7 @@ public class SofteDeleteWareHouseQueryHandler : BaseHandler<SofteDeleteWareHouse
         var wareHouseService = _servicesFactory.GetService<IWareHouseService>();
 
         var wareHouse = await wareHouseService.GetByIdAsync(request.Id, includeSoftDeleted: true);
-        if(wareHouse is null)
+        if (wareHouse is null)
             return _resultFactory.Fail<SofteDeleteDto>("GetByIdFailed");
 
         if (wareHouse.IsDeleted)

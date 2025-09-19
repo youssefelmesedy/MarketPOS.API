@@ -1,11 +1,7 @@
-﻿using MarketPOS.Application.Specifications;
-
-namespace MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
-public interface IProductService :IFullService<Product>
+﻿namespace MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
+public interface IProductService : IFullService<Product>
 {
     Task<IEnumerable<Product>> GetByNameAsync(string name, List<Func<IQueryable<Product>, IQueryable<Product>>> includes, bool icludSofteDelete = false);
-
-    Task<IEnumerable<Product>?> GetProductbyCategoryIdSpce(ISpecification<Product> specification);
 
     Task<IEnumerable<Product>> GetAllWithCategoryAsync
         (Guid? CategoryId = null,

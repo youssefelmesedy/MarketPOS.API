@@ -1,16 +1,16 @@
-using Xunit;
-using FluentAssertions;
-using Moq;
 using AutoMapper;
-using Microsoft.Extensions.Localization;
+using FluentAssertions;
+using Market.Domain.Entitys.DomainCategory;
+using MarketPOS.Application.Common.Exceptions;
 using MarketPOS.Application.Features.CQRS.CQRSProduct.Command;
 using MarketPOS.Application.Features.CQRS.CQRSProduct.Command.HandlerCommand;
-using MarketPOS.Shared.DTOs.ProductDto;
-using MarketPOS.Design.FactoryResult;
-using Market.Domain.Entitys.DomainCategory;
-using MarketPOS.Design.FactoryServices;
-using MarketPOS.Application.Common.Exceptions;
 using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
+using MarketPOS.Design.FactoryResult;
+using MarketPOS.Design.FactoryServices;
+using MarketPOS.Shared.DTOs.ProductDto;
+using Microsoft.Extensions.Localization;
+using Moq;
+using Xunit;
 
 public class CreateProductHandlerTests
 {
@@ -33,7 +33,7 @@ public class CreateProductHandlerTests
         };
 
         var categoryServiceMock = new Mock<ICategoryService>();
-        categoryServiceMock.Setup(s => s.GetByIdAsync(It.IsAny<Guid>(),false,null,false,false))
+        categoryServiceMock.Setup(s => s.GetByIdAsync(It.IsAny<Guid>(), false, null, false, false))
                            .ReturnsAsync((Category?)null);
 
         var serviceFactoryMock = new Mock<IServiceFactory>();

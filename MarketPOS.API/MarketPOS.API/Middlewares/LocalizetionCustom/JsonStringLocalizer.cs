@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Collections.Concurrent;
 using System.Globalization;
 namespace MarketPOS.API.Middlewares.LocalizetionCustom;
 
@@ -31,7 +30,7 @@ namespace MarketPOS.API.Middlewares.LocalizetionCustom;
 
 //    public IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures)
 //    {
-//        var filePath = $"Resources/{Thread.CurrentThread.CurrentCulture.Name}.json";
+//        var filePath = $"Resources/{Thread.CurrentThread.CurrentCulture.GetByName}.json";
 
 //        using FileStream FileStream = new(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
 
@@ -76,7 +75,7 @@ namespace MarketPOS.API.Middlewares.LocalizetionCustom;
 
 //    private string GetString(string key)
 //    {
-//        var filePath =$"Resources/{Thread.CurrentThread.CurrentCulture.Name}.json";
+//        var filePath =$"Resources/{Thread.CurrentThread.CurrentCulture.GetByName}.json";
 //        var fullFilePath = Path.GetFullPath(filePath);
 
 //        if (File.Exists(fullFilePath))

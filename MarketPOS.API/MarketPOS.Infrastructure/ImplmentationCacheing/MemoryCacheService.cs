@@ -14,12 +14,27 @@ public class MemoryCacheService : IGenericCache
         _logger = logger;
         _localizer = localizer;
     }
+    public string BuildCacheKey(params object?[] parts)
+    {
+        return string.Join("_", parts.Select(p =>
+        {
+            if (p == null) return "null";
 
+            // لو object عبارة عن expression أو delegate
+            var type = p.GetType();
+            if (type.IsSubclassOf(typeof(Delegate)) || type.Name.Contains("Expression"))
+            {
+                return p.GetHashCode().ToString(); // بدل ToString
+            }
+
+            return p.ToString();
+        }));
+    }
     public Task<T?> GetAsync<T>(string key)
     {
         try
         {
-            if(_memoryCache.TryGetValue(key, out T? value))
+            if (_memoryCache.TryGetValue(key, out T? value))
             {
                 _logger.LogInformation(_localizer["Success"] + $"(Cache Hit): Key = {key}");
                 return Task.FromResult<T?>(value);
@@ -32,7 +47,7 @@ public class MemoryCacheService : IGenericCache
         {
             _logger.LogError(ex, _localizer["GetByIdFailed"] + $" (Key={key})");
             return Task.FromResult<T?>(default);
-        } 
+        }
     }
     public Task SetAsync<T>(string key, T value, TimeSpan? absoluteExpiration = null)
     {
@@ -69,4 +84,18 @@ public class MemoryCacheService : IGenericCache
 
         return Task.CompletedTask;
     }
+
+    public async Task<T> GetOrAddAsync<T>(string key, Func<Task<T>> factory, TimeSpan? absoluteExpiration = null)
+    {
+        var existing = await GetAsync<T>(key);
+        if (existing != null)
+            return existing;
+
+        var value = await factory();
+        if (value != null)
+            await SetAsync(key, value, absoluteExpiration);
+
+        return value!;
+    }
+
 }

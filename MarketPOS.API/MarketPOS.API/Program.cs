@@ -27,6 +27,7 @@ if (cacheProvider?.Equals("Redis", StringComparison.OrdinalIgnoreCase) == true)
         options.Configuration = builder.Configuration["CacheSettings:RedisConnection"];
         options.InstanceName = "MarketPOS_";
     });
+    
     builder.Services.AddScoped<IGenericCache, RedisCacheService>();
 }
 else

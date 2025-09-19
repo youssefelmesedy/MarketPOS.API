@@ -14,9 +14,9 @@ public partial class ProductProfile
                   : new List<Guid>()))
 
             .ForMember(dest => dest.IngredinentName,
-                opt => opt.MapFrom(src => src.ProductIngredients != null 
-                  ? src.ProductIngredients.Select(pi => pi.ActiveIngredinents.Name).ToList() 
-                  : new List<string?>() { "Not Found Ingredients "}))
+                opt => opt.MapFrom(src => src.ProductIngredients != null
+                  ? src.ProductIngredients.Select(pi => pi.ActiveIngredinents.Name).ToList()
+                  : new List<string?>() { "Not Found Ingredients " }))
 
             .ForMember(dest => dest.WaerHousId,
                 opt => opt.MapFrom(src => src.ProductInventories != null

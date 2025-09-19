@@ -9,7 +9,7 @@ public class RestorIngredinentCommandHandler : BaseHandler<RestorIngredinentComm
         IServiceFactory services,
         IResultFactory<RestorIngredinentCommandHandler> resultFactory,
         IMapper? mapper = null,
-        IStringLocalizer<RestorIngredinentCommandHandler>? localizer = null) 
+        IStringLocalizer<RestorIngredinentCommandHandler>? localizer = null)
         : base(services, resultFactory, mapper, null, localizer)
     {
     }
@@ -22,10 +22,10 @@ public class RestorIngredinentCommandHandler : BaseHandler<RestorIngredinentComm
         if (ingerdient is null)
             return _resultFactory.Fail<RestorDto>("GetByIdFailed");
 
-        if(!ingerdient.IsDeleted)
+        if (!ingerdient.IsDeleted)
             return _resultFactory.Fail<RestorDto>("RestoreFailed");
 
-         await service.RestoreAsync(ingerdient);
+        await service.RestoreAsync(ingerdient);
 
         var mapping = _mapper?.Map<RestorDto>(ingerdient);
         if (mapping is null)

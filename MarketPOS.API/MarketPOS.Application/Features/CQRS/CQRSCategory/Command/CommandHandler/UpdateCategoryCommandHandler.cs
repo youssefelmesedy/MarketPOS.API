@@ -29,7 +29,7 @@ public class UpdateCategoryCommandHandler : BaseHandler<UpdateCategoryCommandHan
                                                                      c.Id != category.Id);
 
         if (existCategoryName.Any())
-         return _resultFactory.Fail<Guid>("DuplicateCategoryName");
+            return _resultFactory.Fail<Guid>("DuplicateCategoryName");
 
         await serviceCategory.UpdateAsync(category);
 

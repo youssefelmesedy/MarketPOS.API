@@ -5,10 +5,10 @@ public class GetByNameProductQueryHandler : BaseHandler<GetByNameProductQueryHan
 {
 
     public GetByNameProductQueryHandler(
-        IServiceFactory serviceFactoory, 
+        IServiceFactory serviceFactoory,
         IResultFactory<GetByNameProductQueryHandler> resultFactory,
         IMapper mapper, IStringLocalizer<GetByNameProductQueryHandler> localizer,
-        ILocalizationPostProcessor localizationPostProcessor) 
+        ILocalizationPostProcessor localizationPostProcessor)
         : base(serviceFactoory, resultFactory, mapper, null, localizer, localizationPostProcessor)
     {
     }
@@ -31,7 +31,7 @@ public class GetByNameProductQueryHandler : BaseHandler<GetByNameProductQueryHan
         var data = await service.GetByNameAsync(request.Name!, includes, request.IncludSofteDelete);
         if (data is null || !data.Any())
             return _resultFactory.Fail<IEnumerable<SomeFeaturesProductDto>>("GetByNameFailed");
-        
+
 
         var mappeing = _mapper?.Map<IEnumerable<SomeFeaturesProductDto>>(data);
         if (mappeing is null)

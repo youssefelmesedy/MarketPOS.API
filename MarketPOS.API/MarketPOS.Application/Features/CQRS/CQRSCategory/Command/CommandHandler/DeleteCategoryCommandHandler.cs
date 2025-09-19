@@ -15,10 +15,10 @@ public class DeleteCategoryCommandHandler : BaseHandler<DeleteCategoryCommandHan
         var service = _servicesFactory.GetService<ICategoryService>();
 
         var category = await service.GetByIdAsync(request.Id);
-        if  (category is null) 
+        if (category is null)
             throw new NotFoundException($"Not Found Category with Id: {request.Id}");
 
-         await service.RemoveAsync(category);
+        await service.RemoveAsync(category);
 
         return _resultFactory.Success<Guid>(request.Id, "Deleted");
     }

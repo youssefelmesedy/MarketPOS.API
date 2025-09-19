@@ -22,8 +22,8 @@ public class UpdateIngredinentCommandHandler : BaseHandler<UpdateIngredinentComm
             return _resultFactory.Fail<Guid>("GetByIdFailed");
 
         var existName = await _service.FindAsync(i => i.Name!.Trim().ToLower() == request.Dto.Name.Trim().ToLower()
-                                                            && i.Id != request.Id);
-        if(existName.Any())
+                                                            && i.Id != request.Id, includeSoftDeleted: true);
+        if (existName.Any())
             return _resultFactory.Fail<Guid>("DuplicateActiveIngredinentName");
 
         _mapper?.Map(request.Dto, existIngredinent);

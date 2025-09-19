@@ -7,11 +7,11 @@ public class GetAllWareHouseQueryHandler : BaseHandler<GetAllWareHouseQueryHandl
 {
 
     public GetAllWareHouseQueryHandler(
-        IServiceFactory services, 
-        IResultFactory<GetAllWareHouseQueryHandler> resultFactory, 
-        IMapper? mapper = null, 
+        IServiceFactory services,
+        IResultFactory<GetAllWareHouseQueryHandler> resultFactory,
+        IMapper? mapper = null,
         IStringLocalizer<GetAllWareHouseQueryHandler>? localizer = null,
-        ILocalizationPostProcessor localizationPostProcessor = null!) 
+        ILocalizationPostProcessor localizationPostProcessor = null!)
         : base(services, resultFactory, mapper, null, localizer, localizationPostProcessor)
     {
     }
@@ -20,7 +20,7 @@ public class GetAllWareHouseQueryHandler : BaseHandler<GetAllWareHouseQueryHandl
     {
         var categoryService = _servicesFactory.GetService<IWareHouseService>();
 
-        var wareHouses =await categoryService.GetAllAsync(includeSoftDeleted: request.SofteDelete, ordering: p => p.OrderBy(w => w.Name), applyIncludes: false);
+        var wareHouses = await categoryService.GetAllAsync(includeSoftDeleted: request.SofteDelete, ordering: p => p.OrderBy(w => w.Name), applyIncludes: false);
         if (wareHouses is null)
             return _resultFactory.Fail<IEnumerable<WareHouseDetailsDto>>("GetAllFailed");
 

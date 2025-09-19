@@ -6,11 +6,11 @@ public class GetByIdInegredinentQueryHandler : BaseHandler<GetAllActiveIngredine
     IRequestHandler<GetByIdInegredinentQuery, ResultDto<ActiveIngredinentsDetalisDTO>>
 {
     public GetByIdInegredinentQueryHandler(
-        IServiceFactory services, 
+        IServiceFactory services,
         IResultFactory<GetAllActiveIngredinentQueryHandler> resultFactory,
         IMapper? mapper = null,
         IStringLocalizer<GetAllActiveIngredinentQueryHandler>? localizer = null,
-        ILocalizationPostProcessor localizationPostProcessor = null!) 
+        ILocalizationPostProcessor localizationPostProcessor = null!)
         : base(services, resultFactory, mapper, null, localizer, localizationPostProcessor)
     {
     }

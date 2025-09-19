@@ -7,27 +7,19 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AspNetCore.Localizer.Json" Version="1.0.1" />
-		<PackageReference Include="AutoMapper" Version="14.0.0" />
+		<PackageReference Include="AspNetCore.Localizer.Json" Version="1.0.2" />
+		<PackageReference Include="AutoMapper" Version="15.0.1" />
 		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.1" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
-		<PackageReference Include="MediatR" Version="12.5.0" />
+		<PackageReference Include="MediatR" Version="13.0.0" />
 		<PackageReference Include="MediatR.Extensions.FluentValidation.AspNetCore" Version="6.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.6" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.6" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.6">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.9">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.6" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.6">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.8" />
-		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.6" />
-		<PackageReference Include="NSwag.AspNetCore" Version="14.4.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.6" />
+		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.9" />
+		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.9" />
+		<PackageReference Include="NSwag.AspNetCore" Version="14.6.0" />
 		<PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
 	</ItemGroup>
 

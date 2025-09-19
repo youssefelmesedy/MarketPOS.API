@@ -8,8 +8,8 @@ public class RestorWareHouseQueryHandler : BaseHandler<RestorWareHouseQueryHandl
     public RestorWareHouseQueryHandler(
         IServiceFactory services,
         IResultFactory<RestorWareHouseQueryHandler> resultFactory,
-        IMapper? mapper = null, 
-        IStringLocalizer<RestorWareHouseQueryHandler>? localizer = null, 
+        IMapper? mapper = null,
+        IStringLocalizer<RestorWareHouseQueryHandler>? localizer = null,
         ILocalizationPostProcessor localizationPostProcessor = null!)
         : base(services, resultFactory, mapper, null, localizer, localizationPostProcessor)
     {
@@ -23,7 +23,7 @@ public class RestorWareHouseQueryHandler : BaseHandler<RestorWareHouseQueryHandl
         if (wareHouse is null)
             return _resultFactory.Fail<RestorDto>("GetByIdFailed");
 
-        if(!wareHouse.IsDeleted)
+        if (!wareHouse.IsDeleted)
             return _resultFactory.Fail<RestorDto>("RestoreFailed");
 
         var result = await wareHouseService.RestoreAsync(wareHouse);

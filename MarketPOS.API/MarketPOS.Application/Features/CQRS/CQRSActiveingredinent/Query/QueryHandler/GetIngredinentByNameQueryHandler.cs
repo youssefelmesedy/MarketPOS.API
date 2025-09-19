@@ -1,4 +1,4 @@
-﻿  using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
+﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 using MarketPOS.Shared.DTOs.ActivelngredientsDTO;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSActiveingredinent.Query.QueryHandler;
@@ -10,7 +10,7 @@ public class GetIngredinentByNameQueryHandler : BaseHandler<GetIngredinentByName
         IResultFactory<GetIngredinentByNameQueryHandler> resultFactory,
         IMapper? mapper = null,
         IStringLocalizer<GetIngredinentByNameQueryHandler>? localizer = null,
-        ILocalizationPostProcessor localizationPostProcessor = null!) 
+        ILocalizationPostProcessor localizationPostProcessor = null!)
         : base(services, resultFactory, mapper, null, localizer, localizationPostProcessor)
     {
     }
@@ -22,7 +22,7 @@ public class GetIngredinentByNameQueryHandler : BaseHandler<GetIngredinentByName
         var ingredinents = await service.FindAsync(i => i.Name!.Trim().ToLower() == request.Name.Trim().ToLower(),
                                                          includeSoftDeleted: request.SofteDeleted);
         if (!ingredinents.Any())
-           return  _resultFactory.Fail<ActiveIngredinentsDetalisDTO>("NotFound");
+            return _resultFactory.Fail<ActiveIngredinentsDetalisDTO>("NotFound");
 
         var mapping = _mapper?.Map<ActiveIngredinentsDetalisDTO>(ingredinents.First());
         if (mapping is null)

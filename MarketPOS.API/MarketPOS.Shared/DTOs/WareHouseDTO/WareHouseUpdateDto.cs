@@ -1,4 +1,4 @@
-﻿namespace MarketPOS.Shared.DTOs.WareHouseDTO; 
+﻿namespace MarketPOS.Shared.DTOs.WareHouseDTO;
 public class WareHouseUpdateDto
 {
     public Guid Id { get; set; }

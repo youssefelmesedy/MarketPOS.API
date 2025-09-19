@@ -1,12 +1,10 @@
-﻿using MarketPOS.Application.Specifications;
+﻿using MarketPOS.Infrastructure.Repositories.GenericRepositoryAndBaseBuliderQuery;
 
 namespace MarketPOS.Infrastructure.Repositories.ProductRepositorys;
 public class ProductRepository : GenericeRepository<Product>, IProductRepo
 {
-    private readonly ISpecificationEvaluator<Product> _specificationEvaluator;
-    public ProductRepository(ApplicationDbContext context, ISpecificationEvaluator<Product> specificationEvaluator = null!) : base(context)
+    public ProductRepository(ApplicationDbContext context) : base(context)
     {
-        _specificationEvaluator = specificationEvaluator;
     }
 
     public async Task<IEnumerable<Product>> GetAllWithCategoryAsync(Guid? categoryId = null)
@@ -18,10 +16,4 @@ public class ProductRepository : GenericeRepository<Product>, IProductRepo
 
         return await query.ToListAsync();
     }
-    public async Task<IEnumerable<Product>> GetBySpecificationAsync(ISpecification<Product> specification)
-    {
-        var query = _specificationEvaluator.GetQuery(_dbSet.AsQueryable(), specification);
-        return await query.ToListAsync();
-    }
-
 }

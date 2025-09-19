@@ -1,5 +1,5 @@
 ﻿namespace Market.Domain.Entitys.DomainProduct;
-public class ProductActiveIngredient 
+public class ProductActiveIngredient
 {
     public Guid ProductId { get; set; }
     public Product Product { get; set; } = default!;

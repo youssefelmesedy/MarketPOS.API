@@ -1,4 +1,6 @@
-﻿namespace MarketPOS.Infrastructure.Repositories.ProductRepositorys;
+﻿using MarketPOS.Infrastructure.Repositories.GenericRepositoryAndBaseBuliderQuery;
+
+namespace MarketPOS.Infrastructure.Repositories.ProductRepositorys;
 public class ProductPriceRepository : GenericeRepository<ProductPrice>, IProductPriceRepo
 {
     public ProductPriceRepository(ApplicationDbContext context) : base(context)
@@ -9,7 +11,7 @@ public class ProductPriceRepository : GenericeRepository<ProductPrice>, IProduct
     {
         var entity = await _dbSet
             .Include(p => p.Product)
-            .FirstOrDefaultAsync(p => p.ProductId == productId); 
+            .FirstOrDefaultAsync(p => p.ProductId == productId);
 
         return entity ?? throw new KeyNotFoundException($"ProductPrice with Product ID {productId} not found.");
     }

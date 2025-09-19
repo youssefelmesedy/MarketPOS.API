@@ -30,10 +30,10 @@ namespace MarketPOS.API.Controllers.WareHouse
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiResponse<object>), StatusCodes.Status500InternalServerError)]
-        [TypeFilter(typeof(ValidateParameterAttribute), Arguments = new object[] {"Id", ParameterValidationType.Guid})]
-        public async Task<IActionResult> GetById([FromQuery] Guid Id,[FromQuery] bool SoftDeleted)
+        [TypeFilter(typeof(ValidateParameterAttribute), Arguments = new object[] { "Id", ParameterValidationType.Guid })]
+        public async Task<IActionResult> GetById([FromQuery] Guid Id, [FromQuery] bool SoftDeleted)
         {
-            var result = await _mediator.Send(new GetByIdWareHouseQuery(Id,SoftDeleted));
+            var result = await _mediator.Send(new GetByIdWareHouseQuery(Id, SoftDeleted));
             return Ok(result);
         }
 

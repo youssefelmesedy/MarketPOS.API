@@ -1,28 +1,30 @@
-﻿namespace MarketPOS.Application.Services.InterfacesServices.GenericeInterface;
-using System.Linq.Expressions;
-
-public interface IProjectableService<TEntity> where TEntity : class
+﻿public interface IProjectableService<TEntity> where TEntity : class
 {
     Task<List<TResult>> GetAllAsync<TResult>(
         IMapper mapper,
         Expression<Func<TEntity, bool>>? predicate = null,
         bool tracking = false,
         List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
-        bool includeSoftDeleted = false, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null);
+        bool includeSoftDeleted = false,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null)
+        where TResult : class; // ✨ أضف القيد هنا
 
-    Task<TResult?> GetByIdAsync<TResult>(
+    Task<TResult?> GetByIdProjectedAsync<TResult>(
         IMapper mapper,
         Expression<Func<TEntity, bool>> predicate,
         bool tracking = false,
         List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
-        bool includeSoftDeleted = false);
+        bool includeSoftDeleted = false)
+        where TResult : class; // ✨ هنا كمان
 
     Task<IEnumerable<TResult>> FindProjectedAsync<TResult>(
         IMapper mapper,
         Expression<Func<TEntity, bool>> predicate,
         bool tracking = false,
         List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
-        bool includeSoftDeleted = false, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null);
+        bool includeSoftDeleted = false,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null)
+        where TResult : class; // ✨ وهنا
 
     Task<(IEnumerable<TResult> Data, int TotalCount)> GetPagedProjectedAsync<TResult>(
         IMapper mapper,
@@ -33,6 +35,6 @@ public interface IProjectableService<TEntity> where TEntity : class
         bool ascending = true,
         bool tracking = false,
         List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
-        bool includeSoftDeleted = false);
+        bool includeSoftDeleted = false)
+        where TResult : class; // ✨ وهنا
 }
-

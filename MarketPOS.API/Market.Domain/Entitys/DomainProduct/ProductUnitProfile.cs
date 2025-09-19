@@ -1,10 +1,7 @@
-﻿using Market.Domain.Entitys.DomainCategory;
-using System.Xml.Linq;
-
-namespace Market.Domain.Entitys.DomainProduct;
+﻿namespace Market.Domain.Entitys.DomainProduct;
 
 // ProductUnitProfile.cs
-public class  ProductUnitProfile : BaseEntity
+public class ProductUnitProfile : BaseEntity
 {
     public Guid ProductId { get; set; }
 
@@ -56,7 +53,7 @@ public class  ProductUnitProfile : BaseEntity
             modified = true;
         }
 
-        if(modified)
+        if (modified)
         {
             UpdatedAt = DateTime.Now;
             ModifiedBy = "Youssef"; // Replace with actual user context if available

@@ -1,6 +1,6 @@
 ﻿namespace MarketPOS.Shared.DTOs.WareHouseDTO;
 
-public class WareHouseCreateDto 
+public class WareHouseCreateDto
 {
     public string Name { get; set; } = string.Empty;
 

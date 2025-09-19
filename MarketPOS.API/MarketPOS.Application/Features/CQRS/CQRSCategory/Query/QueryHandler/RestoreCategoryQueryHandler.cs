@@ -9,8 +9,8 @@ public class RestoreCategoryQueryHandler : BaseHandler<RestoreCategoryQueryHandl
         IServiceFactory serviceFactory,
         IResultFactory<RestoreCategoryQueryHandler> resultFactory,
         IMapper mapper,
-        IStringLocalizer<RestoreCategoryQueryHandler> localizer) 
-        : base(serviceFactory, resultFactory, mapper, localizer : localizer)
+        IStringLocalizer<RestoreCategoryQueryHandler> localizer)
+        : base(serviceFactory, resultFactory, mapper, localizer: localizer)
     {
     }
 

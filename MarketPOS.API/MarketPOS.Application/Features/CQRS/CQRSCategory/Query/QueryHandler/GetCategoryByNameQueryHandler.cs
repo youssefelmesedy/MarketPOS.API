@@ -1,14 +1,14 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Query.QueryHandler;
-public class GetCategoryByNameQueryHandler : BaseHandler<GetCategoryByNameQueryHandler>,IRequestHandler<GetCategoryName, ResultDto<IEnumerable<CategoryDetalisDto>>>
+public class GetCategoryByNameQueryHandler : BaseHandler<GetCategoryByNameQueryHandler>, IRequestHandler<GetCategoryName, ResultDto<IEnumerable<CategoryDetalisDto>>>
 {
     public GetCategoryByNameQueryHandler(
         IServiceFactory serviceFactory,
         IResultFactory<GetCategoryByNameQueryHandler> resultFactory,
         IMapper mapper,
         IStringLocalizer<GetCategoryByNameQueryHandler> localizer,
-        ILocalizationPostProcessor localizationPostProcessor) : base(serviceFactory, resultFactory, mapper, localizer: localizer, localizationPostProcessor : localizationPostProcessor)
+        ILocalizationPostProcessor localizationPostProcessor) : base(serviceFactory, resultFactory, mapper, localizer: localizer, localizationPostProcessor: localizationPostProcessor)
     {
     }
 
