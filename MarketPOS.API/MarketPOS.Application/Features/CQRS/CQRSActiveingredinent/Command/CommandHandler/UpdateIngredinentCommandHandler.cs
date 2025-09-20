@@ -15,22 +15,23 @@ public class UpdateIngredinentCommandHandler : BaseHandler<UpdateIngredinentComm
 
     public async Task<ResultDto<Guid>> Handle(UpdateIngredinentCommand request, CancellationToken cancellationToken)
     {
-        var _service = _servicesFactory.GetService<IActiveingredinentService>();
+        var ingredientService = _servicesFactory.GetService<IActiveingredinentService>();
 
-        var existIngredinent = await _service.GetByIdAsync(request.Id, true, includeSoftDeleted: request.SofteDelete);
+        var existIngredinent = await ingredientService.GetByIdAsync(request.Id, true, includeSoftDeleted: request.SofteDelete);
         if (existIngredinent is null)
             return _resultFactory.Fail<Guid>("GetByIdFailed");
 
-        var existName = await _service.FindAsync(i => i.Name!.Trim().ToLower() == request.Dto.Name.Trim().ToLower()
-                                                            && i.Id != request.Id, includeSoftDeleted: true);
-        if (existName.Any())
-            return _resultFactory.Fail<Guid>("DuplicateActiveIngredinentName");
+        var newName = existIngredinent.Name!.Trim().ToLower();
+
+        if (await ingredientService.AnyAsync(p => (p.Name!.ToLower().Trim() == newName)
+                                              && p.Id != existIngredinent.Id, true))
+            return _resultFactory.Fail<Guid>($"DuplicateActiveIngredinentName");
 
         _mapper?.Map(request.Dto, existIngredinent);
         if (existIngredinent is null)
             return _resultFactory.Fail<Guid>("Mappingfailed");
 
-        await _service.UpdateAsync(existIngredinent);
+        await ingredientService.UpdateAsync(existIngredinent);
 
         return _resultFactory.Success(existIngredinent.Id, "Updated");
     }

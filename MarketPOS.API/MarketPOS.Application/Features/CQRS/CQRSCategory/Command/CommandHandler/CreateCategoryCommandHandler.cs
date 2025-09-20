@@ -18,10 +18,9 @@ public class CreateCategoryCommandHandler : BaseHandler<CreateCategoryCommandHan
         if (category is null)
             return _resultFactory.Fail<Guid>("MappingFiled");
 
-        var existCategoryName = await serviceCategory.FindAsync(c => c.Name.ToLower().Trim() ==
-                                                                     category.Name.ToLower().Trim());
-        if (existCategoryName.Any())
-            return _resultFactory.Fail<Guid>($"DuplicateCategoryName: \n {existCategoryName.Select(c => c.Id).First()}");
+        var categoryName = category.Name.Trim().ToLower() ;
+        if(await serviceCategory.AnyAsync(c => c.Name.Trim().ToLower() == categoryName, true))
+            return _resultFactory.Fail<Guid>($"DuplicateCategoryName");
 
         await serviceCategory.AddAsync(category);
 

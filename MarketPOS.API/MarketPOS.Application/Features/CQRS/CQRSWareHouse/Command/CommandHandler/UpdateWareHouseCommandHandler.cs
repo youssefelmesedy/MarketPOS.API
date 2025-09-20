@@ -20,12 +20,10 @@ public class UpdateWareHouseCommandHandler : BaseHandler<UpdateWareHouseCommandH
 
         var normalizedName = request.Dto.Name.Trim().ToLower();
 
-        var existWareHouse = await wareHouseService.FindAsync(p =>
+        if (await wareHouseService.AnyAsync(p =>
                                           (p.Name.Trim().ToLower() == normalizedName) &&
-                                                    p.Id != request.Dto.Id);
-
-        if (existWareHouse.Any())
-            return _resultFactory.Fail<Guid>($"DuplicateWareHouseName: \n {existWareHouse.Select(p => p.Id).First()}");
+                                                    p.Id != request.Dto.Id))
+            return _resultFactory.Fail<Guid>($"DuplicateWareHouseName");
 
         var wareHouse = await wareHouseService.GetByIdAsync(request.Dto.Id, true);
         if (wareHouse is null)

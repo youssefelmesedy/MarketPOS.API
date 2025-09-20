@@ -2,7 +2,7 @@
 
 namespace MarketPOS.Infrastructure.Repositories.GenericRepositoryAndBaseBuliderQuery;
 
-public class GenericeRepository<T> : BaseBuildeQuery<T>, IFullRepository<T> where T : class
+public class GenericeRepository<TEntity> : BaseBuildeQuery<TEntity>, IFullRepository<TEntity> where TEntity : class
 {
     public GenericeRepository(ApplicationDbContext context) : base(context)
     {
@@ -13,11 +13,11 @@ public class GenericeRepository<T> : BaseBuildeQuery<T>, IFullRepository<T> wher
     IMapper mapper,
     int pageIndex,
     int pageSize,
-    Expression<Func<T, bool>>? filter = null,
-    Func<IQueryable<T>, IOrderedQueryable<T>>? ordering = null,
+    Expression<Func<TEntity, bool>>? filter = null,
+    Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null,
     bool ascending = true,
     bool tracking = false,
-    List<Func<IQueryable<T>, IQueryable<T>>>? includeExpressions = null,
+    List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
     bool includeSoftDeleted = false,
     bool applyIncludes = false)
     {
@@ -35,11 +35,11 @@ public class GenericeRepository<T> : BaseBuildeQuery<T>, IFullRepository<T> wher
 
     public async Task<List<TResult>> GetProjectedListAsync<TResult>(
         IMapper mapper,
-        Expression<Func<T, bool>>? predicate = null,
+        Expression<Func<TEntity, bool>>? predicate = null,
         bool tracking = false,
-        List<Func<IQueryable<T>, IQueryable<T>>>? includeExpressions = null, // Optional if needed
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null, // Optional if needed
         bool includeSoftDeleted = false,
-         Func<IQueryable<T>, IOrderedQueryable<T>>? ordering = null,
+         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null,
         bool applyIncludes = false) // Important: false when using ProjectTo
     {
         var query = BuildQuery(predicate, tracking, includeExpressions, includeSoftDeleted, ordering, applyIncludes);
@@ -48,9 +48,9 @@ public class GenericeRepository<T> : BaseBuildeQuery<T>, IFullRepository<T> wher
 
     public async Task<TResult?> GetProjectedByIdAsync<TResult>(
     IMapper mapper,
-    Expression<Func<T, bool>> predicate,
+    Expression<Func<TEntity, bool>> predicate,
     bool tracking = false,
-    List<Func<IQueryable<T>, IQueryable<T>>>? includeExpressions = null,
+    List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
     bool includeSoftDeleted = false,
     bool applyIncludes = false)
     {
@@ -60,67 +60,73 @@ public class GenericeRepository<T> : BaseBuildeQuery<T>, IFullRepository<T> wher
 
     public async Task<IEnumerable<TResult>> FindProjectedAsync<TResult>(
     IMapper mapper,
-    Expression<Func<T, bool>> predicate,
+    Expression<Func<TEntity, bool>> predicate,
     bool tracking = false,
-    List<Func<IQueryable<T>, IQueryable<T>>>? includeExpressions = null,
+    List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
     bool includeSoftDeleted = false,
-     Func<IQueryable<T>, IOrderedQueryable<T>>? ordering = null,
+     Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null,
     bool applyIncludes = false)
     {
         var query = BuildQuery(predicate, tracking, includeExpressions, includeSoftDeleted, ordering, applyIncludes);
         return await query.ProjectTo<TResult>(mapper.ConfigurationProvider).ToListAsync();
     }
+
+    public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, bool includeSofteDelete = false)
+    {
+        var query = BuildQuery(predicate, includeSoftDeleted: includeSofteDelete);
+        return await query.AnyAsync(predicate);
+    }
     #endregion
 
     #region QueryableRepository Methods
-    public async Task<IEnumerable<T>> GetAllAsync(
+    public async Task<IEnumerable<TEntity>> GetAllAsync(
         bool tracking = false,
-        List<Func<IQueryable<T>, IQueryable<T>>>? includeExpressions = null,
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
         bool includeSoftDeleted = false,
-         Func<IQueryable<T>, IOrderedQueryable<T>>? ordering = null,
+         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null,
         bool applyIncludes = true)
     {
         return await BuildQuery(null, tracking, includeExpressions, includeSoftDeleted, ordering, applyIncludes).ToListAsync();
     }
 
-    public async Task<T?> GetByIdAsync(
+    public async Task<TEntity?> GetByIdAsync(
         Guid id,
         bool tracking = false,
-        List<Func<IQueryable<T>, IQueryable<T>>>? includeExpressions = null,
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
         bool includeSoftDeleted = false,
         bool applyIncludes = true)
     {
-        var parameter = Expression.Parameter(typeof(T), "x");
+        var parameter = Expression.Parameter(typeof(TEntity), "x");
         var property = Expression.Property(parameter, "Id");
         var equals = Expression.Equal(property, Expression.Constant(id));
-        var lambda = Expression.Lambda<Func<T, bool>>(equals, parameter);
+        var lambda = Expression.Lambda<Func<TEntity, bool>>(equals, parameter);
 
         return await BuildQuery(lambda, tracking, includeExpressions, includeSoftDeleted, null, applyIncludes).FirstOrDefaultAsync();
     }
 
-    public async Task<IEnumerable<T>> FindAsync(
-        Expression<Func<T, bool>> predicate,
+    public async Task<IEnumerable<TEntity>> FindAsync(
+        Expression<Func<TEntity, bool>> predicate,
         bool tracking = false,
-        List<Func<IQueryable<T>, IQueryable<T>>>? includeExpressions = null,
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
         bool includeSoftDeleted = false,
-         Func<IQueryable<T>, IOrderedQueryable<T>>? ordering = null,
+         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null,
         bool applyIncludes = true)
     {
         return await BuildQuery(predicate, tracking, includeExpressions, includeSoftDeleted, ordering, applyIncludes).ToListAsync();
     }
 
-    public async Task<(IEnumerable<T> Data, int TotalCount)> GetPagedAsync(
+    public async Task<(IEnumerable<TEntity> Data, int TotalCount)> GetPagedAsync(
         int pageIndex,
         int pageSize,
-        Expression<Func<T, bool>>? filter = null,
-        Func<IQueryable<T>, IOrderedQueryable<T>>? ordering = null,
+        Expression<Func<TEntity, bool>>? filter = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null,
         bool ascending = true,
         bool tracking = false,
-        List<Func<IQueryable<T>, IQueryable<T>>>? includeExpressions = null,
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
         bool includeSoftDeleted = false,
         bool applyIncludes = true)
     {
-        IQueryable<T> query = BuildQuery(filter, tracking, includeExpressions, includeSoftDeleted, ordering, applyIncludes);
+        IQueryable<TEntity> query = BuildQuery(filter, tracking, includeExpressions, includeSoftDeleted, ordering, applyIncludes);
 
         //if (ordering != null)
         //    query = ascending ? query.OrderBy(ordering) : query.OrderByDescending(orderBy);
@@ -136,27 +142,27 @@ public class GenericeRepository<T> : BaseBuildeQuery<T>, IFullRepository<T> wher
     #endregion
 
     #region WritableRepository Methods
-    public async Task AddAsync(T entity)
+    public async Task AddAsync(TEntity entity)
     {
         await _dbSet.AddAsync(entity);
     }
 
-    public async Task AddRangeAsync(IEnumerable<T> entities)
+    public async Task AddRangeAsync(IEnumerable<TEntity> entities)
     {
         await _dbSet.AddRangeAsync(entities);
     }
 
-    public void Update(T entity)
+    public void Update(TEntity entity)
     {
         _dbSet.Update(entity);
     }
 
-    public void Remove(T entity)
+    public void Remove(TEntity entity)
     {
         _dbSet.Remove(entity);
     }
 
-    public void RemoveRange(IEnumerable<T> entities)
+    public void RemoveRange(IEnumerable<TEntity> entities)
     {
         _dbSet.RemoveRange(entities);
     }

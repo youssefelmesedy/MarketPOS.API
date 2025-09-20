@@ -1,4 +1,5 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices;
+using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
 
 public class UpdateProductCommandHandler
     : BaseHandler<UpdateProductCommandHandler>,
@@ -20,8 +21,9 @@ public class UpdateProductCommandHandler
     public async Task<ResultDto<Guid>> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
         // ✅ Check duplicate
-        if (await IsDuplicateAsync(request.Dto))
-            return _resultFactory.Fail<Guid>("DuplicateProductName");
+        var duplicateError = await CheckDuplicateAsync(request.Dto);
+        if (duplicateError != null)
+            return _resultFactory.Fail<Guid>(duplicateError);
 
         // ✅ Load Product
         var product = await LoadProductAsync(request.Dto.Id);
@@ -41,19 +43,33 @@ public class UpdateProductCommandHandler
     }
 
     #region Private Helpers
-
-    private async Task<bool> IsDuplicateAsync(UpdateProductDto dto)
+    private async Task<string?> CheckDuplicateAsync(UpdateProductDto dto)
     {
         var normalizedName = dto.Name.Trim().ToLower();
-        var normalizedBarcode = dto.Barcode?.Trim();
+        var normalizedBarcode = dto.Barcode?.Trim().ToLower();
 
-        var exist = await _services.ProductService.FindAsync(p =>
-            (p.Name.Trim().ToLower() == normalizedName || p.Barcode == normalizedBarcode) &&
+        // ✅ Check name duplication (excluding the same Id)
+        var nameExists = await _services.ProductService.AnyAsync(p =>
+            (p.Name.Trim().ToLower() == normalizedName) &&
             p.Id != dto.Id);
 
-        return exist.Any();
-    }
+        if (nameExists)
+            return "DuplicateProductName";
 
+        // ✅ Check barcode duplication (excluding the same Id)
+        if (!string.IsNullOrEmpty(normalizedBarcode))
+        {
+            var barcodeExists = await _services.ProductService.AnyAsync(p =>
+                p.Barcode != null &&
+                p.Barcode.Trim().ToLower() == normalizedBarcode &&
+                p.Id != dto.Id);
+
+            if (barcodeExists)
+                return "DuplicateProductBarcode";
+        }
+
+        return null; // ✅ No duplication
+    }
     private async Task<Product?> LoadProductAsync(Guid id)
     {
         var includes = ProductIncludeHelper.GetIncludeExpressions(

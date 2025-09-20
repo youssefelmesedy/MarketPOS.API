@@ -1,5 +1,7 @@
 ﻿using MarketPOS.Application.InterfaceCacheing;
 using MarketPOS.Infrastructure;
+using Microsoft.EntityFrameworkCore.Query;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace MarketPOS.Design.Decorator;
@@ -87,6 +89,13 @@ public class GenericServiceCacheing<TEntity> : GenericService<TEntity>, IFullSer
             _logger.LogInformation("Finding {Entity} with predicate from DB", _cacheKeyPrefix);
             return await base.FindAsync(predicate, tracking, includeExpressions, includeSoftDeleted, ordering);
         }, TimeSpan.FromMinutes(2));
+    }
+
+    // 🚨 AnyAsync = من غير كاش
+    public override async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, bool includeSoftDeleted = false)
+    {
+        _logger.LogInformation("Checking existence of {Entity} from DB", _cacheKeyPrefix);
+        return await base.AnyAsync(predicate, includeSoftDeleted);
     }
 
     #endregion
@@ -187,38 +196,38 @@ public class GenericServiceCacheing<TEntity> : GenericService<TEntity>, IFullSer
     public override async Task AddAsync(TEntity entity)
     {
         await base.AddAsync(entity);
-        await _cache.RemoveAsync(_cacheKeyPrefix); // invalidate entity cache
+        await _cache.RemoveByPrefixAsync(_cacheKeyPrefix); // invalidate all keys
     }
 
     public override async Task UpdateAsync(TEntity entity)
     {
         await base.UpdateAsync(entity);
-        await _cache.RemoveAsync(_cacheKeyPrefix);
+        await _cache.RemoveByPrefixAsync(_cacheKeyPrefix);
     }
 
     public override async Task RemoveAsync(TEntity entity)
     {
         await base.RemoveAsync(entity);
-        await _cache.RemoveAsync(_cacheKeyPrefix);
+        await _cache.RemoveByPrefixAsync(_cacheKeyPrefix);
     }
 
     public override async Task<TEntity> SoftDeleteAsync(TEntity entity)
     {
         var result = await base.SoftDeleteAsync(entity);
-        await _cache.RemoveAsync(_cacheKeyPrefix);
+        await _cache.RemoveByPrefixAsync(_cacheKeyPrefix);
         return result;
     }
 
     public override async Task<TEntity> RestoreAsync(TEntity entity)
     {
         var result = await base.RestoreAsync(entity);
-        await _cache.RemoveAsync(_cacheKeyPrefix);
+        await _cache.RemoveByPrefixAsync(_cacheKeyPrefix);
         return result;
     }
 
     #endregion
 
-    #region Key Builder (Unified)
+    #region Key Builder (With Hashing)
 
     private string BuildNormalizedCacheKey<TResult>(
         string methodName,
@@ -232,18 +241,26 @@ public class GenericServiceCacheing<TEntity> : GenericService<TEntity>, IFullSer
         var keyBuilder = new StringBuilder($"{_cacheKeyPrefix}:{methodName}:{typeof(TResult).Name}");
 
         if (predicate != null)
-            keyBuilder.Append($":predicate:{predicate}");
+            keyBuilder.Append($":predicate:{HashKey(predicate.ToString())}");
 
         if (includeExpressions != null && includeExpressions.Any())
-            keyBuilder.Append($":includes:{string.Join(",", includeExpressions.Select(x => x.ToString()))}");
+            keyBuilder.Append($":includes:{HashKey(string.Join(",", includeExpressions.Select(x => x.ToString())))}");
 
         if (ordering != null)
-            keyBuilder.Append($":ordering:{ordering}");
+            keyBuilder.Append($":ordering:{HashKey(ordering.ToString()!)}");
 
         if (pageIndex.HasValue && pageSize.HasValue)
             keyBuilder.Append($":page:{pageIndex}:{pageSize}:{ascending}");
 
         return keyBuilder.ToString();
+    }
+
+    private string HashKey(string input)
+    {
+        using var sha = SHA256.Create();
+        var bytes = Encoding.UTF8.GetBytes(input);
+        var hash = sha.ComputeHash(bytes);
+        return Convert.ToBase64String(hash);
     }
 
     #endregion

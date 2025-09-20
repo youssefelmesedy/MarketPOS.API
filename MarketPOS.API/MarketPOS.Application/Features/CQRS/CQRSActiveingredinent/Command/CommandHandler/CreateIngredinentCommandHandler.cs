@@ -16,17 +16,18 @@ public class CreateIngredinentCommandHandler : BaseHandler<CreateIngredinentComm
 
     public async Task<ResultDto<Guid>> Handle(CreateActivIngredinentCommand request, CancellationToken cancellationToken)
     {
-        var _service = _servicesFactory.GetService<IActiveingredinentService>();
+        var ingredientService = _servicesFactory.GetService<IActiveingredinentService>();
 
-        var existEntity = await _service.FindAsync(a => a.Name!.Trim().ToLower() == request.DTO.Name.Trim().ToLower(), includeSoftDeleted: true);
-        if (existEntity.Any())
+        var newName = request.DTO.Name.Trim().ToLower();
+
+        if (await ingredientService.AnyAsync(p => p.Name!.ToLower().Trim() == newName, true))
             return _resultFactory.Fail<Guid>($"DuplicateActiveIngredinentName");
 
         var mapping = _mapper?.Map<ActiveIngredients>(request.DTO);
         if (mapping is null)
             return _resultFactory.Fail<Guid>("Mappingfailed");
 
-        await _service.AddAsync(mapping);
+        await ingredientService.AddAsync(mapping);
 
         return _resultFactory.Success(mapping.Id, "Created");
     }

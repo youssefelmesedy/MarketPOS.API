@@ -3,7 +3,6 @@
 namespace MarketPOS.Application.Features.CQRS.CQRSProduct.Command.HandlerCommand;
 public class CreateProductCommandHandler : BaseHandler<CreateProductCommandHandler>, IRequestHandler<CreateProductCommand, ResultDto<Guid>>
 {
-
     public CreateProductCommandHandler
         (
         IServiceFactory serviceFactory,
@@ -13,30 +12,31 @@ public class CreateProductCommandHandler : BaseHandler<CreateProductCommandHandl
        : base(serviceFactory, resultFactory, mapper, localizer: localizer)
     {
     }
-
     public async Task<ResultDto<Guid>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
-        var getCategory = _servicesFactory.GetService<ICategoryService>();
+        var categoryService = _servicesFactory.GetService<ICategoryService>();
         var productService = _servicesFactory.GetService<IProductService>();
 
-        var category = await getCategory.GetByIdAsync(request.Dto.CategoryId);
-
-        var existProductName = await productService.FindAsync(p => p.Name.Trim().ToLower() == request.Dto.Name.Trim().ToLower()
-                                                                  || p.Barcode == request.Dto.Barcode);
-        if (existProductName.Any())
-            return _resultFactory.Fail<Guid>($"DuplicateProductName: \n {existProductName.Select(p => p.Id).First()}");
-
+        var category = await categoryService.GetByIdAsync(request.Dto.CategoryId);
         if (category == null || category.IsDeleted)
             throw new NotFoundException(nameof(Category), request.Dto.CategoryId);
 
-        var newproduct = _mapper?.Map<Product>(request.Dto);
-        if (newproduct is null)
-            return _resultFactory.Fail<Guid>("Mappingfailed");
+        var newName = request.Dto.Name.Trim().ToLower();
+        var newBarcode = request.Dto.Barcode?.Trim().ToLower();
 
+        if (await productService.AnyAsync(p => p.Name.ToLower().Trim() == newName))
+            return _resultFactory.Fail<Guid>("DuplicateProductName");
 
-        await productService.AddAsync(newproduct);
+        if (!string.IsNullOrEmpty(newBarcode) &&
+            await productService.AnyAsync(p => p.Barcode != null && p.Barcode.ToLower().Trim() == newBarcode))
+            return _resultFactory.Fail<Guid>("DuplicateBarcode");
 
-        return _resultFactory.Success(newproduct.Id, "Created");
+        var newProduct = _mapper!.Map<Product>(request.Dto);
+        if (newProduct == null)
+            return _resultFactory.Fail<Guid>("MappingFailed");
 
+        await productService.AddAsync(newProduct);
+
+        return _resultFactory.Success(newProduct.Id, "Created");
     }
 }
