@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketPOS.Design", "MarketP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Market.Domain", "Market.Domain\Market.Domain.csproj", "{010CF420-FD15-0F96-CDEC-FD100BA8E043}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Market.POS.Tests", "Market.POS.Tests\Market.POS.Tests.csproj", "{1990DF0B-CDDC-4725-AA41-567FBECFD295}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketPOS.API.Testing", "MarketPOS.API.Testing\MarketPOS.API.Testing.csproj", "{0415D220-6FB6-4096-B16E-C1A9BF67E872}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{010CF420-FD15-0F96-CDEC-FD100BA8E043}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{010CF420-FD15-0F96-CDEC-FD100BA8E043}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{010CF420-FD15-0F96-CDEC-FD100BA8E043}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1990DF0B-CDDC-4725-AA41-567FBECFD295}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1990DF0B-CDDC-4725-AA41-567FBECFD295}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1990DF0B-CDDC-4725-AA41-567FBECFD295}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1990DF0B-CDDC-4725-AA41-567FBECFD295}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0415D220-6FB6-4096-B16E-C1A9BF67E872}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0415D220-6FB6-4096-B16E-C1A9BF67E872}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0415D220-6FB6-4096-B16E-C1A9BF67E872}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0415D220-6FB6-4096-B16E-C1A9BF67E872}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

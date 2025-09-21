@@ -1,0 +1,11 @@
+﻿global using AutoMapper;
+global using MarketPOS.Application.Common.Helpers.LocalizationPostProcessorMappeing;
+global using MarketPOS.Application.Features.CQRS.CQRSCategory.Query;
+global using MarketPOS.Application.Features.CQRS.CQRSCategory.Query.QueryHandler;
+global using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
+global using MarketPOS.Design.FactoryResult;
+global using MarketPOS.Design.FactoryServices;
+global using MarketPOS.Shared.DTOs;
+global using MarketPOS.Shared.DTOs.CategoryDto;
+global using Microsoft.Extensions.Localization;
+global using Moq;
