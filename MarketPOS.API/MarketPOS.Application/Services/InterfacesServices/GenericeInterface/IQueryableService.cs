@@ -20,6 +20,10 @@ public interface IQueryableService<TEntity> where TEntity : class
         List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
         bool includeSoftDeleted = false, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null);
 
+    Task<bool> AnyAsync(
+    Expression<Func<TEntity, bool>> predicate,
+    bool includeSoftDeleted = false);
+
     Task<IEnumerable<TEntity>> GetAllAsync(
         bool tracking = false,
         List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,

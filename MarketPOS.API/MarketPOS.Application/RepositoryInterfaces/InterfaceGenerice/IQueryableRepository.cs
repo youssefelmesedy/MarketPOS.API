@@ -1,32 +1,34 @@
 ﻿namespace MarketPOS.Application.RepositoryInterfaces.InterfaceGenerice;
 
-public interface IQueryableRepository<T> where T : class
+public interface IQueryableRepository<TEntity> where TEntity : class
 {
-    Task<IEnumerable<T>> GetAllAsync(bool tracking = false,
-        List<Func<IQueryable<T>, IQueryable<T>>>? includeExpressions = null,
+    Task<IEnumerable<TEntity>> GetAllAsync(bool tracking = false,
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
         bool includeSoftDeleted = false,
-         Func<IQueryable<T>, IOrderedQueryable<T>>? ordering = null,
+         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null,
         bool applyIncludes = true);
 
-    Task<T?> GetByIdAsync(Guid id,
+    Task<TEntity?> GetByIdAsync(Guid id,
         bool tracking = false,
-        List<Func<IQueryable<T>, IQueryable<T>>>? includeExpressions = null,
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
         bool includeSoftDeleted = false,
         bool applyIncludes = true);
 
-    Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate,
+    Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate,
         bool tracking = false,
-        List<Func<IQueryable<T>, IQueryable<T>>>? includeExpressions = null,
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
         bool includeSoftDeleted = false,
-        Func<IQueryable<T>, IOrderedQueryable<T>>? ordering = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null,
         bool applyIncludes = true);
 
-    Task<(IEnumerable<T> Data, int TotalCount)> GetPagedAsync(int pageIndex, int pageSize,
-        Expression<Func<T, bool>>? filter = null,
-        Func<IQueryable<T>, IOrderedQueryable<T>>? ordering = null,
+    Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, bool includeSofteDelete = false);
+
+    Task<(IEnumerable<TEntity> Data, int TotalCount)> GetPagedAsync(int pageIndex, int pageSize,
+        Expression<Func<TEntity, bool>>? filter = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null,
         bool ascending = true,
         bool tracking = false,
-        List<Func<IQueryable<T>, IQueryable<T>>>? includeExpressions = null,
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
         bool includeSoftDeleted = false,
         bool applyIncludes = true);
 }

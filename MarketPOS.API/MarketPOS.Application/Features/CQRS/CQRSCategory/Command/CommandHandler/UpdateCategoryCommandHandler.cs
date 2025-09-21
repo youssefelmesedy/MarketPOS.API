@@ -24,11 +24,10 @@ public class UpdateCategoryCommandHandler : BaseHandler<UpdateCategoryCommandHan
         if (category is null)
             return _resultFactory.Fail<Guid>("MappingFiled");
 
-        var existCategoryName = await serviceCategory.FindAsync(c => c.Name.ToLower().Trim() ==
-                                                                     category.Name.ToLower().Trim() &&
-                                                                     c.Id != category.Id);
+        var categoryName = category.Name.Trim().ToLower();
 
-        if (existCategoryName.Any())
+        if (await serviceCategory.AnyAsync(c => (c.Name.Trim().ToLower() == categoryName) && 
+                                                     c.Id != category.Id, true))
             return _resultFactory.Fail<Guid>("DuplicateCategoryName");
 
         await serviceCategory.UpdateAsync(category);

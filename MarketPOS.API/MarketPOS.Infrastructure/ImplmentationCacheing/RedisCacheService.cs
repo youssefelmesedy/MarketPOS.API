@@ -1,14 +1,18 @@
 ﻿using MarketPOS.Application.InterfaceCacheing;
 using Microsoft.Extensions.Caching.Distributed;
+using System.Collections.Concurrent;
+using System.Text.Json;
 
 namespace MarketPOS.Infrastructure.ImplmentationCacheing;
-
 
 public class RedisCacheService : IGenericCache
 {
     private readonly IDistributedCache _cache;
     private readonly ILogger<RedisCacheService> _logger;
     private readonly IStringLocalizer<RedisCacheService> _localizer;
+
+    // لتتبع الكيز المرتبطة بكل Prefix
+    private static readonly ConcurrentDictionary<string, HashSet<string>> _prefixKeys = new();
 
     public RedisCacheService(
         IDistributedCache cache,
@@ -19,22 +23,25 @@ public class RedisCacheService : IGenericCache
         _logger = logger;
         _localizer = localizer;
     }
+
     public string BuildCacheKey(params object?[] parts)
     {
         return string.Join("_", parts.Select(p =>
         {
             if (p == null) return "null";
 
-            // لو object عبارة عن expression أو delegate
-            var type = p.GetType();
-            if (type.IsSubclassOf(typeof(Delegate)) || type.Name.Contains("Expression"))
+            switch (p)
             {
-                return p.GetHashCode().ToString(); // بدل ToString
+                case Expression exp:
+                    return exp.ToString(); // ثابت
+                case Delegate del:
+                    return del.Method.ToString(); // اسم الميثود
+                default:
+                    return p.ToString() ?? "null";
             }
-
-            return p.ToString();
         }));
     }
+
     public async Task<T?> GetAsync<T>(string key)
     {
         try
@@ -70,6 +77,12 @@ public class RedisCacheService : IGenericCache
             var data = JsonSerializer.Serialize(value);
             await _cache.SetStringAsync(key, data, options);
 
+            // سجل المفتاح ضمن الـ prefix
+            var prefix = key.Split('_').First();
+            _prefixKeys.AddOrUpdate(prefix,
+                _ => new HashSet<string> { key },
+                (_, set) => { set.Add(key); return set; });
+
             _logger.LogInformation(_localizer["Created"] + $" (Cache SetAsync) Key={key}");
         }
         catch (Exception ex)
@@ -83,11 +96,34 @@ public class RedisCacheService : IGenericCache
         try
         {
             await _cache.RemoveAsync(key);
+
+            var prefix = key.Split('_').First();
+            if (_prefixKeys.TryGetValue(prefix, out var set))
+                set.Remove(key);
+
             _logger.LogInformation(_localizer["Deleted"] + $" (Cache Remove) Key={key}");
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, _localizer["DeleteFailed"] + $" (Key={key})");
+        }
+    }
+
+    public async Task RemoveByPrefixAsync(string prefix)
+    {
+        try
+        {
+            if (_prefixKeys.TryRemove(prefix, out var keys))
+            {
+                foreach (var key in keys)
+                    await _cache.RemoveAsync(key);
+
+                _logger.LogInformation(_localizer["Deleted"] + $" (Cache RemoveByPrefix) Prefix={prefix}");
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, _localizer["DeleteFailed"] + $" (Prefix={prefix})");
         }
     }
 
@@ -103,6 +139,4 @@ public class RedisCacheService : IGenericCache
 
         return value!;
     }
-
 }
-

@@ -22,10 +22,8 @@ public class CreateWareHouseCommandHandler : BaseHandler<CreateWareHouseCommandH
         if (wareHouse is null)
             return _resultFactory.Fail<Guid>("MappingFiled");
 
-        var existWareHouseName = await wareHouseService.FindAsync(c => c.Name.ToLower().Trim() ==
-                                                                     wareHouse.Name.ToLower().Trim());
-
-        if (existWareHouseName.Any())
+        var existWareHouseName = request.Dto.Name.Trim().ToLower();
+        if (await wareHouseService.AnyAsync(i => i.Name.Trim().ToLower() == existWareHouseName, true))
             return _resultFactory.Fail<Guid>($"DuplicateWareHouseName");
 
         await wareHouseService.AddAsync(wareHouse);

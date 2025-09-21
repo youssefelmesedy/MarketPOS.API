@@ -54,6 +54,7 @@
   "SofteDeletedFailed": "بل الفعل تم ايقاف التاعمل مع هذا الكرت لفتره معينه منذو فتره.",
   "RestoreFailed": "هذا الكارت بالفعل تم استرجاعه منذ فتره ",
   "DuplicateCategoryName": "يوجد تصنيف بنفس الاسم بالفعل ",
+  "DuplicateBarcode": "يوجد باركود كارت صنف بل الفعل بنفس الشكل ",
   "DuplicateActiveIngredinentName": "يوجد ماده فعاله بنفس الاسم بل الفعل",
   "DuplicateWareHouseName": "يوجد مخزن بنفس الاسم بالفعل",
   "DuplicateProductName": " يوجد منتج بنفس الاسم بالفعل او باركود بالفعل لدي تصنيف اخر",

@@ -97,6 +97,22 @@ public class GenericService<TEntity> : IFullService<TEntity> where TEntity : cla
         }
     }
 
+    public virtual async Task<bool> AnyAsync(
+    Expression<Func<TEntity, bool>> predicate,
+    bool includeSoftDeleted = false)
+    {
+        try
+        {
+            return await _unitOfWork.RepositoryEntity<TEntity>()
+                .AnyAsync(predicate, includeSoftDeleted);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, _localizer["AnyFailed"]);
+            throw;
+        }
+    }
+
     #endregion
 
     #region Projectable Methods

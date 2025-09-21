@@ -53,9 +53,10 @@
   "SofteDeletedFailed": "This card Aready suspended for a certain period.",
   "RestoreFailed": "TThis card was actually recovered a while ago.",
   "DuplicateCategoryName": "Category with the same name already exists",
+  "DuplicateBarcode": "Product with the Barcode aready exist",
   "DuplicateActiveIngredinentName": "Ingerdinen with the same name already exists",
   "DuplicateWareHouseName": "WareHouse with the same name already exists",
-  "DuplicateProductName": "Product with the name already exist or Barcode aready exist",
+  "DuplicateProductName": "Product with the Barcode aready exist",
 
   // Specific types (optional for clarity)
   "Invalid_Guid": "The provided ID is not a valid GUID.",

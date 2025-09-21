@@ -1,4 +1,4 @@
-﻿namespace MarketPOS.API;
+﻿namespace MarketPOS.API.Extensions.ExtensionSwgger;
 public class ContactDocumentProcessor : IDocumentProcessor
 {
     public void Process(DocumentProcessorContext context)

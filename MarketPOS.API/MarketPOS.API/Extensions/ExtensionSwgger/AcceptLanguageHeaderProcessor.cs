@@ -1,5 +1,5 @@
 ﻿using NJsonSchema;
-namespace MarketPOS.API;
+namespace MarketPOS.API.Extensions.ExtensionSwgger;
 public class AcceptLanguageHeaderProcessor : IOperationProcessor
 {
     public bool Process(OperationProcessorContext context)
@@ -22,4 +22,3 @@ public class AcceptLanguageHeaderProcessor : IOperationProcessor
         return true;
     }
 }
-

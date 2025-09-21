@@ -5,6 +5,7 @@ public interface IGenericCache
     Task<T?> GetAsync<T>(string key);
     Task SetAsync<T>(string key, T value, TimeSpan? absoluteExpiration = null);
     Task RemoveAsync(string key);
+    Task RemoveByPrefixAsync(string prefix);
 
     Task<T> GetOrAddAsync<T>(string key, Func<Task<T>> factory, TimeSpan? absoluteExpiration = null);
 }
