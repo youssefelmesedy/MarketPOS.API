@@ -17,11 +17,13 @@ public class GetAllCategoryQueryHandler : BaseHandler<GetAllCategoryQueryHandler
     {
         var categoryService = _servicesFactory.GetService<ICategoryService>();
 
-        var data = await categoryService.GetAllAsync<CategoryDetalisDto>(_mapper!, null, false, null, request.SoftDelete);
+        var data = await categoryService.GetAllAsync(includeSoftDeleted: request.SoftDelete);
 
-        var localized = _localizationPostProcessor.Apply<CategoryDetalisDto>(data);
+        var mapped = _mapper!.Map<List<CategoryDetalisDto>>(data);
+
+        var localized = _localizationPostProcessor.Apply(mapped);
 
         // Convert to IEnumerable if needed
-        return _resultFactory.Success(localized.ToList(), "Success");
+        return _resultFactory.Success(localized, "Success");
     }
 }

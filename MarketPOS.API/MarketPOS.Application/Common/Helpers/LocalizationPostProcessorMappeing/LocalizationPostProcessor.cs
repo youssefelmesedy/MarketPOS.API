@@ -33,6 +33,19 @@ public class LocalizationPostProcessor : ILocalizationPostProcessor
         return list;
     }
 
+    public List<T> Apply<T>(List<T> list) where T : class
+    {
+        if (list == null) return new List<T>();
+
+        var visited = new HashSet<object>();
+        foreach (var item in list)
+        {
+            ProcessObject(item, visited);
+        }
+
+        return list;
+    }
+
     private void ProcessObject(object obj, HashSet<object> visited)
     {
         if (obj == null || visited.Contains(obj))

@@ -1,6 +1,5 @@
 ﻿using MarketPOS.Application.InterfaceCacheing;
 using MarketPOS.Infrastructure.TrackingServicesMiddleware;
-using Microsoft.EntityFrameworkCore.Query;
 using System.Security.Cryptography;
 using System.Text;
 
