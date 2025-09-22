@@ -1,9 +1,9 @@
 ﻿namespace MarketPOS.Application.Features.CQRS.CQRSCategory.Command;
 public record CreateCategoryCommand : IRequest<ResultDto<Guid>>
 {
-    public CategoryCreateDto Dto { get; set; }
+    public CreateCategoryDto Dto { get; set; }
 
-    public CreateCategoryCommand(CategoryCreateDto dto)
+    public CreateCategoryCommand(CreateCategoryDto dto)
     {
         Dto = dto;
     }

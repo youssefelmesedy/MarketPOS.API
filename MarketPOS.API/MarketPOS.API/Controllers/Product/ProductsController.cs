@@ -4,18 +4,18 @@ using MarketPOS.Shared.DTOs.SofteDleteAndRestor;
 namespace MarketPOS.API.Controllers.Product;
 [ApiController]
 [Route("api/[controller]")]
-public class ProductController : ControllerBase
+public class ProductsController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly IStringLocalizer<ProductController> _localizar;
-    public ProductController(IMediator mediator, IStringLocalizer<ProductController> localizar = null!)
+    private readonly IStringLocalizer<ProductsController> _localizar;
+    public ProductsController(IMediator mediator, IStringLocalizer<ProductsController> localizar = null!)
     {
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         _localizar = localizar ?? throw new ArgumentNullException(nameof(mediator));
     }
 
     // ✅ Pagination
-    [HttpGet("page/")]
+    [HttpGet("/page")]
     [ProducesResponseType(typeof(ResultDto<PagedResultDto<ProductDetailsDto>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultDto<BadRequestResult>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ExtendedProblemDetails), StatusCodes.Status500InternalServerError)]
@@ -31,7 +31,7 @@ public class ProductController : ControllerBase
     }
 
     // ✅ Get All
-    [HttpGet("GetAll/")]
+    [HttpGet()]
     [ProducesResponseType(typeof(ResultDto<IEnumerable<SomeFeaturesProductDto>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultDto<BadRequestResult>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ExtendedProblemDetails), StatusCodes.Status500InternalServerError)]
@@ -43,7 +43,7 @@ public class ProductController : ControllerBase
     }
 
     // ✅ Get By ID
-    [HttpGet("GetById/{id}")]
+    [HttpGet("{id:guid}")]
     [TypeFilter(typeof(ValidateParameterAttribute), Arguments = new object[] { "Id", ParameterValidationType.Guid })]
     [ProducesResponseType(typeof(ResultDto<IEnumerable<ProductDetailsDto>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultDto<BadRequestResult>), StatusCodes.Status400BadRequest)]
@@ -56,24 +56,24 @@ public class ProductController : ControllerBase
     }
 
     // ✅ Get By ID
-    [HttpGet("GetByName/")]
+    [HttpGet("{name}")]
     [TypeFilter(typeof(ValidateParameterAttribute), Arguments = new object[] { "name", ParameterValidationType.NonEmptyString })]
     [ProducesResponseType(typeof(ResultDto<IEnumerable<SomeFeaturesProductDto>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultDto<BadRequestResult>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ExtendedProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> GetByName([FromQuery] string name, [FromQuery] bool includeSofteDelete)
+    public async Task<IActionResult> GetByName(string name, [FromQuery] bool includeSofteDelete)
     {
         var result = await _mediator.Send(new GetByNameProductQuery(name, includeSofteDelete));
 
         return HelperMethod.HandleResult(result, _localizar);
     }
 
-    [HttpGet("GetWithCategoryId/")]
+    [HttpGet("ByCategoryId/{categoryId:guid}")]
     [TypeFilter(typeof(ValidateParameterAttribute), Arguments = new object[] { "categoryId", ParameterValidationType.Guid })]
     [ProducesResponseType(typeof(ResultDto<PagedResultDto<ProductDetailsDto>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultDto<BadRequestResult>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ExtendedProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> WithCategoryId([FromQuery] Guid categoryId, [FromQuery] bool includeSofteDelete, [FromQuery] int pageSize = 0, [FromQuery] int pageIndex = 0)
+    public async Task<IActionResult> WithCategoryId(Guid categoryId, [FromQuery] bool includeSofteDelete, [FromQuery] int pageSize = 0, [FromQuery] int pageIndex = 0)
     {
         var result = await _mediator.Send(new GetProductWithCategoryIdQuery(categoryId, includeSofteDelete, pageSize, pageIndex));
 
@@ -81,7 +81,7 @@ public class ProductController : ControllerBase
     }
 
     // ✅ Create Product
-    [HttpPost("Create/")]
+    [HttpPost()]
     [ProducesResponseType(typeof(ResultDto<Guid>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultDto<ProductDetailsDto>), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ResultDto<ConflictObjectResult>), StatusCodes.Status409Conflict)]
@@ -100,7 +100,7 @@ public class ProductController : ControllerBase
     }
 
     // ✅ Update Product
-    [HttpPut("Update/{id}")]
+    [HttpPut("{id}")]
     [TypeFilter(typeof(ValidateParameterAttribute), Arguments = new object[] { "Id", ParameterValidationType.Guid })]
     [ProducesResponseType(typeof(ResultDto<Guid>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultDto<ProductDetailsDto>), StatusCodes.Status201Created)]
@@ -140,13 +140,13 @@ public class ProductController : ControllerBase
     }
 
     // ✅ Soft Delete Product
-    [HttpPatch("SofteDelete/")]
+    [HttpPatch("IsDelete/{id:guid}")]
     [TypeFilter(typeof(ValidateParameterAttribute), Arguments = new object[] { "Id", ParameterValidationType.Guid })]
     [ProducesResponseType(typeof(ResultDto<SofteDeleteDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultDto<NotFoundObjectResult>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultDto<BadRequestObjectResult>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultDto<ExtendedProblemDetails>), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> SofteDelete([FromQuery] Guid id)
+    public async Task<IActionResult> SofteDelete(Guid id)
     {
         var result = await _mediator.Send(new SofteDeleteProductQuery(id, true));
 
@@ -154,13 +154,13 @@ public class ProductController : ControllerBase
     }
 
     // ✅ Restore Product
-    [HttpPatch("Restore/")]
+    [HttpPatch("Restore/{id:guid}")]
     [TypeFilter(typeof(ValidateParameterAttribute), Arguments = new object[] { "Id", ParameterValidationType.Guid })]
     [ProducesResponseType(typeof(ResultDto<RestorDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultDto<NotFoundObjectResult>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultDto<BadRequestObjectResult>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ResultDto<ExtendedProblemDetails>), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> Restore([FromQuery] Guid id)
+    public async Task<IActionResult> Restore(Guid id)
     {
         var result = await _mediator.Send(new RestoreProductQuery(id));
 
