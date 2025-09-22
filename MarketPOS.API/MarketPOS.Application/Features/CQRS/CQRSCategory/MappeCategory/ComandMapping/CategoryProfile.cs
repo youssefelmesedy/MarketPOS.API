@@ -3,7 +3,7 @@ public partial class CategoryProfile
 {
     public void MapCreateCategory()
     {
-        CreateMap<CategoryCreateDto, Category>()
+        CreateMap<CreateCategoryDto, Category>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name!.Trim()))
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description ?? ""));
 
