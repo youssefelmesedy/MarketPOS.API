@@ -1,7 +1,7 @@
 ﻿using MarketPOS.Application.InterfaceCacheing;
 using MarketPOS.Infrastructure.ImplmentationCacheing;
-namespace MarketPOS.API.Extensions.ExtensionCacheing;
 
+namespace MarketPOS.API.Bootstrapper.Extensions.ExtensionCacheing;
 public static class CachingExtensions
 {
     public static IServiceCollection AddCustomCaching(this IServiceCollection services, IConfiguration configuration)

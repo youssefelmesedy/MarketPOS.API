@@ -1,9 +1,11 @@
 ﻿using MarketPOS.API.Middlewares.FeaturesFunction;
 using MarketPOS.Shared.DTOs.SofteDleteAndRestor;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MarketPOS.API.Controllers.Category;
-[Route("api/Categories")]
+[Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class CategoriesController : ControllerBase
 {
     private readonly IMediator _mediator;

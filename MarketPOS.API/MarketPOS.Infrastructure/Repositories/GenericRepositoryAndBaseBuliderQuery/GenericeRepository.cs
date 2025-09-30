@@ -114,6 +114,16 @@ public class GenericeRepository<TEntity> : BaseBuildeQuery<TEntity>, IFullReposi
     {
         return await BuildQuery(predicate, tracking, includeExpressions, includeSoftDeleted, ordering, applyIncludes).ToListAsync();
     }
+    public async Task<TEntity?> GetAsync(
+        Expression<Func<TEntity, bool>> predicate,
+        bool tracking = false,
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
+        bool includeSoftDeleted = false,
+         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null,
+        bool applyIncludes = true)
+    {
+        return await BuildQuery(predicate, tracking, includeExpressions, includeSoftDeleted, ordering, applyIncludes).FirstOrDefaultAsync();
+    }
 
     public async Task<(IEnumerable<TEntity> Data, int TotalCount)> GetPagedAsync(
         int pageIndex,

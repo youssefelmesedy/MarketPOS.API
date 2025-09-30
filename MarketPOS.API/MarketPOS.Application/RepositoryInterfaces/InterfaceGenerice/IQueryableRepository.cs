@@ -21,6 +21,14 @@ public interface IQueryableRepository<TEntity> where TEntity : class
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null,
         bool applyIncludes = true);
 
+        Task<TEntity?> GetAsync(
+        Expression<Func<TEntity, bool>> predicate,
+        bool tracking = false,
+        List<Func<IQueryable<TEntity>, IQueryable<TEntity>>>? includeExpressions = null,
+        bool includeSoftDeleted = false,
+         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null,
+        bool applyIncludes = true);
+
     Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, bool includeSofteDelete = false);
 
     Task<(IEnumerable<TEntity> Data, int TotalCount)> GetPagedAsync(int pageIndex, int pageSize,

@@ -1,14 +1,13 @@
-﻿using MarketPOS.Infrastructure.Repositories.GenericRepositoryAndBaseBuliderQuery;
+﻿using System.Collections.Concurrent;
 using Microsoft.EntityFrameworkCore.Storage;
-using System.Collections;
 
-namespace Market.POS.Infrastructure.Repositories;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _context;
+    private readonly ConcurrentDictionary<string, object> _repositories = new();
     private readonly IServiceProvider _serviceProvider;
     private IDbContextTransaction? _transaction;
-    private readonly Hashtable _repositories = new Hashtable();
+    private bool _disposed;
 
     public UnitOfWork(ApplicationDbContext context, IServiceProvider serviceProvider)
     {
@@ -20,85 +19,137 @@ public class UnitOfWork : IUnitOfWork
     {
         var typeName = typeof(TEntity).Name;
 
-        if (!_repositories.ContainsKey(typeName))
+        var repository = _repositories.GetOrAdd(typeName, _ =>
         {
-            // حاول تنشئ instance من GenericRepository<TEntity>
             var repositoryType = typeof(GenericeRepository<>).MakeGenericType(typeof(TEntity));
-            var repositoryInstance = Activator.CreateInstance(repositoryType, _context);
+            return Activator.CreateInstance(repositoryType, _context)!;
+        });
 
-            if (repositoryInstance == null)
-                throw new InvalidOperationException($"Could not create repository instance for entity type '{typeName}'.");
-
-            _repositories.Add(typeName, repositoryInstance);
-        }
-
-        var repository = _repositories[typeName];
-        if (repository is not IFullRepository<TEntity> typedRepository)
-            throw new InvalidCastException($"Repository instance is not of the expected type IFullRepository<{typeName}>.");
-
-        return typedRepository;
+        return (IFullRepository<TEntity>)repository;
     }
-
 
     public TRepository Repository<TRepository>() where TRepository : class
     {
         var typeName = typeof(TRepository).Name;
 
-        if (!_repositories.ContainsKey(typeName))
+        var repo = _repositories.GetOrAdd(typeName, _ =>
         {
-            // نحصل على الريبو من DI container
             var repositoryInstance = _serviceProvider.GetService<TRepository>();
             if (repositoryInstance == null)
-                throw new InvalidOperationException($"Repository of type '{typeName}' is not registered in the DI container.");
+                throw new InvalidOperationException(
+                    $"Repository of type '{typeName}' is not registered in the DI container.");
+            return repositoryInstance;
+        });
 
-            _repositories.Add(typeName, repositoryInstance);
-        }
-
-        var repo = _repositories[typeName];
-        if (repo is not TRepository typedRepo)
-            throw new InvalidCastException($"Repository instance stored for '{typeName}' cannot be cast to '{typeof(TRepository)}'.");
-
-        return typedRepo;
+        return (TRepository)repo;
     }
 
-    public async Task BeginTransactionAsync()
+    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        => await _context.SaveChangesAsync(cancellationToken);
+
+    #region Transaction with Execution Strategy
+
+    public async Task ExecuteInTransactionAsync(Func<CancellationToken, Task> action,
+        CancellationToken cancellationToken = default)
+    {
+        var strategy = _context.Database.CreateExecutionStrategy();
+
+        await strategy.ExecuteAsync(async ct =>
+        {
+            await using var transaction = await _context.Database.BeginTransactionAsync(ct);
+            try
+            {
+                await action(ct);
+                await transaction.CommitAsync(ct);
+            }
+            catch
+            {
+                await transaction.RollbackAsync(ct);
+                throw;
+            }
+        }, cancellationToken);
+    }
+
+    public async Task<TResult> ExecuteInTransactionAsync<TResult>(
+        Func<CancellationToken, Task<TResult>> action,
+        CancellationToken cancellationToken = default)
+    {
+        var strategy = _context.Database.CreateExecutionStrategy();
+
+        return await strategy.ExecuteAsync(async ct =>
+        {
+            await using var transaction = await _context.Database.BeginTransactionAsync(ct);
+            try
+            {
+                var result = await action(ct);
+                await transaction.CommitAsync(ct);
+                return result;
+            }
+            catch
+            {
+                await transaction.RollbackAsync(ct);
+                throw;
+            }
+        }, cancellationToken);
+    }
+
+    #endregion
+
+    #region Manual Transaction
+
+    public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
+    {
+        if (_transaction == null)
+            _transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+    }
+
+    public async Task CommitAsync(CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            await _context.SaveChangesAsync(cancellationToken);
+            await _transaction!.CommitAsync(cancellationToken);
+        }
+        catch
+        {
+            await RollbackAsync(cancellationToken);
+            throw;
+        }
+        finally
+        {
+            await _transaction!.DisposeAsync();
+            _transaction = null;
+        }
+    }
+
+    public async Task RollbackAsync(CancellationToken cancellationToken = default)
     {
         if (_transaction != null)
-            throw new InvalidOperationException("A transaction is already in progress.");
-
-        _transaction = await _context.Database.BeginTransactionAsync();
+        {
+            await _transaction.RollbackAsync(cancellationToken);
+            await _transaction.DisposeAsync();
+            _transaction = null;
+        }
     }
 
-    public async Task CommitAsync()
-    {
-        if (_transaction == null)
-            throw new InvalidOperationException("No active transaction to commit.");
-
-        await _transaction.CommitAsync();
-        await _transaction.DisposeAsync();
-        _transaction = null;
-    }
-
-    public async Task RollbackAsync()
-    {
-        if (_transaction == null)
-            throw new InvalidOperationException("No active transaction to rollback.");
-
-        await _transaction.RollbackAsync();
-        await _transaction.DisposeAsync();
-        _transaction = null;
-    }
-
-    public Task<int> SaveChangesAsync()
-    {
-        return _context.SaveChangesAsync();
-    }
+    #endregion
 
     public void Dispose()
     {
-        _transaction?.Dispose();
-        _context.Dispose();
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!_disposed)
+        {
+            if (disposing)
+            {
+                _context?.Dispose();
+                _transaction?.Dispose();
+            }
+            _disposed = true;
+        }
     }
 }
-
-

@@ -1,4 +1,5 @@
-﻿public static class RegisterServicesApplication
+﻿namespace MarketPOS.Application;
+public static class RegisterServicesApplication
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
