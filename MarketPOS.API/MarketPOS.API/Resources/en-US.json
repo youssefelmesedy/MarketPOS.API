@@ -63,6 +63,18 @@
   "Invalid_PositiveInt": "The value must be a positive integer.",
   "Invalid_NonEmptyString": "The value must not be empty.",
   "Invalid_Enum": "The value must be a valid option.",
-  "NoValues": "No input values were found."
+  "NoValues": "No input values were found.",
 
+  // Auth Service Message
+  "EmailAlreadyRegistered": "البريد الإلكتروني مسجل بالفعل",
+  "UsernameAlreadyTaken": "اسم المستخدم مستخدم بالفعل",
+  "ProfileImageRequired": "يجب رفع صورة الملف الشخصي",
+  "RegistrationFailed": "فشل في التسجيل",
+  "RegistrationSuccessful": "تم التسجيل بنجاح",
+  "InvalidCredentials": "بيانات الدخول غير صحيحة",
+  "LoginSuccessful": "تم تسجيل الدخول بنجاح",
+  "InvalidToken": "رمز التحديث غير صالح أو فارغ",
+  "UserNotFound": "لم يتم العثور على مستخدم لهذا الرمز",
+  "InactiveToken": "رمز التحديث غير نشط أو غير صالح",
+  "TokenRefreshed": "تم تحديث الرمز بنجاح"
 }

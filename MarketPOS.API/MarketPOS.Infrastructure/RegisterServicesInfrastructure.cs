@@ -1,5 +1,13 @@
-﻿namespace MarketPOS.Infrastructure;
+﻿using Market.Domain.Entities.Auth;
+using MarketPOS.Application.Services.InterfacesServices.FileStorage;
+using MarketPOS.Application.Services.InterfacesServices.InterFacesAuthentication;
+using MarketPOS.Infrastructure.Services.Authentication.AuthenticationService;
+using MarketPOS.Infrastructure.Services.Authentication.JWTServices;
+using MarketPOS.Infrastructure.Services.FileStorage;
+using Microsoft.AspNetCore.Identity;
 
+
+namespace MarketPOS.Infrastructure;
 public static class RegisterServicesInfrastructure
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
@@ -17,6 +25,24 @@ public static class RegisterServicesInfrastructure
                 );
             });
         });
+
+        // 2. Identity
+        services.AddIdentity<User, IdentityRole<Guid>>(options =>
+        {
+            options.Password.RequireDigit = true;
+            options.Password.RequireLowercase = true;
+            options.Password.RequireUppercase = true;
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequiredLength = 6;
+        })
+        .AddEntityFrameworkStores<ApplicationDbContext>()
+        .AddDefaultTokenProviders();
+
+        // JWT Service
+        services.AddScoped<IJwtService, JwtService>();
+        services.AddScoped<IRefreshTokenService, RefreshTokenService>();
+        services.AddScoped<IFileService, FileService>();
+        services.AddScoped<IAuthService, AuthService>();
 
         // Debandancey Injection for UnitOfWork and Repositories
         services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -46,5 +72,3 @@ public static class RegisterServicesInfrastructure
         return services;
     }
 }
-
-

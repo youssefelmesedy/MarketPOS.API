@@ -23,6 +23,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Features\CQRS\CQRSActiveingredinent\Validetor\QueryValidetor\" />
+	  <Folder Include="Features\CQRS\CQRSAuth\Query\QueryHandler\" />
 	  <Folder Include="Features\CQRS\CQRSWareHouse\Validators\QueryValidetor\" />
 	</ItemGroup>
 

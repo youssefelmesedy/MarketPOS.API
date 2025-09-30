@@ -1,4 +1,6 @@
-﻿namespace MarketPOS.API.Extensions.ExtensionSwgger;
+﻿using NSwag.Generation.Processors.Security;
+
+namespace MarketPOS.API.Extensions.ExtensionSwgger;
 
 public static class SwaggerExtensions
 {
@@ -9,13 +11,40 @@ public static class SwaggerExtensions
             config.Title = "MarketPOS API";
             config.Version = "v1";
             config.Description = "This is the API for MarketPOS system.\n\n" +
-                                 "✨ Developed by Y𝒐𝐔𝓢𝓢e𝓕 E𝓵𝓜𝐄𝓢𝐞𝐃𝓨 ✨\n\n" +
-                                 "🔗 Website: https://yourwebsite.com\n" +
-                                 "📧 Email: https://yousefelmesedy6@gmail.com\n\n" +
-                                 "License: MIT License";
+                                 "✨ Developed by Youssef ElMesedy ✨\n\n";
 
+            // Contact & License Info
+            config.PostProcess = document =>
+            {
+                document.Info.Contact = new NSwag.OpenApiContact
+                {
+                    Name = "Youssef ElMesedy",
+                    Email = "yousefelmesedy6@gmail.com",
+                    Url = "https://yourwebsite.com"
+                };
+
+                document.Info.License = new NSwag.OpenApiLicense
+                {
+                    Name = "MIT License",
+                    Url = "https://opensource.org/licenses/MIT"
+                };
+            };
+
+            // Accept-Language Header (لو عندك كلاس مخصص)
             config.OperationProcessors.Add(new AcceptLanguageHeaderProcessor());
-            config.DocumentProcessors.Add(new ContactDocumentProcessor());
+
+            config.AddSecurity("Bearer", Enumerable.Empty<string>(), new OpenApiSecurityScheme
+            {
+                Type = OpenApiSecuritySchemeType.Http, // خلي بالك هنا
+                Scheme = "bearer",
+                BearerFormat = "JWT",
+                In = OpenApiSecurityApiKeyLocation.Header, // مش ParameterLocation
+                Name = "Authorization",
+                Description = "Enter: Bearer {your token}"
+            });
+
+            config.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("Bearer"));
+
         });
 
         return services;
@@ -38,11 +67,10 @@ public static class SwaggerExtensions
     {
         app.MapGet("/", context =>
         {
-            context.Response.Redirect("/swagger/index.html");
+            context.Response.Redirect("/swagger");
             return Task.CompletedTask;
         });
 
         return app;
     }
 }
-
