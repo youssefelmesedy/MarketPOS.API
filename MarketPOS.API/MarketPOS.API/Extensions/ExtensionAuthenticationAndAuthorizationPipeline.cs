@@ -41,6 +41,46 @@ public static class ExtensionAuthenticationAndAuthorizationPipeline
                 IssuerSigningKey = new SymmetricSecurityKey(key),
                 ClockSkew = TimeSpan.Zero 
             };
+
+            options.Events = new JwtBearerEvents
+            {
+                OnChallenge = async context =>
+                {
+                    context.HandleResponse();
+
+                    var problem = new ExtendedProblemDetails
+                    {
+                        Status = StatusCodes.Status401Unauthorized,
+                        Title = "Unauthorized",
+                        Detail = "You are not authorized to access this resource.",
+                        ErrorCode = "AUTH_001",
+                        ErrorSource = "JWT",
+                        Instance = context.Request.Path,
+                        Errors = new { Authorization = new[] { "Missing or invalid token" } }
+                    };
+
+                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    context.Response.ContentType = "application/json";
+                    await context.Response.WriteAsync(JsonSerializer.Serialize(problem));
+                },
+                OnForbidden = async context =>
+                {
+                    var problem = new ExtendedProblemDetails
+                    {
+                        Status = StatusCodes.Status403Forbidden,
+                        Title = "Forbidden",
+                        Detail = "You do not have permission to access this resource.",
+                        ErrorCode = "AUTH_002",
+                        ErrorSource = "JWT",
+                        Instance = context.Request.Path,
+                        Errors = new { Authorization = new[] { "You lack required roles or policies" } }
+                    };
+
+                    context.Response.StatusCode = StatusCodes.Status403Forbidden;
+                    context.Response.ContentType = "application/json";
+                    await context.Response.WriteAsync(JsonSerializer.Serialize(problem));
+                },
+            };
         });
 
         services.AddAuthorization();

@@ -12,9 +12,15 @@ public static class RegisterServicesInfrastructure
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
+        var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+        var connectionString = environment == "Development"
+                 ? configuration.GetConnectionString("LocalConnection")
+                 : configuration.GetConnectionString("ServerConnection");
+
         services.AddDbContext<ApplicationDbContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), sqlOptions =>
+            options.UseSqlServer(connectionString, sqlOptions =>
             {
                 sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
 
@@ -68,6 +74,8 @@ public static class RegisterServicesInfrastructure
         services.AddScoped<IWareHouseService, WareHouseService>();
         services.AddScoped<ISupplierService, SupplierService>();
         services.AddScoped<IAggregateService, AggregateService>();
+
+        Console.WriteLine($"EnviromentName: {environment}");
 
         return services;
     }
