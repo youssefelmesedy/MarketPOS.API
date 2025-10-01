@@ -8,7 +8,6 @@ using MarketPOS.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ✅ حمّل كل ملفات الإعدادات الأول
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -17,7 +16,6 @@ builder.Configuration
     .AddJsonFile("appsettings.JWT.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables();
 
-// ✅ بعدين نضيف الخدمات
 builder.Services
     .AddApplicationServices()
     .AddInfrastructureServices(builder.Configuration) 

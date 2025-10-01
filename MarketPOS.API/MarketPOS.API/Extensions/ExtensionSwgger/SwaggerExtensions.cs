@@ -30,15 +30,14 @@ public static class SwaggerExtensions
                 };
             };
 
-            // Accept-Language Header (لو عندك كلاس مخصص)
             config.OperationProcessors.Add(new AcceptLanguageHeaderProcessor());
 
             config.AddSecurity("Bearer", Enumerable.Empty<string>(), new OpenApiSecurityScheme
             {
-                Type = OpenApiSecuritySchemeType.Http, // خلي بالك هنا
+                Type = OpenApiSecuritySchemeType.Http,
                 Scheme = "bearer",
                 BearerFormat = "JWT",
-                In = OpenApiSecurityApiKeyLocation.Header, // مش ParameterLocation
+                In = OpenApiSecurityApiKeyLocation.Header, 
                 Name = "Authorization",
                 Description = "Enter: Bearer {your token}"
             });
