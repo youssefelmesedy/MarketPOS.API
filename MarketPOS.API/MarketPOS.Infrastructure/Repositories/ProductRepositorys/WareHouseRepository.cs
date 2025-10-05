@@ -2,9 +2,11 @@
 using MarketPOS.Infrastructure.Repositories.GenericRepositoryAndBaseBuliderQuery;
 
 namespace MarketPOS.Infrastructure.Repositories.ProductRepositorys;
-public class WareHouseRepository : GenericeRepository<Warehouse>, IWareHouseRepo
+public class WareHouseRepository : GenericRepository<Warehouse>, IWareHouseRepo
 {
-    public WareHouseRepository(ApplicationDbContext context) : base(context)
+    private readonly ILogger<WareHouseRepository> _logger;
+    public WareHouseRepository(ApplicationDbContext context, ILogger<WareHouseRepository> logger) : base(context, logger)
     {
+        _logger = logger;
     }
 }

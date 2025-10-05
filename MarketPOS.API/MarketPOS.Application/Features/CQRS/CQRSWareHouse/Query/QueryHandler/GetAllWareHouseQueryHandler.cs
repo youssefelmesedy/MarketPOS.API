@@ -21,7 +21,7 @@ public class GetAllWareHouseQueryHandler : BaseHandler<GetAllWareHouseQueryHandl
         var categoryService = _servicesFactory.GetService<IWareHouseService>();
 
         var wareHouses = await categoryService.GetAllAsync(includeSoftDeleted: request.SofteDelete, ordering: p => p.OrderBy(w => w.Name), applyIncludes: false);
-        if (wareHouses is null)
+        if (!wareHouses.Any())
             return _resultFactory.Fail<IEnumerable<WareHouseDetailsDto>>("GetAllFailed");
 
         var wareHouseDtos = _mapper?.Map<IEnumerable<WareHouseDetailsDto>>(wareHouses);

@@ -1,5 +1,6 @@
 ﻿using MarketPOS.API.Middlewares.Exceptions;
 using MarketPOS.Application.InterfaceCacheing;
+using MarketPOS.Infrastructure.TrackingServicesMiddleware;
 using Microsoft.Data.SqlClient;
 using YourProjectNamespace.Application.Common.Exceptions;
 
@@ -15,6 +16,7 @@ public class ProductService : GenericServiceCacheing<Product>, IProductService
         IGenericCache cache)
         : base(unitOfWork, localizer, logger, cache) 
     {
+        ServiceTracker.Add(typeof(ProductService).Name);
         _cacheKeyPrefix = typeof(ProductService).Name;
     }
 

@@ -108,7 +108,9 @@ public class AuthService : IAuthService
             var refreshToken = await _refreshTokenService.GenerateTokenAsync(
                 user.Id,
                 _refreshTokenService.GetIpAdress(context),
-                _refreshTokenService.GetDevice(context)
+                _refreshTokenService.GetDevice(context), 
+                expiryDays: 15, 
+                maxTokens: 5
             );
 
             _logger.LogInformation("User registered successfully: {Email}", register.Email);
@@ -165,7 +167,7 @@ public class AuthService : IAuthService
             user.Id,
             _refreshTokenService.GetIpAdress(context),
             _refreshTokenService.GetDevice(context),
-            expiryDays: 1, maxTokens: 5);
+            expiryDays: 15, maxTokens: 5);
 
         return new RefreshTokenDto
         {
@@ -224,7 +226,7 @@ public class AuthService : IAuthService
             user.Id,
             _refreshTokenService.GetIpAdress(_httpContextAccessor.HttpContext!),
             _refreshTokenService.GetDevice(_httpContextAccessor.HttpContext!),
-            expiryDays: 1, maxTokens: 5);
+            expiryDays: 15, maxTokens: 5);
 
         tokenDTO.Message = _localizer["TokenRefreshed"];
         tokenDTO.IsActive = true;

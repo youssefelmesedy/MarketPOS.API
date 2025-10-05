@@ -54,7 +54,7 @@ public static class RegisterServicesInfrastructure
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         // Debandancey Injection for Generic Repositories and Decorate Caching
-        services.AddScoped(typeof(IFullRepository<>), typeof(GenericeRepository<>));
+        services.AddScoped(typeof(IFullRepository<>), typeof(GenericRepository<>));
         services.AddScoped(typeof(IFullService<>), typeof(GenericService<>));
         services.AddScoped(typeof(IFullService<>), typeof(GenericServiceCacheing<>));
 

@@ -26,6 +26,7 @@ namespace MarketPOS.API.Controllers.WareHouse
         public async Task<IActionResult> GetAll([FromQuery] bool SoftDeleted)
         {
             var result = await _mediator.Send(new GetAllWareHouseQuery(SoftDeleted));
+
             return HelperMethod.HandleResult(result, _localizar);
         }
 

@@ -1,10 +1,12 @@
 ﻿using MarketPOS.Infrastructure.Repositories.GenericRepositoryAndBaseBuliderQuery;
 
 namespace MarketPOS.Infrastructure.Repositories.ProductRepositorys;
-public class ProductUnitProfileRepository : GenericeRepository<ProductUnitProfile>, IProductUnitProfileRepo
+public class ProductUnitProfileRepository : GenericRepository<ProductUnitProfile>, IProductUnitProfileRepo
 {
-    public ProductUnitProfileRepository(ApplicationDbContext context) : base(context)
+    private readonly ILogger<ProductUnitProfileRepository> _logger;
+    public ProductUnitProfileRepository(ApplicationDbContext context, ILogger<ProductUnitProfileRepository> logger) : base(context, logger)
     {
+        _logger = logger;
     }
 
     public async Task<ProductUnitProfile> GetByProductIdAsync(Guid productId)

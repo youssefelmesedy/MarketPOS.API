@@ -2,7 +2,7 @@
 
 public interface IProjectableRepository<T> where T : class
 {
-    Task<List<TResult>> GetProjectedListAsync<TResult>(
+    Task<List<TResult>> GetAllProjectedListAsync<TResult>(
         IMapper mapper,
         Expression<Func<T, bool>>? predicate = null,
         bool tracking = false,

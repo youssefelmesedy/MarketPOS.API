@@ -66,16 +66,18 @@
   "Invalid_Enum": "القيمة يجب أن تكون من القيم المسموح بها.",
   "NoValues": "لم يتم ايجاد اي قيم مدخله",
 
-  //  Auth Service Message
-  "EmailAlreadyRegistered": "Email is already registered",
-  "UsernameAlreadyTaken": "Username is already taken",
-  "ProfileImageRequired": "Profile image must be provided",
-  "RegistrationFailed": "Registration failed",
-  "RegistrationSuccessful": "Registration successful",
-  "InvalidCredentials": "Invalid credentials",
-  "LoginSuccessful": "Login successful",
-  "InvalidToken": "Invalid or empty token",
-  "UserNotFound": "User not found for refresh token",
-  "InactiveToken": "Inactive or invalid refresh token",
-  "TokenRefreshed": "Token refreshed successfully"
+
+  // Auth Service Message
+  "EmailAlreadyRegistered": "البريد الإلكتروني مسجل بالفعل",
+  "UsernameAlreadyTaken": "اسم المستخدم مستخدم بالفعل",
+  "ProfileImageRequired": "يجب رفع صورة الملف الشخصي",
+  "RegistrationFailed": "فشل في التسجيل",
+  "RegistrationSuccessful": "تم التسجيل بنجاح",
+  "InvalidCredentials": "بيانات الدخول غير صحيحة",
+  "LoginSuccessful": "تم تسجيل الدخول بنجاح",
+  "InvalidToken": "رمز التحديث غير صالح أو فارغ",
+  "UserNotFound": "لم يتم العثور على مستخدم لهذا الرمز",
+  "InactiveToken": "رمز التحديث غير نشط أو غير صالح",
+  "TokenRefreshed": "تم تحديث الرمز بنجاح",
+
 }

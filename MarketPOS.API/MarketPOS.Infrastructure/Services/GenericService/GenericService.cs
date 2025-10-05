@@ -127,7 +127,7 @@ public class GenericService<TEntity> : IFullService<TEntity> where TEntity : cla
     {
         try
         {
-            return await _unitOfWork.RepositoryEntity<TEntity>().GetProjectedListAsync<TResult>(mapper, predicate, tracking, includeExpressions, includeSoftDeleted,
+            return await _unitOfWork.RepositoryEntity<TEntity>().GetAllProjectedListAsync<TResult>(mapper, predicate, tracking, includeExpressions, includeSoftDeleted,
                                  ordering, applyIncludes: false);
         }
         catch (Exception ex)
@@ -320,4 +320,3 @@ public class GenericService<TEntity> : IFullService<TEntity> where TEntity : cla
 
     #endregion
 }
-

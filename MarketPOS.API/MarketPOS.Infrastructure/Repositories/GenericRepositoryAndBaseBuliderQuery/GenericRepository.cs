@@ -1,11 +1,16 @@
 ﻿using AutoMapper.QueryableExtensions;
+using MarketPOS.Infrastructure.TrackingServicesMiddleware;
+using System.Diagnostics;
 
 namespace MarketPOS.Infrastructure.Repositories.GenericRepositoryAndBaseBuliderQuery;
 
-public class GenericeRepository<TEntity> : BaseBuildeQuery<TEntity>, IFullRepository<TEntity> where TEntity : class
+public class GenericRepository<TEntity> : BaseBuildeQuery<TEntity>, IFullRepository<TEntity> where TEntity : class
 {
-    public GenericeRepository(ApplicationDbContext context) : base(context)
+    private readonly ILogger<GenericRepository<TEntity>> _logger;
+    public GenericRepository(ApplicationDbContext context, ILogger<GenericRepository<TEntity>> logger) : base(context)
     {
+        ServiceTracker.Add(typeof(GenericRepository<TEntity>).Name);
+        _logger = logger;
     }
 
     #region ProjectableRepository Methods
@@ -33,7 +38,7 @@ public class GenericeRepository<TEntity> : BaseBuildeQuery<TEntity>, IFullReposi
         return (data, total);
     }
 
-    public async Task<List<TResult>> GetProjectedListAsync<TResult>(
+    public async Task<List<TResult>> GetAllProjectedListAsync<TResult>(
         IMapper mapper,
         Expression<Func<TEntity, bool>>? predicate = null,
         bool tracking = false,
@@ -42,7 +47,15 @@ public class GenericeRepository<TEntity> : BaseBuildeQuery<TEntity>, IFullReposi
          Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null,
         bool applyIncludes = false) // Important: false when using ProjectTo
     {
+        var stopwatch = Stopwatch.StartNew();
+
+        _logger.LogInformation("Repository - GetAllAsync executing EF query");
+
         var query = BuildQuery(predicate, tracking, includeExpressions, includeSoftDeleted, ordering, applyIncludes);
+
+        stopwatch.Stop();
+        _logger.LogInformation("Repository - EF query finished in {ElapsedMilliseconds} ms", stopwatch.ElapsedMilliseconds);
+
         return await query.ProjectTo<TResult>(mapper.ConfigurationProvider).ToListAsync();
     }
 
@@ -86,7 +99,16 @@ public class GenericeRepository<TEntity> : BaseBuildeQuery<TEntity>, IFullReposi
          Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? ordering = null,
         bool applyIncludes = true)
     {
-        return await BuildQuery(null, tracking, includeExpressions, includeSoftDeleted, ordering, applyIncludes).ToListAsync();
+        var stopwatch = Stopwatch.StartNew();
+
+        _logger.LogInformation("Repository - GetAllAsync executing EF query");
+
+        var query = await BuildQuery(null, tracking, includeExpressions, includeSoftDeleted, ordering, applyIncludes).ToListAsync();
+
+        stopwatch.Stop();
+        _logger.LogInformation("Repository - EF query finished in {ElapsedMilliseconds} ms", stopwatch.ElapsedMilliseconds);
+
+        return query.ToList();
     }
 
     public async Task<TEntity?> GetByIdAsync(

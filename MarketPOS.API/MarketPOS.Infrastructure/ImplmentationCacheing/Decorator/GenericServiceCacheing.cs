@@ -17,7 +17,7 @@ public class GenericServiceCacheing<TEntity> : GenericService<TEntity>, IFullSer
         IGenericCache cacheService)
         : base(unitOfWork, localizer, logger, cacheService)
     {
-        ServiceTracker.Add(typeof(TEntity).Name);
+        ServiceTracker.Add(typeof(GenericService<TEntity>).Name);
         _cacheKeyPrefix = typeof(TEntity).Name;
     }
 

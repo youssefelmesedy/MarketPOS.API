@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace MarketPOS.API.Middlewares;
+namespace MarketPOS.API.ExtensionsFiltreingAndMiddlewares.Exceptions;
 
 #region ResponseMiddleware New
 public class ResponseMiddleware
@@ -111,7 +111,7 @@ public class ResponseMiddleware
             Status = statusCode,
             Message = root.TryGetProperty("message", out var msgProp)
                         ? msgProp.GetString() ?? ""
-                        : (successFlag ? _localizer["Success"] : _localizer["Error"]),
+                        : successFlag ? _localizer["Success"] : _localizer["Error"],
             Data = successFlag && root.TryGetProperty("data", out var dataProp)
                         ? JsonSerializer.Deserialize<object>(dataProp.GetRawText())
                         : null,
