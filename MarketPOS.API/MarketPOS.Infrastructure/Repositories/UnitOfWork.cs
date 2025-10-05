@@ -1,5 +1,6 @@
-﻿using System.Collections.Concurrent;
+﻿using MarketPOS.Infrastructure.TrackingServicesMiddleware;
 using Microsoft.EntityFrameworkCore.Storage;
+using System.Collections.Concurrent;
 
 public class UnitOfWork : IUnitOfWork
 {
@@ -11,6 +12,7 @@ public class UnitOfWork : IUnitOfWork
 
     public UnitOfWork(ApplicationDbContext context, IServiceProvider serviceProvider)
     {
+        ServiceTracker.Add(typeof(UnitOfWork).Name);
         _context = context ?? throw new ArgumentNullException(nameof(context));
         _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
     }
@@ -21,10 +23,15 @@ public class UnitOfWork : IUnitOfWork
 
         var repository = _repositories.GetOrAdd(typeName, _ =>
         {
-            var repositoryType = typeof(GenericeRepository<>).MakeGenericType(typeof(TEntity));
-            return Activator.CreateInstance(repositoryType, _context)!;
+            var repositoryType = typeof(GenericRepository<>).MakeGenericType(typeof(TEntity));
+            var loggerType = typeof(ILogger<>).MakeGenericType(repositoryType);
+            var logger = _serviceProvider.GetRequiredService(loggerType);
+
+
+            return Activator.CreateInstance(repositoryType, _context, logger)!;
         });
 
+        ServiceTracker.Add(typeName);
         return (IFullRepository<TEntity>)repository;
     }
 

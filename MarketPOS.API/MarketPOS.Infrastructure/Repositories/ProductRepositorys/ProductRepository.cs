@@ -1,10 +1,12 @@
 ﻿using MarketPOS.Infrastructure.Repositories.GenericRepositoryAndBaseBuliderQuery;
 
 namespace MarketPOS.Infrastructure.Repositories.ProductRepositorys;
-public class ProductRepository : GenericeRepository<Product>, IProductRepo
+public class ProductRepository : GenericRepository<Product>, IProductRepo
 {
-    public ProductRepository(ApplicationDbContext context) : base(context)
+    private readonly ILogger<ProductRepository> _logger;
+    public ProductRepository(ApplicationDbContext context, ILogger<ProductRepository> logger) : base(context, logger)
     {
+        _logger = logger; 
     }
 
     public async Task<IEnumerable<Product>> GetAllWithCategoryAsync(Guid? categoryId = null)

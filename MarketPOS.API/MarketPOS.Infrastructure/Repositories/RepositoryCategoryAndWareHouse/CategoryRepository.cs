@@ -1,9 +1,10 @@
 ﻿using MarketPOS.Infrastructure.Repositories.GenericRepositoryAndBaseBuliderQuery;
 
 namespace MarketPOS.Infrastructure.Repositories.RepositoryCategory;
-public class CategoryRepository : GenericeRepository<Category>, ICategoryRepo
+public class CategoryRepository : GenericRepository<Category>, ICategoryRepo
 {
-    public CategoryRepository(ApplicationDbContext context) : base(context)
+    private readonly ILogger<CategoryRepository> _logger;
+    public CategoryRepository(ApplicationDbContext context, ILogger<CategoryRepository> logger) : base(context, logger)
     {
     }
 }

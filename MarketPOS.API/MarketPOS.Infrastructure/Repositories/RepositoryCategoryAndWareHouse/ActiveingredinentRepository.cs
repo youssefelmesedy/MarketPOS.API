@@ -2,9 +2,11 @@
 using MarketPOS.Infrastructure.Repositories.GenericRepositoryAndBaseBuliderQuery;
 
 namespace MarketPOS.Infrastructure.Repositories.RepositoryCategoryAndWareHouse;
-public class ActiveingredinentRepository : GenericeRepository<ActiveIngredients>, IActivelngredinentsRepo
+public class ActiveingredinentRepository : GenericRepository<ActiveIngredients>, IActivelngredinentsRepo
 {
-    public ActiveingredinentRepository(ApplicationDbContext context) : base(context)
+    private readonly ILogger<ActiveingredinentRepository> _logger;
+    public ActiveingredinentRepository(ApplicationDbContext context, ILogger<ActiveingredinentRepository> logger) : base(context, logger)
     {
+        _logger = logger;
     }
 }

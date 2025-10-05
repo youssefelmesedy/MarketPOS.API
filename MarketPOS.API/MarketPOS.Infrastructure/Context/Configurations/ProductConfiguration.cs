@@ -51,7 +51,6 @@ public class ProductPriceConfiguration : BaseEntityConfiguration<ProductPrice>
 {
     public override void Configure(EntityTypeBuilder<ProductPrice> builder)
     {
-        base.Configure(builder);
         builder.HasKey(p => p.ProductId);
 
         builder.Ignore(p => p.Id);
@@ -77,7 +76,6 @@ public class ProductUnitProfileConfiguration : BaseEntityConfiguration<ProductUn
 {
     public override void Configure(EntityTypeBuilder<ProductUnitProfile> builder)
     {
-        base.Configure(builder);
 
         builder.HasKey(p => p.ProductId);
 

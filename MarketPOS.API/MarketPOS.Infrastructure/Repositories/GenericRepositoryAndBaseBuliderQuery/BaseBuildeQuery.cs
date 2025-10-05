@@ -42,6 +42,7 @@ public class BaseBuildeQuery<T> where T : class
 
         if (orderBy != null)
             query = orderBy(query); // Fixed the issue by using the provided 'orderBy' delegate.
+
         return query;
     }
 }

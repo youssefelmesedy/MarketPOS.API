@@ -32,10 +32,11 @@ public class ProductsController : ControllerBase
 
     // ✅ Get All
     [HttpGet()]
+    [Route("{SofteDelete:bool}")]
     [ProducesResponseType(typeof(ResultDto<IEnumerable<SomeFeaturesProductDto>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultDto<BadRequestResult>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ExtendedProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> GetAll([FromQuery] bool SofteDelete)
+    public async Task<IActionResult> GetAll(bool SofteDelete = false)
     {
         var result = await _mediator.Send(new GetAllProductsQuery(SofteDelete));
 

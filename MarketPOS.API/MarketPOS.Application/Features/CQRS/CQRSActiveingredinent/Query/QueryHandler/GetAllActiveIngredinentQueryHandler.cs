@@ -1,4 +1,5 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
+using MarketPOS.Shared.Constants;
 using MarketPOS.Shared.DTOs.ActivelngredientsDTO;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSActiveingredinent.Query.QueryHandler;
@@ -21,14 +22,14 @@ public class GetAllActiveIngredinentQueryHandler : BaseHandler<GetAllActiveIngre
 
         var entitys = await _service.GetAllAsync(includeSoftDeleted: request.SoftDelete);
         if (!entitys.Any())
-            return _resultFactory.Fail<IEnumerable<ActiveIngredinentsDetalisDTO>>("GetAllFailed");
+            return _resultFactory.Fail<IEnumerable<ActiveIngredinentsDetalisDTO>>(Messages.Service.GetAllFailed);
 
         var result = _mapper?.Map<IEnumerable<ActiveIngredinentsDetalisDTO>>(entitys);
         if (result is null)
-            return _resultFactory.Fail<IEnumerable<ActiveIngredinentsDetalisDTO>>("MappingFiled");
+            return _resultFactory.Fail<IEnumerable<ActiveIngredinentsDetalisDTO>>(Messages.Service.Mappingfailed);
 
-        var reusltLocalizer = _localizationPostProcessor.Apply(result);
+        var resultLocalizer = _localizationPostProcessor.Apply(result);
 
-        return _resultFactory.Success(reusltLocalizer, "Success");
+        return _resultFactory.Success(resultLocalizer, Messages.Successfully.Success);
     }
 }
