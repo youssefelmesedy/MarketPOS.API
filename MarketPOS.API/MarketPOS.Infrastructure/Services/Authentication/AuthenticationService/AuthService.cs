@@ -1,6 +1,6 @@
-﻿using Azure.Core;
-using Market.Domain.Entities.Auth;
+﻿using Market.Domain.Entities.Auth;
 using MarketPOS.Application.InterfaceCacheing;
+using MarketPOS.Application.Services.InterfacesServices.Authentication;
 using MarketPOS.Application.Services.InterfacesServices.FileStorage;
 using MarketPOS.Application.Services.InterfacesServices.InterFacesAuthentication;
 using MarketPOS.Shared.Constants;
@@ -23,6 +23,7 @@ public class AuthService : IAuthService
     private readonly ILogger<AuthService> _logger;
     private readonly IStringLocalizer<AuthService> _localizer;
     private readonly IGenericCache _cache;
+    private readonly IEmailService _emailService;
     private readonly string _cacheKeyPrefix;
 
     public AuthService(
@@ -35,7 +36,8 @@ public class AuthService : IAuthService
         RoleManager<IdentityRole<Guid>> roleManager,
         IFileService fileService,
         IStringLocalizer<AuthService> localizer,
-        IGenericCache cache)
+        IGenericCache cache,
+        IEmailService emailService)
     {
         _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
@@ -47,6 +49,7 @@ public class AuthService : IAuthService
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _localizer = localizer ?? throw new ArgumentNullException(nameof(localizer));
         _cache = cache ?? throw new ArgumentNullException(nameof(cache));
+        _emailService = emailService ?? throw new ArgumentNullException(nameof(emailService));
         _cacheKeyPrefix = typeof(AuthService).Name;
     }
     public async Task<AuthDto> RegisterAsync(RegisterDto register, string foldername, CancellationToken cancellationToken = default)
@@ -285,14 +288,78 @@ public class AuthService : IAuthService
         }
     }
 
-    public Task<AuthDto> ChangePasswordAsync(Guid userId, ChangePasswordDto dto, CancellationToken cancellationToken = default)
+    public async Task<AuthDto> ChangePasswordAsync(Guid userId, ChangePasswordDto dto, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        if(dto.NewPassword != dto.ConfirmNewPassword)
+            throw new ValidationException("New Password and Confirm New Password do not match.");
+
+        if(dto.NewPassword == dto.CurrentPassword)
+            throw new ValidationException("New Password must be different from Current Password.");
+
+        var user = await _userManager.FindByIdAsync(userId.ToString());
+        if (user == null)
+            throw new KeyNotFoundException("User not found.");
+
+        var isCurrentPasswordValid = await _userManager.CheckPasswordAsync(user, dto.CurrentPassword!);
+        if (!isCurrentPasswordValid)
+            throw new ValidationException("Current Password is incorrect.");
+
+        var result = await _userManager.ChangePasswordAsync(user, dto.CurrentPassword!, dto.NewPassword!);
+        if (!result.Succeeded)
+        {
+            var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+            throw new InvalidOperationException($"Password change failed: {errors}");
+        }
+        return new AuthDto
+        {
+            Message = AppMessages.PasswordChangeSuccessful,
+            IsAuthenticated = true,
+            FullName = user.FullName ?? "Unk",
+            UserName = user.UserName ?? "Unk",
+            Email = user.Email ?? "Unk",
+            ProfileImageURL = user.ProfileImageUrl ?? string.Empty
+        };
     }
 
-    public Task<AuthDto> RequestPasswordResetAsync(RequestPasswordResetDto dto, CancellationToken cancellationToken = default)
+    public async Task<AuthDto> RequestPasswordResetAsync(RequestPasswordResetDto dto, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        // 1️⃣ التحقق من صحة البريد
+        if (string.IsNullOrWhiteSpace(dto.Email))
+            throw new ValidationException("Email is required.");
+
+        // 2️⃣ البحث عن المستخدم بواسطة البريد
+        var user = await _userManager.FindByEmailAsync(dto.Email);
+
+        // 3️⃣ أمان: لو المستخدم غير موجود، نرجع رسالة عامة
+        if (user == null)
+        {
+            return new AuthDto
+            {
+                Message = "If this email is registered, you will receive a password reset link."
+            };
+        }
+
+        // 4️⃣ توليد رمز إعادة تعيين كلمة المرور
+        var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+        // 5️⃣ بناء رابط إعادة التعيين
+        var encodedToken = Uri.EscapeDataString(resetToken);
+        var encodedEmail = Uri.EscapeDataString(user.Email!); // تأكد أن البريد ليس null
+        var resetLink = $"https://yourapp.com/reset-password?token={encodedToken}&email={encodedEmail}";
+
+        // 6️⃣ إرسال البريد باستخدام EmailService
+        await _emailService.SendPasswordResetAsync(user.Email!, resetLink);
+
+        // 7️⃣ إرجاع رسالة عامة لتجنب كشف وجود البريد
+        return new AuthDto
+        {
+            Message = "If this email is registered, you will receive a password reset link.",
+            IsAuthenticated = true,
+            FullName = user.FullName ?? "UnKwon",
+            Email = user.Email ?? "UnKwon",
+            UserName = user.UserName ?? "Unkwon",
+            ProfileImageURL= user.ProfileImageUrl ?? string.Empty,
+        };
     }
 
     public Task<AuthDto> ResetPasswordAsync(ResetPasswordDto dto, CancellationToken cancellationToken = default)

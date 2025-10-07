@@ -1,7 +1,9 @@
 ﻿using Market.Domain.Entities.Auth;
+using MarketPOS.Application.Services.InterfacesServices.Authentication;
 using MarketPOS.Application.Services.InterfacesServices.FileStorage;
 using MarketPOS.Application.Services.InterfacesServices.InterFacesAuthentication;
 using MarketPOS.Infrastructure.Services.Authentication.AuthenticationService;
+using MarketPOS.Infrastructure.Services.Authentication.EmailServices;
 using MarketPOS.Infrastructure.Services.Authentication.JWTServices;
 using MarketPOS.Infrastructure.Services.FileStorage;
 using Microsoft.AspNetCore.Identity;
@@ -17,8 +19,9 @@ public static class RegisterServicesInfrastructure
         IHostEnvironment environment)
     {
 
-        var connectionString = configuration.GetConnectionString("LocalConnection"); // locale Data base
-        //var connectionString = configuration.GetConnectionString("ServerConnection"); // Server Data base
+        var connectionString = environment.IsProduction()
+            ? configuration.GetConnectionString("ServerConnection")// locale Data base
+            : configuration.GetConnectionString("LocalConnection"); // Server Data base
         Console.WriteLine(connectionString);
         services.AddDbContext<ApplicationDbContext>(options =>
         {
@@ -76,6 +79,7 @@ public static class RegisterServicesInfrastructure
         services.AddScoped<IWareHouseService, WareHouseService>();
         services.AddScoped<ISupplierService, SupplierService>();
         services.AddScoped<IAggregateService, AggregateService>();
+        services.AddScoped<IEmailService, EmailService>();
 
         Console.WriteLine($"EnviromentName: {environment.EnvironmentName}");
 
