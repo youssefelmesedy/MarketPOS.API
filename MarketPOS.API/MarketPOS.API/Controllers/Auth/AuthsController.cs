@@ -1,6 +1,7 @@
 ﻿using MarketPOS.API.Middlewares.FeaturesFunction;
 using MarketPOS.Application.Features.CQRS.CQRSAuth.Command;
 using MarketPOS.Shared.DTOs.Authentication;
+using MarketPOS.Shared.DTOs.AuthenticationDTO;
 using MarketPOS.Shared.Eunms.EunmPersonFolderNameImage;
 using Microsoft.AspNetCore.Authentication;
 using System.Runtime.InteropServices;
@@ -72,15 +73,29 @@ public class AuthsController : ControllerBase
     {
         var token = Request.Cookies["refreshtoken"];
 
-        if(token == null)
+        if (token == null)
             return ErrorFunction.BadRequest(false, "Can't Insert Token Empty..!");
 
         var logout = await _mediator.Send(new LogoutCommand(token));
         if (!logout.IsSuccess)
             return ErrorFunction.NotFound(logout.IsSuccess, logout.Message, logout.Errors);
 
-         Response.Cookies.Delete("refreshToken");
+        Response.Cookies.Delete("refreshToken");
         return HelperMethod.HandleResult(logout, _localizer);
+    }
+
+    [HttpPost("request-password-reset")]
+    public async Task<IActionResult> RequestPasswordReset([FromBody] RequestPasswordResetDto dto)
+    {
+        var command = new RequestPasswordResetCommand(dto);
+        if (command.Dto.Email == null)
+            return ErrorFunction.BadRequest(false, "Can't Send Empty Email");
+
+        var result = await _mediator.Send(command);
+        if (result is null || !result.IsSuccess)
+            return ErrorFunction.NotFound(result!.IsSuccess, result.Message, result.Errors);
+
+        return HelperMethod.HandleResult(result, _localizer);
     }
 
     [HttpPost("UploadImage")]

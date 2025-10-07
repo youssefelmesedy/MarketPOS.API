@@ -1,15 +1,7 @@
 ﻿{
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "http": {
-      "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": false,
-      "applicationUrl": "http://localhost:5067",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-    },
-    "https": {
+    "MarketPOS.API": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,
@@ -17,6 +9,16 @@
       "applicationUrl": "https://localhost:7209;http://localhost:5067",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "https": {
+        "commandName": "Project",
+        "dotnetRunMessages": true,
+        "launchBrowser": false,
+        "launchUrl": "swagger",
+        "applicationUrl": "https://localhost:7209;http://localhost:5067",
+        "environmentVariables": {
+          "ASPNETCORE_ENVIRONMENT": "Development"
+        }
       }
     }
   }

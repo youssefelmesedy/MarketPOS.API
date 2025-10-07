@@ -5,6 +5,7 @@ using MarketPOS.API.Extensions.ExtensionMiddlewar;
 using MarketPOS.API.Extensions.ExtensionSwgger;
 using MarketPOS.API.Extensions.ExtensionValidatuion;
 using MarketPOS.Application;
+using MarketPOS.Infrastructure.Services.Authentication.EmailServices;
 using MarketPOS.Shared.RateLimitedSettings;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,9 +17,11 @@ builder.Configuration
     .AddJsonFile("appsettings.Production.json", optional: true, reloadOnChange: true)
     .AddJsonFile("appsettings.JWT.json", optional: true, reloadOnChange: true)
     .AddJsonFile("appsettings.RateLimitRoles.json", optional: true, reloadOnChange: true)
+    .AddJsonFile("appsettings.Email.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables();
 
 builder.Services.Configure<RateLimitingOptions>(builder.Configuration.GetSection("RateLimitingOptions"));
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 
 builder.Services
     .AddApplicationServices()
