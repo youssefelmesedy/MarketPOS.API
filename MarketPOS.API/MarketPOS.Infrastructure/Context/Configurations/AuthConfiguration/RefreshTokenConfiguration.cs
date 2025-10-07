@@ -28,7 +28,7 @@ public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
             .HasDefaultValueSql("GETUTCDATE()");
 
         //  Revoked
-        builder.Property(r => r.IsRevoked)
+        builder.Property(r => r.Revoked)
             .HasDefaultValue(null);
 
         //  Relationship: User 1 → * RefreshTokens

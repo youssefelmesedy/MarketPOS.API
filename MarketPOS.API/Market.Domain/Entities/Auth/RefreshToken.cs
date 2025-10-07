@@ -6,10 +6,11 @@ public class RefreshToken
     public string? Device { get; set; } // User Agent
     public string? IpAddress { get; set; } 
     public DateTime ExpiresAt { get; set; }
-    public DateTime? IsRevoked { get; set; } 
+    public DateTime? Revoked { get; set; } 
     public DateTime CreatedAt { get; set; }
+
     public bool IsExpired  => DateTime.UtcNow >= ExpiresAt;
-    public bool IsActive => IsRevoked == null && !IsExpired;
+    public bool IsActive => Revoked == null && !IsExpired;
 
     // Navigation Properties
     public Guid UserId { get; set; }

@@ -17,8 +17,8 @@ public class RefreshTokenCommandHanndler : BaseHandler<RefreshTokenCommandHanndl
             ?? throw new InvalidOperationException("IAuthService not registered in the service factory.");
         
         var auth = await _authService.RefreshTokenAsync(request.RefreshToken!);
-        if (auth is null)
-            return _resultFactory.Fail<RefreshTokenDto>($"Message: {auth!.Message}");
+        if (auth is null || !auth.IsActive)
+            return _resultFactory.Fail<RefreshTokenDto>($"{auth!.Message}");
 
         return _resultFactory.Success(auth, "Token refreshed successfully.");
     }

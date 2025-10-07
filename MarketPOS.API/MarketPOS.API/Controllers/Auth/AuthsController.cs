@@ -2,6 +2,8 @@
 using MarketPOS.Application.Features.CQRS.CQRSAuth.Command;
 using MarketPOS.Shared.DTOs.Authentication;
 using MarketPOS.Shared.Eunms.EunmPersonFolderNameImage;
+using Microsoft.AspNetCore.Authentication;
+using System.Runtime.InteropServices;
 
 namespace MarketPOS.API.Controllers.Auth;
 
@@ -23,11 +25,11 @@ public class AuthsController : ControllerBase
         var rehreshtoken = Request.Cookies["refreshToken"];
 
         if (registerDto == null)
-            return BadRequest("Invalid registration data.");
+            return ErrorFunction.BadRequest(false, "Invalid registration data.");
 
         var result = await _mediator.Send(new RegisterCommand(registerDto, folderName.ToString()));
         if (!result.IsSuccess)
-            return BadRequest(result.Message);
+            return ErrorFunction.BadRequest(result.IsSuccess, result.Message, result.Errors);
 
         SetRefreshTokenInCookie(result.Data!.RefreshToken, result.Data.ExpiresAt!.Value);
 
@@ -38,14 +40,13 @@ public class AuthsController : ControllerBase
     public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
     {
         if (loginDto == null)
-            return BadRequest("Invalid login data.");
+            return ErrorFunction.BadRequest(false,"Invalid login data.");
 
         var rehreshToken = Request.Cookies["refreshToken"];
 
         var result = await _mediator.Send(new LoginCommand(loginDto));
         if (!result.IsSuccess)
-
-            return BadRequest(result.Message);
+            return ErrorFunction.BadRequest(result.IsSuccess, result.Message, result.Errors);
 
         SetRefreshTokenInCookie(result.Data!.RefreshToken, result.Data.ExpiredAt ?? default);
 
@@ -59,24 +60,40 @@ public class AuthsController : ControllerBase
 
         var result = await _mediator.Send(new RefreshTokenCommand(refreshToken));
         if (!result.IsSuccess)
-            return BadRequest(result.Message);
+            return ErrorFunction.NotFound(result.IsSuccess, result.Message, result.Errors);
 
         SetRefreshTokenInCookie(result.Data!.RefreshToken, result.Data.ExpiredAt ?? default);
 
         return HelperMethod.HandleResult(result, _localizer);
     }
 
+    [HttpPost("Logout")]
+    public async Task<IActionResult> Logout()
+    {
+        var token = Request.Cookies["refreshtoken"];
+
+        if(token == null)
+            return ErrorFunction.BadRequest(false, "Can't Insert Token Empty..!");
+
+        var logout = await _mediator.Send(new LogoutCommand(token));
+        if (!logout.IsSuccess)
+            return ErrorFunction.NotFound(logout.IsSuccess, logout.Message, logout.Errors);
+
+         Response.Cookies.Delete("refreshToken");
+        return HelperMethod.HandleResult(logout, _localizer);
+    }
+
     [HttpPost("UploadImage")]
     public async Task<IActionResult> UploadImage([FromForm] UploadImageDto dto, PersonFolderNameImages folderName, CancellationToken cancellationToken)
     {
         if (dto == null || dto.File!.Length == 0)
-            return BadRequest("No file uploaded.");
+            return ErrorFunction.BadRequest(false,"No file uploaded.");
 
         // Call your service to handle the file upload
         var result = await _mediator.Send(new UplodeFileCommand(dto.UserId, dto.PersoneFullName!, dto.File, folderName.ToString()), cancellationToken);
 
         if (!result.IsSuccess)
-            return BadRequest(result.Message);
+            return ErrorFunction.NotFound(result.IsSuccess, result.Message, result.Errors);
 
         return HelperMethod.HandleResult(result, _localizer);
     }

@@ -2,6 +2,7 @@
 using MarketPOS.Application.InterfaceCacheing;
 using MarketPOS.Application.Services.InterfacesServices.InterFacesAuthentication;
 using Microsoft.AspNetCore.Http;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 
 public class RefreshTokenService : GenericServiceCacheing<RefreshToken>, IRefreshTokenService
@@ -16,7 +17,7 @@ public class RefreshTokenService : GenericServiceCacheing<RefreshToken>, IRefres
     }
 
     public async Task<RefreshToken> GenerateTokenAsync
-            (Guid userId, string ipAddress, string device, int expiryDays = 1, int maxTokens = 5)
+            (Guid userId, string ipAddress, string device, int expiryDays = 15)
     {
         try
         {
@@ -30,17 +31,15 @@ public class RefreshTokenService : GenericServiceCacheing<RefreshToken>, IRefres
             {
                 RefToken = token,
                 UserId = userId,
-                ExpiresAt = DateTime.UtcNow.ToLocalTime().AddDays(expiryDays),
-                CreatedAt = DateTime.UtcNow.ToLocalTime(),
-                IsRevoked = null,
+                ExpiresAt = DateTime.UtcNow.AddDays(expiryDays),
+                CreatedAt = DateTime.UtcNow,
+                Revoked = null,
                 IpAddress = ipAddress,
                 Device = device
             };
 
             await repo.AddAsync(refreshToken);
             await _unitOfWork.SaveChangesAsync();
-
-            await CleanupOldTokensAsync(userId, maxTokens);
 
             _logger.LogInformation("Generated new refresh token for UserId: {UserId}", userId);
             return refreshToken;
@@ -59,7 +58,7 @@ public class RefreshTokenService : GenericServiceCacheing<RefreshToken>, IRefres
             var repo = _unitOfWork.RepositoryEntity<RefreshToken>();
             var refreshToken = await repo.GetAsync(t => t.UserId == userId);
 
-            if (refreshToken is null || refreshToken.IsRevoked != null || refreshToken.IsExpired)
+            if (refreshToken is null || refreshToken.Revoked != null || refreshToken.IsExpired)
             {
                 _logger.LogWarning("Invalid or expired refresh token: {RefToken}", refreshToken?.RefToken);
                 return false;
@@ -80,18 +79,20 @@ public class RefreshTokenService : GenericServiceCacheing<RefreshToken>, IRefres
         try
         {
             var repo = _unitOfWork.RepositoryEntity<RefreshToken>();
-            var refreshToken = await repo.GetAsync(t => t.RefToken == token);
 
-            if (refreshToken is null || refreshToken.IsRevoked != null)
+            var rehreshToken = await repo.GetAsync(t => t.RefToken == token, tracking: true);
+
+            if (rehreshToken is null || rehreshToken.Revoked != null)
             {
-                _logger.LogWarning("Attempt to revoke an invalid or already revoked token: {RefToken}", refreshToken?.RefToken);
+                _logger.LogWarning("Attempt to revoke an invalid or already revoked token: {RefToken}", rehreshToken?.RefToken);
                 return false;
             }
 
-            refreshToken.IsRevoked = DateTime.UtcNow.ToLocalTime();
+            rehreshToken.Revoked = DateTime.UtcNow;
+            repo.Update(rehreshToken);
             await _unitOfWork.SaveChangesAsync();
 
-            _logger.LogInformation("Revoked refresh token: {RefToken}", refreshToken.RefToken);
+            _logger.LogInformation("Revoked refresh token: {RefToken}", rehreshToken.RefToken);
             return true;
         }
         catch (Exception ex)
@@ -101,33 +102,47 @@ public class RefreshTokenService : GenericServiceCacheing<RefreshToken>, IRefres
         }
     }
 
-    public async Task<bool> CleanupOldTokensAsync(Guid userId, int maxTokens = 5)
+    public async Task<bool> CleanupOldTokensAsync(Guid userId, string device, int maxTokensPerDevice = 50)
     {
         try
         {
             var repo = _unitOfWork.RepositoryEntity<RefreshToken>();
 
-            var tokens = await repo.GetAllAsync();
-            if (tokens.Count(t => t.UserId == userId && t.IsRevoked != null) <= maxTokens)
+            // ✅ هات كل التوكنات لنفس المستخدم والجهاز
+            var tokens = await repo.FindAsync(t => t.UserId == userId && t.Device == device, tracking: true);
+
+            if (tokens == null || tokens.Count() <= maxTokensPerDevice)
                 return false;
 
-            var oldTokens = tokens
+            // ✅ رتبهم من الأحدث للأقدم
+            var orderedTokens = tokens
                 .OrderByDescending(t => t.CreatedAt)
-                .Skip(maxTokens)
                 .ToList();
 
-            if (!oldTokens.Any())
-                return false;
+            // ✅ سيب آخر واحد نشط أو مستخدم
+            var activeToken = orderedTokens.FirstOrDefault(t => t.Revoked == null && t.ExpiresAt > DateTime.UtcNow)
+                ?? orderedTokens.First();
 
-            repo.RemoveRange(oldTokens);
-            await _unitOfWork.SaveChangesAsync();
+            // ✅ احذف الأقدم بعد الحد المسموح، مع الحفاظ على النشط
+            var tokensToDelete = orderedTokens
+                .Where(t => t.Id != activeToken.Id)
+                .Skip(maxTokensPerDevice - 1)
+                .ToList();
 
-            _logger.LogInformation("Cleaned up {Count} old tokens for UserId: {UserId}", oldTokens.Count, userId);
+            if (tokensToDelete.Any())
+            {
+                repo.RemoveRange(tokensToDelete);
+                await _unitOfWork.SaveChangesAsync();
+
+                _logger.LogInformation("🧹 Cleaned {Count} old tokens for UserId: {UserId}, Device: {Device}",
+                    tokensToDelete.Count, userId, device);
+            }
+
             return true;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error while cleaning up old tokens for UserId: {UserId}", userId);
+            _logger.LogError(ex, "Error cleaning tokens for UserId: {UserId}, Device: {Device}", userId, device);
             throw;
         }
     }
@@ -144,6 +159,18 @@ public class RefreshTokenService : GenericServiceCacheing<RefreshToken>, IRefres
         }
 
         return tokens;
+    }
+
+    public async Task<string> GetByTokenAsync(string token)
+    {
+        var repo = _unitOfWork.RepositoryEntity<RefreshToken>();
+        var refreshToken = await repo.GetAsync(t => t.RefToken == token);
+        if (refreshToken is null)
+        {
+            _logger.LogInformation("No refresh token found for the provided token.");
+            return null!;
+        }
+        return refreshToken.RefToken ?? "Unknown";
     }
 
     public string GetIpAdress(HttpContext context)

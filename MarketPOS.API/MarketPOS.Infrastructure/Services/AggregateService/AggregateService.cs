@@ -1,8 +1,10 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.EntityIntrerfaceService;
+using MarketPOS.Application.Services.InterfacesServices.InterFacesAuthentication;
 
 namespace MarketPOS.Infrastructure.Services.AggregateService;
 public class AggregateService : IAggregateService
 {
+    public IAuthService AuthService { get; }
     public IProductService ProductService { get; }
     public ICategoryService CategoryService { get; }
     public IProductPriceService ProductPriceService { get; }
@@ -12,6 +14,7 @@ public class AggregateService : IAggregateService
     public ISupplierService SupplierService { get; }
 
     public AggregateService(
+        IAuthService authService,
         IProductService productService,
         ICategoryService categoryService,
         IProductPriceService priceService,
@@ -20,6 +23,7 @@ public class AggregateService : IAggregateService
         IWareHouseService houseService,
         ISupplierService supplierService)
     {
+        AuthService = authService;
         ProductService = productService;
         CategoryService = categoryService;
         ProductPriceService = priceService;

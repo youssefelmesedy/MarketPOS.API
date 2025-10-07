@@ -45,8 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\customers\" />
-    <Folder Include="wwwroot\images\users\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 

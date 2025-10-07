@@ -1,4 +1,5 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.InterFacesAuthentication;
+using MarketPOS.Shared.Constants;
 using MarketPOS.Shared.DTOs.Authentication;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSAuth.Command.CommandHandler;
@@ -14,10 +15,10 @@ public class LoginCommandHandler : BaseHandler<LoginCommandHandler>,
     {
         var _authService = _servicesFactory.GetService<IAuthService>() ?? throw new InvalidOperationException("IAuthService not login in the service factory.");
 
-        var authDto = await  _authService.LoginAsync(request.dto);
-        if(authDto is null)
-            return _resultFactory.Fail<RefreshTokenDto>($"Message: {authDto!.Message}");
+        var authDto = await  _authService.LoginAsync(request.dto, cancellationToken);
+        if(authDto is null || !authDto.IsActive)
+            return _resultFactory.Fail<RefreshTokenDto>(AppMessages.InvalidCredentials);
 
-        return _resultFactory.Success(authDto, $"Login Successfully");
+        return _resultFactory.Success(authDto, AppMessages.LoginSuccessful);
     }
 }

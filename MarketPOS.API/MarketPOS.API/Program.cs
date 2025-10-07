@@ -22,7 +22,7 @@ builder.Services.Configure<RateLimitingOptions>(builder.Configuration.GetSection
 
 builder.Services
     .AddApplicationServices()
-    .AddInfrastructureServices(builder.Configuration) 
+    .AddInfrastructureServices(builder.Configuration, builder.Environment) 
     .AddDesignPatternServices()
     .AddCustomCaching(builder.Configuration)
     .AddCustomLocalization()
