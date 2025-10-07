@@ -1,4 +1,5 @@
 ﻿using MarketPOS.Application.Services.InterfacesServices.InterFacesAuthentication;
+using MarketPOS.Shared.Constants;
 using MarketPOS.Shared.DTOs.Authentication;
 
 namespace MarketPOS.Application.Features.CQRS.CQRSAuth.Command.CommandHandler;
@@ -19,11 +20,11 @@ public class RegisterCommandHandler : BaseHandler<RegisterCommandHandler>,
 
         var register = await authService.RegisterAsync(request.dto, request.folderName);
         if(register is null)
-            return _resultFactory.Fail<AuthDto>($"Message: {register!.Message}");
+            return _resultFactory.Fail<AuthDto>($"{register!.Message}");
 
         if (!register.IsAuthenticated)
-            return _resultFactory.Fail<AuthDto>($"Message: {register.Message}");
+            return _resultFactory.Fail<AuthDto>($"{register.Message}");
 
-        return _resultFactory.Success(register, "Registration Successfully");
+        return _resultFactory.Success(register, AppMessages.RegistrationSuccessful);
     }
 }

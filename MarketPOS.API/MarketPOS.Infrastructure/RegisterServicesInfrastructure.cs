@@ -5,19 +5,21 @@ using MarketPOS.Infrastructure.Services.Authentication.AuthenticationService;
 using MarketPOS.Infrastructure.Services.Authentication.JWTServices;
 using MarketPOS.Infrastructure.Services.FileStorage;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Hosting;
 
 
 namespace MarketPOS.Infrastructure;
 public static class RegisterServicesInfrastructure
 {
-    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructureServices(
+        this IServiceCollection services, 
+        IConfiguration configuration,
+        IHostEnvironment environment)
     {
-        var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-        var connectionString = environment == "Development"
-                 ? configuration.GetConnectionString("LocalConnection")
-                 : configuration.GetConnectionString("ServerConnection");
-
+        var connectionString = configuration.GetConnectionString("LocalConnection"); // locale Data base
+        //var connectionString = configuration.GetConnectionString("ServerConnection"); // Server Data base
+        Console.WriteLine(connectionString);
         services.AddDbContext<ApplicationDbContext>(options =>
         {
             options.UseSqlServer(connectionString, sqlOptions =>
@@ -75,7 +77,7 @@ public static class RegisterServicesInfrastructure
         services.AddScoped<ISupplierService, SupplierService>();
         services.AddScoped<IAggregateService, AggregateService>();
 
-        Console.WriteLine($"EnviromentName: {environment}");
+        Console.WriteLine($"EnviromentName: {environment.EnvironmentName}");
 
         return services;
     }

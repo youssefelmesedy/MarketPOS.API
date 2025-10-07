@@ -1,9 +1,11 @@
 ﻿using MarketPOS.API.Middlewares.FeaturesFunction;
 using MarketPOS.Shared.DTOs.SofteDleteAndRestor;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MarketPOS.API.Controllers.Product;
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class ProductsController : ControllerBase
 {
     private readonly IMediator _mediator;

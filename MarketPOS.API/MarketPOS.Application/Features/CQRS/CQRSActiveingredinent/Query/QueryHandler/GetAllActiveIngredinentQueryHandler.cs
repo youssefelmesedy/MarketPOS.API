@@ -22,14 +22,14 @@ public class GetAllActiveIngredinentQueryHandler : BaseHandler<GetAllActiveIngre
 
         var entitys = await _service.GetAllAsync(includeSoftDeleted: request.SoftDelete);
         if (!entitys.Any())
-            return _resultFactory.Fail<IEnumerable<ActiveIngredinentsDetalisDTO>>(Messages.Service.GetAllFailed);
+            return _resultFactory.Fail<IEnumerable<ActiveIngredinentsDetalisDTO>>(AppMessages.GetAllFailed);
 
         var result = _mapper?.Map<IEnumerable<ActiveIngredinentsDetalisDTO>>(entitys);
         if (result is null)
-            return _resultFactory.Fail<IEnumerable<ActiveIngredinentsDetalisDTO>>(Messages.Service.Mappingfailed);
+            return _resultFactory.Fail<IEnumerable<ActiveIngredinentsDetalisDTO>>(AppMessages.Mappingfailed);
 
         var resultLocalizer = _localizationPostProcessor.Apply(result);
 
-        return _resultFactory.Success(resultLocalizer, Messages.Successfully.Success);
+        return _resultFactory.Success(resultLocalizer, AppMessages.Success);
     }
 }

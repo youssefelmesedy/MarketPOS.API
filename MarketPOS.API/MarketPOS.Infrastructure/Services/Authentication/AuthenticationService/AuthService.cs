@@ -1,8 +1,11 @@
-﻿using Market.Domain.Entities.Auth;
+﻿using Azure.Core;
+using Market.Domain.Entities.Auth;
 using MarketPOS.Application.InterfaceCacheing;
 using MarketPOS.Application.Services.InterfacesServices.FileStorage;
 using MarketPOS.Application.Services.InterfacesServices.InterFacesAuthentication;
+using MarketPOS.Shared.Constants;
 using MarketPOS.Shared.DTOs.Authentication;
+using MarketPOS.Shared.DTOs.AuthenticationDTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
@@ -54,13 +57,13 @@ public class AuthService : IAuthService
         return await _unitOfWork.ExecuteInTransactionAsync(async cancellationToken =>
         {
             if (await _userManager.FindByEmailAsync(register.Email) != null)
-                return new AuthDto { Message = _localizer["EmailAlreadyRegistered"] };
+                return new AuthDto { Message = AppMessages.EmailAlreadyRegistered};
 
             if (await _userManager.FindByNameAsync(register.UserName) != null)
-                return new AuthDto { Message = _localizer["UsernameAlreadyTaken"] };
+                return new AuthDto { Message = AppMessages.UsernameAlreadyTaken};
 
             if (register.File == null || register.File.Length == 0)
-                return new AuthDto { Message = _localizer["ProfileImageRequired"] };
+                return new AuthDto { Message = AppMessages.ProfileImageRequired};
 
             var user = new User
             {
@@ -72,52 +75,59 @@ public class AuthService : IAuthService
                 CreatedAt = DateTime.UtcNow
             };
 
-            user.ProfileImageUrl = await _fileService.SaveUserImageAsync(
-                user.Id,
-                user.UserName.Trim(),
-                register.File,
-                foldername
-            );
+            // ✅ Save profile image safely
+            try
+            {
+                user.ProfileImageUrl = await _fileService.SaveUserImageAsync(
+                    user.Id,
+                    user.UserName.Trim(),
+                    register.File,
+                    foldername
+                );
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error saving profile image for {Email}", register.Email);
+                return new AuthDto { Message = AppMessages.UplodeImageFilde };
+            }
 
+            // ✅ Create user
             var result = await _userManager.CreateAsync(user, register.Password);
             if (!result.Succeeded)
             {
                 var errors = string.Join(", ", result.Errors.Select(e => e.Description));
-                return new AuthDto { Message = $"{_localizer["RegistrationFailed"]}: {errors}" };
+                return new AuthDto { Message = $"{AppMessages.RegistrationFailed}: {errors}" };
             }
 
-            // ✅ Add Default Role
-            var defaultRole = "User";
+            // ✅ Assign default role
+            const string defaultRole = "User";
             if (!await _roleManager.RoleExistsAsync(defaultRole))
             {
                 await _roleManager.CreateAsync(new IdentityRole<Guid>(defaultRole));
             }
             await _userManager.AddToRoleAsync(user, defaultRole);
 
-            // ✅ Get roles + cache them
+            // ✅ Cache roles directly
             var cacheKey = _cache.BuildCacheKey("UserRoles", _cacheKeyPrefix, user.Id);
-            var roles = await _cache.GetOrAddAsync(cacheKey, async () =>
-            {
-                var r = await _userManager.GetRolesAsync(user);
-                return r.ToList();
-            }, TimeSpan.FromMinutes(30));
+            var roles = new List<string> { defaultRole };
+            await _cache.SetAsync(cacheKey, roles, TimeSpan.FromMinutes(30));
 
-            var accessToken = _jwtService.GenerateToken(user.Id, user.UserName!, user.Email!, roles);
-
+            // ✅ Generate tokens
             var context = _httpContextAccessor.HttpContext!;
+            var accessToken = _jwtService.GenerateToken(user.Id, user.UserName!, user.Email!, roles);
             var refreshToken = await _refreshTokenService.GenerateTokenAsync(
                 user.Id,
                 _refreshTokenService.GetIpAdress(context),
-                _refreshTokenService.GetDevice(context), 
-                expiryDays: 15, 
-                maxTokens: 5
+                _refreshTokenService.GetDevice(context),
+                expiryDays: 15
             );
 
-            _logger.LogInformation("User registered successfully: {Email}", register.Email);
+            _logger.LogInformation("User {UserId} registered successfully with email {Email} from IP {IP}",
+                user.Id, user.Email, _refreshTokenService.GetIpAdress(context));
 
             return new AuthDto
             {
-                Message = _localizer["RegistrationSuccessful"],
+                Message = AppMessages.RegistrationSuccessful,
                 IsAuthenticated = true,
                 FullName = user.FullName ?? "Unk",
                 UserName = user.UserName ?? "Unk",
@@ -138,40 +148,41 @@ public class AuthService : IAuthService
 
         if (user == null || !await _userManager.CheckPasswordAsync(user, login.Password))
         {
-            _logger.LogInformation("Invalid credentials for {Input}", login.EmailORUserName);
-            return new RefreshTokenDto { Message = _localizer["InvalidCredentials"] };
+            _logger.LogWarning("Invalid credentials for {Input}", login.EmailORUserName);
+            return null!;
         }
 
+        // ✅ Get roles from cache
         var cacheKey = _cache.BuildCacheKey("UserRoles", _cacheKeyPrefix, user.Id);
+        var roles = await _cache.GetOrAddAsync(cacheKey, async () =>
+        {
+            var r = await _userManager.GetRolesAsync(user);
+            return r.ToList();
+        }, TimeSpan.FromMinutes(30));
 
-        var Roles = await _cache.GetOrAddAsync(cacheKey, async () =>
-          {
-              var roles = await _userManager.GetRolesAsync(user);
-              return roles.ToList();
-          }, TimeSpan.FromMinutes(30));
-
-        var accessToken = _jwtService.GenerateToken(user.Id, user.UserName!, user.Email!, Roles);
+        var accessToken = _jwtService.GenerateToken(user.Id, user.UserName!, user.Email!, roles);
 
         var context = _httpContextAccessor.HttpContext!;
-        var repo = _unitOfWork.RepositoryEntity<RefreshToken>();
-        var lastRefreshToken = await _refreshTokenService.LastRefreshToken(user.Id);
+        var device = _refreshTokenService.GetDevice(context);
+        var ip = _refreshTokenService.GetIpAdress(context);
 
-        RefreshToken newRefreshToken;
+        // ✅ نحصل على كل التوكنات لنفس الجهاز (بدون إلغاء النشطة)
+        var existingTokens = await _unitOfWork.RepositoryEntity<RefreshToken>()
+            .FindAsync(t => t.UserId == user.Id && t.Device == device, true);
 
-        if (lastRefreshToken != null)
-        {
-            await _refreshTokenService.RevokeTokenAsync(lastRefreshToken.RefToken!);
-        }
+        // ❌ حذفنا عملية إلغاء التوكنات القديمة
+        // ✅ نكتفي بتنظيف القديم جدًا بعد الحد الأقصى ��لمسموح
+        await _refreshTokenService.CleanupOldTokensAsync(user.Id, device, maxTokens: 5);
 
-        newRefreshToken = await _refreshTokenService.GenerateTokenAsync(
-            user.Id,
-            _refreshTokenService.GetIpAdress(context),
-            _refreshTokenService.GetDevice(context),
-            expiryDays: 15, maxTokens: 5);
+        // ✅ إنشاء RefreshToken جديد
+        var newRefreshToken = await _refreshTokenService.GenerateTokenAsync(
+            user.Id, ip, device, expiryDays: 15);
+
+        _logger.LogInformation("User {UserId} logged in successfully from device {Device}", user.Id, device);
 
         return new RefreshTokenDto
         {
-            Message = _localizer["LoginSuccessful"],
+            Message = AppMessages.LoginSuccessful,
             IsActive = true,
             FullName = user.FullName ?? "Unk",
             Token = accessToken,
@@ -186,33 +197,43 @@ public class AuthService : IAuthService
 
         if (string.IsNullOrWhiteSpace(token))
         {
-            _logger.LogInformation("Refresh token is empty or null");
+            _logger.LogWarning("Refresh token is null or empty");
             tokenDTO.Message = _localizer["InvalidToken"];
             return tokenDTO;
         }
 
+        // ✅ البحث عن المستخدم اللي يملك هذا التوكن
         var user = await _userManager.Users
             .Include(u => u.RefreshTokens)
+            .AsNoTracking()
             .SingleOrDefaultAsync(u => u.RefreshTokens!.Any(rt => rt.RefToken == token));
 
         if (user is null)
         {
-            _logger.LogInformation("User not found for refresh token: {RefToken}", token);
-            tokenDTO.Message = _localizer["UserNotFound"];
+            _logger.LogWarning("No user found for refresh token: {Token}", token);
+            tokenDTO.Message = AppMessages.UserNotFound;
             return tokenDTO;
         }
 
         var refreshToken = user.RefreshTokens!.SingleOrDefault(rt => rt.RefToken == token);
-        if (refreshToken is null || !refreshToken.IsActive)
+
+        if (refreshToken == null || !refreshToken.IsActive)
         {
-            _logger.LogInformation("Inactive or invalid refresh token: {RefToken}", token);
-            tokenDTO.Message = _localizer["InactiveToken"];
+            _logger.LogInformation("Inactive or expired refresh token: {Token}", token);
+            tokenDTO.Message = AppMessages.InactiveToken;
             return tokenDTO;
         }
 
-        await _refreshTokenService.RevokeTokenAsync(refreshToken.RefToken!);
+        // ✅ تفعيل الـ Rotation (نوقف القديم ونصدر جديد)
+        var revoked = await _refreshTokenService.RevokeTokenAsync(refreshToken.RefToken!);
+        if (!revoked)
+        {
+            _logger.LogWarning("Failed to revoke token: {Token}", token);
+            tokenDTO.Message = AppMessages.InvalidRevokedToken;
+            return tokenDTO;
+        }
 
-        // ✅ Get roles from cache (instead of always DB)
+        // ✅ تجهيز بيانات المستخدم لتوليد توكن جديد
         var cacheKey = _cache.BuildCacheKey("UserRoles", _cacheKeyPrefix, user.Id);
         var roles = await _cache.GetOrAddAsync(cacheKey, async () =>
         {
@@ -220,23 +241,74 @@ public class AuthService : IAuthService
             return r.ToList();
         }, TimeSpan.FromMinutes(30));
 
-        var newAccessToken = _jwtService.GenerateToken(user.Id, user.UserName!, user.Email!, roles);
-
+        var context = _httpContextAccessor.HttpContext!;
         var newRefreshToken = await _refreshTokenService.GenerateTokenAsync(
             user.Id,
-            _refreshTokenService.GetIpAdress(_httpContextAccessor.HttpContext!),
-            _refreshTokenService.GetDevice(_httpContextAccessor.HttpContext!),
-            expiryDays: 15, maxTokens: 5);
+            _refreshTokenService.GetIpAdress(context),
+            _refreshTokenService.GetDevice(context),
+            expiryDays: 15
+        );
+         await _refreshTokenService.CleanupOldTokensAsync(user.Id, _refreshTokenService.GetDevice(context), maxTokens: 5);
 
-        tokenDTO.Message = _localizer["TokenRefreshed"];
+        var newAccessToken = _jwtService.GenerateToken(user.Id, user.UserName!, user.Email!, roles);
+
+        _logger.LogInformation("Token refreshed successfully for user {UserId}", user.Id);
+
+        tokenDTO.Message = AppMessages.TokenRefreshed;
         tokenDTO.IsActive = true;
         tokenDTO.FullName = user.FullName ?? "Unk";
         tokenDTO.Token = newAccessToken;
-        tokenDTO.RefreshToken = newRefreshToken.RefToken ?? "Unk";
+        tokenDTO.RefreshToken = newRefreshToken.RefToken ?? string.Empty;
         tokenDTO.ExpiredAt = newRefreshToken.ExpiresAt;
 
-        _logger.LogInformation("Token refreshed successfully for user: {UserId}", user.Id);
         return tokenDTO;
     }
+
+    public async Task<bool> LogoutAsync(string token, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            var revokedToken = await _refreshTokenService.RevokeTokenAsync(token);
+            if (!revokedToken)
+            {
+                _logger.LogInformation("No refresh token found for logout: {Token}", token);
+                return false;
+            }
+
+            _logger.LogInformation("User logged out successfully: {Token}", token);
+            return revokedToken;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while logging out: {Token}", token);
+            return false;
+        }
+    }
+
+    public Task<AuthDto> ChangePasswordAsync(Guid userId, ChangePasswordDto dto, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<AuthDto> RequestPasswordResetAsync(RequestPasswordResetDto dto, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<AuthDto> ResetPasswordAsync(ResetPasswordDto dto, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<AuthDto> SendEmailVerificationAsync(Guid userId, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<AuthDto> VerifyEmailAsync(VerifyEmailDto dto, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
 }
 
