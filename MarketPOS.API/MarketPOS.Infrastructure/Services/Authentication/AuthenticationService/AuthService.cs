@@ -1,14 +1,4 @@
-﻿using Market.Domain.Entities.Auth;
-using MarketPOS.Application.InterfaceCacheing;
-using MarketPOS.Application.Services.InterfacesServices.Authentication;
-using MarketPOS.Application.Services.InterfacesServices.FileStorage;
-using MarketPOS.Application.Services.InterfacesServices.InterFacesAuthentication;
-using MarketPOS.Shared.Constants;
-using MarketPOS.Shared.DTOs.Authentication;
-using MarketPOS.Shared.DTOs.AuthenticationDTO;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-
+﻿
 namespace MarketPOS.Infrastructure.Services.Authentication.AuthenticationService;
 
 public class AuthService : IAuthService
@@ -267,6 +257,7 @@ public class AuthService : IAuthService
         return tokenDTO;
     }
 
+    // ✅ Logout: Revoke the refresh token  تسجيل الخروج: إلغاء توكن وايقافه 
     public async Task<bool> LogoutAsync(string token, CancellationToken cancellationToken = default)
     {
         try
@@ -286,6 +277,47 @@ public class AuthService : IAuthService
             _logger.LogError(ex, "Error occurred while logging out: {Token}", token);
             return false;
         }
+    }
+
+    public async Task<AuthDto> RequestPasswordResetAsync(RequestPasswordResetDto dto, CancellationToken cancellationToken = default)
+    {
+        // 1️⃣ التحقق من صحة البريد
+        if (string.IsNullOrWhiteSpace(dto.Email))
+            throw new ValidationException("Email is required.");
+
+        // 2️⃣ البحث عن المستخدم بواسطة البريد
+        User? user = await _userManager.FindByEmailAsync(dto.Email);
+
+        // 3️⃣ أمان: لو المستخدم غير موجود، نرجع رسالة عامة
+        if (user == null)
+        {
+            return new AuthDto
+            {
+                Message = "If this email is registered, you will receive a password reset link."
+            };
+        }
+
+        // 4️⃣ توليد رمز إعادة تعيين كلمة المرور
+        var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+        // 5️⃣ بناء رابط إعادة التعيين
+        var encodedToken = Uri.EscapeDataString(resetToken);
+        var encodedEmail = Uri.EscapeDataString(user.Email!); // تأكد أن البريد ليس null
+        var resetLink = $"https://yourapp.com/reset-password?token={encodedToken}&email={encodedEmail}";
+
+        // 6️⃣ إرسال البريد باستخدام EmailService
+        await _emailService.SendPasswordResetAsync(user.Gmail!, resetLink);
+
+        // 7️⃣ إرجاع رسالة عامة لتجنب كشف وجود البريد
+        return new AuthDto
+        {
+            Message = "If this email is registered, you will receive a password reset link.",
+            IsAuthenticated = true,
+            FullName = user.FullName ?? "UnKwon",
+            Email = user.Email ?? "UnKwon",
+            UserName = user.UserName ?? "Unkwon",
+            ProfileImageURL = user.ProfileImageUrl ?? string.Empty,
+        };
     }
 
     public async Task<AuthDto> ChangePasswordAsync(Guid userId, ChangePasswordDto dto, CancellationToken cancellationToken = default)
@@ -318,47 +350,6 @@ public class AuthService : IAuthService
             UserName = user.UserName ?? "Unk",
             Email = user.Email ?? "Unk",
             ProfileImageURL = user.ProfileImageUrl ?? string.Empty
-        };
-    }
-
-    public async Task<AuthDto> RequestPasswordResetAsync(RequestPasswordResetDto dto, CancellationToken cancellationToken = default)
-    {
-        // 1️⃣ التحقق من صحة البريد
-        if (string.IsNullOrWhiteSpace(dto.Email))
-            throw new ValidationException("Email is required.");
-
-        // 2️⃣ البحث عن المستخدم بواسطة البريد
-        var user = await _userManager.FindByEmailAsync(dto.Email);
-
-        // 3️⃣ أمان: لو المستخدم غير موجود، نرجع رسالة عامة
-        if (user == null)
-        {
-            return new AuthDto
-            {
-                Message = "If this email is registered, you will receive a password reset link."
-            };
-        }
-
-        // 4️⃣ توليد رمز إعادة تعيين كلمة المرور
-        var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
-
-        // 5️⃣ بناء رابط إعادة التعيين
-        var encodedToken = Uri.EscapeDataString(resetToken);
-        var encodedEmail = Uri.EscapeDataString(user.Email!); // تأكد أن البريد ليس null
-        var resetLink = $"https://yourapp.com/reset-password?token={encodedToken}&email={encodedEmail}";
-
-        // 6️⃣ إرسال البريد باستخدام EmailService
-        await _emailService.SendPasswordResetAsync(user.Email!, resetLink);
-
-        // 7️⃣ إرجاع رسالة عامة لتجنب كشف وجود البريد
-        return new AuthDto
-        {
-            Message = "If this email is registered, you will receive a password reset link.",
-            IsAuthenticated = true,
-            FullName = user.FullName ?? "UnKwon",
-            Email = user.Email ?? "UnKwon",
-            UserName = user.UserName ?? "Unkwon",
-            ProfileImageURL= user.ProfileImageUrl ?? string.Empty,
         };
     }
 

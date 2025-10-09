@@ -19,6 +19,11 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                .IsRequired()
                .HasMaxLength(256);
 
+        builder.HasIndex(u => u.Gmail).IsUnique();
+        builder.Property(u => u.Gmail)
+               .IsRequired()
+               .HasMaxLength(256);
+
         builder.Property(u => u.FirstName)
                .HasMaxLength(100);
 

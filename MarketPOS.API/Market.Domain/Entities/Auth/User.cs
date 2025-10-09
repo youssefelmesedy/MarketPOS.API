@@ -17,9 +17,7 @@ public class User : IdentityUser<Guid>
     public DateTime? RestorAt { get; set; }
     public string? RestorBy { get; set; }
 
-    public string? PasswordResetToken { get; set; }
-    public DateTime? PasswordResetTokenExpiry { get; set; }
-
+    public string? Gmail { get; set; }
     public string? ProfileImageUrl { get; set; }
     public List<RefreshToken>? RefreshTokens { get; set; } = new();
 }
