@@ -42,5 +42,17 @@ global using System.Linq.Dynamic.Core;
 global using System.Linq.Expressions;
 global using System.Text.Json;
 
+//Auth Using
+global using Market.Domain.Entities.Auth;
+global using MarketPOS.Application.InterfaceCacheing;
+global using MarketPOS.Application.Services.InterfacesServices.Authentication;
+global using MarketPOS.Application.Services.InterfacesServices.FileStorage;
+global using MarketPOS.Application.Services.InterfacesServices.InterFacesAuthentication;
+global using MarketPOS.Shared.Constants;
+global using MarketPOS.Shared.DTOs.Authentication;
+global using MarketPOS.Shared.DTOs.AuthenticationDTO;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.AspNetCore.Identity;
+
 
 

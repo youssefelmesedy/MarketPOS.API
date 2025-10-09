@@ -4,6 +4,7 @@ using MarketPOS.API.Extensions.ExtensionLocalizetion;
 using MarketPOS.API.Extensions.ExtensionMiddlewar;
 using MarketPOS.API.Extensions.ExtensionSwgger;
 using MarketPOS.API.Extensions.ExtensionValidatuion;
+using MarketPOS.API.Extensions.SetteingEmailService;
 using MarketPOS.Application;
 using MarketPOS.Infrastructure.Services.Authentication.EmailServices;
 using MarketPOS.Shared.RateLimitedSettings;
@@ -21,10 +22,10 @@ builder.Configuration
     .AddEnvironmentVariables();
 
 builder.Services.Configure<RateLimitingOptions>(builder.Configuration.GetSection("RateLimitingOptions"));
-builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 
 builder.Services
     .AddApplicationServices()
+    .AddEmailService(builder.Configuration, builder.Environment)
     .AddInfrastructureServices(builder.Configuration, builder.Environment) 
     .AddDesignPatternServices()
     .AddCustomCaching(builder.Configuration)

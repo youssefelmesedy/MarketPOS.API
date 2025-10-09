@@ -3,8 +3,6 @@ using MarketPOS.Application.Features.CQRS.CQRSAuth.Command;
 using MarketPOS.Shared.DTOs.Authentication;
 using MarketPOS.Shared.DTOs.AuthenticationDTO;
 using MarketPOS.Shared.Eunms.EunmPersonFolderNameImage;
-using Microsoft.AspNetCore.Authentication;
-using System.Runtime.InteropServices;
 
 namespace MarketPOS.API.Controllers.Auth;
 
