@@ -1,4 +1,5 @@
 ﻿using AutoMapper.QueryableExtensions;
+using MarketPOS.Infrastructure.Context.Persistence;
 using MarketPOS.Infrastructure.TrackingServicesMiddleware;
 using System.Diagnostics;
 

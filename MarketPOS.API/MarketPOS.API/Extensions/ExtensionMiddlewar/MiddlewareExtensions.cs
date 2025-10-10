@@ -1,7 +1,7 @@
-﻿using MarketPOS.API.Extensions.ExtensionsProfilingMiddleware;
+﻿using Hangfire;
+using MarketPOS.API.Extensions.ExtensionsProfilingMiddleware;
 using MarketPOS.API.ExtensionsFiltreingAndMiddlewares.Exceptions;
 using MarketPOS.Infrastructure.TrackingServicesMiddleware;
-using Microsoft.AspNetCore.Authorization;
 namespace MarketPOS.API.Extensions.ExtensionMiddlewar;
 public static class MiddlewareExtensions
 {
@@ -14,7 +14,7 @@ public static class MiddlewareExtensions
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
-
+        
         // 3️⃣ تسجيل الـ User (Authentication/Authorization)
         app.UseCustomAuthenticationAndAuthorization();
 

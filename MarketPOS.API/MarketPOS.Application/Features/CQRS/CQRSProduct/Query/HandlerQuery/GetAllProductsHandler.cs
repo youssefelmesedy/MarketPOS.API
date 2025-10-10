@@ -39,7 +39,7 @@ public class GetAllProductsHandler : BaseHandler<GetAllProductsHandler>, IReques
             includeExpressions: includes,
             includeSoftDeleted: request.SofteDelete, ordering: p => p.OrderBy(p => p.Name));
         stopwatch.Stop();
-        _logger.LogInformation("Handler finished in {ElapsedMilliseconds} ms", stopwatch.ElapsedMilliseconds);
+        _logger?.LogInformation("Handler finished in {ElapsedMilliseconds} ms", stopwatch.ElapsedMilliseconds);
 
         if (data is null || !data.Any())
             return _resultFactory.Fail<List<SomeFeaturesProductDto>>("NotFound");

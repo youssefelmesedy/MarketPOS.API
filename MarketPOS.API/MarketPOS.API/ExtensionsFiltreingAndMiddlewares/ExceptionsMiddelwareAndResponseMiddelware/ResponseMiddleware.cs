@@ -20,6 +20,12 @@ public class ResponseMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
+        if (context.Request.Path.StartsWithSegments("/hangfire", StringComparison.OrdinalIgnoreCase))
+        {
+            await _next(context);
+            return;
+        }
+
         var originalBody = context.Response.Body;
         await using var memStream = new MemoryStream();
         context.Response.Body = memStream;

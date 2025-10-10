@@ -1,4 +1,5 @@
-﻿using MarketPOS.Infrastructure.Repositories.GenericRepositoryAndBaseBuliderQuery;
+﻿using MarketPOS.Infrastructure.Context.Persistence;
+using MarketPOS.Infrastructure.Repositories.GenericRepositoryAndBaseBuliderQuery;
 
 namespace MarketPOS.Infrastructure.Repositories.RepositoryCategory;
 public class CategoryRepository : GenericRepository<Category>, ICategoryRepo

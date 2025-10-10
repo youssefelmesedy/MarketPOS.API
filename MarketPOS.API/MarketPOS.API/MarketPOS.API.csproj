@@ -1,18 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Extensions\ExtenisonRateLimitingMiddleware\RateLimitingMiddleware.cs~RF168e72d9.TMP" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\EmailTemplates\PasswordReset.html" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="AspNetCore.Localizer.Json" Version="1.0.2" />
@@ -34,23 +26,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\MarketPOS.Application\MarketPOS.Application.csproj" />
-	  <ProjectReference Include="..\MarketPOS.Design\MarketPOS.Design.csproj" />
-	  <ProjectReference Include="..\MarketPOS.Infrastructure\MarketPOS.Infrastructure.csproj" />
+		<ProjectReference Include="..\MarketPOS.Application\MarketPOS.Application.csproj" />
+		<ProjectReference Include="..\MarketPOS.Design\MarketPOS.Design.csproj" />
+		<ProjectReference Include="..\MarketPOS.Infrastructure\MarketPOS.Infrastructure.csproj" />
 	</ItemGroup>
 
-  <ItemGroup>
-    <Content Update="Resources\ar-EG.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Resources\en-US.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+	<ItemGroup>
+		<Content Update="Resources\ar-EG.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Resources\en-US.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\images\" />
-  </ItemGroup>
-
+	<!-- ✅ ده الجزء الصحيح -->
+	<ItemGroup>
+		<Content Update="wwwroot\EmailTemplates\**\*.*">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
 </Project>
