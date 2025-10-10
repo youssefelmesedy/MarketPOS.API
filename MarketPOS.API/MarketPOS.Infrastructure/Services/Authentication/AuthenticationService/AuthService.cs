@@ -1,5 +1,4 @@
-﻿
-namespace MarketPOS.Infrastructure.Services.Authentication.AuthenticationService;
+﻿namespace MarketPOS.Infrastructure.Services.Authentication.AuthenticationService;
 
 public class AuthService : IAuthService
 {
@@ -14,6 +13,7 @@ public class AuthService : IAuthService
     private readonly IStringLocalizer<AuthService> _localizer;
     private readonly IGenericCache _cache;
     private readonly IEmailService _emailService;
+    private readonly IConfiguration _configuration;
     private readonly string _cacheKeyPrefix;
 
     public AuthService(
@@ -27,7 +27,8 @@ public class AuthService : IAuthService
         IFileService fileService,
         IStringLocalizer<AuthService> localizer,
         IGenericCache cache,
-        IEmailService emailService)
+        IEmailService emailService,
+        IConfiguration configuration)
     {
         _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
@@ -41,8 +42,9 @@ public class AuthService : IAuthService
         _cache = cache ?? throw new ArgumentNullException(nameof(cache));
         _emailService = emailService ?? throw new ArgumentNullException(nameof(emailService));
         _cacheKeyPrefix = typeof(AuthService).Name;
+        _configuration = configuration;
     }
-    public async Task<AuthDto> RegisterAsync(RegisterDto register, string foldername, CancellationToken cancellationToken = default)
+    public async Task<AuthDto> RegisterAsync(RegisterationDto register, string foldername, CancellationToken cancellationToken = default)
     {
         if (register == null)
             throw new ArgumentNullException(nameof(register));
@@ -65,6 +67,7 @@ public class AuthService : IAuthService
                 LastName = register.LastName,
                 UserName = register.UserName,
                 Email = register.Email,
+                Gmail = register.Gmail,
                 CreatedAt = DateTime.UtcNow
             };
 
@@ -301,9 +304,18 @@ public class AuthService : IAuthService
         var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
 
         // 5️⃣ بناء رابط إعادة التعيين
+        var apiBaseUrl = _configuration["AppSettings:ApiBaseUrl"];
+        if (string.IsNullOrWhiteSpace(apiBaseUrl))
+            throw new InvalidOperationException("API Base URL is not configured.");
+
         var encodedToken = Uri.EscapeDataString(resetToken);
         var encodedEmail = Uri.EscapeDataString(user.Email!); // تأكد أن البريد ليس null
-        var resetLink = $"https://yourapp.com/reset-password?token={encodedToken}&email={encodedEmail}";
+
+        var resetLink = $"{apiBaseUrl}/EmailTemplates/ResetPasswordPage.html?" +
+               $"?email={Uri.EscapeDataString(user.Email!)}" +
+               $"&token={Uri.EscapeDataString(resetToken)}" +
+               $"&username={Uri.EscapeDataString(user.UserName!)}" +
+               $"&profileImage={Uri.EscapeDataString(user.ProfileImageUrl!)}";
 
         // 6️⃣ إرسال البريد باستخدام EmailService
         await _emailService.SendPasswordResetAsync(user.Gmail!, resetLink);
@@ -317,6 +329,33 @@ public class AuthService : IAuthService
             Email = user.Email ?? "UnKwon",
             UserName = user.UserName ?? "Unkwon",
             ProfileImageURL = user.ProfileImageUrl ?? string.Empty,
+        };
+    }
+
+    public async Task<AuthDto> ResetPasswordAsync(ResetPasswordDto dto, CancellationToken cancellationToken = default)
+    {
+        if (dto.NewPassword != dto.ConfirmNewPassword)
+            throw new ValidationException("New Password and Confirm Password do not match.");
+
+        var user = await _userManager.FindByEmailAsync(dto.Email);
+        if (user == null)
+            throw new KeyNotFoundException("Invalid email.");
+
+        var result = await _userManager.ResetPasswordAsync(user, dto.Token, dto.NewPassword);
+        if (!result.Succeeded)
+        {
+            var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+            throw new InvalidOperationException($"Password reset failed: {errors}");
+        }
+
+        return new AuthDto
+        {
+            Message = "Password reset successfully.",
+            IsAuthenticated = true,
+            FullName = user.FullName ?? "Unknown",
+            UserName = user.UserName ?? "Unknown",
+            Email = user.Email ?? "Unknown",
+            ProfileImageURL = user.ProfileImageUrl ?? string.Empty
         };
     }
 
@@ -351,11 +390,6 @@ public class AuthService : IAuthService
             Email = user.Email ?? "Unk",
             ProfileImageURL = user.ProfileImageUrl ?? string.Empty
         };
-    }
-
-    public Task<AuthDto> ResetPasswordAsync(ResetPasswordDto dto, CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
     }
 
     public Task<AuthDto> SendEmailVerificationAsync(Guid userId, CancellationToken cancellationToken = default)

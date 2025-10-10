@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketPOS.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251007060214_Modified Named IsRevoked in Revoked In Table RefreshToken")]
-    partial class ModifiedNamedIsRevokedinRevokedInTableRefreshToken
+    [Migration("20251010003756_Intital Data Base")]
+    partial class IntitalDataBase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,6 +107,11 @@ namespace MarketPOS.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("Gmail")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -167,6 +172,9 @@ namespace MarketPOS.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("Gmail")
                         .IsUnique();
 
                     b.HasIndex("NormalizedEmail")

@@ -19,7 +19,7 @@ public class AuthsController : ControllerBase
     }
     
     [HttpPost("Register")]
-    public async Task<IActionResult> Register([FromForm] RegisterDto registerDto, PersonFolderNameImages folderName)
+    public async Task<IActionResult> Register([FromForm] RegisterationDto registerDto, PersonFolderNameImages folderName)
     {
         var rehreshtoken = Request.Cookies["refreshToken"];
 
@@ -90,6 +90,22 @@ public class AuthsController : ControllerBase
             return ErrorFunction.BadRequest(false, "Can't Send Empty Email");
 
         var result = await _mediator.Send(command);
+        if (result is null || !result.IsSuccess)
+            return ErrorFunction.NotFound(result!.IsSuccess, result.Message, result.Errors);
+
+        return HelperMethod.HandleResult(result, _localizer);
+    }
+
+    [HttpPost("reset-password")]
+    public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto dto)
+    {
+        var command = new ResetPasswordCommand(dto);
+
+        if (command.Dto.Token == null || command.Dto.NewPassword == null)
+            return ErrorFunction.BadRequest(false, "Token or New Password cannot be null.");
+
+        var result = await _mediator.Send(command);
+
         if (result is null || !result.IsSuccess)
             return ErrorFunction.NotFound(result!.IsSuccess, result.Message, result.Errors);
 

@@ -6,7 +6,7 @@ namespace MarketPOS.Application.Services.InterfacesServices.InterFacesAuthentica
 public interface IAuthService
 {
     // --- Auth Core ---
-    Task<AuthDto> RegisterAsync(RegisterDto register, string folderName, CancellationToken cancellationToken = default);
+    Task<AuthDto> RegisterAsync(RegisterationDto register, string folderName, CancellationToken cancellationToken = default);
     Task<RefreshTokenDto> LoginAsync(LoginDto login, CancellationToken cancellationToken = default);
     Task<RefreshTokenDto> RefreshTokenAsync(string token);
     Task<bool> LogoutAsync(string token, CancellationToken cancellationToken = default);

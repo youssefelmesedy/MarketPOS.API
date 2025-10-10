@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MarketPOS.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class ModifiedNamedIsRevokedinRevokedInTableRefreshToken : Migration
+    public partial class IntitalDataBase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -110,6 +110,7 @@ namespace MarketPOS.Infrastructure.Migrations
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     RestorAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     RestorBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     ProfileImageUrl = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -590,6 +591,12 @@ namespace MarketPOS.Infrastructure.Migrations
                 name: "IX_Users_Email",
                 table: "Users",
                 column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Gmail",
+                table: "Users",
+                column: "Gmail",
                 unique: true);
 
             migrationBuilder.CreateIndex(
