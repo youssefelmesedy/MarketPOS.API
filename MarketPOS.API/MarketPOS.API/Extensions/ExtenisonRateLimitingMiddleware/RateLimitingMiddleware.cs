@@ -25,6 +25,12 @@ public partial class RateLimitingMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
+        if (context.Request.Path.StartsWithSegments("/hangfire", StringComparison.OrdinalIgnoreCase))
+        {
+            await _next(context);
+            return;
+        }
+
         var endpoint = context.GetEndpoint();
         var rateLimitAttr = endpoint?.Metadata.GetMetadata<RateLimitAttribute>();
 

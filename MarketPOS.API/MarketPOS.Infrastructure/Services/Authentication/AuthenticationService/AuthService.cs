@@ -1,4 +1,7 @@
-﻿namespace MarketPOS.Infrastructure.Services.Authentication.AuthenticationService;
+﻿using Hangfire;
+using Hangfire.States;
+
+namespace MarketPOS.Infrastructure.Services.Authentication.AuthenticationService;
 
 public class AuthService : IAuthService
 {
@@ -14,8 +17,8 @@ public class AuthService : IAuthService
     private readonly IGenericCache _cache;
     private readonly IEmailService _emailService;
     private readonly IConfiguration _configuration;
+    private readonly IBackgroundJobClient _jobClint;
     private readonly string _cacheKeyPrefix;
-
     public AuthService(
         IUnitOfWork unitOfWork,
         IJwtService jwtService,
@@ -28,7 +31,8 @@ public class AuthService : IAuthService
         IStringLocalizer<AuthService> localizer,
         IGenericCache cache,
         IEmailService emailService,
-        IConfiguration configuration)
+        IConfiguration configuration,
+        IBackgroundJobClient jobClint)
     {
         _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
@@ -41,8 +45,9 @@ public class AuthService : IAuthService
         _localizer = localizer ?? throw new ArgumentNullException(nameof(localizer));
         _cache = cache ?? throw new ArgumentNullException(nameof(cache));
         _emailService = emailService ?? throw new ArgumentNullException(nameof(emailService));
+        _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+        _jobClint = jobClint ?? throw new ArgumentNullException(nameof(jobClint));
         _cacheKeyPrefix = typeof(AuthService).Name;
-        _configuration = configuration;
     }
     public async Task<AuthDto> RegisterAsync(RegisterationDto register, string foldername, CancellationToken cancellationToken = default)
     {
@@ -303,8 +308,13 @@ public class AuthService : IAuthService
         // 4️⃣ توليد رمز إعادة تعيين كلمة المرور
         var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
 
-        // 5️⃣ بناء رابط إعادة التعيين
-        var apiBaseUrl = _configuration["AppSettings:ApiBaseUrl"];
+        string? apiBaseUrl = null;
+
+        if (dto.ServerHosted)
+            apiBaseUrl = _configuration["AppSettings:ApiServerUrl"];
+        else
+            apiBaseUrl = _configuration["AppSettings:ApiBaseUrl"];
+
         if (string.IsNullOrWhiteSpace(apiBaseUrl))
             throw new InvalidOperationException("API Base URL is not configured.");
 
@@ -312,13 +322,15 @@ public class AuthService : IAuthService
         var encodedEmail = Uri.EscapeDataString(user.Email!); // تأكد أن البريد ليس null
 
         var resetLink = $"{apiBaseUrl}/EmailTemplates/ResetPasswordPage.html?" +
-               $"?email={Uri.EscapeDataString(user.Email!)}" +
+               $"email={Uri.EscapeDataString(user.Email!)}" +
                $"&token={Uri.EscapeDataString(resetToken)}" +
                $"&username={Uri.EscapeDataString(user.UserName!)}" +
                $"&profileImage={Uri.EscapeDataString(user.ProfileImageUrl!)}";
 
-        // 6️⃣ إرسال البريد باستخدام EmailService
-        await _emailService.SendPasswordResetAsync(user.Gmail!, resetLink);
+        // ✅ إرسال البريد بخلفية باستخدام Hangfire
+        _jobClint.Create<IEmailService>(service =>
+               service.SendPasswordResetAsync(user.Gmail!, resetLink), new EnqueuedState("emails"));
+
 
         // 7️⃣ إرجاع رسالة عامة لتجنب كشف وجود البريد
         return new AuthDto

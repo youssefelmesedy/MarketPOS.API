@@ -1,4 +1,5 @@
 ﻿using MarketPOS.Application.RepositoryInterfaces.RepositoryCategoryAndWareHouse;
+using MarketPOS.Infrastructure.Context.Persistence;
 using MarketPOS.Infrastructure.Repositories.GenericRepositoryAndBaseBuliderQuery;
 
 namespace MarketPOS.Infrastructure.Repositories.ProductRepositorys;

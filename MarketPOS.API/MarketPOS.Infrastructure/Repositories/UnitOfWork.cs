@@ -1,4 +1,5 @@
-﻿using MarketPOS.Infrastructure.TrackingServicesMiddleware;
+﻿using MarketPOS.Infrastructure.Context.Persistence;
+using MarketPOS.Infrastructure.TrackingServicesMiddleware;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Collections.Concurrent;
 

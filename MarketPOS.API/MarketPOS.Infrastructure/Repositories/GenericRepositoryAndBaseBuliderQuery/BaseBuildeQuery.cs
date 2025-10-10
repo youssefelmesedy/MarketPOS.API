@@ -1,4 +1,6 @@
-﻿namespace MarketPOS.Infrastructure.Repositories.GenericRepositoryAndBaseBuliderQuery;
+﻿using MarketPOS.Infrastructure.Context.Persistence;
+
+namespace MarketPOS.Infrastructure.Repositories.GenericRepositoryAndBaseBuliderQuery;
 
 public class BaseBuildeQuery<T> where T : class
 {

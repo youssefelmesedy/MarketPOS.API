@@ -1,82 +1,154 @@
-﻿using MarketPOS.Infrastructure.Services.Authentication.AuthenticationService;
-using MarketPOS.Infrastructure.Services.Authentication.EmailServices;
+﻿using Hangfire;
+using MarketPOS.Infrastructure.Context.Persistence;
+using MarketPOS.Infrastructure.Services.Authentication.AuthenticationService;
 using MarketPOS.Infrastructure.Services.Authentication.JWTServices;
 using MarketPOS.Infrastructure.Services.FileStorage;
 using Microsoft.Extensions.Hosting;
 
-
-namespace MarketPOS.Infrastructure;
-public static class RegisterServicesInfrastructure
+namespace MarketPOS.Infrastructure
 {
-    public static IServiceCollection AddInfrastructureServices(
-        this IServiceCollection services, 
-        IConfiguration configuration,
-        IHostEnvironment environment)
+    public static class RegisterServicesInfrastructure
     {
-        // 1. Database Context
-        var connectionString = environment.IsProduction()
-            ? configuration.GetConnectionString("ServerConnection")// locale Data base
-            : configuration.GetConnectionString("LocalConnection"); // Server Data base
-        Console.WriteLine(connectionString);
-        services.AddDbContext<ApplicationDbContext>(options =>
+        public static IServiceCollection AddInfrastructureServices(
+            this IServiceCollection services,
+            IConfiguration configuration,
+            IHostEnvironment environment)
         {
-            options.UseSqlServer(connectionString, sqlOptions =>
+            // 1️⃣ إعداد قاعدة البيانات
+            services.AddDatabaseContext(configuration, environment);
+
+            // 2️⃣ إعداد Hangfire
+            services.AddHangfireConfiguration(configuration, environment);
+
+            // 3️⃣ إعداد Identity
+            services.AddIdentityConfiguration();
+
+            // 4️⃣ إضافة الـ Services والـ Repositories
+            services.AddApplicationDependencies();
+
+            Console.WriteLine($"✅ Environment: {environment.EnvironmentName}");
+
+            return services;
+        }
+
+        #region Database Configuration
+        private static IServiceCollection AddDatabaseContext(
+            this IServiceCollection services,
+            IConfiguration configuration,
+            IHostEnvironment environment)
+        {
+            var connectionString = environment.EnvironmentName == "Development"
+                ? configuration.GetConnectionString("LocalConnection")
+                : configuration.GetConnectionString("ServerConnection");
+
+            Console.WriteLine($"🔗 Connection: {connectionString}");
+
+            services.AddDbContext<ApplicationDbContext>(options =>
             {
-                sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
-
-                sqlOptions.EnableRetryOnFailure(
-                    maxRetryCount: 5,                       
-                    maxRetryDelay: TimeSpan.FromSeconds(10),
-                    errorNumbersToAdd: null                 
-                );
+                options.UseSqlServer(connectionString, sqlOptions =>
+                {
+                    sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                    sqlOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+                });
             });
-        });
 
-        // 2. Identity
-        services.AddIdentity<User, IdentityRole<Guid>>(options =>
+            return services;
+        }
+        #endregion
+
+        #region Hangfire Configuration
+        private static IServiceCollection AddHangfireConfiguration(
+            this IServiceCollection services,
+            IConfiguration configuration,
+            IHostEnvironment environment)
         {
-            options.Password.RequireDigit = true;
-            options.Password.RequireLowercase = true;
-            options.Password.RequireUppercase = true;
-            options.Password.RequireNonAlphanumeric = false;
-            options.Password.RequiredLength = 6;
-        })
-        .AddEntityFrameworkStores<ApplicationDbContext>()
-        .AddDefaultTokenProviders();
+            var connectionString = environment.EnvironmentName == "Development"
+                ? configuration.GetConnectionString("LocalConnection")
+                : configuration.GetConnectionString("ServerConnection");
 
-        // JWT Service
-        services.AddScoped<IJwtService, JwtService>();
-        services.AddScoped<IRefreshTokenService, RefreshTokenService>();
-        services.AddScoped<IFileService, FileService>();
-        services.AddScoped<IAuthService, AuthService>();
+            services.AddHangfire(config =>
+            {
+                config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                      .UseSimpleAssemblyNameTypeSerializer()
+                      .UseRecommendedSerializerSettings()
+                      .UseSqlServerStorage(connectionString, new Hangfire.SqlServer.SqlServerStorageOptions
+                      {
+                          CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                          SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                          QueuePollInterval = TimeSpan.Zero,
+                          UseRecommendedIsolationLevel = true,
+                          DisableGlobalLocks = true
+                      });
+            });
 
-        // Debandancey Injection for UnitOfWork and Repositories
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
+            // ✅ تشغيل السيرفر
+            services.AddHangfireServer(options =>
+            {
+                options.WorkerCount = Environment.ProcessorCount * 2; // عدد الـ Workers
+                options.ServerName = $"HangfireServer-{environment.EnvironmentName}";
+                options.Queues = new[] { "default", "emails", "notifications", "background" };
+            });
 
-        // Debandancey Injection for Generic Repositories and Decorate Caching
-        services.AddScoped(typeof(IFullRepository<>), typeof(GenericRepository<>));
-        services.AddScoped(typeof(IFullService<>), typeof(GenericService<>));
-        services.AddScoped(typeof(IFullService<>), typeof(GenericServiceCacheing<>));
+            return services;
+        }
+        #endregion
 
-        services.AddScoped<IProductRepo, ProductRepository>();
-        services.AddScoped<IProductPriceRepo, ProductPriceRepository>();
-        services.AddScoped<IProductUnitProfileRepo, ProductUnitProfileRepository>();
-        services.AddScoped<ICategoryRepo, CategoryRepository>();
-        services.AddScoped<IActivelngredinentsRepo, ActiveingredinentRepository>();
-        services.AddScoped<IWareHouseRepo, WareHouseRepository>();
-        services.AddScoped<ISupplierRepo, SupplierRepo>();
+        #region Identity Configuration
+        private static IServiceCollection AddIdentityConfiguration(this IServiceCollection services)
+        {
+            services.AddIdentity<User, IdentityRole<Guid>>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 6;
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
 
-        services.AddScoped<IProductService, ProductService>();
-        services.AddScoped<IProductPriceService, ProductPriceService>();
-        services.AddScoped<IProductUnitProfileService, ProductUnitProfileService>();
-        services.AddScoped<ICategoryService, CategoryService>();
-        services.AddScoped<IActiveingredinentService, ActiveingredinentService>();
-        services.AddScoped<IWareHouseService, WareHouseService>();
-        services.AddScoped<ISupplierService, SupplierService>();
-        services.AddScoped<IAggregateService, AggregateService>();
+            return services;
+        }
+        #endregion
 
-        Console.WriteLine($"EnviromentName: {environment.EnvironmentName}");
+        #region Dependency Injection Configuration
+        private static IServiceCollection AddApplicationDependencies(this IServiceCollection services)
+        {
+            // JWT & Auth
+            services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IRefreshTokenService, RefreshTokenService>();
+            services.AddScoped<IFileService, FileService>();
+            services.AddScoped<IAuthService, AuthService>();
 
-        return services;
+            // UnitOfWork
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            // Generic Repositories
+            services.AddScoped(typeof(IFullRepository<>), typeof(GenericRepository<>));
+            services.AddScoped(typeof(IFullService<>), typeof(GenericService<>));
+            services.AddScoped(typeof(IFullService<>), typeof(GenericServiceCacheing<>));
+
+            // Repositories
+            services.AddScoped<IProductRepo, ProductRepository>();
+            services.AddScoped<IProductPriceRepo, ProductPriceRepository>();
+            services.AddScoped<IProductUnitProfileRepo, ProductUnitProfileRepository>();
+            services.AddScoped<ICategoryRepo, CategoryRepository>();
+            services.AddScoped<IActivelngredinentsRepo, ActiveingredinentRepository>();
+            services.AddScoped<IWareHouseRepo, WareHouseRepository>();
+            services.AddScoped<ISupplierRepo, SupplierRepo>();
+
+            // Services
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductPriceService, ProductPriceService>();
+            services.AddScoped<IProductUnitProfileService, ProductUnitProfileService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IActiveingredinentService, ActiveingredinentService>();
+            services.AddScoped<IWareHouseService, WareHouseService>();
+            services.AddScoped<ISupplierService, SupplierService>();
+            services.AddScoped<IAggregateService, AggregateService>();
+
+            return services;
+        }
+        #endregion
     }
 }

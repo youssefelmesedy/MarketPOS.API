@@ -40,7 +40,18 @@
     <div class="card">
         <h2>✅ Password Changed Successfully!</h2>
         <p>You can now login with your new password.</p>
-        <a href="https://localhost:7209/swagger/index.html">Go to Login</a>
+        <a id="loginLink" href="#">Go to Login</a>
     </div>
+
+    <script>
+        // 🔹 نكتشف أصل الرابط اللي جاي منه المستخدم
+        const baseUrl = window.location.origin;
+
+        // 🔹 نضيف عليه المسار الخاص بالـ login أو swagger
+        const loginUrl = `${baseUrl}/swagger/index.html`;
+
+        // 🔹 نضبط الزر
+        document.getElementById("loginLink").href = loginUrl;
+    </script>
 </body>
 </html>
