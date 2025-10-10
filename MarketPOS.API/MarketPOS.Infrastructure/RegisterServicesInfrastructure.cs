@@ -13,7 +13,7 @@ public static class RegisterServicesInfrastructure
         IConfiguration configuration,
         IHostEnvironment environment)
     {
-
+        // 1. Database Context
         var connectionString = environment.IsProduction()
             ? configuration.GetConnectionString("ServerConnection")// locale Data base
             : configuration.GetConnectionString("LocalConnection"); // Server Data base

@@ -3,8 +3,7 @@
 namespace MarketPOS.Infrastructure.Repositories.RepositoryCategory;
 public class CategoryRepository : GenericRepository<Category>, ICategoryRepo
 {
-    private readonly ILogger<CategoryRepository>? _logger;
-    public CategoryRepository(ApplicationDbContext context, ILogger<CategoryRepository> logger) : base(context, logger)
+    public CategoryRepository(ApplicationDbContext context, ILogger<CategoryRepository> logger = null!) : base(context, logger)
     {
     }
 }

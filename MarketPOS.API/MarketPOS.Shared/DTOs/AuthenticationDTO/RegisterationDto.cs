@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace  MarketPOS.Shared.DTOs.Authentication;
-public record RegisterDto
+public record RegisterationDto
 {
     [Required(ErrorMessage = "First name is required.")]
     [MaxLength(55, ErrorMessage = "First name cannot exceed 55 characters.")]
@@ -33,6 +33,10 @@ public record RegisterDto
     [DataType(DataType.Password)]
     [Compare("Password", ErrorMessage = "Passwords do not match.")]
     public string ConfirmPassword { get; init; } = string.Empty;
+
+    [Required(ErrorMessage = "Gmail is required.")]
+    [EmailAddress(ErrorMessage = "Invalid gmail address format.")]
+    public string Gmail { get; init; } = string.Empty;
 
     [MaxFileSize(5 * 1024 * 1024)] // 5 MB
     [AllowedExtensions(new[] { ".jpg", ".jpeg", ".png" })]
